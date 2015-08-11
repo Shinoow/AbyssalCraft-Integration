@@ -1,0 +1,113 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+repositories {
+	maven {
+			name 'CB Repo'
+			url "http://chickenbones.net/maven/"
+		}
+	maven {
+			name "Mobius Repo"
+			url "http://mobiusstrip.eu/maven"
+		}
+}
+
+apply plugin: 'java'
+apply plugin: 'forge'
+
+ext.propFile = file "build.properties"
+
+propFile.withReader {
+	
+	def prop = new Properties()
+	prop.load(it)
+	project.ext.props = new ConfigSlurper().parse prop
+}
+
+version = props.aci_version
+group= "com.shinoow.acintegration" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "AbyssalCraft Integration"
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+minecraft {
+    version = "1.7.10-10.13.3.1370-1.7.10"
+    runDir = "eclipse"
+	
+		replaceIn "ACIntegration.java"
+            replace "forgeversion", props.forge_version
+}
+
+dependencies {
+	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.138:dev"
+	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.46:dev"
+	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.110:dev"
+	compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.507:dev"
+}
+
+version = "${props.mc_version}-${props.aci_version}"
+
+processResources
+{
+	// I really don't want that file to exist anywhere
+	exclude '**/Thumbs.db'
+
+	// this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+	
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+		include 'version.properties'
+
+        // replace version and mcversion
+        expand ([
+			'version':project.version,
+			'aciversion':project.props.aci_version,
+			'mcversion':project.props.mc_version,
+			'forgeversion':project.props.forge_version
+		])
+    }
+        
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+		exclude 'version.properties'
+    }
+}
+	
+	task srcJar(type: Jar) {
+    from sourceSets.main.allSource
+	
+	extension = 'jar'
+	classifier = 'src'
+}
+
+	task devJar(type: Jar, dependsOn: 'classes') {
+    from(sourceSets.main.output) {
+        include '**'
+    }
+
+    extension = 'jar'
+    classifier = 'dev'
+}
+
+	artifacts {
+    archives srcJar, devJar
+}
