@@ -1,0 +1,37 @@
+necro.text.integration=If one has access to technology unknown to The Great Old Ones, one might utilize them with technology granted from the Abyss for new purposes.
+
+necro.text.integration.tc.1=With Thaumcraft installed, you can now discover aspects in blocks, items and entities added in AbyssalCraft. There is also 2 new aspects, Coralos and Dreadia. You also get a Vis discount and the ability to view nodes when wearing the Depths Armor set.
+necro.text.integration.tc.2=Infusion Enchanting has been added for all enchantments added in AbyssalCraft. Light Pierce requires 1 Glowstone Dust, 1 Arrow, and 10 Lux. Iron Wall requires 1 Block of Iron, 1 Cobblestone Wall, 10 Tutamen and 10 Terra.
+necro.text.integration.tc.3=Coralium requires 1 Refined Coralium Ingot, 1 Coralium Plagued Flesh, 10 Coralos and 10 Potentia. Dread requires 1 Dreadium Ingot, 1 Dread Fragment, 10 Dreadia and 10 Potentia.
+necro.text.integration.tc.4=There are also wand parts added in the integration. Wand Caps can be made from Abyssalnite, Refined Coralium, Dreadium and Ethaxium Nuggets. Wand Rods can be made from Darklands Oak Logs, Coralium Stone, Dreadlands Tree Logs and Omothol stone.
+necro.text.integration.tc.5=Wands can be made by combining the Abyssalnite Cap with the Darklands Rod, Coralium Cap with the Coralium Rod, Dreadium Cap with the Dreadlands Rod, the Ethaxium Cap with the Omothol Rod and the Voidmetal Cap with the Omothol Rod.
+necro.text.integration.tc.6=The Darklands Rod regenerates up to 10% of the wand's Vis inside Darklands biomes. The Dreadlands Rod does the same inside Dreadlands biomes. The Omothol Rod provides infinite Vis in Omothol (with the Ethaxium Cap) and the End (with the Voidmetal Cap).
+necro.text.integration.tc.7=The Darklands and Dreadlands Wands are crafted like normal wands, through Arcane Crafting. The Coralium Wand is crafted through Infusion Crafting, with the Rod in the middle, the Caps in the other slots, 10 Perditio, 10 Coralos and 10 Tenebrae.
+necro.text.integration.tc.8=The Ethaxium Empowered Omothol Wand is crafted through Infusion Crafting with the Rod in the middle, the Caps in the other slots, 10 Perditio, 10 Spiritus and 10 Tenebrae. The Voidmetal Aspected is the same, but with Alienis instead of Spiritus.
+
+necro.text.integration.morph.1=With Morph installed, you can get morph abilities when morphing into AbyssalCraft entities. Additional abilities might be added, like plague immunity.
+necro.text.integration.morph.2=When morphed into entities that has special models, your hand will be morphed into the hand used by that model in 1st person view.
+
+#Thaumcraft integration
+
+item.wandcap.abyssalnite.name=Abyssalnite Cap
+item.wandcap.coralium.name=Refined Coralium Cap
+item.wandcap.dreadium.name=Dreadium Cap
+item.wandcap.ethaxium.name=Ethaxium Cap
+item.wandcore.darklands.name=Darklands Oak Rod
+item.wandcore.coralium.name=Coralium Stone Rod
+item.wandcore.dreadlands.name=Dreadlands Wood Rod
+item.wandcore.omothol.name=Omothol Stone Rod
+item.Wand.abyssalnite.cap=Abyssalnite Bound
+item.Wand.darklands.rod=Darklands Oak
+item.Wand.coralium.cap=Coralium Empowered
+item.Wand.coralium.rod=Coralium Stone
+item.Wand.dreadium.cap=Dreadium Bound
+item.Wand.dreadlands.rod=Dreadlands Wood
+item.Wand.ethaxium.cap=Ethaxium Empowered
+item.Wand.omothol.rod=Omothol Stone
+
+itemGroup.acthaum=AbyssalCraft Thaumcraft Integration
+
+tc.aspect.coralos=Coralium
+tc.aspect.dreadia=Dread

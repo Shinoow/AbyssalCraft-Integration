@@ -1,0 +1,25 @@
+{
+  	"modListVersion": 2,
+  	"modList": [
+  			{
+  				"modid": "acintegration",
+  				"name": "AbyssalCraft Integration",
+  				"description": "A mod that handles AbyssalCraft integrations.",
+  				"mcversion": "${mcversion}",
+  				"version": "${version}",
+  				"authorList": [
+  						"shinoow"
+  				],
+  				"credits": "shinoow (coding)",
+  				"dependants": [  ],
+				"dependencies": [ "abyssalcraft" ],
+				"parent": "",
+				"requiredMods": [  ],
+				"logoFile": "assets/acintegration/textures/logo.png",
+				"screenshots": [  ],
+				"updateUrl": "",
+  				"url": "http://minecraft.curseforge.com/mc-mods/234851",
+ 				"useDependencyInformation": true
+			}
+	]
+}
