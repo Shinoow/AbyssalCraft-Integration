@@ -5,6 +5,8 @@ Integration module for AbyssalCraft
 
 AbyssalCraft Integration is a module (previously a part of AbyssalCraft) which holds cross-mod integrations. Turning this into a separate mod was done in order to make the process of adding/updating integrations faster.
 Any other mod author who wishes to add support for their own mod can file a pull request with their stuff (and documentation for the things they want to add).
+You can find the project at the following URL:
+http://minecraft.curseforge.com/mc-mods/234851-abyssalcraft-integration
 
 ### Licensing
 
