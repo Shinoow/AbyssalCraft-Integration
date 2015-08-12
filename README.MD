@@ -10,7 +10,7 @@ http://minecraft.curseforge.com/mc-mods/234851-abyssalcraft-integration
 
 ### Licensing
 
-Right now the project is licensed as "All Rights Reserved", but that will either end up as GLPL or MIT (depending on things like CLA's for contributors)
+Right now the project is licensed as "All Rights Reserved", but that will either end up as LGPL or MIT (depending on things like CLA's for contributors)
 
 ### Compiling and running
 
