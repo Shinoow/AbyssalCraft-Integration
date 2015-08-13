@@ -22,10 +22,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft;after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
 public class ACIntegration {
 
-	public static final String version = "1.0.0";
+	public static final String version = "1.0.1";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -64,15 +64,16 @@ public class ACIntegration {
 	}
 
 	private void registerIntegrations(){
-		if(Loader.isModLoaded("Thaumcraft") && loadTC)
+		if(Loader.isModLoaded("Thaumcraft") && loadTC){
 			AbyssalCraftAPI.registerACIntegration(new ACTC());
+			ACTC.instance.preInit();
+		}
 		if(Loader.isModLoaded("Morph") && loadMorph)
 			AbyssalCraftAPI.registerACIntegration(new ACMorph());
-		if(Loader.isModLoaded("EE3") && loadEE3)
+		if(Loader.isModLoaded("EE3") && loadEE3){
 			AbyssalCraftAPI.registerACIntegration(new ACEE3());
-
-		ACTC.instance.preInit();
-		ACEE3.instance.preInit();
+			ACEE3.instance.preInit();
+		}
 	}
 
 	private void registerNecroData(){
