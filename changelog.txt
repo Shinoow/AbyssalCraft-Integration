@@ -1,0 +1,5 @@
+- Added Thaumium Upgrade Kit
+- Added Void metal Upgrade Kit
+- Assigned Aspects to more Items
+- Assigned EMC values to more Items
+- Rewrote Thaumcraft integration info (and added pictures)

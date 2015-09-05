@@ -80,14 +80,24 @@ public class ACEE3 implements IACPlugin {
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.antiCorbone, 80);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.antiSpider_eye, 128);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.antiPork, 24);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.essence, 1, 0), 256);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.essence, 1, 1), 512);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.essence, 1, 2), 1024);
 
-		for(String name :OreDictionary.getOreNames())
-			if(name.startsWith("crystal")){
+		for(String name :OreDictionary.getOreNames()){
+			if(name.startsWith("crystal") && !name.startsWith("crystalShard")){
 				List<ItemStack> ores = OreDictionary.getOres(name);
 				Iterator iter = ores.iterator();
 				while(iter.hasNext())
 					EnergyValueRegistryProxy.addPreAssignedEnergyValue(iter.next(), 1024);
 			}
+			if(name.startsWith("crystalShard")){
+				List<ItemStack> ores = OreDictionary.getOres(name);
+				Iterator iter = ores.iterator();
+				while(iter.hasNext())
+					EnergyValueRegistryProxy.addPreAssignedEnergyValue(iter.next(), 1024/9);
+			}
+		}
 	}
 
 	@Override

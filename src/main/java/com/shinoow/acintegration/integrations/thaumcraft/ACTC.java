@@ -16,6 +16,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -27,18 +28,20 @@ import thaumcraft.common.items.wands.ItemWandCasting;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACEntities;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
+import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.acintegration.ACIntegration;
 import com.shinoow.acintegration.integrations.thaumcraft.creativetabs.TabACThaum;
 import com.shinoow.acintegration.integrations.thaumcraft.items.ItemACThaumcraft;
 import com.shinoow.acintegration.integrations.thaumcraft.wands.*;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ACTC implements IACPlugin {
 
 	public static WandCap abyssalniteCap, coraliumCap, dreadiumCap, ethaxiumCap;
 	public static WandRod darklandsRod, coraliumRod, dreadlandsRod, omotholRod;
-	public static Item wandCap, wandCore;
+	public static Item wandCap, wandCore, thaumiumU, voidmetalU;
 	public static Aspect CORALIUM, DREAD;
 	public static ItemStack darkWand, corWand, dreadWand, omotholWand, endWand;
 
@@ -59,9 +62,18 @@ public class ACTC implements IACPlugin {
 
 			wandCap = new ItemACThaumcraft("wandcap", true, "abyssalnite", "coralium", "dreadium", "ethaxium");
 			wandCore = new ItemACThaumcraft("wandcore", true, "darklands", "coralium", "dreadlands", "omothol");
+			thaumiumU = new ItemUpgradeKit("Iron", "Thaumium").setUnlocalizedName("thaumiumu").setTextureName(ACIntegration.modid + ":" + "thaumiumu");
+			voidmetalU = new ItemUpgradeKit("Thaumium", "Void metal").setUnlocalizedName("voidmetalu").setTextureName(ACIntegration.modid + ":" + "voidmetalu");
+
+			if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
+				TabACThaum.instance.addItem(thaumiumU);
+				TabACThaum.instance.addItem(voidmetalU);
+			}
 
 			GameRegistry.registerItem(wandCap, "wandcap");
 			GameRegistry.registerItem(wandCore, "wandcore");
+			GameRegistry.registerItem(thaumiumU, "thaumiumu");
+			GameRegistry.registerItem(voidmetalU, "voidmetalu");
 
 			darklandsRod = new WandRodAC("darklands", 50, new ItemStack(wandCore, 1, 0), 1, new DarklandsRodOnUpdate(), new ResourceLocation("acintegration","textures/model/wands/wand_rod_darklands.png"));
 			coraliumRod = new WandRodAC("coralium", 75, new ItemStack(wandCore, 1, 1), 3, new CoraliumRodOnUpdate(), new ResourceLocation("acintegration","textures/model/wands/wand_rod_coralium.png"));
@@ -111,6 +123,21 @@ public class ACTC implements IACPlugin {
 		DREAD = new Aspect("dreadia", 0xB00000, new Aspect[] {Aspect.POISON, Aspect.FIRE}, new ResourceLocation("acintegration", "textures/aspects/dreadia.png"), 1);
 
 		if(ACIntegration.tcItems){
+
+			GameRegistry.addRecipe(new ItemStack(thaumiumU), new Object[] {"#%", "%&", '#', Items.iron_ingot, '%', ItemApi.getItem("itemResource", 2), '&', AbyssalCraft.IronU});
+			GameRegistry.addRecipe(new ItemStack(voidmetalU), new Object[] {"#%", "%&", '#', ItemApi.getItem("itemResource", 2), '%', ItemApi.getItem("itemResource", 16), '&', thaumiumU});
+
+			addArmorUpgrade(ItemApi.getItem("itemHelmetThaumium", 0), ItemApi.getItem("itemChestThaumium", 0), ItemApi.getItem("itemLegsThaumium", 0), ItemApi.getItem("itemBootsThaumium", 0), thaumiumU, new ItemStack(Items.iron_helmet, 1, OreDictionary.WILDCARD_VALUE),
+					new ItemStack(Items.iron_chestplate, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.iron_leggings, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.iron_boots, 1, OreDictionary.WILDCARD_VALUE));
+			addArmorUpgrade(ItemApi.getItem("itemHelmetVoid", 0), ItemApi.getItem("itemChestVoid", 0), ItemApi.getItem("itemLegsVoid", 0), ItemApi.getItem("itemBootsVoid", 0), voidmetalU, ItemApi.getItem("itemHelmetThaumium", OreDictionary.WILDCARD_VALUE),
+					ItemApi.getItem("itemChestThaumium", OreDictionary.WILDCARD_VALUE), ItemApi.getItem("itemLegsThaumium", OreDictionary.WILDCARD_VALUE), ItemApi.getItem("itemBootsThaumium", OreDictionary.WILDCARD_VALUE));
+
+			addToolUpgrade(ItemApi.getItem("itemSwordThaumium", 0), ItemApi.getItem("itemPickThaumium", 0), ItemApi.getItem("itemAxeThaumium", 0), ItemApi.getItem("itemShovelThaumium", 0), ItemApi.getItem("itemHoeThaumium", 0), thaumiumU,
+					new ItemStack(Items.iron_sword, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.iron_pickaxe, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.iron_axe, 1, OreDictionary.WILDCARD_VALUE),
+					new ItemStack(Items.iron_shovel, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.iron_hoe, 1, OreDictionary.WILDCARD_VALUE));
+			addToolUpgrade(ItemApi.getItem("itemSwordVoid", 0), ItemApi.getItem("itemPickVoid", 0), ItemApi.getItem("itemAxeVoid", 0), ItemApi.getItem("itemShovelVoid", 0), ItemApi.getItem("itemHoeVoid", 0), voidmetalU,
+					ItemApi.getItem("itemSwordThaumium", OreDictionary.WILDCARD_VALUE), ItemApi.getItem("itemPickThaumium", OreDictionary.WILDCARD_VALUE), ItemApi.getItem("itemAxeThaumium", OreDictionary.WILDCARD_VALUE),
+					ItemApi.getItem("itemShovelThaumium", OreDictionary.WILDCARD_VALUE), ItemApi.getItem("itemHoeThaumium", OreDictionary.WILDCARD_VALUE));
 
 			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCap, 1, 0), new AspectList().add(Aspect.ORDER, 3).add(Aspect.FIRE, 3).add(Aspect.AIR, 3), new Object[] {"###", "# #", '#', new ItemStack(AbyssalCraft.nugget, 1, 0)});
 			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCap, 1, 1), new AspectList().add(Aspect.ORDER, 4).add(Aspect.FIRE, 4).add(Aspect.AIR, 4), new Object[] {"###", "# #", '#', new ItemStack(AbyssalCraft.nugget, 1, 1)});
@@ -185,32 +212,64 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.eldritchScale), new AspectList().add(Aspect.FLESH, 2).add(Aspect.ELDRITCH, 1).add(Aspect.WATER, 1).add(Aspect.ARMOR, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.PSDLfinder), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.SENSES, 2).add(CORALIUM, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.EoA), new AspectList().add(Aspect.SENSES, 3).add(Aspect.DARKNESS, 3).add(CORALIUM, 2));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.essence, 1, 0), new AspectList().add(Aspect.MAGIC, 2).add(CORALIUM, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.essence, 1, 1), new AspectList().add(Aspect.MAGIC, 2).add(DREAD, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.essence, 1, 2), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.DARKNESS, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.skin, 1, 0), new AspectList().add(Aspect.FLESH, 3).add(Aspect.MAN, 2).add(CORALIUM, 2));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.skin, 1, 1), new AspectList().add(Aspect.FLESH, 3).add(Aspect.MAN, 2).add(DREAD, 2));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.skin, 1, 2), new AspectList().add(Aspect.FLESH, 3).add(Aspect.MAN, 2).add(Aspect.ELDRITCH, 2));
 
 		//Aspects, crystals
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalIron), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalSulfur), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalCarbon), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalOxygen), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.AIR, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalHydrogen), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalNitrogen), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.COLD, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalPhosphorus), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.MAGIC, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalPotassium), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalNitrate), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.COLD, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalMethane), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalRedstone), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.MECHANISM, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalAbyssalnite), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalCoralium), new AspectList().add(Aspect.CRYSTAL, 3).add(CORALIUM, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalDreadium), new AspectList().add(Aspect.CRYSTAL, 3).add(DREAD, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalBlaze), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalTin), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalCopper), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalSilicon), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalMagnesium), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalAluminium), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalSilica), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalAlumina), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalMagnesia), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalZinc), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 0), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 1), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 2), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 3), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 4), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.AIR, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 5), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 6), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.COLD, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 7), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 8), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 9), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.COLD, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 10), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 11), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.MECHANISM, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 12), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 13), new AspectList().add(Aspect.CRYSTAL, 3).add(CORALIUM, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 14), new AspectList().add(Aspect.CRYSTAL, 3).add(DREAD, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 15), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 16), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 17), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 18), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 19), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 20), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 21), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 22), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 23), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 24), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 0), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 1), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 2), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 3), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 4), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.AIR, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 5), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 6), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.COLD, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 7), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 8), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 9), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.COLD, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 10), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 11), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.MECHANISM, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 12), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 13), new AspectList().add(Aspect.CRYSTAL, 3).add(CORALIUM, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 14), new AspectList().add(Aspect.CRYSTAL, 3).add(DREAD, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 15), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.FIRE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 16), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 17), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 18), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 19), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 20), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 21), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 22), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 23), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystalShard, 1, 24), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
 
 		//Aspect, entities
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.depths_ghoul), new AspectList().add(Aspect.UNDEAD, 6).add(Aspect.DEATH, 1).add(Aspect.EARTH, 2).add(CORALIUM, 1));
@@ -236,6 +295,7 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.minion_of_the_gatekeeper), new AspectList().add(Aspect.DEATH, 5).add(Aspect.DARKNESS, 5).add(Aspect.ELDRITCH, 5));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.greater_dread_spawn), new AspectList().add(Aspect.UNDEAD, 3).add(DREAD, 3).add(Aspect.FLESH, 3));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.lesser_dreadbeast), new AspectList().add(Aspect.UNDEAD, 3).add(DREAD, 3).add(Aspect.FLESH, 3));
+		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.lesser_shoggoth), new AspectList().add(Aspect.UNDEAD, 3).add(Aspect.FLESH, 3).add(Aspect.SLIME, 3));
 
 		//Infusion enchanting
 		ThaumcraftApi.addInfusionEnchantmentRecipe("INFUSIONENCHANTMENT", AbyssalCraft.lightPierce, 10, new AspectList().add(Aspect.LIGHT, 10), new ItemStack[]{new ItemStack(Items.glowstone_dust), new ItemStack(Items.arrow)});
@@ -251,5 +311,24 @@ public class ACTC implements IACPlugin {
 
 	public static String getMobName(String name){
 		return "abyssalcraft." + name;
+	}
+
+	private void addArmorUpgrade(ItemStack helmet, ItemStack chestplate, ItemStack pants, ItemStack boots,
+			Item upgrade,ItemStack oldh, ItemStack oldc, ItemStack oldp, ItemStack oldb){
+
+		GameRegistry.addRecipe(helmet, new Object[] {"#", "@", '#', oldh, '@', upgrade});
+		GameRegistry.addRecipe(chestplate, new Object[] {"#", "@", '#', oldc, '@', upgrade});
+		GameRegistry.addRecipe(pants, new Object[] {"#", "@", '#', oldp, '@', upgrade});
+		GameRegistry.addRecipe(boots, new Object[] {"#", "@", '#', oldb, '@', upgrade});
+	}
+
+	private void addToolUpgrade(ItemStack tool1, ItemStack tool2, ItemStack tool3, ItemStack tool4, ItemStack tool5,
+			Item upgrade,ItemStack oldtool1, ItemStack oldtool2, ItemStack oldtool3, ItemStack oldtool4, ItemStack oldtool5){
+
+		GameRegistry.addRecipe(tool1, new Object[] {"#", "@", '#', oldtool1, '@', upgrade});
+		GameRegistry.addRecipe(tool2, new Object[] {"#", "@", '#', oldtool2, '@', upgrade});
+		GameRegistry.addRecipe(tool3, new Object[] {"#", "@", '#', oldtool3, '@', upgrade});
+		GameRegistry.addRecipe(tool4, new Object[] {"#", "@", '#', oldtool4, '@', upgrade});
+		GameRegistry.addRecipe(tool5, new Object[] {"#", "@", '#', oldtool5, '@', upgrade});
 	}
 }

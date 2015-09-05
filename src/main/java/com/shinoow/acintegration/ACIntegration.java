@@ -1,16 +1,26 @@
 package com.shinoow.acintegration;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+
+import org.apache.logging.log4j.Level;
+
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.Configuration;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData.PageType;
 import com.shinoow.acintegration.integrations.ee3.ACEE3;
 import com.shinoow.acintegration.integrations.morph.ACMorph;
 import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -22,10 +32,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.8.9,]", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
 public class ACIntegration {
 
-	public static final String version = "1.0.1";
+	public static final String version = "1.1.0";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -43,6 +53,7 @@ public class ACIntegration {
 	public void preInit(FMLPreInitializationEvent event) {
 
 		metadata = event.getModMetadata();
+		metadata.description = metadata.description +"\n\n\u00a76Supporters: "+getSupporterList()+"\u00a7r";
 
 		instance = this;
 
@@ -85,10 +96,12 @@ public class ACIntegration {
 				StatCollector.translateToLocal("necro.text.integration.tc.6"),
 				StatCollector.translateToLocal("necro.text.integration.tc.7"),
 				StatCollector.translateToLocal("necro.text.integration.tc.8")};
-		String[] morphtxt = new String[]{StatCollector.translateToLocal("necro.text.integration.morph.1"),
-				StatCollector.translateToLocal("necro.text.integration.morph.2")};
+		ResourceLocation[] tcres = new ResourceLocation[]{new ResourceLocation("acintegration", "textures/necronomicon/tc1.png"),
+				new ResourceLocation("acintegration", "textures/necronomicon/tc2.png"),
+				new ResourceLocation("acintegration", "textures/necronomicon/tc3.png"), null};
+		String[] morphtxt = new String[]{StatCollector.translateToLocal("necro.text.integration.morph")};
 
-		PageData tc = new PageData(4, "Thaumcraft", tctxt);
+		PageData tc = new PageData(4, "Thaumcraft", PageType.INFO, tcres, tctxt);
 		PageData morph = new PageData(1, "Morph", morphtxt);
 
 		NecroData data = new NecroData(name, StatCollector.translateToLocal("necro.text.integration"), tc, morph);
@@ -111,5 +124,22 @@ public class ACIntegration {
 
 		if(cfg.hasChanged())
 			cfg.save();
+	}
+
+	private String getSupporterList(){
+		BufferedReader nameFile;
+		String names = "";
+		try {
+			nameFile = new BufferedReader(new InputStreamReader(new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/supporters.txt").openStream()));
+
+			names = nameFile.readLine();
+			nameFile.close();
+
+		} catch (IOException e) {
+			FMLLog.log("AbyssalCraft Integration", Level.ERROR, "Failed to fetch supporter list, using local version!");
+			names = "Enfalas, Saice Shoop";
+		}
+
+		return names;
 	}
 }
