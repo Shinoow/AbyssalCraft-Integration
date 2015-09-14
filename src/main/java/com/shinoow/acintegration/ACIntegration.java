@@ -16,6 +16,7 @@ import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData.PageType;
 import com.shinoow.acintegration.integrations.ee3.ACEE3;
+import com.shinoow.acintegration.integrations.minetweaker.ACMT;
 import com.shinoow.acintegration.integrations.morph.ACMorph;
 import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
 
@@ -35,7 +36,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 @Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.8.9,]", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
 public class ACIntegration {
 
-	public static final String version = "1.1.0";
+	public static final String version = "1.2.0";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -47,7 +48,7 @@ public class ACIntegration {
 
 	public static Configuration cfg;
 
-	public static boolean loadTC, loadMorph, loadEE3, tcItems;
+	public static boolean loadTC, loadMorph, loadEE3, tcItems, loadMT;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -85,6 +86,8 @@ public class ACIntegration {
 			AbyssalCraftAPI.registerACIntegration(new ACEE3());
 			ACEE3.instance.preInit();
 		}
+		if(Loader.isModLoaded("MineTweaker3") && loadMT)
+			AbyssalCraftAPI.registerACIntegration(new ACMT());
 	}
 
 	private void registerNecroData(){
@@ -121,6 +124,7 @@ public class ACIntegration {
 		loadMorph = cfg.get(Configuration.CATEGORY_GENERAL, "Morph Integration", true, "Whether or not to load the Morph integration.").getBoolean();
 		loadEE3 = cfg.get(Configuration.CATEGORY_GENERAL, "Equivalent Exchange 3 Integration", true, "Whether or not to load the Equivalent Exchange 3 integration.").getBoolean();
 		tcItems = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Items", true, "Wheter or not to add items through the Thaumcraft integration.").getBoolean();
+		loadMT = cfg.get(Configuration.CATEGORY_GENERAL, "MineTweaker 3 Integration", true, "Whether or not to load the MineTweaker 3 integration.").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();

@@ -1,5 +1,6 @@
-- Added Thaumium Upgrade Kit
-- Added Void metal Upgrade Kit
-- Assigned Aspects to more Items
-- Assigned EMC values to more Items
-- Rewrote Thaumcraft integration info (and added pictures)
+- Added MineTweaker 3 integration
+- You can now add Transmutator recipes through MineTweaker
+- You can now add Crystallizer recipes through MineTweaker
+- You can now add Creation Rituals through Minetweaker
+- You can now add Infusion Rituals through MineTweaker
+- Added config option to disable MineTweaker integration
