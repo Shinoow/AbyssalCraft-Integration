@@ -9,6 +9,7 @@ import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
+import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -18,13 +19,11 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class InfusionRitual {
 
 	@ZenMethod
-	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, IItemStack item, IItemStack sacrifice, IItemStack...offerings){
+	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, IItemStack item, IIngredient sacrifice, IIngredient...offerings){
 
-		ItemStack[] offers = new ItemStack[offerings.length];
-		for(int i = 0; i < offerings.length; i++)
-			offers[i] = ACMT.toStack(offerings[i]);
+		Object[] offers = ACMT.toObjects(offerings);
 
-		NecronomiconInfusionRitual ritual = new NecronomiconInfusionRitual(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, ACMT.toStack(item), ACMT.toStack(sacrifice), offers);
+		NecronomiconInfusionRitual ritual = new NecronomiconInfusionRitual(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, ACMT.toStack(item), ACMT.toObject(sacrifice), offers);
 		MineTweakerAPI.apply(new Add(ritual));
 	}
 

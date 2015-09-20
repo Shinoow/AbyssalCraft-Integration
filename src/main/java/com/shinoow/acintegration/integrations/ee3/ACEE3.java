@@ -13,6 +13,8 @@ package com.shinoow.acintegration.integrations.ee3;
 
 import java.util.*;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -45,6 +47,9 @@ public class ACEE3 implements IACPlugin {
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.ethaxium, 16);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.Darkgrass, 1);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.dreadgrass, 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.monolithStone, 16);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.shoggothBlock, 8);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.shoggothBiomass, 16);
 
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.cbrick, 16);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.ethaxium_brick, 16);
@@ -83,6 +88,11 @@ public class ACEE3 implements IACPlugin {
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.essence, 1, 0), 256);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.essence, 1, 1), 512);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.essence, 1, 2), 1024);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 0), 32);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 1), 64);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), 96);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), 128);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), 160);
 
 		for(String name :OreDictionary.getOreNames()){
 			if(name.startsWith("crystal") && !name.startsWith("crystalShard")){
@@ -114,9 +124,29 @@ public class ACEE3 implements IACPlugin {
 
 	private List getInputs(NecronomiconRitual ritual){
 		List<ItemStack> inputs = new ArrayList<ItemStack>();
-		inputs.addAll(Arrays.asList(ritual.getOfferings()));
+		inputs.addAll(Arrays.asList(getStacks(ritual.getOfferings())));
 		if(ritual instanceof NecronomiconInfusionRitual)
-			inputs.add(((NecronomiconInfusionRitual) ritual).getSacrifice());
+			inputs.add(getStack(((NecronomiconInfusionRitual) ritual).getSacrifice()));
 		return inputs;
+	}
+
+	private ItemStack[] getStacks(Object[] obj){
+		ItemStack[] stacks = new ItemStack[obj.length];
+
+		for(int i = 0; i < obj.length; i++)
+			stacks[i] = getStack(obj[i]);
+		return stacks;
+	}
+
+	private ItemStack getStack(Object obj){
+		if(obj instanceof Item)
+			return new ItemStack((Item)obj);
+		if(obj instanceof Block)
+			return new ItemStack((Block)obj);
+		if(obj instanceof ItemStack)
+			return (ItemStack)obj;
+		if(obj instanceof String)
+			return OreDictionary.getOres((String)obj).iterator().next();
+		return null;
 	}
 }

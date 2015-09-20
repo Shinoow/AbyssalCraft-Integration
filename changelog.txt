@@ -1,6 +1,4 @@
-- Added MineTweaker 3 integration
-- You can now add Transmutator recipes through MineTweaker
-- You can now add Crystallizer recipes through MineTweaker
-- You can now add Creation Rituals through Minetweaker
-- You can now add Infusion Rituals through MineTweaker
-- Added config option to disable MineTweaker integration
+- MineTweaker integration now support OreDictionary for rituals
+- Assigned more EMC values
+- Assigned more Aspects
+- Now runs on Forge 10.13.4.1448

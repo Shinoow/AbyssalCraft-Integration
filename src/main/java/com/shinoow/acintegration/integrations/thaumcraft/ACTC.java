@@ -184,6 +184,16 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.omotholstone), new AspectList().add(Aspect.EARTH, 2).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.cstone), new AspectList().add(Aspect.EARTH, 2).add(CORALIUM, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.PSDL), new AspectList().add(Aspect.EARTH, 2).add(Aspect.ENERGY, 2).add(DREAD, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.monolithStone), new AspectList().add(Aspect.EARTH, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothBlock), new AspectList().add(Aspect.EARTH, 1).add(Aspect.FLESH, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothBiomass), new AspectList().add(Aspect.EARTH, 1).add(Aspect.FLESH, 1).add(Aspect.ELDRITCH, 1).add(Aspect.LIFE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.cthulhuStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.hasturStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.jzaharStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.azathothStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.nyarlathotepStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.yogsothothStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shubniggurathStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 
 		//Aspects, items
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.abyingot), new AspectList().add(Aspect.METAL, 3).add(Aspect.DARKNESS, 1));
@@ -218,6 +228,11 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.skin, 1, 0), new AspectList().add(Aspect.FLESH, 3).add(Aspect.MAN, 2).add(CORALIUM, 2));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.skin, 1, 1), new AspectList().add(Aspect.FLESH, 3).add(Aspect.MAN, 2).add(DREAD, 2));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.skin, 1, 2), new AspectList().add(Aspect.FLESH, 3).add(Aspect.MAN, 2).add(Aspect.ELDRITCH, 2));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 0), new AspectList().add(Aspect.UNDEAD, 3).add(Aspect.FLESH, 3).add(Aspect.SLIME, 3));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 1), new AspectList().add(Aspect.UNDEAD, 3).add(Aspect.FLESH, 3).add(Aspect.SLIME, 3).add(CORALIUM, 3));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), new AspectList().add(Aspect.UNDEAD, 3).add(Aspect.FLESH, 3).add(Aspect.SLIME, 3).add(DREAD, 3));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), new AspectList().add(Aspect.UNDEAD, 3).add(Aspect.FLESH, 3).add(Aspect.SLIME, 3).add(Aspect.ELDRITCH, 3));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), new AspectList().add(Aspect.UNDEAD, 3).add(Aspect.FLESH, 3).add(Aspect.SLIME, 3).add(Aspect.DARKNESS, 3));
 
 		//Aspects, crystals
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 0), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
