@@ -1,4 +1,1 @@
-- MineTweaker integration now support OreDictionary for rituals
-- Assigned more EMC values
-- Assigned more Aspects
-- Now runs on Forge 10.13.4.1448
+- Fixed a crash related to the Thaumcraft integration and mod load orders
