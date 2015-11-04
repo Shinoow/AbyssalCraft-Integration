@@ -1,1 +1,4 @@
-- Fixed a crash related to the Thaumcraft integration and mod load orders
+- Removed Morph integration (moved back to AbyssalCraft)
+- Assigned more Aspects to Blocks/Items/Entities
+- Assigned EMC values to all coins
+- Bump to AbyssalCraft 1.9.0a

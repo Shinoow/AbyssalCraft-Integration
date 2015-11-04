@@ -194,6 +194,9 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.nyarlathotepStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.yogsothothStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shubniggurathStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.monolithStone), new AspectList().add(Aspect.EARTH, 2).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.energyPedestal), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.monolithPillar), new AspectList().add(Aspect.EARTH, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 
 		//Aspects, items
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.abyingot), new AspectList().add(Aspect.METAL, 3).add(Aspect.DARKNESS, 1));
@@ -233,6 +236,14 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), new AspectList().add(Aspect.UNDEAD, 3).add(Aspect.FLESH, 3).add(Aspect.SLIME, 3).add(DREAD, 3));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), new AspectList().add(Aspect.UNDEAD, 3).add(Aspect.FLESH, 3).add(Aspect.SLIME, 3).add(Aspect.ELDRITCH, 3));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), new AspectList().add(Aspect.UNDEAD, 3).add(Aspect.FLESH, 3).add(Aspect.SLIME, 3).add(Aspect.DARKNESS, 3));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.charm), new AspectList().add(Aspect.CRAFT, 2).add(Aspect.CRYSTAL, 1).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.cthulhuCharm), new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 3).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.hasturCharm), new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 3).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.jzaharCharm), new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 3).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.azathothCharm), new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 3).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.nyarlathotepCharm), new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 3).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.yogsothothCharm), new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 3).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shubniggurathCharm), new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 3).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
 
 		//Aspects, crystals
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 0), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));
@@ -311,6 +322,10 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.greater_dread_spawn), new AspectList().add(Aspect.UNDEAD, 3).add(DREAD, 3).add(Aspect.FLESH, 3));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.lesser_dreadbeast), new AspectList().add(Aspect.UNDEAD, 3).add(DREAD, 3).add(Aspect.FLESH, 3));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.lesser_shoggoth), new AspectList().add(Aspect.UNDEAD, 3).add(Aspect.FLESH, 3).add(Aspect.SLIME, 3));
+		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.evil_cow), new AspectList().add(Aspect.BEAST, 2).add(Aspect.EARTH, 2).add(Aspect.FLESH, 2));
+		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.evil_chicken), new AspectList().add(Aspect.BEAST, 2).add(Aspect.EARTH, 2).add(Aspect.FLESH, 2));
+		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.demon_cow), new AspectList().add(Aspect.FLESH, 3).add(Aspect.FIRE, 3).add(Aspect.BEAST, 2));
+		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.demon_chicken), new AspectList().add(Aspect.FLESH, 3).add(Aspect.FIRE, 3).add(Aspect.BEAST, 2));
 
 		//Infusion enchanting
 		ThaumcraftApi.addInfusionEnchantmentRecipe("INFUSIONENCHANTMENT", AbyssalCraft.lightPierce, 10, new AspectList().add(Aspect.LIGHT, 10), new ItemStack[]{new ItemStack(Items.glowstone_dust), new ItemStack(Items.arrow)});

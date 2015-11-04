@@ -62,6 +62,11 @@ public class ACEE3 implements IACPlugin {
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.cthulhuCoin, 1028);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.elderCoin, 1028);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.jzaharCoin, 1028);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.hasturCoin, 1028);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.azathothCoin, 1028);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.nyarlathotepCoin, 1028);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.yogsothothCoin, 1028);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.shubniggurathCoin, 1028);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.Cpearl, 262);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.shadowfragment, 16);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.abyingot, 3072);
@@ -125,8 +130,8 @@ public class ACEE3 implements IACPlugin {
 	private List getInputs(NecronomiconRitual ritual){
 		List<ItemStack> inputs = new ArrayList<ItemStack>();
 		inputs.addAll(Arrays.asList(getStacks(ritual.getOfferings())));
-		if(ritual instanceof NecronomiconInfusionRitual)
-			inputs.add(getStack(((NecronomiconInfusionRitual) ritual).getSacrifice()));
+		if(ritual.getSacrifice() != null)
+			inputs.add(getStack(ritual.getSacrifice()));
 		return inputs;
 	}
 
