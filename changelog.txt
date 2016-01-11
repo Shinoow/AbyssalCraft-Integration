@@ -1,4 +1,5 @@
-- Removed Morph integration (moved back to AbyssalCraft)
-- Assigned more Aspects to Blocks/Items/Entities
-- Assigned EMC values to all coins
-- Bump to AbyssalCraft 1.9.0a
+- Bump to AbyssalCraft 1.9.0-pre-3
+- Added EMC values to the block versions of the liquids
+- Added ProjectE integration (does the same as the EE3 one, but for ProjectE instead)
+- Additional Warp can now be gained through attacking/being attacked by AbyssalCraft mobs and being inside the dimensions
+- Now runs on Forge 10.13.4.1558

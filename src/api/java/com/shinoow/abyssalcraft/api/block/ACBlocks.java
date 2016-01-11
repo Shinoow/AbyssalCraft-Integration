@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2015 Shinoow.
+ * Copyright (c) 2012 - 2016 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -150,6 +150,11 @@ public class ACBlocks {
 	public static Block monolith_stone = getBlock("monolithstone");
 	public static Block energy_pedestal = getBlock("energypedestal");
 	public static Block monolith_pillar = getBlock("monolithpillar");
+	public static Block sacrificial_altar = getBlock("sacrificialaltar");
+	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
+	public static Block tiered_energy_pedestal = getBlock("tieredenergypedestal");
+	/** Metadata block, 0 = Overworld, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
+	public static Block tiered_sacrificial_altar = getBlock("tieredsacrificialaltar");
 
 	private static Block getBlock(String name){
 		return GameRegistry.findBlock("abyssalcraft", name);

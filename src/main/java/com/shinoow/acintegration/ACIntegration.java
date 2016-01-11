@@ -17,6 +17,7 @@ import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData.PageType;
 import com.shinoow.acintegration.integrations.ee3.ACEE3;
 import com.shinoow.acintegration.integrations.minetweaker.ACMT;
+import com.shinoow.acintegration.integrations.projecte.ACPE;
 import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
@@ -35,7 +36,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 @Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.0,];after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
 public class ACIntegration {
 
-	public static final String version = "1.3.0";
+	public static final String version = "1.3.5";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -47,7 +48,7 @@ public class ACIntegration {
 
 	public static Configuration cfg;
 
-	public static boolean loadTC, loadEE3, tcItems, loadMT;
+	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarp;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -85,6 +86,8 @@ public class ACIntegration {
 		}
 		if(Loader.isModLoaded("MineTweaker3") && loadMT)
 			AbyssalCraftAPI.registerACIntegration(new ACMT());
+		if(Loader.isModLoaded("ProjectE") && loadPE)
+			AbyssalCraftAPI.registerACIntegration(new ACPE());
 	}
 
 	private void registerNecroData(){
@@ -101,7 +104,7 @@ public class ACIntegration {
 				new ResourceLocation("acintegration", "textures/necronomicon/tc3.png"), null};
 		String[] morphtxt = new String[]{StatCollector.translateToLocal("necro.text.integration.morph")};
 
-		PageData tc = new PageData(4, "Thaumcraft", PageType.INFO, tcres, tctxt);
+		PageData tc = new PageData(4, "Thaumcraft", tcres, tctxt);
 		PageData morph = new PageData(1, "Morph", morphtxt);
 
 		NecroData data = new NecroData(name, StatCollector.translateToLocal("necro.text.integration"), tc, morph);
@@ -121,6 +124,8 @@ public class ACIntegration {
 		loadEE3 = cfg.get(Configuration.CATEGORY_GENERAL, "Equivalent Exchange 3 Integration", true, "Whether or not to load the Equivalent Exchange 3 integration.").getBoolean();
 		tcItems = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Items", true, "Wheter or not to add items through the Thaumcraft integration.").getBoolean();
 		loadMT = cfg.get(Configuration.CATEGORY_GENERAL, "MineTweaker 3 Integration", true, "Whether or not to load the MineTweaker 3 integration.").getBoolean();
+		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
+		tcWarp = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs and being inside AbyssalCraft dimensions").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();

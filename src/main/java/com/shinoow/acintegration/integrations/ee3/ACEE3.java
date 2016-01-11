@@ -20,6 +20,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.exchange.RecipeRegistryProxy;
+import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.api.ritual.*;
@@ -50,6 +51,17 @@ public class ACEE3 implements IACPlugin {
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.monolithStone, 16);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.shoggothBlock, 8);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.shoggothBiomass, 16);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.abyore, 3072);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.abydreadore, 3072);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.dreadore, 3072);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.AbyLCorOre, 4096);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.nitreOre, 32);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.AbyNitOre, 32);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.AbyTinOre, 256);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.AbyCopOre, 128);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.Coraliumore, 32);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.AbyCorOre, 32);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.AbyPCorOre, 262);
 
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.cbrick, 16);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.ethaxium_brick, 16);
@@ -81,6 +93,8 @@ public class ACEE3 implements IACPlugin {
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.portalPlacerJzh, 251904);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.CFluid, 32);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.antifluid, 32);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.Cwater, 32);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.anticwater, 32);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.antiBone, 48);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.friedegg, 32);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.antiBeef, 24);
@@ -98,6 +112,10 @@ public class ACEE3 implements IACPlugin {
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 2), 96);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 3), 128);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(AbyssalCraft.shoggothFlesh, 1, 4), 160);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.sulfur, 32);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.nitre, 32);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.tinIngot, 256);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(AbyssalCraft.copperIngot, 128);
 
 		for(String name :OreDictionary.getOreNames()){
 			if(name.startsWith("crystal") && !name.startsWith("crystalShard")){
@@ -125,6 +143,46 @@ public class ACEE3 implements IACPlugin {
 		for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
 			if(ritual instanceof NecronomiconCreationRitual)
 				RecipeRegistryProxy.addRecipe(((NecronomiconCreationRitual) ritual).getItem(), getInputs(ritual));
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.OC);
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.essence, 1, OreDictionary.WILDCARD_VALUE));
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.skin, 1, OreDictionary.WILDCARD_VALUE));
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.necronomicon_cor);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.necronomicon_dre);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.necronomicon_omt);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.abyssalnomicon);
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.cthulhuCharm, 1, OreDictionary.WILDCARD_VALUE));
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.hasturCharm, 1, OreDictionary.WILDCARD_VALUE));
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.jzaharCharm, 1, OreDictionary.WILDCARD_VALUE));
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.azathothCharm, 1, OreDictionary.WILDCARD_VALUE));
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.nyarlathotepCharm, 1, OreDictionary.WILDCARD_VALUE));
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.yogsothothCharm, 1, OreDictionary.WILDCARD_VALUE));
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.shubniggurathCharm, 1, OreDictionary.WILDCARD_VALUE));
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.cthulhuStatue);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.hasturStatue);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.jzaharStatue);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.azathothStatue);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.nyarlathotepStatue);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.yogsothothStatue);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.shubniggurathStatue);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.portalPlacer);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.portalPlacerDL);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.dreadKey);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.portalPlacerJzh);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.PSDL);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.dreadaltartop);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.dreadaltarbottom);
+		AbilityRegistryProxy.setAsNotLearnable(AbyssalCraft.EoA);
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.tieredEnergyPedestal, 1, OreDictionary.WILDCARD_VALUE));
+		AbilityRegistryProxy.setAsNotLearnable(new ItemStack(AbyssalCraft.tieredSacrificialAltar, 1, OreDictionary.WILDCARD_VALUE));
+
+		for(String name :OreDictionary.getOreNames()){
+			if(name.startsWith("crystal")){
+				List<ItemStack> ores = OreDictionary.getOres(name);
+				Iterator iter = ores.iterator();
+				while(iter.hasNext())
+					AbilityRegistryProxy.setAsNotLearnable(iter.next());
+			}
+		}
 	}
 
 	private List getInputs(NecronomiconRitual ritual){

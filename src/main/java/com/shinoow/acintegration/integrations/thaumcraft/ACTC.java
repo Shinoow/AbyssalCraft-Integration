@@ -16,6 +16,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
@@ -54,6 +55,9 @@ public class ACTC implements IACPlugin {
 
 	@Override
 	public void preInit() {
+
+		if(ACIntegration.tcWarp)
+			MinecraftForge.EVENT_BUS.register(new ACTCEvents());
 
 		if(ACIntegration.tcItems){
 
@@ -126,6 +130,9 @@ public class ACTC implements IACPlugin {
 
 			GameRegistry.addRecipe(new ItemStack(thaumiumU), new Object[] {"#%", "%&", '#', Items.iron_ingot, '%', ItemApi.getItem("itemResource", 2), '&', AbyssalCraft.IronU});
 			GameRegistry.addRecipe(new ItemStack(voidmetalU), new Object[] {"#%", "%&", '#', ItemApi.getItem("itemResource", 2), '%', ItemApi.getItem("itemResource", 16), '&', thaumiumU});
+
+			ThaumcraftApi.addWarpToItem(new ItemStack(thaumiumU), 10);
+			ThaumcraftApi.addWarpToItem(new ItemStack(voidmetalU), 10);
 
 			addArmorUpgrade(ItemApi.getItem("itemHelmetThaumium", 0), ItemApi.getItem("itemChestThaumium", 0), ItemApi.getItem("itemLegsThaumium", 0), ItemApi.getItem("itemBootsThaumium", 0), thaumiumU, new ItemStack(Items.iron_helmet, 1, OreDictionary.WILDCARD_VALUE),
 					new ItemStack(Items.iron_chestplate, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.iron_leggings, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(Items.iron_boots, 1, OreDictionary.WILDCARD_VALUE));
