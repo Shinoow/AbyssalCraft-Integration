@@ -85,6 +85,8 @@ dependencies {
 	deobfCompile name: 'Thaumcraft', version: "5.1.6", ext: 'jar'
 }
 
+version = "${props.mc_version}-${props.aci_version}"
+
 processResources
 {
 	// I really don't want that file to exist anywhere
