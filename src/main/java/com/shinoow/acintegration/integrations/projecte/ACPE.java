@@ -123,10 +123,10 @@ public class ACPE implements IACPlugin {
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.nyarlathotepStatue), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.yogsothothStatue), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.shubniggurathStatue), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.portalPlacer), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.portalPlacerDL), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.gatewayKey), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.gatewayKeyDL), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.dreadKey), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.portalPlacerJzh), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.gatewayKeyJzh), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.PSDL), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.dreadaltartop), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(AbyssalCraft.dreadaltarbottom), 0);

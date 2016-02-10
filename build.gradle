@@ -1,34 +1,45 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+		maven {
+            // Required for the curseforge task
+            name = "gradle"
+            url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+		classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.0.5"
     }
 }
 
+apply plugin: 'java'
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.matthewprenger.cursegradle'
+
 repositories {
-	maven {
+	/*maven {
 			name 'CB Repo'
 			url "http://chickenbones.net/maven/"
 		}
 	maven {
 			name "Mobius Repo"
 			url "http://mobiusstrip.eu/maven"
-		}
-}
+		}*/
 
-apply plugin: 'java'
-apply plugin: 'forge'
-apply plugin: 'curseforge'
+	maven {
+		name 'Progwml6'
+		url "http://dvs1.progwml6.com/files/maven"
+	}
+	ivy {
+		name "Thaumcraft"
+		artifactPattern "https://dl.dropboxusercontent.com/u/47135879/[module]-1.8.9-[revision]-deobf.[ext]"
+	}
+}
 
 ext.propFile = file "build.properties"
 
@@ -47,21 +58,32 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 minecraft {
-    version = "1.7.10-10.13.4.1558-1.7.10"
-    runDir = "eclipse"
+    version = "1.8.9-11.15.1.1722"
+    runDir = "run"
+    
+    // the mappings can be changed at any time, and must be in the following format.
+    // snapshot_YYYYMMDD   snapshot are built nightly.
+    // stable_#            stables are built at the discretion of the MCP team.
+    // Use non-default mappings at your own risk. they may not allways work.
+    // simply re-run your setup task after changing the mappings to update your workspace.
+    mappings = "stable_20"
+    makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+	
+	useDepAts = true
 	
 		replaceIn "ACIntegration.java"
             replace "forgeversion", props.forge_version
 }
 
 dependencies {
-	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.138:dev"
-	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.46:dev"
-	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.110:dev"
-	compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.507:dev"
-}
+	//compile "codechicken:CodeChickenLib:1.7.10-1.1.3.138:dev"
+	//compile "codechicken:CodeChickenCore:1.7.10-1.0.7.46:dev"
+	//compile "codechicken:NotEnoughItems:1.7.10-1.0.5.110:dev"
+	//compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.507:dev"
 
-version = "${props.mc_version}-${props.aci_version}"
+	deobfCompile "mezz.jei:jei_1.8.9:2.25.3.131"
+	deobfCompile name: 'Thaumcraft', version: "5.1.6", ext: 'jar'
+}
 
 processResources
 {
@@ -113,13 +135,21 @@ processResources
     archives srcJar, devJar
 }
 
-curse {
+curseforge {
     apiKey = project.hasProperty('curseForgeApiKey') ? project.curseForgeApiKey : '' // gradle curse -Pcurseforge_key=your-api-key
-    projectId   = "234851" // http://minecraft.curseforge.com/mc-mods/"xxxxxx"-projectname
-    releaseType = project.props.release_type //alpha beta release
-    changelog   = new File('changelog.txt').text //must have at least an empty string
-	
-	additionalArtifact devJar, srcJar
-	
-	relatedProject 'abyssalcraft'
+    project {
+		id   = "234851" // http://minecraft.curseforge.com/mc-mods/"xxxxxx"-projectname
+		releaseType = project.props.release_type //alpha beta release
+		changelogType = 'html'
+		changelog   = new File('changelog.html') //must have at least an empty string
+		addArtifact devJar
+		addArtifact srcJar
+		
+		relations{
+			requiredLibrary 'abyssalcraft'
+			optionalLibrary 'crafttweaker-customized-mineweaker3'
+			optionalLibrary 'projecte'
+			optionalLibrary 'thaumcraft'
+		}
+	}
 }

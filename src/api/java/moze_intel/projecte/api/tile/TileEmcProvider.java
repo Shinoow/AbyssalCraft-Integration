@@ -1,6 +1,6 @@
 package moze_intel.projecte.api.tile;
 
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 /**
  * Reference implementation for IEMCProvider
@@ -10,7 +10,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class TileEmcProvider extends TileEmcBase implements IEmcProvider
 {
 	@Override
-	public double provideEMC(ForgeDirection side, double toExtract)
+	public double provideEMC(EnumFacing side, double toExtract)
 	{
 		double toRemove = Math.min(currentEMC, toExtract);
 		removeEMC(toRemove);

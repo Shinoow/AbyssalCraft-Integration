@@ -2,15 +2,15 @@ package com.shinoow.acintegration.integrations.minetweaker;
 
 import static minetweaker.api.minecraft.MineTweakerMC.getItemStack;
 
-import com.shinoow.abyssalcraft.api.integration.IACPlugin;
-
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.item.IngredientStack;
 import minetweaker.api.oredict.IOreDictEntry;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
+
+import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 
 public class ACMT implements IACPlugin {
 

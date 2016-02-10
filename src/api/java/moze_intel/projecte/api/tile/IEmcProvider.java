@@ -1,6 +1,6 @@
 package moze_intel.projecte.api.tile;
 
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 /**
  * Implement this interface to specify that "EMC can be taken from this Tile Entity from an external source"
@@ -18,5 +18,5 @@ public interface IEmcProvider extends IEmcStorage
 	 * @param toExtract The maximum amount to extract
 	 * @return The amount actually extracted
 	 */
-	double provideEMC(ForgeDirection side, double toExtract);
+	double provideEMC(EnumFacing side, double toExtract);
 }

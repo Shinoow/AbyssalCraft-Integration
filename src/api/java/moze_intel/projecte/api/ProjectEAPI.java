@@ -1,10 +1,10 @@
 package moze_intel.projecte.api;
 
-import cpw.mods.fml.common.FMLLog;
 import moze_intel.projecte.api.proxy.IEMCProxy;
 import moze_intel.projecte.api.proxy.IBlacklistProxy;
 import moze_intel.projecte.api.proxy.IConversionProxy;
 import moze_intel.projecte.api.proxy.ITransmutationProxy;
+import net.minecraftforge.fml.common.FMLLog;
 
 public final class ProjectEAPI
 {

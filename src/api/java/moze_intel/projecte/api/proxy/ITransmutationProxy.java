@@ -1,6 +1,7 @@
 package moze_intel.projecte.api.proxy;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -12,15 +13,12 @@ public interface ITransmutationProxy
     /**
      * Register a world transmutation with the Philosopher's Stone
      * Calls this during the postinit phase
-     * @param origin Original block when targeting world transmutation
-     * @param originMeta Original metadata
-     * @param result1 First result block
-     * @param result1Meta First result metadata
-     * @param result2 Alternate result (when sneaking). You may pass null, in which there will be no alternate transmutation
-     * @param result2meta Alternate result metadata. If result2 is null, this value is ignored
+     * @param origin Original blockstate when targeting world transmutation
+     * @param result1 First result blockstate
+     * @param result2 Alternate result blockstate (when sneaking). You may pass null, in which there will be no alternate transmutation
      * @return Whether the registration succeeded. It may fail if transmutations already exist for block origin
      */
-    boolean registerWorldTransmutation(Block origin, int originMeta, Block result1, int result1Meta, @Nullable Block result2, int result2meta);
+    boolean registerWorldTransmutation(IBlockState origin, IBlockState result1, IBlockState result2);
 
     /**
      * Queries the knowledge of the provided player

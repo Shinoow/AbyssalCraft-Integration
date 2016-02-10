@@ -1,6 +1,7 @@
 package moze_intel.projecte.api.item;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -18,5 +19,5 @@ public interface IAlchChestItem
      * @param world The World
      * @param stack The ItemStack being ticked
      */
-    void updateInAlchChest(World world, int x, int y, int z, ItemStack stack);
+    void updateInAlchChest(World world, BlockPos pos, ItemStack stack);
 }
