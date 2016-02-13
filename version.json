@@ -1,10 +1,11 @@
 {
   "homepage": "http://minecraft.curseforge.com/mc-mods/234851",
   "promos": {
-    "1.8.9-latest": "1.3.5",
-    "1.8.9-recommended": "1.3.5"
+    "1.8.9-latest": "1.4.0",
+    "1.8.9-recommended": "1.4.0"
   },
   "1.8.9": {
-	"1.3.5": "-Ported to Minecraft 1.8.9\n- Enabled Forge version checker\n- EE3 integration is disabled (mod not updated)\n- Thaumcraft integration is partially enabled (only Aspects, but some are not assigned due to the amount that has been removed in the 1.8 updates)\n- Some config options are disabled due to the aforementioned"
+	"1.4.0": "- Bump to AbyssalCraft 1.9.0-pre-4\n- Bumped the extra Necronomicon info to AbyssalCraftAPI 1.6\n- You can now add/edit/remove Necronomicon Pages/Chapters through MineTweaker\n- Now runs on Forge 11.15.1.1741",
+	"1.3.5": "- Ported to Minecraft 1.8.9\n- Enabled Forge version checker\n- EE3 integration is disabled (mod not updated)\n- Thaumcraft integration is partially enabled (only Aspects, but some are not assigned due to the amount that has been removed in the 1.8 updates)\n- Some config options are disabled due to the aforementioned"
   }
 }

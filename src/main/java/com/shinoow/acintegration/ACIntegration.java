@@ -25,16 +25,17 @@ import org.apache.logging.log4j.Level;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.PageData;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
+import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.acintegration.integrations.minetweaker.ACMT;
 import com.shinoow.acintegration.integrations.projecte.ACPE;
 import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
 
 @Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.0,];after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
-updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
+acceptedMinecraftVersions = "[1.8.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
 public class ACIntegration {
 
-	public static final String version = "1.3.5";
+	public static final String version = "1.4.0";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -76,12 +77,12 @@ public class ACIntegration {
 	private void registerIntegrations(){
 		if(Loader.isModLoaded("Thaumcraft") && loadTC){
 			AbyssalCraftAPI.registerACIntegration(new ACTC());
-//			ACTC.instance.preInit();
+			//			ACTC.instance.preInit();
 		}
-//		if(Loader.isModLoaded("EE3") && loadEE3){
-//			AbyssalCraftAPI.registerACIntegration(new ACEE3());
-//			ACEE3.instance.preInit();
-//		}
+		//		if(Loader.isModLoaded("EE3") && loadEE3){
+		//			AbyssalCraftAPI.registerACIntegration(new ACEE3());
+		//			ACEE3.instance.preInit();
+		//		}
 		if(Loader.isModLoaded("MineTweaker3") && loadMT)
 			AbyssalCraftAPI.registerACIntegration(new ACMT());
 		if(Loader.isModLoaded("ProjectE") && loadPE)
@@ -100,12 +101,17 @@ public class ACIntegration {
 		ResourceLocation[] tcres = new ResourceLocation[]{new ResourceLocation("acintegration", "textures/necronomicon/tc1.png"),
 				new ResourceLocation("acintegration", "textures/necronomicon/tc2.png"),
 				new ResourceLocation("acintegration", "textures/necronomicon/tc3.png"), null};
-		String[] morphtxt = new String[]{StatCollector.translateToLocal("necro.text.integration.morph")};
 
-		PageData tc = new PageData(4, "Thaumcraft", tcres, tctxt);
-		PageData morph = new PageData(1, "Morph", morphtxt);
+		Chapter tc = new Chapter("thaumcraft", "Thaumcraft", new Page[]{
+				new Page(1, tcres[0], tctxt[0]), new Page(2, tctxt[1]), new Page(3, tcres[1], tctxt[2]),
+				new Page(4, tctxt[3]), new Page(5, tcres[2], tctxt[4]), new Page(5, tctxt[6]),
+				new Page(7, tctxt[6]), new Page(8, tctxt[7])
+		});
+		Chapter morph = new Chapter("morph", "Morph", new Page[]{
+				new Page(1, StatCollector.translateToLocal("necro.text.integration.morph"))
+		});
 
-		NecroData data = new NecroData(name, StatCollector.translateToLocal("necro.text.integration"), tc, morph);
+		NecroData data = new NecroData(modid, name, StatCollector.translateToLocal("necro.text.integration"), tc, morph);
 
 		AbyssalCraftAPI.registerNecronomiconData(data, 0);
 	}
@@ -119,11 +125,11 @@ public class ACIntegration {
 	private static void syncConfig(){
 
 		loadTC = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Integration", true, "Whether or not to load the Thaumcraft integration. Disabling this will override any other part of said integration.").getBoolean();
-//		loadEE3 = cfg.get(Configuration.CATEGORY_GENERAL, "Equivalent Exchange 3 Integration", true, "Whether or not to load the Equivalent Exchange 3 integration.").getBoolean();
-//		tcItems = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Items", true, "Wheter or not to add items through the Thaumcraft integration.").getBoolean();
+		//		loadEE3 = cfg.get(Configuration.CATEGORY_GENERAL, "Equivalent Exchange 3 Integration", true, "Whether or not to load the Equivalent Exchange 3 integration.").getBoolean();
+		//		tcItems = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Items", true, "Wheter or not to add items through the Thaumcraft integration.").getBoolean();
 		loadMT = cfg.get(Configuration.CATEGORY_GENERAL, "MineTweaker 3 Integration", true, "Whether or not to load the MineTweaker 3 integration.").getBoolean();
 		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
-//		tcWarp = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs and being inside AbyssalCraft dimensions").getBoolean();
+		//		tcWarp = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs and being inside AbyssalCraft dimensions").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();
