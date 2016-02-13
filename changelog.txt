@@ -1,5 +1,4 @@
-- Bump to AbyssalCraft 1.9.0-pre-3
-- Added EMC values to the block versions of the liquids
-- Added ProjectE integration (does the same as the EE3 one, but for ProjectE instead)
-- Additional Warp can now be gained through attacking/being attacked by AbyssalCraft mobs and being inside the dimensions
-- Now runs on Forge 10.13.4.1558
+- Bump to AbyssalCraft 1.9.0-pre-4
+- Bumped the extra Necronomicon info to AbyssalCraftAPI 1.6
+- You can now add/edit/remove Necronomicon Pages/Chapters through MineTweaker
+- Now runs on Forge 10.13.4.1614
