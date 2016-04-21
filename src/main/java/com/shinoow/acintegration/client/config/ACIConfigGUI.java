@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.fml.client.config.DummyConfigElement.DummyCategoryElement;
 import net.minecraftforge.fml.client.config.GuiConfig;
@@ -23,7 +23,7 @@ public class ACIConfigGUI extends GuiConfig {
 	@SuppressWarnings("rawtypes")
 	private static List<IConfigElement> getConfigElements(){
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
-		list.add(new DummyCategoryElement(StatCollector.translateToLocal("aci_general"), "aci_general", GeneralEntry.class));
+		list.add(new DummyCategoryElement(I18n.translateToLocal("aci_general"), "aci_general", GeneralEntry.class));
 		return list;
 	}
 
@@ -35,7 +35,7 @@ public class ACIConfigGUI extends GuiConfig {
 
 		@Override
 		protected GuiScreen buildChildScreen(){
-			return new GuiConfig(owningScreen, new ConfigElement(ACIntegration.cfg.getCategory("general")).getChildElements(), "acintegration", "general", true, true, StatCollector.translateToLocal("aci_general"));
+			return new GuiConfig(owningScreen, new ConfigElement(ACIntegration.cfg.getCategory("general")).getChildElements(), "acintegration", "general", true, true, I18n.translateToLocal("aci_general"));
 
 		}
 	}

@@ -20,10 +20,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACPotions;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 
 /**
  * A Necronomicon Area-of-Effect Ritual
@@ -83,7 +84,7 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 		if(potion instanceof Potion)
 			return (Potion) potion;
 		if(potion instanceof Integer)
-			return Potion.potionTypes[(int) potion];
+			return Potion.getPotionById((int) potion);
 		return null;
 	}
 
@@ -92,9 +93,9 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 		try {
 			Class utilClass = Class.forName("com.shinoow.abyssalcraft.common.util.EntityUtil");
 
-			result = potion == ACPotions.Coralium_plague && (Boolean)utilClass.getDeclaredMethod("isEntityCoralium", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity) ||
-					potion == ACPotions.Dread_plague && (Boolean)utilClass.getDeclaredMethod("isEntityDread", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity) ||
-					potion == ACPotions.Antimatter && (Boolean)utilClass.getDeclaredMethod("isEntityAnti", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity);
+			result = potion == AbyssalCraftAPI.coralium_plague && (Boolean)utilClass.getDeclaredMethod("isEntityCoralium", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity) ||
+					potion == AbyssalCraftAPI.dread_plague && (Boolean)utilClass.getDeclaredMethod("isEntityDread", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity) ||
+					potion == AbyssalCraftAPI.antimatter_potion && (Boolean)utilClass.getDeclaredMethod("isEntityAnti", EntityLivingBase.class).invoke(null, (EntityLivingBase)entity);
 
 		} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
@@ -111,13 +112,13 @@ public class NecronomiconPotionAoERitual extends NecronomiconRitual {
 	@Override
 	protected void completeRitualServer(World world, BlockPos pos, EntityPlayer player){
 
-		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, world.getBlockState(pos).getBlock().getCollisionBoundingBox(world, pos, world.getBlockState(pos)).expand(16, 3, 16));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(player, new AxisAlignedBB(pos).expand(16, 3, 16));
 
 		if(!entities.isEmpty())
 			for(Entity entity : entities)
 				if(entity instanceof EntityLiving && !entity.isDead)
 					if(!isEntityImmune(getPotionEffect(), entity))
-						((EntityLiving)entity).addPotionEffect(new PotionEffect(getPotionEffect().id, 400));
+						((EntityLiving)entity).addPotionEffect(new PotionEffect(getPotionEffect(), 400));
 	}
 
 	@Override

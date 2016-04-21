@@ -1,10 +1,16 @@
 {
   "homepage": "http://minecraft.curseforge.com/mc-mods/234851",
   "promos": {
-    "1.8.9-latest": "1.4.0",
-    "1.8.9-recommended": "1.4.0"
+	"1.9-latest": "1.4.1",
+	"1.9-recommended": "1.4.1",
+    "1.8.9-latest": "1.4.1",
+    "1.8.9-recommended": "1.4.1"
+  },
+  "1.9": {
+	"1.4.1": "- Ported to Minecraft 1.9\n- Currently only contains the CraftTweaker integration\n- Runs on Forge 12.16.0.1863\n- Added Abyssalnite, Refined Coralium and Dreadium Dust (any mod with OreDict support should be able to use these right away)"
   },
   "1.8.9": {
+	"1.4.1": "- Bump to AbyssalCraft 1.9.1.1\n- Changed MineTweaker 3 integration to use CraftTweaker (same mod, different modid)\n- Removed the Morph section from the NecroData instance\n- Now runs on Forge 11.15.1.1847\n- Added Abyssalnite, Refined Coralium and Dreadium Dust (any mod with OreDict support should be able to use these right away)\n- The Thaumcraft integration is back (all of it)",
 	"1.4.0": "- Bump to AbyssalCraft 1.9.0-pre-4\n- Bumped the extra Necronomicon info to AbyssalCraftAPI 1.6\n- You can now add/edit/remove Necronomicon Pages/Chapters through MineTweaker\n- Now runs on Forge 11.15.1.1741",
 	"1.3.5": "- Ported to Minecraft 1.8.9\n- Enabled Forge version checker\n- EE3 integration is disabled (mod not updated)\n- Thaumcraft integration is partially enabled (only Aspects, but some are not assigned due to the amount that has been removed in the 1.8 updates)\n- Some config options are disabled due to the aforementioned"
   }
