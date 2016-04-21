@@ -2,8 +2,11 @@ package com.shinoow.acintegration.integrations.minetweaker;
 
 import static minetweaker.api.minecraft.MineTweakerMC.getItemStack;
 
+import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
+import com.shinoow.acintegration.ACIntegration;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
@@ -12,6 +15,7 @@ import minetweaker.api.item.IngredientStack;
 import minetweaker.api.oredict.IOreDictEntry;
 import net.minecraft.item.ItemStack;
 
+@ACPlugin
 public class ACMT implements IACPlugin {
 
 	@Override
@@ -20,6 +24,12 @@ public class ACMT implements IACPlugin {
 		return "MineTweaker 3";
 	}
 
+	@Override
+	public boolean canLoad() {
+
+		return Loader.isModLoaded("MineTweaker3") && ACIntegration.loadMT;
+	}
+	
 	@Override
 	public void preInit() {
 

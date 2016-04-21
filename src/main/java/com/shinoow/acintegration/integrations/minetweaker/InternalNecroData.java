@@ -40,13 +40,13 @@ public class InternalNecroData {
 		@Override
 		public void apply() {
 
-			for(Chapter chap : AbyssalCraftAPI.internalNDHandler.getInternalNecroData(identifier).getChapters())
+			for(Chapter chap : AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData(identifier).getChapters())
 				if(chap.getIdentifier().equals(chapter.getIdentifier())){
 					oldChapter = chap;
 					break;
 				}
 
-			AbyssalCraftAPI.internalNDHandler.addChapter(chapter, identifier);
+			AbyssalCraftAPI.getInternalNDHandler().addChapter(chapter, identifier);
 		}
 
 		@Override
@@ -77,8 +77,8 @@ public class InternalNecroData {
 		public void undo() {
 
 			if(oldChapter != null){
-				AbyssalCraftAPI.internalNDHandler.addChapter(oldChapter, identifier);
-			} AbyssalCraftAPI.internalNDHandler.removeChapter(identifier, chapter.getIdentifier());
+				AbyssalCraftAPI.getInternalNDHandler().addChapter(oldChapter, identifier);
+			} AbyssalCraftAPI.getInternalNDHandler().removeChapter(identifier, chapter.getIdentifier());
 		}
 	}
 
@@ -101,10 +101,10 @@ public class InternalNecroData {
 		@Override
 		public void apply() {
 
-			for(Chapter chap : AbyssalCraftAPI.internalNDHandler.getInternalNecroData(necrodataidentifier).getChapters())
+			for(Chapter chap : AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData(necrodataidentifier).getChapters())
 				if(chap.getIdentifier().equals(chapteridentifier)){
 					removedChapters.add(chap);
-					AbyssalCraftAPI.internalNDHandler.removeChapter(necrodataidentifier, chapteridentifier);
+					AbyssalCraftAPI.getInternalNDHandler().removeChapter(necrodataidentifier, chapteridentifier);
 					return;
 				}	
 		}
@@ -139,7 +139,7 @@ public class InternalNecroData {
 			if(removedChapters != null)
 				for(Chapter chap : removedChapters)
 					if(chap != null)
-						AbyssalCraftAPI.internalNDHandler.addChapter(chap, necrodataidentifier);
+						AbyssalCraftAPI.getInternalNDHandler().addChapter(chap, necrodataidentifier);
 		}
 	}
 
@@ -189,13 +189,13 @@ public class InternalNecroData {
 		@Override
 		public void apply() {
 
-			for(Chapter chap : AbyssalCraftAPI.internalNDHandler.getInternalNecroData(necrodataidentifier).getChapters())
+			for(Chapter chap : AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData(necrodataidentifier).getChapters())
 				if(chap.getIdentifier().equals(chapteridentifier)){
 					oldPage = chap.getPage(page.getPageNumber());
 					break;
 				}
 
-			AbyssalCraftAPI.internalNDHandler.addPage(page, necrodataidentifier, chapteridentifier);
+			AbyssalCraftAPI.getInternalNDHandler().addPage(page, necrodataidentifier, chapteridentifier);
 		}
 
 		@Override
@@ -226,8 +226,8 @@ public class InternalNecroData {
 		public void undo() {
 
 			if(oldPage != null){
-				AbyssalCraftAPI.internalNDHandler.addPage(oldPage, necrodataidentifier, chapteridentifier);
-			}else AbyssalCraftAPI.internalNDHandler.removePage(page.getPageNumber(), necrodataidentifier, chapteridentifier);
+				AbyssalCraftAPI.getInternalNDHandler().addPage(oldPage, necrodataidentifier, chapteridentifier);
+			}else AbyssalCraftAPI.getInternalNDHandler().removePage(page.getPageNumber(), necrodataidentifier, chapteridentifier);
 		}
 	}
 
@@ -252,7 +252,7 @@ public class InternalNecroData {
 		@Override
 		public void apply() {
 
-			for(Chapter chap : AbyssalCraftAPI.internalNDHandler.getInternalNecroData(necrodataidentifier).getChapters())
+			for(Chapter chap : AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData(necrodataidentifier).getChapters())
 				if(chap.getIdentifier().equals(chapteridentifier)){
 					removedPages.add(chap.getPage(pageNum));
 					chap.removePage(pageNum);
@@ -290,7 +290,7 @@ public class InternalNecroData {
 			if(removedPages != null)
 				for(Page page : removedPages)
 					if(page != null)
-						AbyssalCraftAPI.internalNDHandler.addPage(page, necrodataidentifier, chapteridentifier);
+						AbyssalCraftAPI.getInternalNDHandler().addPage(page, necrodataidentifier, chapteridentifier);
 		}
 	}
 }

@@ -28,6 +28,7 @@ import thaumcraft.common.items.wands.ItemWandCasting;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACEntities;
+import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.acintegration.ACIntegration;
@@ -36,8 +37,10 @@ import com.shinoow.acintegration.integrations.thaumcraft.items.ItemACThaumcraft;
 import com.shinoow.acintegration.integrations.thaumcraft.wands.*;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+@ACPlugin
 public class ACTC implements IACPlugin {
 
 	public static WandCap abyssalniteCap, coraliumCap, dreadiumCap, ethaxiumCap;
@@ -53,6 +56,12 @@ public class ACTC implements IACPlugin {
 
 	public static ACTC instance = new ACTC();
 
+	@Override
+	public boolean canLoad() {
+
+		return Loader.isModLoaded("Thaumcraft") && ACIntegration.loadTC;
+	}
+	
 	@Override
 	public void preInit() {
 
@@ -204,6 +213,9 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.monolithStone), new AspectList().add(Aspect.EARTH, 2).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.energyPedestal), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.monolithPillar), new AspectList().add(Aspect.EARTH, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.sacrificialAltar), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1).add(Aspect.DEATH, 1).add(Aspect.EXCHANGE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.tieredEnergyPedestal), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.tieredSacrificialAltar), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1).add(Aspect.DEATH, 1).add(Aspect.EXCHANGE, 1));
 
 		//Aspects, items
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.abyingot), new AspectList().add(Aspect.METAL, 3).add(Aspect.DARKNESS, 1));
@@ -251,6 +263,7 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.nyarlathotepCharm), new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 3).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.yogsothothCharm), new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 3).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shubniggurathCharm), new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 3).add(Aspect.METAL, 2).add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.gatekeeperEssence), new AspectList().add(Aspect.ELDRITCH, 3).add(Aspect.DARKNESS, 3).add(Aspect.DEATH, 3).add(Aspect.ENERGY, 3));
 
 		//Aspects, crystals
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.crystal, 1, 0), new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.METAL, 1));

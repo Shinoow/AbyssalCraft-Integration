@@ -5,20 +5,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.logging.log4j.Level;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.acintegration.integrations.ee3.ACEE3;
-import com.shinoow.acintegration.integrations.minetweaker.ACMT;
-import com.shinoow.acintegration.integrations.projecte.ACPE;
 import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
+import com.shinoow.acintegration.items.ItemMetadata;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLLog;
@@ -32,11 +36,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.0,];after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.1.1,];after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
 public class ACIntegration {
 
-	public static final String version = "1.4.0";
+	public static final String version = "1.4.1";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -50,6 +55,17 @@ public class ACIntegration {
 
 	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarp;
 
+	public static Item dust;
+	
+	public static final CreativeTabs tabItems = new CreativeTabs("acintegration"){
+
+		@Override
+		public Item getTabIconItem() {
+
+			return dust;
+		}
+	};
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
@@ -61,13 +77,27 @@ public class ACIntegration {
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
 
+		dust = new ItemMetadata("dust", true, "abyssalnite", "coralium", "dreadium");
+
+		GameRegistry.registerItem(dust, "dust");
+
+		OreDictionary.registerOre("dustAbyssalnite", new ItemStack(dust, 1, 0));
+		OreDictionary.registerOre("dustLiquifiedCoralium", new ItemStack(dust, 1, 1));
+		OreDictionary.registerOre("dustDreadium", new ItemStack(dust, 1, 2));
+
 		registerIntegrations();
 		registerNecroData();
 	}
 
 	@EventHandler
 	public void Init(FMLInitializationEvent event) {
+		GameRegistry.addSmelting(new ItemStack(dust, 1, 0), new ItemStack(ACItems.abyssalnite_ingot), 3F);
+		GameRegistry.addSmelting(new ItemStack(dust, 1, 1), new ItemStack(ACItems.refined_coralium_ingot), 3F);
+		GameRegistry.addSmelting(new ItemStack(dust, 1, 2), new ItemStack(ACItems.dreadium_ingot), 3F);
 
+		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(dust, 1, 0), new ItemStack(ACItems.crystal_shard, 4, 12), 0.1F);
+		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(dust, 1, 1), new ItemStack(ACItems.crystal_shard, 4, 13), 0.1F);
+		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(dust, 1, 2), new ItemStack(ACItems.crystal_shard, 4, 14), 0.1F);
 	}
 
 	@EventHandler
@@ -77,17 +107,11 @@ public class ACIntegration {
 
 	private void registerIntegrations(){
 		if(Loader.isModLoaded("Thaumcraft") && loadTC){
-			AbyssalCraftAPI.registerACIntegration(new ACTC());
 			ACTC.instance.preInit();
 		}
 		if(Loader.isModLoaded("EE3") && loadEE3){
-			AbyssalCraftAPI.registerACIntegration(new ACEE3());
 			ACEE3.instance.preInit();
 		}
-		if(Loader.isModLoaded("MineTweaker3") && loadMT)
-			AbyssalCraftAPI.registerACIntegration(new ACMT());
-		if(Loader.isModLoaded("ProjectE") && loadPE)
-			AbyssalCraftAPI.registerACIntegration(new ACPE());
 	}
 
 	private void registerNecroData(){

@@ -22,9 +22,14 @@ import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 import com.pahimar.ee3.api.exchange.RecipeRegistryProxy;
 import com.pahimar.ee3.api.knowledge.AbilityRegistryProxy;
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.api.ritual.*;
+import com.shinoow.acintegration.ACIntegration;
 
+import cpw.mods.fml.common.Loader;
+
+@ACPlugin
 public class ACEE3 implements IACPlugin {
 
 	@Override
@@ -34,6 +39,12 @@ public class ACEE3 implements IACPlugin {
 	}
 
 	public static ACEE3 instance = new ACEE3();
+
+	@Override
+	public boolean canLoad() {
+
+		return Loader.isModLoaded("EE3") && ACIntegration.loadEE3;
+	}
 
 	@Override
 	public void preInit() {

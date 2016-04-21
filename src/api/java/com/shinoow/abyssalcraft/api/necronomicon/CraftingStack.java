@@ -11,9 +11,7 @@
  ******************************************************************************/
 package com.shinoow.abyssalcraft.api.necronomicon;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -96,47 +94,45 @@ public class CraftingStack {
 				this.output = new ItemStack((Block)output);
 			else if(output instanceof ItemStack)
 				this.output = (ItemStack)output;
-			for(Object thing : CraftingManager.getInstance().getRecipeList()){
+			for(Object thing : CraftingManager.getInstance().getRecipeList())
 				if(thing instanceof IRecipe){
 					IRecipe recipe = (IRecipe)thing;
 					if(recipe.getRecipeOutput() != null && recipe.getRecipeOutput().isItemEqual(this.output)){
-							if(recipe instanceof ShapedRecipes)
-								for(int i = 0; i < recipe.getRecipeSize(); i++){
-									stuff[i] = ((ShapedRecipes) recipe).recipeItems[i];
+						if(recipe instanceof ShapedRecipes)
+							for(int i = 0; i < recipe.getRecipeSize(); i++)
+								stuff[i] = ((ShapedRecipes) recipe).recipeItems[i];
+						if(recipe instanceof ShapelessRecipes)
+							for(int i = 0; i < recipe.getRecipeSize(); i++)
+								stuff[i] = ((ShapelessRecipes) recipe).recipeItems.get(i);
+						if(recipe instanceof ShapedOreRecipe)
+							for(int i = 0; i < recipe.getRecipeSize(); i++)
+								stuff[i] = ((ShapedOreRecipe) recipe).getInput()[i];
+						if(recipe instanceof ShapelessOreRecipe)
+							for(int i = 0; i < recipe.getRecipeSize(); i++)
+								stuff[i] = ((ShapelessOreRecipe) recipe).getInput().get(i);
+
+						if(recipe.getRecipeSize() == 4){
+							Object[] copy = stuff.clone();
+							stuff = new Object[9];
+							for(int i = 0; i < 2; i++){
+								stuff[i] = copy[i];
+								stuff[i+3] = copy[i+2];
 							}
-							if(recipe instanceof ShapelessRecipes)
-								for(int i = 0; i < recipe.getRecipeSize(); i++){
-									stuff[i] = ((ShapelessRecipes) recipe).recipeItems.get(i);
-								}
-							if(recipe instanceof ShapedOreRecipe)
-								for(int i = 0; i < recipe.getRecipeSize(); i++){
-									stuff[i] = ((ShapedOreRecipe) recipe).getInput()[i];
-								}
-							if(recipe instanceof ShapelessOreRecipe)
-								for(int i = 0; i < recipe.getRecipeSize(); i++){
-									stuff[i] = ((ShapelessOreRecipe) recipe).getInput().get(i);
-								}
-							
-							 if(recipe.getRecipeSize() == 4){
-								Object[] copy = stuff.clone();
-								stuff = new Object[9];
-								for(int i = 0; i < 2; i++){
-									stuff[i] = copy[i];
-									stuff[i+3] = copy[i+2];
-								}
-							}
+						}
+						this.output.stackSize = recipe.getRecipeOutput().stackSize;
 					}
 				}
-			}
 			for(int i = 0; i < 9; i++)
-				if(stuff[i] == null || stuff[i] instanceof ItemStack)
-					this.recipe[i] = (ItemStack) stuff[i];
+				if(stuff[i] == null)
+					recipe[i] = (ItemStack) stuff[i];
+				else if(stuff[i] instanceof ItemStack)
+					recipe[i] = ((ItemStack) stuff[i]).copy();
 				else if(stuff[i] instanceof Item)
-					this.recipe[i] = new ItemStack((Item)stuff[i]);
+					recipe[i] = new ItemStack((Item)stuff[i]);
 				else if(stuff[i] instanceof Block)
-					this.recipe[i] = new ItemStack((Block)stuff[i]);
-				else if(stuff[i] instanceof ArrayList)
-					this.recipe[i] = (ItemStack)((ArrayList) stuff[i]).get(0);
+					recipe[i] = new ItemStack((Block)stuff[i]);
+				else if(stuff[i] instanceof List)
+					recipe[i] = ((ItemStack)((List) stuff[i]).get(0)).copy();
 				else throw new ClassCastException("Not a Item, Block or ItemStack!");
 		}
 

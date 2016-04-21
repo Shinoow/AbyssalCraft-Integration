@@ -8,8 +8,13 @@ import net.minecraftforge.oredict.OreDictionary;
 import moze_intel.projecte.api.ProjectEAPI;
 
 import com.shinoow.abyssalcraft.AbyssalCraft;
+import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
+import com.shinoow.acintegration.ACIntegration;
 
+import cpw.mods.fml.common.Loader;
+
+@ACPlugin
 public class ACPE implements IACPlugin {
 
 	@Override
@@ -18,6 +23,12 @@ public class ACPE implements IACPlugin {
 		return "ProjectE";
 	}
 
+	@Override
+	public boolean canLoad() {
+
+		return Loader.isModLoaded("ProjectE") && ACIntegration.loadPE;
+	}
+	
 	@Override
 	public void preInit() {}
 

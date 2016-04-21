@@ -1,4 +1,2 @@
-- Bump to AbyssalCraft 1.9.0-pre-4
-- Bumped the extra Necronomicon info to AbyssalCraftAPI 1.6
-- You can now add/edit/remove Necronomicon Pages/Chapters through MineTweaker
-- Now runs on Forge 10.13.4.1614
+- Bump to AbyssalCraft 1.9.1.1
+- Added Abyssalnite, Refined Coralium and Dreadium Dust (any mod with OreDict support should be able to use these right away)
