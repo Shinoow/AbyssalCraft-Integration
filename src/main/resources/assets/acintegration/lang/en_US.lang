@@ -11,6 +11,12 @@ necro.text.integration.tc.8=The Ethaxium Empowered Omothol Wand is crafted throu
 
 necro.text.integration.morph=With Morph installed, you can get morph abilities when morphing into AbyssalCraft entities. Additional abilities might be added, like plague immunity. When morphed into entities that has special models, your hand will be morphed into the hand used by that model in 1st person view.
 
+item.dust.abyssalnite.name=Abyssalnite Dust
+item.dust.coralium.name=Refined Coralium Dust
+item.dust.dreadium.name=Dreadium Dust
+
+itemGroup.acintegration=AbyssalCraft Integration
+
 #Thaumcraft integration
 
 item.wandcap.abyssalnite.name=Abyssalnite Cap
@@ -24,7 +30,7 @@ item.wandcore.omothol.name=Omothol Stone Rod
 item.Wand.abyssalnite.cap=Abyssalnite Bound
 item.Wand.darklands.rod=Darklands Oak
 item.Wand.coralium.cap=Coralium Empowered
-item.Wand.coralium.rod=Coralium Stone
+item.Wand.coraliumstone.rod=Coralium Stone
 item.Wand.dreadium.cap=Dreadium Bound
 item.Wand.dreadlands.rod=Dreadlands Wood
 item.Wand.ethaxium.cap=Ethaxium Empowered
