@@ -19,7 +19,7 @@ Right now the project is licensed as "All Rights Reserved", but that will either
 ### Compiling and running
 
 Since this isn't a complete environment, the last remaining pieces will need to be added to a folder (along with the build.gradle, build.properties and the src and libs folders).
-After that, simply open the fodler in a command prompt and type `gradle setupDecompWorkspace` followed by either `gradle eclipse` or `gradle idea` (if you don't have gradle installed, use `gradlew` or `gradlew.bat` instead of `gradle`)
+After that, simply open the folder in a command prompt and type `gradle setupDecompWorkspace` followed by either `gradle eclipse` or `gradle idea` (if you don't have gradle installed, use `gradlew` or `gradlew.bat` instead of `gradle`)
 
 ### Contributing
 
