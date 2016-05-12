@@ -80,4 +80,57 @@ public class Crystallizer {
 			CrystallizerRecipes.instance().getCrystallizationList().remove(input);
 		}
 	}
+
+	@ZenMethod
+	public static void removeCrystallization(IItemStack input){
+		MineTweakerAPI.apply(new Remove(ACMT.toStack(input)));
+	}
+
+	private static class Remove implements IUndoableAction {
+
+		private ItemStack input, output1, output2;
+
+		public Remove(ItemStack input){
+			this.input = input;
+			ItemStack[] outputs = CrystallizerRecipes.instance().getCrystallizationResult(input);
+
+			output1 = outputs[0];
+			output2 = outputs[1];
+		}
+
+		@Override
+		public void apply() {
+			CrystallizerRecipes.instance().getCrystallizationList().remove(input);
+		}
+
+		@Override
+		public boolean canUndo() {
+
+			return true;
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing Crystallization recipe for " + output1.getDisplayName() + (output2 != null ? " (and "+ output2.getDisplayName() + ")" : "") + " (input: " + input.getDisplayName() + ")";
+		}
+
+		@Override
+		public String describeUndo() {
+
+			return "Re-Adding Crystallization recipe for " + output1.getDisplayName() + (output2 != null ? " (and "+ output2.getDisplayName() + ")" : "") + " (input: " + input.getDisplayName() + ")";
+		}
+
+		@Override
+		public Object getOverrideKey() {
+
+			return null;
+		}
+
+		@Override
+		public void undo() {
+			if(input != null && output1 != null)
+				AbyssalCraftAPI.addCrystallization(input, output1, output2, CrystallizerRecipes.instance().getExperience(output1));
+		}	
+	}
 }

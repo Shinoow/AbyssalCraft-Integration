@@ -58,7 +58,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 minecraft {
-    version = "1.9-12.16.0.1863-1.9"
+    version = "1.9-12.16.1.1887"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -81,8 +81,10 @@ dependencies {
 	//compile "codechicken:NotEnoughItems:1.7.10-1.0.5.110:dev"
 	//compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.507:dev"
 
-	deobfCompile "mezz.jei:jei_1.9:3.2.8.182"
+	deobfCompile "mezz.jei:jei_1.9:3.3.3.197"
 	//deobfCompile name: 'Thaumcraft', version: "5.2.4", ext: 'jar'
+	deobfCompile "slimeknights.mantle:Mantle:1.9-0.10.0.jenkins132"
+    deobfCompile "slimeknights:TConstruct:1.9-2.3.0.jenkins193"
 }
 
 version = "${props.mc_version}-${props.aci_version}"
@@ -152,6 +154,7 @@ curseforge {
 			optionalLibrary 'crafttweaker-customized-minetweaker3'
 			//optionalLibrary 'projecte'
 			//optionalLibrary 'thaumcraft'
+			optionalLibrary 'tinkers-construct'
 		}
 	}
 }
