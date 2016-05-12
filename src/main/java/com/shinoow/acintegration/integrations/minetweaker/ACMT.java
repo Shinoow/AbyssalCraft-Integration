@@ -47,6 +47,7 @@ public class ACMT implements IACPlugin {
 		MineTweakerAPI.registerClass(CreationRitual.class);
 		MineTweakerAPI.registerClass(InfusionRitual.class);
 		MineTweakerAPI.registerClass(InternalNecroData.class);
+		MineTweakerAPI.registerClass(Shoggoth.class);
 	}
 
 	// Start of borrowed code from Immersive Engineering
