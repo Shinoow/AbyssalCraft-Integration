@@ -1,0 +1,17 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"aby": {
+				"model": "forge:fluid",
+				"custom": { "fluid": "moltenabyssalnite" }
+			},
+		"cor": {
+				"model": "forge:fluid",
+				"custom": { "fluid": "moltenrefinedcoralium" }
+			},
+		"dre": {
+				"model": "forge:fluid",
+				"custom": { "fluid": "moltendreadium" }
+			}
+	}
+}

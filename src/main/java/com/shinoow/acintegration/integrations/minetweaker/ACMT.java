@@ -2,10 +2,12 @@ package com.shinoow.acintegration.integrations.minetweaker;
 
 import static minetweaker.api.minecraft.MineTweakerMC.getItemStack;
 import minetweaker.MineTweakerAPI;
+import minetweaker.api.block.IBlock;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.item.IngredientStack;
 import minetweaker.api.oredict.IOreDictEntry;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
@@ -46,6 +48,7 @@ public class ACMT implements IACPlugin {
 		MineTweakerAPI.registerClass(CreationRitual.class);
 		MineTweakerAPI.registerClass(InfusionRitual.class);
 		MineTweakerAPI.registerClass(InternalNecroData.class);
+		MineTweakerAPI.registerClass(Shoggoth.class);
 	}
 
 	// Start of borrowed code from Immersive Engineering

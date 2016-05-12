@@ -42,3 +42,20 @@ itemGroup.acthaum=AbyssalCraft Thaumcraft Integration
 
 tc.aspect.coralos=Coralium
 tc.aspect.dreadia=Dread
+
+#Tinkers' integration
+
+fluid.moltenAbyssalnite.name=Molten Abyssalnite
+fluid.moltenRefinedCoralium.name=Molten Refined Coralium
+fluid.moltenDreadium.name=Molten Dreadium
+
+material.abyssalnite.name=Abyssalnite
+material.refined_coralium.name=Refined Coralium
+material.dreadium.name=Dreadium
+
+modifier.dreadplague.name=Dread-Plagued
+modifier.dreadplague.desc=§oSuccumb to Cha'garoth!§r\nApply the Dread Plague on critical hits.
+modifier.coraliumplague.name=Coralium-Plagued
+modifier.coraliumplague.desc=§oInfect all of them!§r\nApply the Coralium Plage on critical hits.
+modifier.dreadpurity.name=Purified
+modifier.dreadpurity.desc=§oDecimate the corruption!§r\nDeal 25% extra damage to any Dread-Plagued entity.

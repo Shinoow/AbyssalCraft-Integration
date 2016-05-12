@@ -67,4 +67,55 @@ public class Transmutator {
 			TransmutatorRecipes.instance().getTransmutationList().remove(input);
 		}
 	}
+
+	@ZenMethod
+	public static void removeTransmutation(IItemStack input){
+		MineTweakerAPI.apply(new Remove(ACMT.toStack(input)));
+	}
+
+	private static class Remove implements IUndoableAction {
+
+		private ItemStack input, output;
+
+		public Remove(ItemStack input){
+			this.input = input;
+			output = TransmutatorRecipes.instance().getTransmutationResult(input);
+		}
+
+		@Override
+		public void apply() {
+			TransmutatorRecipes.instance().getTransmutationList().remove(input);
+		}
+
+		@Override
+		public boolean canUndo() {
+
+			return true;
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing Transmutation recipe for " + output.getDisplayName() + " (input: " + input.getDisplayName() + ")";
+		}
+
+		@Override
+		public String describeUndo() {
+
+			return "Re-Adding Transmutation recipe for " + output.getDisplayName() + " (input: " + input.getDisplayName() + ")";
+		}
+
+		@Override
+		public Object getOverrideKey() {
+
+			return null;
+		}
+
+		@Override
+		public void undo() {
+			if(input != null && output != null){
+				AbyssalCraftAPI.addTransmutation(input, output, TransmutatorRecipes.instance().getExperience(output));
+			}
+		}	
+	}
 }
