@@ -22,13 +22,13 @@ public class ACMT implements IACPlugin {
 	@Override
 	public String getModName() {
 
-		return "CraftTweaker";
+		return "MineTweaker 3";
 	}
 
 	@Override
 	public boolean canLoad() {
 
-		return Loader.isModLoaded("crafttweaker") && ACIntegration.loadMT;
+		return Loader.isModLoaded("MineTweaker3") && ACIntegration.loadMT;
 	}
 	
 	@Override

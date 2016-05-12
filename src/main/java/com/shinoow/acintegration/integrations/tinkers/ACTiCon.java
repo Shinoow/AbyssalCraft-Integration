@@ -1,6 +1,5 @@
 package com.shinoow.acintegration.integrations.tinkers;
 
-import static slimeknights.tconstruct.library.utils.HarvestLevels.IRON;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -17,6 +16,8 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
 import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
@@ -104,7 +105,7 @@ public class ACTiCon implements IACPlugin {
 
 		FMLInterModComms.sendMessage("tconstruct", "integrateSmeltery", tag);
 
-		if(FMLCommonHandler.instance().getSide().isClient()){
+		if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
 			registerFluidModel(moltenAbyssalnite, "aby");
 			registerFluidModel(moltenCoralium, "cor");
 			registerFluidModel(moltenDreadium, "dre");
@@ -161,6 +162,7 @@ public class ACTiCon implements IACPlugin {
 
 	}
 
+	@SideOnly(Side.CLIENT)
 	private void registerFluidModel(Block fluidBlock, String name) {
 		Item item = Item.getItemFromBlock(fluidBlock);
 
