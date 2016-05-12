@@ -18,6 +18,8 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
 import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
@@ -105,7 +107,7 @@ public class ACTiCon implements IACPlugin {
 
 		FMLInterModComms.sendMessage("tconstruct", "integrateSmeltery", tag);
 
-		if(FMLCommonHandler.instance().getSide().isClient()){
+		if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
 			registerFluidModel(moltenAbyssalnite, "aby");
 			registerFluidModel(moltenCoralium, "cor");
 			registerFluidModel(moltenDreadium, "dre");
@@ -175,6 +177,7 @@ public class ACTiCon implements IACPlugin {
 		registerItem(item, name);
 	}
 
+	@SideOnly(Side.CLIENT)
 	private void registerFluidModel(Block fluidBlock, String name) {
 		Item item = Item.getItemFromBlock(fluidBlock);
 

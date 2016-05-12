@@ -58,7 +58,7 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 minecraft {
-    version = "1.9-12.16.1.1887"
+    version = "1.9-12.16.1.1892"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
