@@ -45,7 +45,7 @@ import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 acceptedMinecraftVersions = "[1.8.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
 public class ACIntegration {
 
-	public static final String version = "1.4.2.1";
+	public static final String version = "1.4.2.2";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
