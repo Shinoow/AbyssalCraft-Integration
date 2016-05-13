@@ -14,12 +14,12 @@ package com.shinoow.acintegration.integrations.thaumcraft.creativetabs;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
 
 public class TabACThaum extends CreativeTabs {
 

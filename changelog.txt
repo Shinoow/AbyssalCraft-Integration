@@ -1,3 +1,1 @@
-- Bump to AbyssalCraft 1.9.1.2
-- You can now add Entities to the Lesser Shoggoth Food List through MineTweaker
-- You can now remove Crystallizer/Transmutator recipes
+- The game shouldn't crash when certain integrated mods aren't present
