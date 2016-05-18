@@ -44,7 +44,7 @@ import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 acceptedMinecraftVersions = "[1.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
 public class ACIntegration {
 
-	public static final String version = "1.4.2.2";
+	public static final String version = "1.4.3";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -56,7 +56,7 @@ public class ACIntegration {
 
 	public static Configuration cfg;
 
-	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarp, loadTiCon;
+	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarp, loadTiCon, loadBQ;
 
 	public static Item dust;
 
@@ -175,6 +175,7 @@ public class ACIntegration {
 		//		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
 		//		tcWarp = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs and being inside AbyssalCraft dimensions").getBoolean();
 		loadTiCon = cfg.get(Configuration.CATEGORY_GENERAL, "Tinkers' Construct", true, "Whether or not to load the Tinkers' Construct integration.").getBoolean();
+		loadBQ = cfg.get(Configuration.CATEGORY_GENERAL, "Better Questing", true, "Whether or not to load the Better Questing integration.").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();

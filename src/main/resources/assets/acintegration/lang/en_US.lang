@@ -59,3 +59,11 @@ modifier.coraliumplague.name=Coralium-Plagued
 modifier.coraliumplague.desc=§oInfect all of them!§r\nApply the Coralium Plage on critical hits.
 modifier.dreadpurity.name=Purified
 modifier.dreadpurity.desc=§oDecimate the corruption!§r\nDeal 25% extra damage to any Dread-Plagued entity.
+
+#Better Questing
+
+acintegration.task.transmute=Transmutation Task
+acintegration.task.crystallize=Crystallization Task
+acintegration.task.creationritual=Creation Ritual Task
+acintegration.task.infusionritual=Infusion Ritual Task
+acintegration.task.ritual=Ritual Task
