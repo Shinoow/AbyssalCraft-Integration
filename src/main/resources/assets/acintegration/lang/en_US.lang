@@ -42,3 +42,11 @@ itemGroup.acthaum=AbyssalCraft Thaumcraft Integration
 
 tc.aspect.coralos=Coralium
 tc.aspect.dreadia=Dread
+
+#Better Questing
+
+acintegration.task.transmute=Transmutation Task
+acintegration.task.crystallize=Crystallization Task
+acintegration.task.creationritual=Creation Ritual Task
+acintegration.task.infusionritual=Infusion Ritual Task
+acintegration.task.ritual=Ritual Task

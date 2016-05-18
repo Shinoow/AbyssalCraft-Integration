@@ -41,7 +41,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.1.2,];after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
 public class ACIntegration {
 
-	public static final String version = "1.4.2.2";
+	public static final String version = "1.4.3";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -53,7 +53,7 @@ public class ACIntegration {
 
 	public static Configuration cfg;
 
-	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarp;
+	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarp, loadBQ;
 
 	public static Item dust;
 	
@@ -155,6 +155,7 @@ public class ACIntegration {
 		loadMT = cfg.get(Configuration.CATEGORY_GENERAL, "MineTweaker 3 Integration", true, "Whether or not to load the MineTweaker 3 integration.").getBoolean();
 		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
 		tcWarp = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs and being inside AbyssalCraft dimensions").getBoolean();
+		loadBQ = cfg.get(Configuration.CATEGORY_GENERAL, "Better Questing", true, "Whether or not to load the Better Questing integration.").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();
