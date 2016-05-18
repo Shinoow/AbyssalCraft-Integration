@@ -155,6 +155,7 @@ curseforge {
 			optionalLibrary 'projecte'
 			optionalLibrary 'thaumcraft'
 			optionalLibrary 'tinkers-construct'
+			optionalLibrary 'better-questing'
 		}
 	}
 }
