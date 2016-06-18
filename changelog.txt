@@ -1,1 +1,2 @@
-- Added Better Questing integration (you can add tasks for AbyssalCraft machines and rituals)
+- Bump to Better Questing 1.0.124
+- Bump to EE3 0.3.0.547

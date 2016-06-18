@@ -185,7 +185,7 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.omotholstone), new AspectList().add(Aspect.EARTH, 2).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.cstone), new AspectList().add(Aspect.EARTH, 2).add(ACTCMisc.CORALIUM, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.PSDL), new AspectList().add(Aspect.EARTH, 2).add(Aspect.ENERGY, 2).add(ACTCMisc.DREAD, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.monolithStone), new AspectList().add(Aspect.EARTH, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.monolithStone), new AspectList().add(Aspect.EARTH, 2).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothBlock), new AspectList().add(Aspect.EARTH, 1).add(Aspect.FLESH, 1).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shoggothBiomass), new AspectList().add(Aspect.EARTH, 1).add(Aspect.FLESH, 1).add(Aspect.ELDRITCH, 1).add(Aspect.LIFE, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.cthulhuStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
@@ -195,7 +195,6 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.nyarlathotepStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.yogsothothStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.shubniggurathStatue), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.monolithStone), new AspectList().add(Aspect.EARTH, 2).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.energyPedestal), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.monolithPillar), new AspectList().add(Aspect.EARTH, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(AbyssalCraft.sacrificialAltar), new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1).add(Aspect.DEATH, 1).add(Aspect.EXCHANGE, 1));
