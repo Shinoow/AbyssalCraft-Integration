@@ -1,13 +1,13 @@
 package com.shinoow.acintegration.integrations.thaumcraft.wands;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.wands.IWandRodOnUpdate;
 import thaumcraft.api.wands.WandCap;
 import thaumcraft.common.items.wands.ItemWand;
+
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class OmotholRodOnUpdate implements IWandRodOnUpdate {
 
@@ -23,7 +23,7 @@ public class OmotholRodOnUpdate implements IWandRodOnUpdate {
 						((ItemWand)itemstack.getItem()).addVis(itemstack, primals[i], 10000, true);
 			}
 		}
-		else if(player.worldObj.provider.getDimensionId() == AbyssalCraft.configDimId3){
+		else if(player.worldObj.provider.getDimensionId() == ACLib.omothol_id){
 			if(((ItemWand)itemstack.getItem()).getCap(itemstack) == WandCap.caps.get("ethaxium")){
 				((ItemWand)itemstack.getItem()).getRod(itemstack).setCapacity(100);
 				for(int i = 0; i < primals.length; i++)

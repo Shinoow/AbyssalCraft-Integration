@@ -1,6 +1,7 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import net.minecraft.block.Block;
@@ -45,7 +46,7 @@ public class Shoggoth {
 		@Override
 		public void apply() {
 
-			AbyssalCraftAPI.addShoggothFood(clazz);
+			EntityUtil.addShoggothFood(clazz);
 		}
 
 		@Override
@@ -75,7 +76,7 @@ public class Shoggoth {
 		@Override
 		public void undo() {
 
-			AbyssalCraftAPI.getShoggothFood().remove(clazz);
+			EntityUtil.getShoggothFood().remove(clazz);
 		}
 	}
 

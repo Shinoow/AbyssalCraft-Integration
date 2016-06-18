@@ -37,15 +37,15 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.common.items.ItemMetadata;
+import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
 import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.1.6,];after:Thaumcraft;after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.2,];after:Thaumcraft;after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
 acceptedMinecraftVersions = "[1.8.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
 public class ACIntegration {
 
-	public static final String version = "1.4.3";
+	public static final String version = "1.4.5";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 

@@ -6,8 +6,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACPotions;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 public class TraitDreadPlague extends AbstractTrait {
 
@@ -20,6 +20,6 @@ public class TraitDreadPlague extends AbstractTrait {
 
 		if(wasCritical && wasHit)
 			if(!EntityUtil.isEntityDread(target))
-				target.addPotionEffect(new PotionEffect(ACPotions.Dread_plague.id, 100));
+				target.addPotionEffect(new PotionEffect(AbyssalCraftAPI.dread_plague.id, 100));
 	}
 }

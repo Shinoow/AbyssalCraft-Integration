@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 public class TraitDreadPurity extends AbstractTrait {
 

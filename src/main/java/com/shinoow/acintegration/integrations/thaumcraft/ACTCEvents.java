@@ -10,12 +10,11 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.internal.EnumWarpType;
 
 import com.google.common.collect.Lists;
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.entity.EntityChagaroth;
 import com.shinoow.abyssalcraft.common.entity.EntityDragonBoss;
 import com.shinoow.abyssalcraft.common.entity.EntityDragonMinion;
@@ -28,7 +27,7 @@ import com.shinoow.abyssalcraft.common.entity.EntitySacthoth;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowBeast;
 import com.shinoow.abyssalcraft.common.entity.EntityShadowTitan;
 import com.shinoow.abyssalcraft.common.entity.EntitySkeletonGoliath;
-import com.shinoow.abyssalcraft.common.util.EntityUtil;
+import com.shinoow.abyssalcraft.lib.ACLib;
 
 public class ACTCEvents {
 
@@ -69,7 +68,6 @@ public class ACTCEvents {
 					if(isElite(mob)){
 						if(player.worldObj.rand.nextInt(20) == 0)
 							ThaumcraftApi.internalMethods.addWarpToPlayer(player, 5, EnumWarpType.NORMAL);
-//							ThaumcraftApiHelper.addStickyWarpToPlayer(player, 5);
 					} else if(isBoss(mob)){
 						if(player.worldObj.rand.nextInt(25) == 0)
 							ThaumcraftApi.internalMethods.addWarpToPlayer(player, 7, EnumWarpType.PERMANENT);
@@ -123,20 +121,20 @@ public class ACTCEvents {
 		if(event.entity instanceof EntityPlayer){
 			EntityPlayer player = (EntityPlayer)event.entity;
 
-			if(player.dimension == AbyssalCraft.configDimId1 ||
-					player.dimension == AbyssalCraft.configDimId2 ||
-					player.dimension == AbyssalCraft.configDimId3 ||
-					player.dimension == AbyssalCraft.configDimId4)
+			if(player.dimension == ACLib.abyssal_wasteland_id ||
+					player.dimension == ACLib.dreadlands_id ||
+					player.dimension == ACLib.omothol_id ||
+					player.dimension == ACLib.dark_realm_id)
 				warpTimer++;
 			if(warpTimer >= 2400){
 				warpTimer = player.worldObj.rand.nextInt(300);
-				if(player.dimension == AbyssalCraft.configDimId1 ||
-						player.dimension == AbyssalCraft.configDimId2)
+				if(player.dimension == ACLib.abyssal_wasteland_id ||
+						player.dimension == ACLib.dreadlands_id)
 					if(player.worldObj.rand.nextBoolean())
 						ThaumcraftApi.internalMethods.addWarpToPlayer(player, 10, EnumWarpType.NORMAL);
 					else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 10, EnumWarpType.PERMANENT);
-				if(player.dimension == AbyssalCraft.configDimId3 ||
-						player.dimension == AbyssalCraft.configDimId4)
+				if(player.dimension == ACLib.omothol_id ||
+						player.dimension == ACLib.dark_realm_id)
 					if(player.worldObj.rand.nextBoolean())
 						ThaumcraftApi.internalMethods.addWarpToPlayer(player, 15, EnumWarpType.NORMAL);
 					else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 15, EnumWarpType.PERMANENT);
