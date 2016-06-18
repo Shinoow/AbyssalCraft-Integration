@@ -34,6 +34,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.internal.DummyNecroDataHandler;
 import com.shinoow.abyssalcraft.api.internal.IInternalNecroDataHandler;
 import com.shinoow.abyssalcraft.api.item.ACItems;
@@ -59,7 +60,7 @@ public class AbyssalCraftAPI {
 	/**
 	 * String used to specify the API version in the "package-info.java" classes
 	 */
-	public static final String API_VERSION = "1.7.1";
+	public static final String API_VERSION = "1.7.5";
 
 	public static Enchantment coralium_enchantment, dread_enchantment, light_pierce, iron_wall;
 
@@ -72,8 +73,6 @@ public class AbyssalCraftAPI {
 	public static DamageSource dread = new DamageSource("dread").setDamageBypassesArmor().setMagicDamage();
 	public static DamageSource antimatter = new DamageSource("antimatter").setDamageBypassesArmor().setMagicDamage();
 
-	private static List<Class<? extends EntityLivingBase>> shoggothFood = Lists.newArrayList();
-
 	private static List<Block> shoggothBlockBlacklist = Lists.newArrayList();
 
 	private static List<ItemStack> crystals = Lists.newArrayList();
@@ -85,14 +84,14 @@ public class AbyssalCraftAPI {
 	 */
 	public static EnumCreatureAttribute SHADOW = EnumHelper.addCreatureAttribute("SHADOW");
 
-	public static ArmorMaterial abyssalniteArmor = EnumHelper.addArmorMaterial("Abyssalnite", "abyssalcraft:abyssalnite", 35, new int[]{3, 6, 8, 3}, 13, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial dreadedAbyssalniteArmor = EnumHelper.addArmorMaterial("Dread", "abyssalcraft:dread", 36, new int[]{3, 6, 8, 3}, 15, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial refinedCoraliumArmor = EnumHelper.addArmorMaterial("Coralium", "abyssalcraft:coralium", 37, new int[]{3, 6, 8, 3}, 14, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial platedCoraliumArmor = EnumHelper.addArmorMaterial("CoraliumP", "abyssalcraft:coraliump", 55, new int[]{4, 7, 9, 4}, 14, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial depthsArmor = EnumHelper.addArmorMaterial("Depths", "abyssalcraft:depths", 33, new int[]{3, 6, 8, 3}, 25, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial dreadiumArmor = EnumHelper.addArmorMaterial("Dreadium", "abyssalcraft:dreadium", 40, new int[]{3, 6, 8, 3}, 15, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial dreadiumSamuraiArmor = EnumHelper.addArmorMaterial("DreadiumS", "abyssalcraft:dreadiums", 45, new int[]{3, 6, 8, 3}, 20, SoundEvents.item_armor_equip_iron);
-	public static ArmorMaterial ethaxiumArmor = EnumHelper.addArmorMaterial("Ethaxium", "abyssalcraft:ethaxium", 50, new int[]{3, 6, 8, 3}, 25, SoundEvents.item_armor_equip_iron);
+	public static ArmorMaterial abyssalniteArmor = EnumHelper.addArmorMaterial("Abyssalnite", "abyssalcraft:abyssalnite", 35, new int[]{3, 6, 8, 3}, 13, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
+	public static ArmorMaterial dreadedAbyssalniteArmor = EnumHelper.addArmorMaterial("Dread", "abyssalcraft:dread", 36, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
+	public static ArmorMaterial refinedCoraliumArmor = EnumHelper.addArmorMaterial("Coralium", "abyssalcraft:coralium", 37, new int[]{3, 6, 8, 3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
+	public static ArmorMaterial platedCoraliumArmor = EnumHelper.addArmorMaterial("CoraliumP", "abyssalcraft:coraliump", 55, new int[]{4, 7, 9, 4}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F);
+	public static ArmorMaterial depthsArmor = EnumHelper.addArmorMaterial("Depths", "abyssalcraft:depths", 33, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.5F);
+	public static ArmorMaterial dreadiumArmor = EnumHelper.addArmorMaterial("Dreadium", "abyssalcraft:dreadium", 40, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
+	public static ArmorMaterial dreadiumSamuraiArmor = EnumHelper.addArmorMaterial("DreadiumS", "abyssalcraft:dreadiums", 45, new int[]{3, 6, 8, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.5F);
+	public static ArmorMaterial ethaxiumArmor = EnumHelper.addArmorMaterial("Ethaxium", "abyssalcraft:ethaxium", 50, new int[]{3, 6, 8, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F);
 
 	public static ToolMaterial darkstoneTool = EnumHelper.addToolMaterial("DARKSTONE", 1, 180, 5.0F, 1, 5);
 	public static ToolMaterial abyssalniteTool = EnumHelper.addToolMaterial("ABYSSALNITE", 4, 1261, 10.0F, 4, 12);
@@ -517,9 +516,12 @@ public class AbyssalCraftAPI {
 	 * @param clazz The potential "food" for the Lesser Shoggoth
 	 * 
 	 * @since 1.2
+	 * 
+	 * @deprecated use {@link EntityUtil#addShoggothFood(Class)} instead
 	 */
+	@Deprecated
 	public static void addShoggothFood(Class<? extends EntityLivingBase> clazz){
-		shoggothFood.add(clazz);
+		EntityUtil.addShoggothFood(clazz);
 	}
 
 	/**
@@ -527,9 +529,12 @@ public class AbyssalCraftAPI {
 	 * @return An ArrayList containing Entity classes
 	 * 
 	 * @since 1.2
+	 * 
+	 * @deprecated use {@link EntityUtil#getShoggothFood()} instead
 	 */
+	@Deprecated
 	public static List<Class<? extends EntityLivingBase>> getShoggothFood(){
-		return shoggothFood;
+		return EntityUtil.getShoggothFood();
 	}
 
 	/**

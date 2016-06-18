@@ -47,9 +47,9 @@ public class ACTiConMisc {
 		FluidRegistry.registerFluid(fluid_molten_dreadium);
 		FluidRegistry.addBucketForFluid(fluid_molten_dreadium);
 
-		moltenAbyssalnite = new BlockTinkerFluid(fluid_molten_abyssalnite, net.minecraft.block.material.Material.lava);
-		moltenCoralium = new BlockTinkerFluid(fluid_molten_coralium, net.minecraft.block.material.Material.lava);
-		moltenDreadium = new BlockTinkerFluid(fluid_molten_dreadium, net.minecraft.block.material.Material.lava);
+		moltenAbyssalnite = new BlockTinkerFluid(fluid_molten_abyssalnite, net.minecraft.block.material.Material.LAVA);
+		moltenCoralium = new BlockTinkerFluid(fluid_molten_coralium, net.minecraft.block.material.Material.LAVA);
+		moltenDreadium = new BlockTinkerFluid(fluid_molten_dreadium, net.minecraft.block.material.Material.LAVA);
 
 		registerBlock(moltenAbyssalnite, "moltenabyssalnite");
 		registerBlock(moltenCoralium, "moltencoralium");

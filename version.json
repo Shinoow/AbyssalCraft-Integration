@@ -1,12 +1,18 @@
 {
   "homepage": "http://minecraft.curseforge.com/mc-mods/234851",
   "promos": {
-	"1.9-latest": "1.4.3",
-	"1.9-recommended": "1.4.3",
-    "1.8.9-latest": "1.4.3",
-    "1.8.9-recommended": "1.4.3"
+	"1.9.4-latest": "1.4.5",
+	"1.9.4-recommended": "1.4.5",
+	"1.9-latest": "1.4.5",
+	"1.9-recommended": "1.4.5",
+    "1.8.9-latest": "1.4.5",
+    "1.8.9-recommended": "1.4.5"
+  },
+  "1.9.4": {
+	"1.4.5": "- Ported to Minecraft 1.9.4\n- Bump to AbyssalCraft 1.9.2\n- Bump to Better Questing 1.2.126\n- ProjectE integration is back\n- Now runs on Forge 12.17.0.1962"
   },
   "1.9": {
+	"1.4.5": "- Bump to AbyssalCraft 1.9.2\n- Bump to Better Questing 1.2.114\n- Now runs on Forge 12.16.1.1938",
 	"1.4.3": "- Added Better Questing integration (you can add tasks for AbyssalCraft machines and rituals)",
 	"1.4.2.2": "- The game shouldn't crash when certain integrated mods aren't present",
 	"1.4.2.1": "- Fixed server-side startup crashes",
@@ -14,6 +20,7 @@
 	"1.4.1": "- Ported to Minecraft 1.9\n- Currently only contains the CraftTweaker integration\n- Runs on Forge 12.16.0.1863\n- Added Abyssalnite, Refined Coralium and Dreadium Dust (any mod with OreDict support should be able to use these right away)"
   },
   "1.8.9": {
+	"1.4.5": "- Bump to AbyssalCraft 1.9.2\n- Bump to Better Questing 1.1.125\n- Now runs on Forge 11.15.1.1902",
 	"1.4.3": "- Added Better Questing integration (you can add tasks for AbyssalCraft machines and rituals)",
 	"1.4.2.2": "- The game shouldn't crash when certain integrated mods aren't present",
 	"1.4.2.1": "- Fixed server-side startup crashes",

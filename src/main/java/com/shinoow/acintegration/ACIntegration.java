@@ -37,14 +37,14 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
-import com.shinoow.abyssalcraft.common.items.ItemMetadata;
+import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.1.6,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
-acceptedMinecraftVersions = "[1.9]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.2,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
+acceptedMinecraftVersions = "[1.9.4]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
 public class ACIntegration {
 
-	public static final String version = "1.4.3";
+	public static final String version = "1.4.5";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -172,7 +172,7 @@ public class ACIntegration {
 		//		loadEE3 = cfg.get(Configuration.CATEGORY_GENERAL, "Equivalent Exchange 3 Integration", true, "Whether or not to load the Equivalent Exchange 3 integration.").getBoolean();
 		//		tcItems = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Items", true, "Wheter or not to add items through the Thaumcraft integration.").getBoolean();
 		loadMT = cfg.get(Configuration.CATEGORY_GENERAL, "MineTweaker Integration", true, "Whether or not to load the MineTweaker integration.").getBoolean();
-		//		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
+		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
 		//		tcWarp = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs and being inside AbyssalCraft dimensions").getBoolean();
 		loadTiCon = cfg.get(Configuration.CATEGORY_GENERAL, "Tinkers' Construct", true, "Whether or not to load the Tinkers' Construct integration.").getBoolean();
 		loadBQ = cfg.get(Configuration.CATEGORY_GENERAL, "Better Questing", true, "Whether or not to load the Better Questing integration.").getBoolean();
