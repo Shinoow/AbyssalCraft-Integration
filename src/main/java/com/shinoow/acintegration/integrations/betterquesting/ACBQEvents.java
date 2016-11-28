@@ -55,19 +55,18 @@ public class ACBQEvents {
 			((TaskRitual) task).onRitual(event.entityPlayer, event.ritual);
 		}
 
-		if(event.ritual instanceof NecronomiconInfusionRitual){
+		if(event.ritual instanceof NecronomiconInfusionRitual)
 			for(Entry<TaskCreationRitualBase,QuestInstance> set : getRitualTasks(event.entityPlayer.getUniqueID()).entrySet()){
 				if(!(set.getKey() instanceof TaskInfusionRitual)) continue;
 
 				((TaskInfusionRitual) set.getKey()).onInfusionRitual(set.getValue(), event.entityPlayer, (NecronomiconInfusionRitual)event.ritual);
 			}
-		} else if(event.ritual instanceof NecronomiconCreationRitual){
+		else if(event.ritual instanceof NecronomiconCreationRitual)
 			for(Entry<TaskCreationRitualBase,QuestInstance> set : getRitualTasks(event.entityPlayer.getUniqueID()).entrySet()){
 				if(!(set.getKey() instanceof TaskCreationRitual)) continue;
 
 				((TaskCreationRitual) set.getKey()).onCreationRitual(set.getValue(), event.entityPlayer, (NecronomiconCreationRitual)event.ritual);
 			}
-		}
 	}
 
 	HashMap<TaskACMachine, QuestInstance> getMachineTasks(UUID uuid)
@@ -75,15 +74,9 @@ public class ACBQEvents {
 		HashMap<TaskACMachine, QuestInstance> map = new HashMap<TaskACMachine, QuestInstance>();
 
 		for(QuestInstance quest : QuestDatabase.getActiveQuests(uuid))
-		{
 			for(TaskBase task : quest.tasks)
-			{
 				if(task instanceof TaskACMachine && !task.isComplete(uuid))
-				{
 					map.put((TaskACMachine)task, quest);
-				}
-			}
-		}
 
 		return map;
 	}
@@ -93,15 +86,9 @@ public class ACBQEvents {
 		HashMap<TaskCreationRitualBase, QuestInstance> map = new HashMap<TaskCreationRitualBase, QuestInstance>();
 
 		for(QuestInstance quest : QuestDatabase.getActiveQuests(uuid))
-		{
 			for(TaskBase task : quest.tasks)
-			{
 				if(task instanceof TaskCreationRitualBase && !task.isComplete(uuid))
-				{
 					map.put((TaskCreationRitualBase)task, quest);
-				}
-			}
-		}
 
 		return map;
 	}

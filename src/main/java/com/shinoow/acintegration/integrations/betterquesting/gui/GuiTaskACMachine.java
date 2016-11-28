@@ -42,7 +42,7 @@ public class GuiTaskACMachine extends GuiEmbedded {
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
 			screen.drawTexturedModalRect(posX + sizeX/2 - 9 + 20, posY + sizeY/2 - 18, 0, 48, 18, 18);
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
-			RenderUtils.RenderItemStack(screen.mc, dispStack.getBaseStack(), (posX + sizeX/2 - 8) + 20, (posY + sizeY/2 - 17), "");
+			RenderUtils.RenderItemStack(screen.mc, dispStack.getBaseStack(), posX + sizeX/2 - 8 + 20, posY + sizeY/2 - 17, "");
 
 			if(!task.inputs.isEmpty()){
 				if(task.inputs.size() == 1){
@@ -68,16 +68,14 @@ public class GuiTaskACMachine extends GuiEmbedded {
 					}
 
 					GL11.glEnable(GL11.GL_DEPTH_TEST);
-					RenderUtils.RenderItemStack(screen.mc, temp, (posX + sizeX/2 - 8) - 40, (posY + sizeY/2 - 17), "");
+					RenderUtils.RenderItemStack(screen.mc, temp, posX + sizeX/2 - 8 - 40, posY + sizeY/2 - 17, "");
 
 					String txt = progress + "/" + dispStack.stackSize;
 					screen.mc.fontRenderer.drawString(txt, posX + sizeX/2 - screen.mc.fontRenderer.getStringWidth(txt)/2 + 20, posY + sizeY/2 + 2, ThemeRegistry.curTheme().textColor().getRGB());
-					screen.mc.fontRenderer.drawString("->", posX + sizeX/2 - screen.mc.fontRenderer.getStringWidth("->")/2 - 10, (posY + sizeY/2 - 17) + 2, ThemeRegistry.curTheme().textColor().getRGB());
+					screen.mc.fontRenderer.drawString("->", posX + sizeX/2 - screen.mc.fontRenderer.getStringWidth("->")/2 - 10, posY + sizeY/2 - 17 + 2, ThemeRegistry.curTheme().textColor().getRGB());
 
 					if(mx >= posX + sizeX/2 - 8 - 40 && mx < posX + sizeX/2 + 8 - 40 && my >= posY + sizeY/2 - 17 && my < posY + sizeY/2 - 1)
-					{
 						screen.DrawTooltip(temp.getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
-					}
 				} else {
 					int max = task.inputs.size();
 					if(max > 5)
@@ -86,7 +84,7 @@ public class GuiTaskACMachine extends GuiEmbedded {
 						if(i >= 5) break;
 						screen.mc.renderEngine.bindTexture(ThemeRegistry.curTheme().guiTexture());
 						GL11.glDisable(GL11.GL_DEPTH_TEST);
-						screen.drawTexturedModalRect(posX + sizeX/2 - 9 - 40, posY + sizeY/2 - 18 + (i*19 - (max * 8)), 0, 48, 18, 18);
+						screen.drawTexturedModalRect(posX + sizeX/2 - 9 - 40, posY + sizeY/2 - 18 + i*19 - max * 8, 0, 48, 18, 18);
 
 						BigItemStack stack = task.inputs.get(i).copy();
 
@@ -105,18 +103,16 @@ public class GuiTaskACMachine extends GuiEmbedded {
 						}
 
 						GL11.glEnable(GL11.GL_DEPTH_TEST);
-						RenderUtils.RenderItemStack(screen.mc, temp, (posX + sizeX/2 - 8) - 40, (posY + sizeY/2 - 17) + (i*19 - (max * 8)), "");
+						RenderUtils.RenderItemStack(screen.mc, temp, posX + sizeX/2 - 8 - 40, posY + sizeY/2 - 17 + i*19 - max * 8, "");
 
 						if(i == max - 1){
 							String txt = progress + "/" + dispStack.stackSize;
 							screen.mc.fontRenderer.drawString(txt, posX + sizeX/2 - screen.mc.fontRenderer.getStringWidth(txt)/2 + 20, posY + sizeY/2 + 2, ThemeRegistry.curTheme().textColor().getRGB());
-							screen.mc.fontRenderer.drawString("->", posX + sizeX/2 - screen.mc.fontRenderer.getStringWidth("->")/2 - 10, (posY + sizeY/2 - 17) + 2, ThemeRegistry.curTheme().textColor().getRGB());
+							screen.mc.fontRenderer.drawString("->", posX + sizeX/2 - screen.mc.fontRenderer.getStringWidth("->")/2 - 10, posY + sizeY/2 - 17 + 2, ThemeRegistry.curTheme().textColor().getRGB());
 						}
 
-						if(mx >= posX + sizeX/2 - 8 - 40 && mx < posX + sizeX/2 + 8 - 40 && my >= posY + sizeY/2 - 17 + (i*19 - (max * 8)) && my < posY + sizeY/2 - 1 + (i*19 - (max * 8)))
-						{
+						if(mx >= posX + sizeX/2 - 8 - 40 && mx < posX + sizeX/2 + 8 - 40 && my >= posY + sizeY/2 - 17 + i*19 - max * 8 && my < posY + sizeY/2 - 1 + i*19 - max * 8)
 							screen.DrawTooltip(temp.getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
-						}
 					}
 				}
 			} else {
@@ -125,9 +121,7 @@ public class GuiTaskACMachine extends GuiEmbedded {
 			}
 
 			if(mx >= posX + sizeX/2 - 8 + 20 && mx < posX + sizeX/2 + 8 + 20 && my >= posY + sizeY/2 - 17 && my < posY + sizeY/2 - 1)
-			{
 				screen.DrawTooltip(dispStack.getBaseStack().getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
-			}
 		}
 	}
 }

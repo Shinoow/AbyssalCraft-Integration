@@ -53,18 +53,15 @@ public class ACTCEvents {
 
 				if(EntityUtil.isEntityCoralium(mob) || EntityUtil.isEntityDread(mob) ||
 						mob.getCreatureAttribute() == AbyssalCraftAPI.SHADOW ||
-						mob instanceof EntitySkeletonGoliath ){
+						mob instanceof EntitySkeletonGoliath )
 					if(isElite(mob)){
 						if(player.worldObj.rand.nextInt(20) == 0)
 							ThaumcraftApiHelper.addStickyWarpToPlayer(player, 5);
 					} else if(isBoss(mob)){
 						if(player.worldObj.rand.nextInt(25) == 0)
 							ThaumcraftApiHelper.addWarpToPlayer(player, 7, false);
-					} else {
-						if(player.worldObj.rand.nextInt(15) == 0)
-							ThaumcraftApiHelper.addWarpToPlayer(player, 3, true);
-					}
-				}
+					} else if(player.worldObj.rand.nextInt(15) == 0)
+						ThaumcraftApiHelper.addWarpToPlayer(player, 3, true);
 			}
 		}
 	}
@@ -80,27 +77,21 @@ public class ACTCEvents {
 
 				if(EntityUtil.isEntityCoralium(mob) || EntityUtil.isEntityDread(mob) ||
 						mob.getCreatureAttribute() == AbyssalCraftAPI.SHADOW ||
-						mob instanceof EntitySkeletonGoliath){
+						mob instanceof EntitySkeletonGoliath)
 					if(isElite(mob)){
-						if(player.worldObj.rand.nextInt(8) == 0){
+						if(player.worldObj.rand.nextInt(8) == 0)
 							if(player.worldObj.rand.nextBoolean())
 								ThaumcraftApiHelper.addStickyWarpToPlayer(player, 7);
 							else ThaumcraftApiHelper.addWarpToPlayer(player, 2, false);
-						}
 					} else if(isBoss(mob)){
-						if(player.worldObj.rand.nextInt(12) == 0){
+						if(player.worldObj.rand.nextInt(12) == 0)
 							if(player.worldObj.rand.nextBoolean())
 								ThaumcraftApiHelper.addWarpToPlayer(player, 10, false);
 							else ThaumcraftApiHelper.addWarpToPlayer(player, 3, false);
-						}
-					} else {
-						if(player.worldObj.rand.nextInt(4) == 0){
-							if(player.worldObj.rand.nextBoolean())
-								ThaumcraftApiHelper.addWarpToPlayer(player, 5, true);
-							else ThaumcraftApiHelper.addWarpToPlayer(player, 1, true);
-						}
-					}
-				}
+					} else if(player.worldObj.rand.nextInt(4) == 0)
+						if(player.worldObj.rand.nextBoolean())
+							ThaumcraftApiHelper.addWarpToPlayer(player, 5, true);
+						else ThaumcraftApiHelper.addWarpToPlayer(player, 1, true);
 			}
 		}
 	}
@@ -139,16 +130,14 @@ public class ACTCEvents {
 	//	}
 
 	private boolean isElite(EntityLiving entity){
-		for(Class<? extends EntityMob> clazz : elites){
+		for(Class<? extends EntityMob> clazz : elites)
 			return entity.getClass().getName().equals(clazz.getName());
-		}
 		return false;
 	}
 
 	private boolean isBoss(EntityLiving entity){
-		for(Class<? extends EntityMob> clazz : bosses){
+		for(Class<? extends EntityMob> clazz : bosses)
 			return entity.getClass().getName().equals(clazz.getName());
-		}
 		return false;
 	}
 }

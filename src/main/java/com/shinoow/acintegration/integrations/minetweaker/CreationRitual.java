@@ -92,19 +92,19 @@ public class CreationRitual {
 		@Override
 		public void apply() {
 
+			removedRituals = new ArrayList<NecronomiconCreationRitual>();
+
 			List<NecronomiconCreationRitual> temp = new ArrayList<NecronomiconCreationRitual>();
-			for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals()){
+			for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
 				if(ritual instanceof NecronomiconCreationRitual &&
 						ritual.getClass().getSuperclass() != NecronomiconCreationRitual.class &&
 						ritual.getClass().getSuperclass().getSuperclass() != NecronomiconCreationRitual.class)
 					temp.add((NecronomiconCreationRitual) ritual);
-			}
-			for(NecronomiconCreationRitual ritual : temp){
+			for(NecronomiconCreationRitual ritual : temp)
 				if(ritual.getItem() == item){
 					removedRituals.add(ritual);
 					RitualRegistry.instance().getRituals().remove(ritual);
 				}
-			}
 		}
 
 		@Override

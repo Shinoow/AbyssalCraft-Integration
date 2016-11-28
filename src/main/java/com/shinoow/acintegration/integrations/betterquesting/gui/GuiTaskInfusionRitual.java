@@ -40,7 +40,7 @@ public class GuiTaskInfusionRitual extends GuiEmbedded {
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
 			screen.drawTexturedModalRect(posX + sizeX/2 - 9 + 20, posY + sizeY/2 - 18, 0, 48, 18, 18);
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
-			RenderUtils.RenderItemStack(screen.mc, dispStack.getBaseStack(), (posX + sizeX/2 - 8) + 20, (posY + sizeY/2 - 17), "");
+			RenderUtils.RenderItemStack(screen.mc, dispStack.getBaseStack(), posX + sizeX/2 - 8 + 20, posY + sizeY/2 - 17, "");
 
 			screen.mc.renderEngine.bindTexture(ThemeRegistry.curTheme().guiTexture());
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -61,7 +61,7 @@ public class GuiTaskInfusionRitual extends GuiEmbedded {
 				}
 			}
 
-			RenderUtils.RenderItemStack(screen.mc, temp, (posX + sizeX/2 - 8) + 20, (posY + sizeY/2 - 17) - 35, "");
+			RenderUtils.RenderItemStack(screen.mc, temp, posX + sizeX/2 - 8 + 20, posY + sizeY/2 - 17 - 35, "");
 
 			String txt = progress + "/" + dispStack.stackSize;
 			screen.mc.fontRenderer.drawString(txt, posX + sizeX/2 - screen.mc.fontRenderer.getStringWidth(txt)/2 + 20, posY + sizeY/2 + 2, ThemeRegistry.curTheme().textColor().getRGB());
@@ -69,14 +69,10 @@ public class GuiTaskInfusionRitual extends GuiEmbedded {
 			screen.mc.fontRenderer.drawString("To create the following:", posX + sizeX/2 - screen.mc.fontRenderer.getStringWidth("To create the following:")/2 + 20, posY + sizeY/2 - 30, ThemeRegistry.curTheme().textColor().getRGB());
 
 			if(mx >= posX + sizeX/2 - 8 + 20 && mx < posX + sizeX/2 + 8 + 20 && my >= posY + sizeY/2 - 17 && my < posY + sizeY/2 - 1)
-			{
 				screen.DrawTooltip(dispStack.getBaseStack().getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
-			}
 
 			if(mx >= posX + sizeX/2 - 8 + 20 && mx < posX + sizeX/2 + 8 + 20 && my >= posY + sizeY/2 - 17 - 35 && my < posY + sizeY/2 - 1 - 35)
-			{
 				screen.DrawTooltip(offerStack.getBaseStack().getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
-			}
 		}
 	}
 }

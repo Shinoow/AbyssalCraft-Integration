@@ -29,7 +29,7 @@ public class ACMT implements IACPlugin {
 
 		return Loader.isModLoaded("MineTweaker3") && ACIntegration.loadMT;
 	}
-	
+
 	@Override
 	public void preInit() {
 
@@ -62,20 +62,17 @@ public class ACMT implements IACPlugin {
 	{
 		if (iStack == null)
 			return null;
-		else
+		else if(iStack instanceof IOreDictEntry)
+			return ((IOreDictEntry)iStack).getName();
+		else if(iStack instanceof IItemStack)
+			return getItemStack((IItemStack) iStack);
+		else if(iStack instanceof IngredientStack)
 		{
-			if(iStack instanceof IOreDictEntry)
-				return ((IOreDictEntry)iStack).getName();
-			else if(iStack instanceof IItemStack)
-				return getItemStack((IItemStack) iStack);
-			else if(iStack instanceof IngredientStack)
-			{
-				IIngredient ingr = ReflectionHelper.getPrivateValue(IngredientStack.class, (IngredientStack)iStack, "ingredient");
-				return toObject(ingr);
-			}
-			else
-				return null;
+			IIngredient ingr = ReflectionHelper.getPrivateValue(IngredientStack.class, (IngredientStack)iStack, "ingredient");
+			return toObject(ingr);
 		}
+		else
+			return null;
 	}
 	public static Object[] toObjects(IIngredient[] iStacks)
 	{
@@ -84,6 +81,6 @@ public class ACMT implements IACPlugin {
 			oA[i] = toObject(iStacks[i]);
 		return oA;
 	}
-	
+
 	// End of borrowed code
 }

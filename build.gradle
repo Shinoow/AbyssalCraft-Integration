@@ -24,6 +24,10 @@ repositories {
 			name "Mobius Repo"
 			url "http://mobiusstrip.eu/maven"
 		}
+	maven {
+        name 'jared'
+        url "http://blamejared.com/maven"
+    }
 }
 
 apply plugin: 'java'
@@ -59,6 +63,7 @@ dependencies {
 	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.46:dev"
 	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.110:dev"
 	compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.0.547:dev"
+    compile "MineTweaker3:MineTweaker3-MC1710-Main:1.7.10-3.0.13.43"
 }
 
 version = "${props.mc_version}-${props.aci_version}"

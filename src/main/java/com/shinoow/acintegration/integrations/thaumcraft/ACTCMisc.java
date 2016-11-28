@@ -1,10 +1,5 @@
 package com.shinoow.acintegration.integrations.thaumcraft;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
-import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
-import com.shinoow.acintegration.ACIntegration;
-import com.shinoow.acintegration.integrations.thaumcraft.creativetabs.TabACThaum;
-import com.shinoow.acintegration.integrations.thaumcraft.items.ItemACThaumcraft;
 import com.shinoow.acintegration.integrations.thaumcraft.wands.CoraliumRodOnUpdate;
 import com.shinoow.acintegration.integrations.thaumcraft.wands.DarklandsRodOnUpdate;
 import com.shinoow.acintegration.integrations.thaumcraft.wands.DreadlandsRodOnUpdate;
@@ -12,20 +7,11 @@ import com.shinoow.acintegration.integrations.thaumcraft.wands.OmotholRodOnUpdat
 import com.shinoow.acintegration.integrations.thaumcraft.wands.WandCapAC;
 import com.shinoow.acintegration.integrations.thaumcraft.wands.WandRodAC;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.oredict.OreDictionary;
-import thaumcraft.api.ItemApi;
-import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.WandCap;
 import thaumcraft.api.wands.WandRod;
-import thaumcraft.common.items.wands.ItemWandCasting;
 
 /**
  * This class exists to move fields from the main plugin class that can trigger a NoClassDefFoundError when the<br>

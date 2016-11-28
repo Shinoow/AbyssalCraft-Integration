@@ -38,10 +38,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.1.2,];after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.1.3,];after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
 public class ACIntegration {
 
-	public static final String version = "1.4.5";
+	public static final String version = "1.4.6";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -56,7 +56,7 @@ public class ACIntegration {
 	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarp, loadBQ;
 
 	public static Item dust;
-	
+
 	public static final CreativeTabs tabItems = new CreativeTabs("acintegration"){
 
 		@Override
@@ -106,12 +106,10 @@ public class ACIntegration {
 	}
 
 	private void registerIntegrations(){
-		if(Loader.isModLoaded("Thaumcraft") && loadTC){
+		if(Loader.isModLoaded("Thaumcraft") && loadTC)
 			ACTC.instance.preInit();
-		}
-		if(Loader.isModLoaded("EE3") && loadEE3){
+		if(Loader.isModLoaded("EE3") && loadEE3)
 			ACEE3.instance.preInit();
-		}
 	}
 
 	private void registerNecroData(){
@@ -129,7 +127,7 @@ public class ACIntegration {
 
 		Chapter tc = new Chapter("thaumcraft", "Thaumcraft", new Page[]{
 				new Page(1, tcres[0], tctxt[0]), new Page(2, tctxt[1]), new Page(3, tcres[1], tctxt[2]),
-				new Page(4, tctxt[3]), new Page(5, tcres[2], tctxt[4]), new Page(5, tctxt[6]),
+				new Page(4, tctxt[3]), new Page(5, tcres[2], tctxt[4]), new Page(5, tctxt[5]),
 				new Page(7, tctxt[6]), new Page(8, tctxt[7])
 		});
 		Chapter morph = new Chapter("morph", "Morph", new Page[]{
@@ -172,7 +170,7 @@ public class ACIntegration {
 
 		} catch (IOException e) {
 			FMLLog.log("AbyssalCraft Integration", Level.ERROR, "Failed to fetch supporter list, using local version!");
-			names = "Enfalas, Saice Shoop";
+			names = "Enfalas, Saice Shoop, Minecreatr, Kendoshii";
 		}
 
 		return names;

@@ -19,7 +19,7 @@ public class TaskTransmute extends TaskACMachine {
 			return;
 
 		int progress = quest == null || !quest.globalQuest? GetPartyProgress(player.getUniqueID()) : GetGlobalProgress();
-		
+
 		if(ItemComparison.StackMatch(output.getBaseStack(), stack, !ignoreNBT, partialMatch) || ItemComparison.OreDictionaryMatch(output.oreDict, output.GetTagCompound(), stack, !ignoreNBT, partialMatch))
 			SetUserProgress(player.getUniqueID(), progress + 1);
 	}
