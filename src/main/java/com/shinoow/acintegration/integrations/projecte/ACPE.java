@@ -27,7 +27,7 @@
 //
 //		return Loader.isModLoaded("ProjectE") && ACIntegration.loadPE;
 //	}
-//	
+//
 //	@Override
 //	public void preInit() {}
 //

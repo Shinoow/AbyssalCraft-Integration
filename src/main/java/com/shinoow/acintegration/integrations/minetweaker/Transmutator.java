@@ -113,9 +113,8 @@ public class Transmutator {
 
 		@Override
 		public void undo() {
-			if(input != null && output != null){
+			if(input != null && output != null)
 				AbyssalCraftAPI.addTransmutation(input, output, TransmutatorRecipes.instance().getExperience(output));
-			}
-		}	
+		}
 	}
 }

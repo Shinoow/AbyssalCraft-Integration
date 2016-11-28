@@ -2,12 +2,10 @@ package com.shinoow.acintegration.integrations.tinkers;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.Fluid;
@@ -94,15 +92,7 @@ public class ACTiCon implements IACPlugin {
 
 		final ModelResourceLocation modelResourceLocation = new ModelResourceLocation("acintegration:fluid", name);
 
-		ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition(){
-
-			@Override
-			public ModelResourceLocation getModelLocation(ItemStack stack) {
-
-				return modelResourceLocation;
-			}
-
-		});
+		ModelLoader.setCustomMeshDefinition(item, stack -> modelResourceLocation);
 
 		ModelLoader.setCustomStateMapper(fluidBlock, new StateMapperBase() {
 			@Override

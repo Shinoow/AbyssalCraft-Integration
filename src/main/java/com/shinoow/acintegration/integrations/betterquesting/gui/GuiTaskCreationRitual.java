@@ -32,16 +32,14 @@ public class GuiTaskCreationRitual extends GuiEmbedded {
 			GlStateManager.disableDepth();
 			screen.drawTexturedModalRect(posX + sizeX/2 - 9 + 20, posY + sizeY/2 - 18, 0, 48, 18, 18);
 			GlStateManager.enableDepth();
-			RenderUtils.RenderItemStack(screen.mc, dispStack.getBaseStack(), (posX + sizeX/2 - 8) + 20, (posY + sizeY/2 - 17), "");
+			RenderUtils.RenderItemStack(screen.mc, dispStack.getBaseStack(), posX + sizeX/2 - 8 + 20, posY + sizeY/2 - 17, "");
 			String txt = progress + "/" + dispStack.stackSize;
 			screen.mc.fontRendererObj.drawString(txt, posX + sizeX/2 - screen.mc.fontRendererObj.getStringWidth(txt)/2 + 20, posY + sizeY/2 + 2, ThemeRegistry.curTheme().textColor().getRGB());
 
 			screen.mc.fontRendererObj.drawString("Create the following through a Creation Ritual:", posX + sizeX/2 - screen.mc.fontRendererObj.getStringWidth("Creation the following through a Creation Ritual:")/2 + 20, posY + sizeY/2 - 30, ThemeRegistry.curTheme().textColor().getRGB());
 
 			if(mx >= posX + sizeX/2 - 8 + 20 && mx < posX + sizeX/2 + 8 + 20 && my >= posY + sizeY/2 - 17 && my < posY + sizeY/2 - 1)
-			{
 				screen.DrawTooltip(dispStack.getBaseStack().getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
-			}
 		}
 	}
 }
