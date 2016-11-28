@@ -42,37 +42,31 @@ public abstract class TaskACMachine extends TaskBase implements IProgressionTask
 	public void Update(QuestInstance quest, EntityPlayer player)
 	{
 		if(player.ticksExisted%200 == 0 && !QuestDatabase.editMode)
-		{
 			Detect(quest, player);
-		}
 	}
-	
+
 	@Override
 	public void Detect(QuestInstance quest, EntityPlayer player)
 	{
 		if(isComplete(player.getUniqueID()))
-		{
 			return;
-		}
-		
+
 		int progress = quest == null || !quest.globalQuest? GetPartyProgress(player.getUniqueID()) : GetGlobalProgress();
-		
+
 		if(progress >= output.stackSize)
-		{
 			setCompletion(player.getUniqueID(), true);
-		}
 	}
-	
+
 	@Override
 	public void writeToJson(JsonObject json){
 		super.writeToJson(json);
 
 		json.addProperty("partialMatch", partialMatch);
 		json.addProperty("ignoreNBT", ignoreNBT);
-		
+
 		if(output != null)
 			json.add("output", NBTConverter.NBTtoJSON_Compound(output.writeToNBT(new NBTTagCompound()), new JsonObject()));
-		
+
 		JsonArray progArray = new JsonArray();
 		for(Entry<UUID,Integer> entry : userProgress.entrySet())
 		{
@@ -82,13 +76,12 @@ public abstract class TaskACMachine extends TaskBase implements IProgressionTask
 			progArray.add(pJson);
 		}
 		json.add("userProgress", progArray);
-		
+
 		JsonArray inputArray = new JsonArray();
-		
-		for(BigItemStack stack : inputs){
+
+		for(BigItemStack stack : inputs)
 			inputArray.add(NBTConverter.NBTtoJSON_Compound(stack.writeToNBT(new NBTTagCompound()), new JsonObject()));
-		}
-		
+
 		json.add("inputs", inputArray);
 	}
 
@@ -98,17 +91,15 @@ public abstract class TaskACMachine extends TaskBase implements IProgressionTask
 
 		partialMatch = JsonHelper.GetBoolean(json, "partialMatch", true);
 		ignoreNBT = JsonHelper.GetBoolean(json, "ignoreNBT", false);
-		
+
 		output = JsonHelper.JsonToItemStack(JsonHelper.GetObject(json, "output"));
-		
+
 		userProgress = new HashMap<UUID,Integer>();
 		for(JsonElement entry : JsonHelper.GetArray(json, "userProgress"))
 		{
 			if(entry == null || !entry.isJsonObject())
-			{
 				continue;
-			}
-			
+
 			UUID uuid;
 			try
 			{
@@ -118,23 +109,23 @@ public abstract class TaskACMachine extends TaskBase implements IProgressionTask
 				ACLogger.log(Level.ERROR, "Unable to load user progress for task", e);
 				continue;
 			}
-			
+
 			userProgress.put(uuid, JsonHelper.GetNumber(entry.getAsJsonObject(), "value", 0).intValue());
 		}
 
 		inputs = new ArrayList<BigItemStack>();
-		
+
 		for(JsonElement entry : JsonHelper.GetArray(json, "inputs")){
 			if(entry == null || !entry.isJsonObject()) continue;
-			
+
 			BigItemStack stack = JsonHelper.JsonToItemStack(entry.getAsJsonObject());
-			
+
 			if(stack != null)
 				inputs.add(stack);
 			else continue;
 		}
 	}
-	
+
 	@Override
 	public void ResetProgress(UUID uuid)
 	{
@@ -148,18 +139,16 @@ public abstract class TaskACMachine extends TaskBase implements IProgressionTask
 		super.ResetAllProgress();
 		userProgress = new HashMap<UUID, Integer>();
 	}
-	
+
 	@Override
 	public float GetParticipation(UUID uuid)
 	{
 		if(output == null || output.stackSize <= 0)
-		{
 			return 1F;
-		}
-		
+
 		return GetUserProgress(uuid) / (float)output.stackSize;
 	}
-	
+
 	@Override
 	public GuiEmbedded getGui(QuestInstance quest, GuiQuesting screen, int posX, int posY, int sizeX, int sizeY)
 	{
@@ -171,50 +160,43 @@ public abstract class TaskACMachine extends TaskBase implements IProgressionTask
 	{
 		userProgress.put(uuid, progress);
 	}
-	
+
 	@Override
 	public Integer GetUserProgress(UUID uuid)
 	{
 		Integer i = userProgress.get(uuid);
 		return i == null? 0 : i;
 	}
-	
+
 	@Override
 	public Integer GetPartyProgress(UUID uuid)
 	{
 		int total = 0;
-		
+
 		PartyInstance party = PartyManager.GetParty(uuid);
-		
+
 		if(party == null)
-		{
 			return GetUserProgress(uuid);
-		} else
-		{
+		else
 			for(PartyMember mem : party.GetMembers())
 			{
 				if(mem != null && mem.GetPrivilege() <= 0)
-				{
 					continue;
-				}
-				
+
 				total += GetUserProgress(mem.userID);
 			}
-		}
-		
+
 		return total;
 	}
-	
+
 	@Override
 	public Integer GetGlobalProgress()
 	{
 		int total = 0;
-		
+
 		for(Integer i : userProgress.values())
-		{
 			total += i == null? 0 : i;
-		}
-		
+
 		return total;
 	}
 }

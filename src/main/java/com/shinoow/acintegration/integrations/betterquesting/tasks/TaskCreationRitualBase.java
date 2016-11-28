@@ -1,6 +1,5 @@
 package com.shinoow.acintegration.integrations.betterquesting.tasks;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.Map.Entry;
@@ -36,37 +35,31 @@ public abstract class TaskCreationRitualBase extends TaskBase implements IProgre
 	public void Update(QuestInstance quest, EntityPlayer player)
 	{
 		if(player.ticksExisted%200 == 0 && !QuestDatabase.editMode)
-		{
 			Detect(quest, player);
-		}
 	}
-	
+
 	@Override
 	public void Detect(QuestInstance quest, EntityPlayer player)
 	{
 		if(isComplete(player.getUniqueID()))
-		{
 			return;
-		}
-		
+
 		int progress = quest == null || !quest.globalQuest? GetPartyProgress(player.getUniqueID()) : GetGlobalProgress();
-		
+
 		if(progress >= output.stackSize)
-		{
 			setCompletion(player.getUniqueID(), true);
-		}
 	}
-	
+
 	@Override
 	public void writeToJson(JsonObject json){
 		super.writeToJson(json);
 
 		json.addProperty("partialMatch", partialMatch);
 		json.addProperty("ignoreNBT", ignoreNBT);
-		
+
 		if(output != null)
 			json.add("output", NBTConverter.NBTtoJSON_Compound(output.writeToNBT(new NBTTagCompound()), new JsonObject()));
-		
+
 		JsonArray progArray = new JsonArray();
 		for(Entry<UUID,Integer> entry : userProgress.entrySet())
 		{
@@ -84,17 +77,15 @@ public abstract class TaskCreationRitualBase extends TaskBase implements IProgre
 
 		partialMatch = JsonHelper.GetBoolean(json, "partialMatch", true);
 		ignoreNBT = JsonHelper.GetBoolean(json, "ignoreNBT", false);
-		
+
 		output = JsonHelper.JsonToItemStack(JsonHelper.GetObject(json, "output"));
-		
+
 		userProgress = new HashMap<UUID,Integer>();
 		for(JsonElement entry : JsonHelper.GetArray(json, "userProgress"))
 		{
 			if(entry == null || !entry.isJsonObject())
-			{
 				continue;
-			}
-			
+
 			UUID uuid;
 			try
 			{
@@ -104,11 +95,11 @@ public abstract class TaskCreationRitualBase extends TaskBase implements IProgre
 				ACLogger.log(Level.ERROR, "Unable to load user progress for task", e);
 				continue;
 			}
-			
+
 			userProgress.put(uuid, JsonHelper.GetNumber(entry.getAsJsonObject(), "value", 0).intValue());
 		}
 	}
-	
+
 	@Override
 	public void ResetProgress(UUID uuid)
 	{
@@ -122,24 +113,22 @@ public abstract class TaskCreationRitualBase extends TaskBase implements IProgre
 		super.ResetAllProgress();
 		userProgress = new HashMap<UUID, Integer>();
 	}
-	
+
 	@Override
 	public float GetParticipation(UUID uuid)
 	{
 		if(output == null || output.stackSize <= 0)
-		{
 			return 1F;
-		}
-		
+
 		return GetUserProgress(uuid) / (float)output.stackSize;
 	}
-	
+
 	@Override
 	public void SetUserProgress(UUID uuid, Integer progress)
 	{
 		userProgress.put(uuid, progress);
 	}
-	
+
 	@Override
 	public Integer GetUserProgress(UUID uuid)
 	{
@@ -151,38 +140,31 @@ public abstract class TaskCreationRitualBase extends TaskBase implements IProgre
 	public Integer GetPartyProgress(UUID uuid)
 	{
 		int total = 0;
-		
+
 		PartyInstance party = PartyManager.GetParty(uuid);
-		
+
 		if(party == null)
-		{
 			return GetUserProgress(uuid);
-		} else
-		{
+		else
 			for(PartyMember mem : party.GetMembers())
 			{
 				if(mem != null && mem.GetPrivilege() <= 0)
-				{
 					continue;
-				}
-				
+
 				total += GetUserProgress(mem.userID);
 			}
-		}
-		
+
 		return total;
 	}
-	
+
 	@Override
 	public Integer GetGlobalProgress()
 	{
 		int total = 0;
-		
+
 		for(Integer i : userProgress.values())
-		{
 			total += i == null? 0 : i;
-		}
-		
+
 		return total;
 	}
 }

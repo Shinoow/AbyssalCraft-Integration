@@ -40,11 +40,11 @@ import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.2,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.3.8,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
 acceptedMinecraftVersions = "[1.9.4]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
 public class ACIntegration {
 
-	public static final String version = "1.4.5";
+	public static final String version = "1.4.6";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -80,7 +80,7 @@ public class ACIntegration {
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
 
-		dust = new ItemMetadata("dust", true, "abyssalnite", "coralium", "dreadium").setCreativeTab(tabItems);
+		dust = new ItemMetadata("dust", "abyssalnite", "coralium", "dreadium").setCreativeTab(tabItems);
 
 		GameRegistry.register(dust, new ResourceLocation("acintegration", "dust"));
 
@@ -105,9 +105,8 @@ public class ACIntegration {
 		if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
 			String[] names = {"abyssalnite", "coralium", "dreadium"};
 			RenderItem render = Minecraft.getMinecraft().getRenderItem();
-			for(int i = 0; i < names.length; i++){
+			for(int i = 0; i < names.length; i++)
 				render.getItemModelMesher().register(dust, i, new ModelResourceLocation("acintegration:dust_" + names[i], "inventory"));
-			}
 		}
 
 		GameRegistry.addSmelting(new ItemStack(dust, 1, 0), new ItemStack(ACItems.abyssalnite_ingot), 3F);
@@ -148,14 +147,14 @@ public class ACIntegration {
 
 		Chapter tc = new Chapter("thaumcraft", "Thaumcraft", new Page[]{
 				new Page(1, tcres[0], tctxt[0]), new Page(2, tctxt[1]), new Page(3, tcres[1], tctxt[2]),
-				new Page(4, tctxt[3]), new Page(5, tcres[2], tctxt[4]), new Page(5, tctxt[6]),
+				new Page(4, tctxt[3]), new Page(5, tcres[2], tctxt[4]), new Page(5, tctxt[5]),
 				new Page(7, tctxt[6]), new Page(8, tctxt[7])
 		});
 		//		Chapter morph = new Chapter("morph", "Morph", new Page[]{
 		//				new Page(1, I18n.translateToLocal("necro.text.integration.morph"))
 		//		});
 
-		NecroData data = new NecroData(modid, name, I18n.translateToLocal("necro.text.integration"), tc);
+		new NecroData(modid, name, I18n.translateToLocal("necro.text.integration"), tc);
 
 		//		AbyssalCraftAPI.registerNecronomiconData(data, 0);
 	}
@@ -192,7 +191,7 @@ public class ACIntegration {
 
 		} catch (IOException e) {
 			FMLLog.log("AbyssalCraft Integration", Level.ERROR, "Failed to fetch supporter list, using local version!");
-			names = "Enfalas, Saice Shoop";
+			names = "Enfalas, Saice Shoop, Minecreatr, Kendoshii";
 		}
 
 		return names;

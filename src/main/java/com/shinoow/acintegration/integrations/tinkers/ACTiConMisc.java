@@ -28,11 +28,11 @@ import static com.shinoow.acintegration.integrations.tinkers.ACTiCon.*;
 public class ACTiConMisc {
 
 	public static Material abyssalnite, coralium, dreadium;
-	
+
 	public static final AbstractTrait dread_plague = new TraitDreadPlague();
 	public static final AbstractTrait coralium_plague = new TraitCoraliumPlague();
 	public static final AbstractTrait dread_purity = new TraitDreadPurity();
-	
+
 	public static void initFluids(){
 		fluid_molten_abyssalnite = new FluidMolten("moltenAbyssalnite", 0x4a1c89);
 		fluid_molten_abyssalnite.setTemperature(700);
@@ -55,7 +55,7 @@ public class ACTiConMisc {
 		registerBlock(moltenCoralium, "moltencoralium");
 		registerBlock(moltenDreadium, "moltendreadium");
 	}
-	
+
 	public static void initMaterials(){
 		abyssalnite = new Material("abyssalnite", 0x4a1c89);
 		abyssalnite.setFluid(fluid_molten_abyssalnite);
@@ -85,16 +85,16 @@ public class ACTiConMisc {
 		TinkerRegistry.addMaterialStats(abyssalnite,
 				new HeadMaterialStats(630, 10.00f, 6.00f, 4),
 				new HandleMaterialStats(0.90f, 60),
-                new ExtraMaterialStats(100));
+				new ExtraMaterialStats(100));
 		TinkerRegistry.addMaterialStats(coralium,
 				new HeadMaterialStats(900, 12.00f, 7.00f, 5),
 				new HandleMaterialStats(0.90f, 60),
-                new ExtraMaterialStats(100));
+				new ExtraMaterialStats(100));
 		TinkerRegistry.addMaterialStats(dreadium,
 				new HeadMaterialStats(1150, 14.00f, 8.00f, 6),
 				new HandleMaterialStats(0.90f, 60),
-                new ExtraMaterialStats(100));
-		
+				new ExtraMaterialStats(100));
+
 		TinkerSmeltery.registerToolpartMeltingCasting(abyssalnite);
 		TinkerSmeltery.registerToolpartMeltingCasting(coralium);
 		TinkerSmeltery.registerToolpartMeltingCasting(dreadium);

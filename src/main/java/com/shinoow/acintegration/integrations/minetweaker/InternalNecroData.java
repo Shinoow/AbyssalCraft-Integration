@@ -1,12 +1,11 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import java.util.List;
-
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -20,7 +19,7 @@ public class InternalNecroData {
 
 	@ZenMethod
 	public static void addChapter(String chapteridentifier, String chaptertitle, String necrodataidentifier){
-		Chapter chapter = new Chapter(chapteridentifier, chaptertitle);
+		Chapter chapter = new Chapter(chapteridentifier, I18n.translateToLocal(chaptertitle));
 		MineTweakerAPI.apply(new AddChapter(chapter, necrodataidentifier));
 	}
 
@@ -76,9 +75,9 @@ public class InternalNecroData {
 		@Override
 		public void undo() {
 
-			if(oldChapter != null){
+			if(oldChapter != null)
 				AbyssalCraftAPI.getInternalNDHandler().addChapter(oldChapter, identifier);
-			} AbyssalCraftAPI.getInternalNDHandler().removeChapter(identifier, chapter.getIdentifier());
+			else AbyssalCraftAPI.getInternalNDHandler().removeChapter(identifier, chapter.getIdentifier());
 		}
 	}
 
@@ -89,7 +88,7 @@ public class InternalNecroData {
 
 	private static class RemoveChapter implements IUndoableAction
 	{
-		List<Chapter> removedChapters;
+		Chapter removedChapter;
 		private final String chapteridentifier;
 		private final String necrodataidentifier;
 
@@ -103,10 +102,10 @@ public class InternalNecroData {
 
 			for(Chapter chap : AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData(necrodataidentifier).getChapters())
 				if(chap.getIdentifier().equals(chapteridentifier)){
-					removedChapters.add(chap);
+					removedChapter = chap;
 					AbyssalCraftAPI.getInternalNDHandler().removeChapter(necrodataidentifier, chapteridentifier);
 					return;
-				}	
+				}
 		}
 
 		@Override
@@ -136,40 +135,44 @@ public class InternalNecroData {
 		@Override
 		public void undo() {
 
-			if(removedChapters != null)
-				for(Chapter chap : removedChapters)
-					if(chap != null)
-						AbyssalCraftAPI.getInternalNDHandler().addChapter(chap, necrodataidentifier);
+			if(removedChapter != null)
+				AbyssalCraftAPI.getInternalNDHandler().addChapter(removedChapter, necrodataidentifier);
 		}
 	}
 
 	@ZenMethod
 	public static void addNormalPage(int pageNum, String pagetext, String chapteridentifier, String necrodataidentifier){
-		Page page = new Page(pageNum, pagetext);
+		Page page = new Page(pageNum, I18n.translateToLocal(pagetext));
 		MineTweakerAPI.apply(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
 	@ZenMethod
 	public static void addItemPage(int pageNum, IItemStack stack, String pagetext, String chapteridentifier, String necrodataidentifier){
-		Page page = new Page(pageNum, ACMT.toStack(stack), pagetext);
+		Page page = new Page(pageNum, ACMT.toStack(stack), I18n.translateToLocal(pagetext));
 		MineTweakerAPI.apply(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
 	@ZenMethod
 	public static void addImagePage(int pageNum, String resourcepath, String pagetext, String chapteridentifier, String necrodataidentifier){
-		Page page = new Page(pageNum, new ResourceLocation(resourcepath), pagetext);
+		Page page = new Page(pageNum, new ResourceLocation(resourcepath), I18n.translateToLocal(pagetext));
 		MineTweakerAPI.apply(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
 	@ZenMethod
 	public static void addCraftingPage(int pageNum, IIngredient thing, String pagetext, String chapteridentifier, String necrodataidentifier){
-		Page page = new Page(pageNum, new CraftingStack(ACMT.toObject(thing)), pagetext);
+		Page page = new Page(pageNum, new CraftingStack(ACMT.toObject(thing)), I18n.translateToLocal(pagetext));
 		MineTweakerAPI.apply(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
 	@ZenMethod
 	public static void addCraftingPage(int pageNum, IIngredient thing, IIngredient[] stuff, String pagetext, String chapteridentifier, String necrodataidentifier){
-		Page page = new Page(pageNum, new CraftingStack(ACMT.toObject(thing), ACMT.toObjects(stuff)), pagetext);
+		Page page = new Page(pageNum, new CraftingStack(ACMT.toObject(thing), ACMT.toObjects(stuff)), I18n.translateToLocal(pagetext));
+		MineTweakerAPI.apply(new AddPage(page, chapteridentifier, necrodataidentifier));
+	}
+
+	@ZenMethod
+	public static void addURLPage(int pageNum, String url, String pagetext, String chapteridentifier, String necrodataidentifier){
+		Page page = new Page(pageNum, url, I18n.translateToLocal(pagetext));
 		MineTweakerAPI.apply(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
@@ -225,9 +228,9 @@ public class InternalNecroData {
 		@Override
 		public void undo() {
 
-			if(oldPage != null){
+			if(oldPage != null)
 				AbyssalCraftAPI.getInternalNDHandler().addPage(oldPage, necrodataidentifier, chapteridentifier);
-			}else AbyssalCraftAPI.getInternalNDHandler().removePage(page.getPageNumber(), necrodataidentifier, chapteridentifier);
+			else AbyssalCraftAPI.getInternalNDHandler().removePage(page.getPageNumber(), necrodataidentifier, chapteridentifier);
 		}
 	}
 
@@ -238,7 +241,7 @@ public class InternalNecroData {
 
 	private static class RemovePage implements IUndoableAction{
 
-		List<Page> removedPages;
+		Page removedPage;
 		private final int pageNum;
 		private final String chapteridentifier;
 		private final String necrodataidentifier;
@@ -254,8 +257,9 @@ public class InternalNecroData {
 
 			for(Chapter chap : AbyssalCraftAPI.getInternalNDHandler().getInternalNecroData(necrodataidentifier).getChapters())
 				if(chap.getIdentifier().equals(chapteridentifier)){
-					removedPages.add(chap.getPage(pageNum));
-					chap.removePage(pageNum);
+					removedPage = chap.getPage(pageNum);
+					if(removedPage != null)
+						chap.removePage(pageNum);
 					return;
 				}
 		}
@@ -287,10 +291,8 @@ public class InternalNecroData {
 		@Override
 		public void undo() {
 
-			if(removedPages != null)
-				for(Page page : removedPages)
-					if(page != null)
-						AbyssalCraftAPI.getInternalNDHandler().addPage(page, necrodataidentifier, chapteridentifier);
+			if(removedPage != null)
+				AbyssalCraftAPI.getInternalNDHandler().addPage(removedPage, necrodataidentifier, chapteridentifier);
 		}
 	}
 }

@@ -28,7 +28,7 @@ public class ACPE implements IACPlugin {
 
 		return Loader.isModLoaded("ProjectE") && ACIntegration.loadPE;
 	}
-	
+
 	@Override
 	public void preInit() {}
 
@@ -145,14 +145,13 @@ public class ACPE implements IACPlugin {
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.tiered_energy_pedestal, 1, OreDictionary.WILDCARD_VALUE), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, OreDictionary.WILDCARD_VALUE), 0);
 
-		for(String name :OreDictionary.getOreNames()){
+		for(String name :OreDictionary.getOreNames())
 			if(name.startsWith("crystal")){
 				List<ItemStack> ores = OreDictionary.getOres(name);
 				Iterator iter = ores.iterator();
 				while(iter.hasNext())
 					ProjectEAPI.getEMCProxy().registerCustomEMC(iter.next(), 0);
 			}
-		}
 	}
 
 	@Override
