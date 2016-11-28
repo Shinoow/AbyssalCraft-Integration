@@ -28,7 +28,7 @@ public class TaskCreationRitual extends TaskCreationRitualBase {
 		if(ItemComparison.StackMatch(output.getBaseStack(), ritual.getItem(), !ignoreNBT, partialMatch) || ItemComparison.OreDictionaryMatch(output.oreDict, output.GetTagCompound(), ritual.getItem(), !ignoreNBT, partialMatch))
 			SetUserProgress(player.getUniqueID(), progress + 1);
 	}
-	
+
 	@Override
 	public GuiEmbedded getGui(QuestInstance quest, GuiQuesting screen, int posX, int posY, int sizeX, int sizeY)
 	{

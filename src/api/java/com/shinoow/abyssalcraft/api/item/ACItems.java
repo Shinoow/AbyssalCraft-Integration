@@ -5,7 +5,7 @@
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/lgpl-3.0.txt
- * 
+ *
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
@@ -15,7 +15,7 @@ import net.minecraft.item.Item;
 
 /**
  * Contains all items added in AbyssalCraft
- * 
+ *
  * @author shinoow
  *
  */
@@ -190,6 +190,7 @@ public class ACItems {
 	public static Item shoggoth_flesh;
 	/** Metadata Item, 0 = Abyssalnite, 1 = Refined Coralium, 2 = Dreadium, 3 = Ethaxium */
 	public static Item ingot_nugget;
+	/** Metadata Item, 0 = Normal, 1 = Abyssal Wasteland, 2 = Dreadlands, 3 = Omothol */
 	public static Item staff_of_rending;
 	/** Metadata Item, 0 = Abyssal Wasteland, 1 = Dreadlands, 2 = Omothol */
 	public static Item essence;
@@ -222,5 +223,6 @@ public class ACItems {
 	public static Item yog_sothoth_engraving;
 	public static Item shub_niggurath_engraving;
 	public static Item essence_of_the_gatekeeper;
+	public static Item interdimensional_cage;
 	//	public static Item shadow_titan_armor_plate = getItem("shadowplate");
 }

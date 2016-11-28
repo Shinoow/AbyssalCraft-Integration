@@ -12,14 +12,14 @@ public class TaskCrystallize extends TaskACMachine {
 
 		return "acintegration.task.crystallize";
 	}
-	
+
 	public void onItemCrystallized(QuestInstance quest, EntityPlayer player, ItemStack stack){
 
 		if(isComplete(player.getUniqueID()))
 			return;
 
 		int progress = quest == null || !quest.globalQuest? GetPartyProgress(player.getUniqueID()) : GetGlobalProgress();
-		
+
 		if(ItemComparison.StackMatch(output.getBaseStack(), stack, !ignoreNBT, partialMatch) || ItemComparison.OreDictionaryMatch(output.oreDict, output.GetTagCompound(), stack, !ignoreNBT, partialMatch))
 			SetUserProgress(player.getUniqueID(), progress + 1);
 	}

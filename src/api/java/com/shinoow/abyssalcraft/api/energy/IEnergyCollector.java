@@ -9,15 +9,17 @@
  * Contributors:
  *     Shinoow -  implementation
  ******************************************************************************/
-package com.shinoow.abyssalcraft.api.entity;
+package com.shinoow.abyssalcraft.api.energy;
 
 /**
- * Interface to define a entity that's immune to the Antimatter potion effect
+ * Interface to use on tile entities that collect Potential Energy (WIP)<br>
+ * WARNING: Any methods in this interface might end up getting removed,<br>
+ * so I would suggest not using it until this text (and the WIP part) is removed.
  *
  * @author shinoow
  *
- * @since 1.0
+ * @since 1.8.4
  */
-public interface IAntiEntity {
+public interface IEnergyCollector extends IEnergyContainer {
 
 }

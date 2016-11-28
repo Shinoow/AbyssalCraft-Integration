@@ -21,7 +21,6 @@ import thaumcraft.api.wands.WandCap;
 import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.items.wands.ItemWand;
 
-import com.shinoow.abyssalcraft.AbyssalCraft;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACEntities;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.integration.ACPlugin;
@@ -50,7 +49,7 @@ public class ACTC implements IACPlugin {
 
 		return Loader.isModLoaded("Thaumcraft") && ACIntegration.loadTC;
 	}
-	
+
 	@Override
 	public void preInit() {
 
@@ -59,7 +58,7 @@ public class ACTC implements IACPlugin {
 
 		if(ACIntegration.tcItems){
 
-//			//did it like this solely for disabling everything item-related if something toggles it off
+			//did it like this solely for disabling everything item-related if something toggles it off
 			TabACThaum.instance = new TabACThaum();
 
 			wandCap = new ItemACThaumcraft("wandcap", true, "abyssalnite", "coralium", "dreadium", "ethaxium");
@@ -82,34 +81,38 @@ public class ACTC implements IACPlugin {
 			darkWand = new ItemStack(ItemsTC.wand);
 			((ItemWand)darkWand.getItem()).setCap(darkWand, WandCap.caps.get("abyssalnite"));
 			((ItemWand)darkWand.getItem()).setRod(darkWand, WandRod.rods.get("darklands"));
-			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.AIR, 5000, true);
-			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.FIRE, 5000, true);
-			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.WATER, 5000, true);
-			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.ORDER, 5000, true);
-			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.ENTROPY, 5000, true);
+			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.AIR, 25000, true);
+			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.EARTH, 25000, true);
+			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.FIRE, 25000, true);
+			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.WATER, 25000, true);
+			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.ORDER, 25000, true);
+			((ItemWand) darkWand.getItem()).addVis(darkWand, Aspect.ENTROPY, 25000, true);
 
 			corWand = new ItemStack(ItemsTC.wand);
 			((ItemWand)corWand.getItem()).setCap(corWand, WandCap.caps.get("coralium"));
 			((ItemWand)corWand.getItem()).setRod(corWand, WandRod.rods.get("coraliumstone"));
-			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.AIR, 7500, true);
-			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.FIRE, 7500, true);
-			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.WATER, 7500, true);
-			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.ORDER, 7500, true);
-			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.ENTROPY, 7500, true);
+			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.AIR, 37500, true);
+			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.EARTH, 37500, true);
+			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.FIRE, 37500, true);
+			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.WATER, 37500, true);
+			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.ORDER, 37500, true);
+			((ItemWand) corWand.getItem()).addVis(corWand, Aspect.ENTROPY, 37500, true);
 
 			dreadWand = new ItemStack(ItemsTC.wand);
 			((ItemWand)dreadWand.getItem()).setCap(dreadWand, WandCap.caps.get("dreadium"));
 			((ItemWand)dreadWand.getItem()).setRod(dreadWand, WandRod.rods.get("dreadlands"));
-			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.AIR, 10000, true);
-			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.FIRE, 10000, true);
-			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.WATER, 10000, true);
-			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.ORDER, 10000, true);
-			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.ENTROPY, 10000, true);
+			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.AIR, 50000, true);
+			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.EARTH, 50000, true);
+			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.FIRE, 50000, true);
+			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.WATER, 50000, true);
+			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.ORDER, 50000, true);
+			((ItemWand) dreadWand.getItem()).addVis(dreadWand, Aspect.ENTROPY, 50000, true);
 
 			omotholWand = new ItemStack(ItemsTC.wand);
 			((ItemWand)omotholWand.getItem()).setCap(omotholWand, WandCap.caps.get("ethaxium"));
 			((ItemWand)omotholWand.getItem()).setRod(omotholWand, WandRod.rods.get("omothol"));
 			((ItemWand) omotholWand.getItem()).addVis(omotholWand, Aspect.AIR, 0, true);
+			((ItemWand) omotholWand.getItem()).addVis(omotholWand, Aspect.EARTH, 0, true);
 			((ItemWand) omotholWand.getItem()).addVis(omotholWand, Aspect.FIRE, 0, true);
 			((ItemWand) omotholWand.getItem()).addVis(omotholWand, Aspect.WATER, 0, true);
 			((ItemWand) omotholWand.getItem()).addVis(omotholWand, Aspect.ORDER, 0, true);
@@ -119,6 +122,7 @@ public class ACTC implements IACPlugin {
 			((ItemWand)endWand.getItem()).setCap(endWand, WandCap.caps.get("void"));
 			((ItemWand)endWand.getItem()).setRod(endWand, WandRod.rods.get("omothol"));
 			((ItemWand) endWand.getItem()).addVis(endWand, Aspect.AIR, 0, true);
+			((ItemWand) endWand.getItem()).addVis(endWand, Aspect.EARTH, 0, true);
 			((ItemWand) endWand.getItem()).addVis(endWand, Aspect.FIRE, 0, true);
 			((ItemWand) endWand.getItem()).addVis(endWand, Aspect.WATER, 0, true);
 			((ItemWand) endWand.getItem()).addVis(endWand, Aspect.ORDER, 0, true);
@@ -126,7 +130,7 @@ public class ACTC implements IACPlugin {
 
 			TabACThaum.instance.addWands();
 			TabACThaum.instance.addAllItemsAndBlocks();
-			
+
 			if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
 				String[] caps = {"abyssalnite", "coralium", "dreadium", "ethaxium"};
 				String[] cores = {"darklands", "coralium", "dreadlands", "omothol"};
@@ -179,16 +183,16 @@ public class ACTC implements IACPlugin {
 					new ItemStack(ItemsTC.thaumiumSword, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ItemsTC.thaumiumPick, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ItemsTC.thaumiumAxe, 1, OreDictionary.WILDCARD_VALUE),
 					new ItemStack(ItemsTC.thaumiumShovel, OreDictionary.WILDCARD_VALUE), new ItemStack(ItemsTC.thaumiumHoe, OreDictionary.WILDCARD_VALUE));
 
-			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCap, 1, 0), new AspectList().add(Aspect.ORDER, 3).add(Aspect.FIRE, 3).add(Aspect.AIR, 3), new Object[] {"###", "# #", '#', new ItemStack(ACItems.ingot_nugget, 1, 0)});
-			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCap, 1, 1), new AspectList().add(Aspect.ORDER, 4).add(Aspect.FIRE, 4).add(Aspect.AIR, 4), new Object[] {"###", "# #", '#', new ItemStack(ACItems.ingot_nugget, 1, 1)});
-			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCap, 1, 2), new AspectList().add(Aspect.ORDER, 5).add(Aspect.FIRE, 5).add(Aspect.AIR, 5), new Object[] {"###", "# #", '#', new ItemStack(ACItems.ingot_nugget, 1, 2)});
-			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCap, 1, 3), new AspectList().add(Aspect.ORDER, 6).add(Aspect.FIRE, 6).add(Aspect.AIR, 6), new Object[] {"###", "# #", '#', new ItemStack(ACItems.ingot_nugget, 1, 3)});
-			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCore, 1, 0), new AspectList().add(Aspect.ENTROPY, 5), new Object[] {" # ", "#  ", '#', ACBlocks.darklands_oak_wood});
-			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCore, 1, 1), new AspectList().add(Aspect.ENTROPY, 5), new Object[] {" # ", "#  ", '#', ACBlocks.coralium_stone});
-			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCore, 1, 2), new AspectList().add(Aspect.ENTROPY, 5).add(Aspect.FIRE, 5), new Object[] {" # ", "#  ", '#', ACBlocks.dreadlands_log});
-			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCore, 1, 3), new AspectList().add(Aspect.ENTROPY, 5), new Object[] {" # ", "#  ", '#', ACBlocks.omothol_stone});
-			ThaumcraftApi.addArcaneCraftingRecipe("", darkWand, new AspectList().add(Aspect.ENTROPY, 5).add(Aspect.ORDER, 5), new Object[] {"  #", " % ", "#  ", '#', new ItemStack(wandCap, 1, 0), '%', new ItemStack(wandCore, 1, 0)});
-			ThaumcraftApi.addArcaneCraftingRecipe("", dreadWand, new AspectList().add(Aspect.ENTROPY, 5).add(Aspect.ORDER, 5), new Object[] {"  #", " % ", "#  ", '#', new ItemStack(wandCap, 1, 2), '%', new ItemStack(wandCore, 1, 2)});
+			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCap, 1, 0), new AspectList().add(Aspect.ORDER, 30).add(Aspect.FIRE, 30).add(Aspect.AIR, 30), new Object[] {"###", "# #", '#', new ItemStack(ACItems.ingot_nugget, 1, 0)});
+			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCap, 1, 1), new AspectList().add(Aspect.ORDER, 40).add(Aspect.FIRE, 40).add(Aspect.AIR, 40), new Object[] {"###", "# #", '#', new ItemStack(ACItems.ingot_nugget, 1, 1)});
+			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCap, 1, 2), new AspectList().add(Aspect.ORDER, 50).add(Aspect.FIRE, 50).add(Aspect.AIR, 50), new Object[] {"###", "# #", '#', new ItemStack(ACItems.ingot_nugget, 1, 2)});
+			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCap, 1, 3), new AspectList().add(Aspect.ORDER, 60).add(Aspect.FIRE, 60).add(Aspect.AIR, 60), new Object[] {"###", "# #", '#', new ItemStack(ACItems.ingot_nugget, 1, 3)});
+			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCore, 1, 0), new AspectList().add(Aspect.ENTROPY, 24), new Object[] {" # ", "#  ", '#', ACBlocks.darklands_oak_wood});
+			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCore, 1, 1), new AspectList().add(Aspect.ENTROPY, 24), new Object[] {" # ", "#  ", '#', ACBlocks.coralium_stone});
+			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCore, 1, 2), new AspectList().add(Aspect.ENTROPY, 24).add(Aspect.FIRE, 24), new Object[] {" # ", "#  ", '#', ACBlocks.dreadlands_log});
+			ThaumcraftApi.addArcaneCraftingRecipe("", new ItemStack(wandCore, 1, 3), new AspectList().add(Aspect.ENTROPY, 24), new Object[] {" # ", "#  ", '#', ACBlocks.omothol_stone});
+			ThaumcraftApi.addArcaneCraftingRecipe("", darkWand, new AspectList().add(Aspect.AIR, 50).add(Aspect.EARTH, 50).add(Aspect.FIRE, 50).add(Aspect.WATER, 50).add(Aspect.ENTROPY, 50).add(Aspect.ORDER, 50), new Object[] {"  #", " % ", "#  ", '#', new ItemStack(wandCap, 1, 0), '%', new ItemStack(wandCore, 1, 0)});
+			ThaumcraftApi.addArcaneCraftingRecipe("", dreadWand, new AspectList().add(Aspect.AIR, 50).add(Aspect.EARTH, 50).add(Aspect.FIRE, 50).add(Aspect.WATER, 50).add(Aspect.ENTROPY, 50).add(Aspect.ORDER, 50), new Object[] {"  #", " % ", "#  ", '#', new ItemStack(wandCap, 1, 2), '%', new ItemStack(wandCore, 1, 2)});
 
 			ThaumcraftApi.addInfusionCraftingRecipe("", corWand, 20, new AspectList().add(Aspect.ENTROPY, 10).add(ACTCMisc.CORALIUM, 10).add(Aspect.DARKNESS, 10), new ItemStack(wandCore, 1, 1), new ItemStack[]{new ItemStack(wandCap, 1, 1), new ItemStack(wandCap, 1, 1)});
 			ThaumcraftApi.addInfusionCraftingRecipe("", omotholWand, 30, new AspectList().add(Aspect.ENTROPY, 10).add(Aspect.SOUL, 10).add(Aspect.DARKNESS, 10), new ItemStack(wandCore, 1, 3), new ItemStack[]{new ItemStack(wandCap, 1, 3), new ItemStack(wandCap, 1, 3)});
@@ -237,8 +241,18 @@ public class ACTC implements IACPlugin {
 		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.energy_pedestal), new AspectList().add(Aspect.ENERGY, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.monolith_pillar), new AspectList().add(Aspect.EARTH, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
 		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.sacrificial_altar), new AspectList().add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1).add(Aspect.DEATH, 1).add(Aspect.EXCHANGE, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.tiered_energy_pedestal), new AspectList().add(Aspect.ENERGY, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.tiered_sacrificial_altar), new AspectList().add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1).add(Aspect.DEATH, 1).add(Aspect.EXCHANGE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.tiered_energy_pedestal), new int[]{0, 1, 2, 3}, new AspectList().add(Aspect.ENERGY, 2).add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.tiered_sacrificial_altar), new int[]{0, 1, 2, 3}, new AspectList().add(Aspect.MAN, 1).add(Aspect.ELDRITCH, 1).add(Aspect.DEATH, 1).add(Aspect.EXCHANGE, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.abyssal_cobblestone), new AspectList().add(Aspect.EARTH, 1).add(Aspect.ENTROPY, 1).add(ACTCMisc.CORALIUM, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.dreadstone_cobblestone), new AspectList().add(Aspect.EARTH, 1).add(Aspect.ENTROPY, 1).add(ACTCMisc.DREAD, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.abyssalnite_cobblestone), new AspectList().add(Aspect.EARTH, 1).add(Aspect.ENTROPY, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.coralium_cobblestone), new AspectList().add(Aspect.EARTH, 1).add(Aspect.ENTROPY, 1).add(ACTCMisc.CORALIUM, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.abyssal_sand), new AspectList().add(Aspect.EARTH, 1).add(Aspect.ENTROPY, 1).add(ACTCMisc.CORALIUM, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.fused_abyssal_sand), new AspectList().add(Aspect.EARTH, 1).add(Aspect.PLANT, 1).add(ACTCMisc.CORALIUM, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.abyssal_sand_glass), new AspectList().add(Aspect.CRYSTAL, 1).add(ACTCMisc.CORALIUM, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.darklands_grass), new AspectList().add(Aspect.EARTH, 1).add(Aspect.PLANT, 1).add(Aspect.DARKNESS, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.dreadlands_grass), new AspectList().add(Aspect.EARTH, 1).add(Aspect.PLANT, 1).add(ACTCMisc.DREAD, 1));
+		ThaumcraftApi.registerObjectTag(new ItemStack(ACBlocks.dreadlands_dirt), new AspectList().add(Aspect.EARTH, 2).add(ACTCMisc.DREAD, 1));
 
 		//Aspects, items
 		ThaumcraftApi.registerObjectTag(new ItemStack(ACItems.abyssalnite_ingot), new AspectList().add(Aspect.METAL, 3).add(Aspect.DARKNESS, 1));

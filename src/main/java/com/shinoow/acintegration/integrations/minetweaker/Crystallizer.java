@@ -131,6 +131,6 @@ public class Crystallizer {
 		public void undo() {
 			if(input != null && output1 != null)
 				AbyssalCraftAPI.addCrystallization(input, output1, output2, CrystallizerRecipes.instance().getExperience(output1));
-		}	
+		}
 	}
 }

@@ -26,9 +26,9 @@ public class ACTCMisc {
 	public static Aspect CORALIUM, DREAD;
 
 	public static void initWandParts(){
-		darklandsRod = new WandRodAC("darklands", 50, new ItemStack(ACTC.wandCore, 1, 0), 1, new DarklandsRodOnUpdate(), new ResourceLocation("acintegration","model/wands/wand_rod_darklands"));
-		coraliumRod = new WandRodAC("coraliumstone", 75, new ItemStack(ACTC.wandCore, 1, 1), 3, new CoraliumRodOnUpdate(), new ResourceLocation("abyssalcraft","blocks/cstone"));
-		dreadlandsRod = new WandRodAC("dreadlands", 100, new ItemStack(ACTC.wandCore, 1, 2), 5, new DreadlandsRodOnUpdate(), new ResourceLocation("acintegration","model/wands/wand_rod_dreadlands"));
+		darklandsRod = new WandRodAC("darklands", 250, new ItemStack(ACTC.wandCore, 1, 0), 1, new DarklandsRodOnUpdate(), new ResourceLocation("acintegration","model/wands/wand_rod_darklands"));
+		coraliumRod = new WandRodAC("coraliumstone", 375, new ItemStack(ACTC.wandCore, 1, 1), 3, new CoraliumRodOnUpdate(), new ResourceLocation("abyssalcraft","blocks/cstone"));
+		dreadlandsRod = new WandRodAC("dreadlands", 500, new ItemStack(ACTC.wandCore, 1, 2), 5, new DreadlandsRodOnUpdate(), new ResourceLocation("acintegration","model/wands/wand_rod_dreadlands"));
 		omotholRod = new WandRodAC("omothol", 0, new ItemStack(ACTC.wandCore, 1, 3), 7, new OmotholRodOnUpdate(), new ResourceLocation("abyssalcraft","blocks/os"));
 
 		abyssalniteCap = new WandCapAC("abyssalnite", 0.95F, new ItemStack(ACTC.wandCap, 1, 0), 1);

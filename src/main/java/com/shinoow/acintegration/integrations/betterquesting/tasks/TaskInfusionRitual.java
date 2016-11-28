@@ -27,10 +27,10 @@ public class TaskInfusionRitual extends TaskCreationRitualBase {
 	}
 
 	public void onInfusionRitual(QuestInstance quest, EntityPlayer player, NecronomiconInfusionRitual ritual){
-		
+
 		if(isComplete(player.getUniqueID()))
 			return;
-		
+
 		int progress = quest == null || !quest.globalQuest? GetPartyProgress(player.getUniqueID()) : GetGlobalProgress();
 
 		ItemStack stack = APIUtils.convertToStack(ritual.getSacrifice());
@@ -43,7 +43,7 @@ public class TaskInfusionRitual extends TaskCreationRitualBase {
 	@Override
 	public void writeToJson(JsonObject json){
 		super.writeToJson(json);
-		
+
 		if(offering != null)
 			json.add("offering", NBTConverter.NBTtoJSON_Compound(offering.writeToNBT(new NBTTagCompound()), new JsonObject()));
 	}
@@ -51,10 +51,10 @@ public class TaskInfusionRitual extends TaskCreationRitualBase {
 	@Override
 	public void readFromJson(JsonObject json){
 		super.readFromJson(json);
-		
+
 		offering = JsonHelper.JsonToItemStack(JsonHelper.GetObject(json, "offering"));
 	}
-	
+
 	@Override
 	public GuiEmbedded getGui(QuestInstance quest, GuiQuesting screen, int posX, int posY, int sizeX, int sizeY)
 	{

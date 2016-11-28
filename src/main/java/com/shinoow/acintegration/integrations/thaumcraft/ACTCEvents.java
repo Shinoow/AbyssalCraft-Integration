@@ -64,18 +64,15 @@ public class ACTCEvents {
 
 				if(EntityUtil.isEntityCoralium(mob) || EntityUtil.isEntityDread(mob) ||
 						mob.getCreatureAttribute() == AbyssalCraftAPI.SHADOW ||
-						mob instanceof EntitySkeletonGoliath ){
+						mob instanceof EntitySkeletonGoliath )
 					if(isElite(mob)){
 						if(player.worldObj.rand.nextInt(20) == 0)
 							ThaumcraftApi.internalMethods.addWarpToPlayer(player, 5, EnumWarpType.NORMAL);
 					} else if(isBoss(mob)){
 						if(player.worldObj.rand.nextInt(25) == 0)
 							ThaumcraftApi.internalMethods.addWarpToPlayer(player, 7, EnumWarpType.PERMANENT);
-					} else {
-						if(player.worldObj.rand.nextInt(15) == 0)
-							ThaumcraftApi.internalMethods.addWarpToPlayer(player, 3, EnumWarpType.TEMPORARY);
-					}
-				}
+					} else if(player.worldObj.rand.nextInt(15) == 0)
+						ThaumcraftApi.internalMethods.addWarpToPlayer(player, 3, EnumWarpType.TEMPORARY);
 			}
 		}
 	}
@@ -91,27 +88,21 @@ public class ACTCEvents {
 
 				if(EntityUtil.isEntityCoralium(mob) || EntityUtil.isEntityDread(mob) ||
 						mob.getCreatureAttribute() == AbyssalCraftAPI.SHADOW ||
-						mob instanceof EntitySkeletonGoliath){
+						mob instanceof EntitySkeletonGoliath)
 					if(isElite(mob)){
-						if(player.worldObj.rand.nextInt(8) == 0){
+						if(player.worldObj.rand.nextInt(8) == 0)
 							if(player.worldObj.rand.nextBoolean())
 								ThaumcraftApi.internalMethods.addWarpToPlayer(player, 7, EnumWarpType.NORMAL);
 							else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 2, EnumWarpType.PERMANENT);
-						}
 					} else if(isBoss(mob)){
-						if(player.worldObj.rand.nextInt(12) == 0){
+						if(player.worldObj.rand.nextInt(12) == 0)
 							if(player.worldObj.rand.nextBoolean())
 								ThaumcraftApi.internalMethods.addWarpToPlayer(player, 10, EnumWarpType.PERMANENT);
 							else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 3, EnumWarpType.PERMANENT);
-						}
-					} else {
-						if(player.worldObj.rand.nextInt(4) == 0){
-							if(player.worldObj.rand.nextBoolean())
-								ThaumcraftApi.internalMethods.addWarpToPlayer(player, 5, EnumWarpType.TEMPORARY);
-							else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 1, EnumWarpType.TEMPORARY);
-						}
-					}
-				}
+					} else if(player.worldObj.rand.nextInt(4) == 0)
+						if(player.worldObj.rand.nextBoolean())
+							ThaumcraftApi.internalMethods.addWarpToPlayer(player, 5, EnumWarpType.TEMPORARY);
+						else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 1, EnumWarpType.TEMPORARY);
 			}
 		}
 	}
@@ -150,16 +141,14 @@ public class ACTCEvents {
 	//	}
 
 	private boolean isElite(EntityLiving entity){
-		for(Class<? extends EntityMob> clazz : elites){
+		for(Class<? extends EntityMob> clazz : elites)
 			return entity.getClass().getName().equals(clazz.getName());
-		}
 		return false;
 	}
 
 	private boolean isBoss(EntityLiving entity){
-		for(Class<? extends EntityMob> clazz : bosses){
+		for(Class<? extends EntityMob> clazz : bosses)
 			return entity.getClass().getName().equals(clazz.getName());
-		}
 		return false;
 	}
 }

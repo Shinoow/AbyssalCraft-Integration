@@ -20,13 +20,11 @@ public class TaskRitual extends TaskBase {
 
 		return "acintegration.task.ritual";
 	}
-	
+
 	public void onRitual(EntityPlayer player, NecronomiconRitual ritual){
-		
+
 		if(isComplete(player.getUniqueID()))
-		{
 			return;
-		}
 
 		if(ritual.getUnlocalizedName().equals("ac.ritual." + name))
 			setCompletion(player.getUniqueID(), true);
@@ -35,14 +33,14 @@ public class TaskRitual extends TaskBase {
 	@Override
 	public void writeToJson(JsonObject json){
 		super.writeToJson(json);
-		
+
 		json.addProperty("ritualname", name);
 	}
-	
+
 	@Override
 	public void readFromJson(JsonObject json){
 		super.readFromJson(json);
-		
+
 		name = JsonHelper.GetString(json, "ritualname", "");
 	}
 
