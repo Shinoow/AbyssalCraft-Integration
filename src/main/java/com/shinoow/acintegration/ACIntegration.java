@@ -41,7 +41,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.1.3,];after:Thaumcraft", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory")
 public class ACIntegration {
 
-	public static final String version = "1.4.6";
+	public static final String version = "1.4.7";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 

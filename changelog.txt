@@ -1,4 +1,2 @@
-- Bump to AbyssalCraft 1.9.1.3
-- Fixed the removePage and removeChapter methods in the MineTweaker integration
-- Fixed the remove methods for rituals in the MineTweaker integration
-- Any string specified as a Chapter title and/or Page text will be localized if possible
+- Removing a Infusion/Creation Ritual through MineTweaker now actually works
+- You can add/remove Potion Rituals (both normal and AoE) through MineTweaker

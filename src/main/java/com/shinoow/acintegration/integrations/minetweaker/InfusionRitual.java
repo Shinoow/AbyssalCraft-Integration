@@ -101,7 +101,7 @@ public class InfusionRitual {
 						ritual.getClass().getSuperclass().getSuperclass() != NecronomiconInfusionRitual.class)
 					temp.add((NecronomiconInfusionRitual) ritual);
 			for(NecronomiconInfusionRitual ritual : temp)
-				if(ritual.getItem() == item){
+				if(RitualRegistry.instance().areStacksEqual(ritual.getItem(), item)){
 					removedRituals.add(ritual);
 					RitualRegistry.instance().getRituals().remove(ritual);
 				}

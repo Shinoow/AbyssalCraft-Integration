@@ -101,7 +101,7 @@ public class CreationRitual {
 						ritual.getClass().getSuperclass().getSuperclass() != NecronomiconCreationRitual.class)
 					temp.add((NecronomiconCreationRitual) ritual);
 			for(NecronomiconCreationRitual ritual : temp)
-				if(ritual.getItem() == item){
+				if(RitualRegistry.instance().areStacksEqual(ritual.getItem(), item)){
 					removedRituals.add(ritual);
 					RitualRegistry.instance().getRituals().remove(ritual);
 				}
