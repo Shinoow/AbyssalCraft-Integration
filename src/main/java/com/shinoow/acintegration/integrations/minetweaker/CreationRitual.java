@@ -19,11 +19,20 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class CreationRitual {
 
 	@ZenMethod
-	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, IItemStack item, IIngredient...offerings){
+	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean requiresSacrifice, IItemStack item, IIngredient...offerings){
+
+		addRitual(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, item, offerings, false);
+	}
+
+	@ZenMethod
+	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean requiresSacrifice, IItemStack item, IIngredient[] offerings, boolean nbt){
 
 		Object[] offers = ACMT.toObjects(offerings);
 
-		NecronomiconCreationRitual ritual = new NecronomiconCreationRitual(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, ACMT.toStack(item), offers);
+		NecronomiconCreationRitual ritual = new NecronomiconCreationRitual(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, ACMT.toStack(item), offers);
+
+		if(nbt) ritual.setNBTSensitive();
+
 		MineTweakerAPI.apply(new Add(ritual));
 	}
 
@@ -101,7 +110,7 @@ public class CreationRitual {
 						ritual.getClass().getSuperclass().getSuperclass() != NecronomiconCreationRitual.class)
 					temp.add((NecronomiconCreationRitual) ritual);
 			for(NecronomiconCreationRitual ritual : temp)
-				if(ritual.getItem() == item){
+				if(RitualRegistry.instance().areStacksEqual(item, ritual.getItem())){
 					removedRituals.add(ritual);
 					RitualRegistry.instance().getRituals().remove(ritual);
 				}
