@@ -77,7 +77,7 @@ dependencies {
 	//deobfCompile name: 'Thaumcraft', version: "5.2.4", ext: 'jar'
 	deobfCompile "slimeknights.mantle:Mantle:1.9-0.10.0.jenkins132"
     deobfCompile "slimeknights:TConstruct:1.9-2.3.0.jenkins193"
-	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.9-1.9.3.8-FINAL:dev"
+	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.9-1.9.3.9-FINAL:dev"
 }
 
 version = "${props.mc_version}-${props.aci_version}"
