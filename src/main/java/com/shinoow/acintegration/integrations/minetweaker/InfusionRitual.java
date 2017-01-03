@@ -21,9 +21,26 @@ public class InfusionRitual {
 	@ZenMethod
 	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, IItemStack item, IIngredient sacrifice, IIngredient...offerings){
 
+		addRitual(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, item, sacrifice, offerings, false);
+	}
+
+	@ZenMethod
+	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, IItemStack item, IIngredient sacrifice, IIngredient[] offerings, boolean nbt){
+
+		addRitual(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, item, sacrifice, offerings, nbt, new String[0]);
+	}
+
+	@ZenMethod
+	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, IItemStack item, IIngredient sacrifice, IIngredient[] offerings, boolean nbt, String...tags){
+
 		Object[] offers = ACMT.toObjects(offerings);
 
 		NecronomiconInfusionRitual ritual = new NecronomiconInfusionRitual(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, ACMT.toStack(item), ACMT.toObject(sacrifice), offers);
+
+		if(nbt) ritual.setNBTSensitive();
+
+		if(tags != null && tags.length > 0) ritual.setTags(tags);
+
 		MineTweakerAPI.apply(new Add(ritual));
 	}
 
@@ -101,7 +118,7 @@ public class InfusionRitual {
 						ritual.getClass().getSuperclass().getSuperclass() != NecronomiconInfusionRitual.class)
 					temp.add((NecronomiconInfusionRitual) ritual);
 			for(NecronomiconInfusionRitual ritual : temp)
-				if(ritual.getItem() == item){
+				if(RitualRegistry.instance().areStacksEqual(item, ritual.getItem())){
 					removedRituals.add(ritual);
 					RitualRegistry.instance().getRituals().remove(ritual);
 				}

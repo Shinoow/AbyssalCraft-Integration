@@ -40,11 +40,11 @@ import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.3.8,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.3.9,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
 acceptedMinecraftVersions = "[1.9.4]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
 public class ACIntegration {
 
-	public static final String version = "1.4.6";
+	public static final String version = "1.4.7";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 

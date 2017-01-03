@@ -110,8 +110,8 @@ public class ACPE implements IACPlugin {
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.tin_ingot), 256);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.copper_ingot), 128);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.life_crystal), 6144);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.liquid_coralium_bucket), 800);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.liquid_antimatter_bucket), 800);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(ACItems.liquid_coralium_bucket_stack, 800);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(ACItems.liquid_antimatter_bucket_stack, 800);
 
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.oblivion_catalyst), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.essence, 1, OreDictionary.WILDCARD_VALUE), 0);
@@ -144,6 +144,12 @@ public class ACPE implements IACPlugin {
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.eye_of_the_abyss), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.tiered_energy_pedestal, 1, OreDictionary.WILDCARD_VALUE), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, OreDictionary.WILDCARD_VALUE), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.tiered_energy_collector, 1, OreDictionary.WILDCARD_VALUE), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.overworld_energy_relay), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.abyssal_wasteland_energy_relay), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.dreadlands_energy_relay), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.omothol_energy_relay), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.tiered_energy_container, 1, OreDictionary.WILDCARD_VALUE), 0);
 
 		for(String name :OreDictionary.getOreNames())
 			if(name.startsWith("crystal")){
