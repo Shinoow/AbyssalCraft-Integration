@@ -12,7 +12,7 @@ http://minecraft.curseforge.com/mc-mods/234851-abyssalcraft-integration
 
 Right now the project is licensed as "All Rights Reserved", but that will either end up as LGPL or MIT (depending on things like CLA's for contributors)
 
-###Support Development
+### Support Development
 
 [![](https://s3.amazonaws.com/patreon_public_assets/kaGh5_patreon_name_and_message.png)](https://www.patreon.com/Shinoow)
 
