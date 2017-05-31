@@ -23,7 +23,7 @@ public class EntityCondition implements IUnlockCondition {
 	}
 
 	public EntityCondition(Class<? extends Entity> clz){
-		name = EntityList.getEntityStringFromClass(clz);
+		name = EntityList.getKey(clz).toString();
 	}
 
 	@Override

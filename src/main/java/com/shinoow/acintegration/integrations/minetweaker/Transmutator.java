@@ -123,7 +123,7 @@ public class Transmutator {
 
 		@Override
 		public void undo() {
-			if(input != null && output != null){
+			if(!input.isEmpty() && !output.isEmpty()){
 				AbyssalCraftAPI.addTransmutation(input, output, TransmutatorRecipes.instance().getExperience(output));
 				if(recipe != null)
 					MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe);

@@ -26,7 +26,7 @@ public class ACMT implements IACPlugin {
 	@Override
 	public boolean canLoad() {
 
-		return Loader.isModLoaded("MineTweaker3") && ACIntegration.loadMT;
+		return Loader.isModLoaded("crafttweaker") && ACIntegration.loadMT;
 	}
 
 	@Override

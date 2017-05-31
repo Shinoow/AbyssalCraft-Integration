@@ -36,8 +36,8 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.4,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
-acceptedMinecraftVersions = "[1.10.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:forge@[forgeversion,);required-after:abyssalcraft@[1.9.4,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
+acceptedMinecraftVersions = "[1.11.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
 public class ACIntegration {
 
 	public static final String version = "1.5.0";
@@ -59,9 +59,9 @@ public class ACIntegration {
 	public static final CreativeTabs tabItems = new CreativeTabs("acintegration"){
 
 		@Override
-		public Item getTabIconItem() {
+		public ItemStack getTabIconItem() {
 
-			return dust;
+			return new ItemStack(dust);
 		}
 	};
 
@@ -170,7 +170,7 @@ public class ACIntegration {
 		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
 		//		tcWarp = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs and being inside AbyssalCraft dimensions").getBoolean();
 		loadTiCon = cfg.get(Configuration.CATEGORY_GENERAL, "Tinkers' Construct", true, "Whether or not to load the Tinkers' Construct integration.").getBoolean();
-		loadBQ = cfg.get(Configuration.CATEGORY_GENERAL, "Better Questing", true, "Whether or not to load the Better Questing integration.").getBoolean();
+//		loadBQ = cfg.get(Configuration.CATEGORY_GENERAL, "Better Questing", true, "Whether or not to load the Better Questing integration.").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();

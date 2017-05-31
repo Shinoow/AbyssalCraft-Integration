@@ -95,15 +95,15 @@ public class NecronomiconEnchantmentRitual extends NecronomiconRitual {
 		altar.writeToNBT(compound);
 		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
 
-		return canEnchant(ItemStack.loadItemStackFromNBT(nbtItem));
+		return canEnchant(new ItemStack(nbtItem));
 	}
 
 	private boolean canEnchant(ItemStack stack){
-		if(stack == null) return false;
+		if(stack.isEmpty()) return false;
 		if(stack.isItemEnchanted()){
 			Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
 			for(Enchantment ench : enchantments.keySet())
-				if(!ench.canApplyTogether(enchantment.enchantmentobj) || !enchantment.enchantmentobj.canApplyTogether(ench))
+				if(!ench.func_191560_c(enchantment.enchantmentobj))
 					return false;
 			return enchantment.enchantmentobj.canApply(stack);
 		}
@@ -121,8 +121,8 @@ public class NecronomiconEnchantmentRitual extends NecronomiconRitual {
 		altar.writeToNBT(compound);
 		NBTTagCompound nbtItem = compound.getCompoundTag("Item");
 
-		if(canEnchant(ItemStack.loadItemStackFromNBT(nbtItem))){
-			ItemStack item = ItemStack.loadItemStackFromNBT(nbtItem);
+		if(canEnchant(new ItemStack(nbtItem))){
+			ItemStack item = new ItemStack(nbtItem);
 			item.addEnchantment(enchantment.enchantmentobj, enchantment.enchantmentLevel);
 			item.writeToNBT(nbtItem);
 			compound.setTag("Item", nbtItem);

@@ -25,7 +25,7 @@ public class MultiEntityCondition implements IUnlockCondition {
 	public MultiEntityCondition(Class<? extends Entity>...entities){
 		names = new String[entities.length];
 		for(int i = 0; i < entities.length; i++)
-			names[i] = EntityList.getEntityStringFromClass(entities[i]);
+			names[i] = EntityList.getKey(entities[i]).toString();
 	}
 
 	@Override

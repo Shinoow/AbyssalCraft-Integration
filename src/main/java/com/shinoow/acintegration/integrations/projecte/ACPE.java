@@ -26,7 +26,7 @@ public class ACPE implements IACPlugin {
 	@Override
 	public boolean canLoad() {
 
-		return Loader.isModLoaded("ProjectE") && ACIntegration.loadPE;
+		return Loader.isModLoaded("projecte") && ACIntegration.loadPE;
 	}
 
 	@Override

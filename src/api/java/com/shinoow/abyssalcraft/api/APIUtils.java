@@ -68,7 +68,7 @@ public class APIUtils {
 	 */
 	public static ItemStack convertToStack(Object obj){
 		if(obj == null)
-			return (ItemStack)obj;
+			return ItemStack.EMPTY;
 		else if(obj instanceof ItemStack)
 			return ((ItemStack)obj).copy();
 		else if(obj instanceof Item)
@@ -76,7 +76,7 @@ public class APIUtils {
 		else if(obj instanceof Block)
 			return new ItemStack((Block)obj);
 		else if(obj instanceof ItemStack[])
-			return ((ItemStack[])obj)[0];
+			return ((ItemStack[])obj)[0].copy();
 		else if(obj instanceof String)
 			return OreDictionary.getOres((String)obj).get(0).copy();
 		else if(obj instanceof List)

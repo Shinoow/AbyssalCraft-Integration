@@ -40,7 +40,7 @@ public class Crystallizer {
 		}
 
 		public Add(ItemStack input, ItemStack output, float exp){
-			this(input, output, null, exp);
+			this(input, output, ItemStack.EMPTY, exp);
 			isSingle = true;
 		}
 
@@ -63,13 +63,13 @@ public class Crystallizer {
 		@Override
 		public String describe() {
 
-			return "Adding Crystallization recipe for " + output1.getDisplayName() + output2 != null ? " (and "+ output2.getDisplayName() + ")" : "";
+			return "Adding Crystallization recipe for " + output1.getDisplayName() + (!output2.isEmpty() ? " (and "+ output2.getDisplayName() + ")" : "");
 		}
 
 		@Override
 		public String describeUndo() {
 
-			return "Removing Crystallization recipe for " + output1.getDisplayName() + output2 != null ? " (and "+ output2.getDisplayName() + ")" : "";
+			return "Removing Crystallization recipe for " + output1.getDisplayName() + (!output2.isEmpty() ? " (and "+ output2.getDisplayName() + ")" : "");
 		}
 
 		@Override
@@ -122,13 +122,13 @@ public class Crystallizer {
 		@Override
 		public String describe() {
 
-			return "Removing Crystallization recipe for " + output1.getDisplayName() + (output2 != null ? " (and "+ output2.getDisplayName() + ")" : "") + " (input: " + input.getDisplayName() + ")";
+			return "Removing Crystallization recipe for " + output1.getDisplayName() + (!output2.isEmpty() ? " (and "+ output2.getDisplayName() + ")" : "") + " (input: " + input.getDisplayName() + ")";
 		}
 
 		@Override
 		public String describeUndo() {
 
-			return "Re-Adding Crystallization recipe for " + output1.getDisplayName() + (output2 != null ? " (and "+ output2.getDisplayName() + ")" : "") + " (input: " + input.getDisplayName() + ")";
+			return "Re-Adding Crystallization recipe for " + output1.getDisplayName() + (!output2.isEmpty() ? " (and "+ output2.getDisplayName() + ")" : "") + " (input: " + input.getDisplayName() + ")";
 		}
 
 		@Override
@@ -139,7 +139,7 @@ public class Crystallizer {
 
 		@Override
 		public void undo() {
-			if(input != null && output1 != null){
+			if(!input.isEmpty() && !output1.isEmpty()){
 				AbyssalCraftAPI.addCrystallization(input, output1, output2, CrystallizerRecipes.instance().getExperience(output1));
 				if(recipe != null)
 					MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe);

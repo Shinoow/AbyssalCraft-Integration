@@ -58,7 +58,7 @@ public class UpgradeKitRecipes {
 			if(areStacksEqual(input, entry.getKey()))
 				return entry.getValue();
 
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	public Map<ItemUpgradeKit, Map<ItemStack, ItemStack>> getAllUpgrades(){

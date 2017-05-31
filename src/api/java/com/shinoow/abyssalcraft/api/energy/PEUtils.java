@@ -23,7 +23,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Lists;
@@ -56,13 +55,13 @@ public class PEUtils {
 				ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
 				ItemStack item1 = player.getHeldItem(EnumHand.OFF_HAND);
 				if(item != null && item.getItem() instanceof IEnergyTransporterItem ||
-						item1 != null && item1.getItem() instanceof IEnergyTransporterItem){
-					if(!world.isRemote){
-						transferPEToStack(item, manipulator);
-						transferPEToStack(item1, manipulator);
-						AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, player, world.provider.getDimension());
-					}
-				}
+						item1 != null && item1.getItem() instanceof IEnergyTransporterItem)
+					if(manipulator.canTransferPE())
+						if(!world.isRemote){
+							transferPEToStack(item, manipulator);
+							transferPEToStack(item1, manipulator);
+							AbyssalCraftAPI.getInternalMethodHandler().spawnPEStream(pos, player, world.provider.getDimension());
+						}
 			}
 	}
 
@@ -104,7 +103,7 @@ public class PEUtils {
 		for(TileEntity tile : collectors)
 			if(checkForAdjacentCollectors(world, tile.getPos()))
 				if(world.rand.nextInt(120-(int)(20 * manipulator.getAmplifier(AmplifierType.DURATION))) == 0)
-					if(((IEnergyCollector) tile).canAcceptPE())
+					if(((IEnergyCollector) tile).canAcceptPE() && manipulator.canTransferPE())
 						if(!world.isRemote){
 							((IEnergyCollector) tile).addEnergy(manipulator.getEnergyQuanta());
 							manipulator.addTolerance(manipulator.isActive() ? 2 : 1);
