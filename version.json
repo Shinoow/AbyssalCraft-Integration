@@ -1,12 +1,17 @@
 {
   "homepage": "http://minecraft.curseforge.com/mc-mods/234851",
   "promos": {
+	"1.10.2-latest": "1.5.0",
+	"1.10.2-recommended": "1.5.0",
 	"1.9.4-latest": "1.4.7",
 	"1.9.4-recommended": "1.4.7",
 	"1.9-latest": "1.4.7",
 	"1.9-recommended": "1.4.7",
     "1.8.9-latest": "1.4.7",
     "1.8.9-recommended": "1.4.7"
+  },
+  "1.10.2": {
+	"1.5.0": "- Ported to 1.10.2\n- Bump to AbyssalCraft 1.9.4-pre-3\n- Removed the method for adding blocks to the Shoggoth Block Blacklist (deprecated since AC 1.9.4-pre-1, has no function)\n- You can now add Upgrade Kit upgrades through the MineTweaker integration\n- Fixed bugs where recipes added through MineTweaker(through this integration) wouldn't display in JEI\n- You can now cast bow and crossbow parts with AbyssalCraft materials\n- Now runs on Forge 12.18.3.2254"
   },
   "1.9.4": {
 	"1.4.7": "- Bump to AbyssalCraft 1.9.3.9\n- You can now specify if a Creation Ritual or Infusion Ritual should be nbt sensitive on the offerings\n- You can now specify NBT tags to transfer over to the infused item in a Infusion Ritual\n- You can now add/remove Enchantment Rituals through MineTweaker\n- Removing a Infusion/Creation Ritual through MineTweaker now actually works\n- You can add/remove Potion Rituals (both normal and AoE) through MineTweaker",

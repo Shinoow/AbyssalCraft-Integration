@@ -23,17 +23,21 @@ public class Transmutator {
 	{
 		private ItemStack input, output;
 		private float exp;
+		Object recipe;
 
 		public Add(ItemStack input, ItemStack output, float exp){
 			this.input = input;
 			this.output = output;
 			this.exp = exp;
+			recipe = ACMTJEIUtil.getTransRecipe(input, output, exp);
 		}
 
 		@Override
 		public void apply() {
 
 			AbyssalCraftAPI.addTransmutation(input, output, exp);
+			if(recipe != null)
+				MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe);
 
 		}
 
@@ -65,6 +69,8 @@ public class Transmutator {
 		public void undo() {
 
 			TransmutatorRecipes.instance().getTransmutationList().remove(input);
+			if(recipe != null)
+				MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(recipe);
 		}
 	}
 
@@ -76,15 +82,19 @@ public class Transmutator {
 	private static class Remove implements IUndoableAction {
 
 		private ItemStack input, output;
+		private Object recipe;
 
 		public Remove(ItemStack input){
 			this.input = input;
 			output = TransmutatorRecipes.instance().getTransmutationResult(input);
+			recipe = ACMTJEIUtil.getTransRecipe(input, output, TransmutatorRecipes.instance().getExperience(output));
 		}
 
 		@Override
 		public void apply() {
 			TransmutatorRecipes.instance().getTransmutationList().remove(input);
+			if(recipe != null)
+				MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(recipe);
 		}
 
 		@Override
@@ -113,8 +123,11 @@ public class Transmutator {
 
 		@Override
 		public void undo() {
-			if(input != null && output != null)
+			if(input != null && output != null){
 				AbyssalCraftAPI.addTransmutation(input, output, TransmutatorRecipes.instance().getExperience(output));
+				if(recipe != null)
+					MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe);
+			}
 		}
 	}
 }

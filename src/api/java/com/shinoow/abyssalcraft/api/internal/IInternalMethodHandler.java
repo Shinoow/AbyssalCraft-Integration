@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -14,6 +14,7 @@ package com.shinoow.abyssalcraft.api.internal;
 import java.util.Random;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -45,6 +46,22 @@ public interface IInternalMethodHandler {
 	 * @param velZ Z velocity
 	 */
 	public void spawnParticle(String particleName, World world, double posX, double posY, double posZ, double velX, double velY, double velZ);
+
+	/**
+	 * Spawns a PE stream between two Positions
+	 * @param posFrom Position of origin
+	 * @param posTo Target position
+	 * @param dimension Dimension ID
+	 */
+	public void spawnPEStream(BlockPos posFrom, BlockPos posTo, int dimension);
+
+	/**
+	 * Spawns a PE stream between a BlockPos and a Entity
+	 * @param posFrom Position of origin
+	 * @param target Target entity
+	 * @param dimension Dimension ID
+	 */
+	public void spawnPEStream(BlockPos posFrom, Entity target, int dimension);
 
 	/**
 	 * Attempts to generate a Darklands Structure.<br>

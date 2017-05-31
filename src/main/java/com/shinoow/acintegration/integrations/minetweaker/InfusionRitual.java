@@ -58,6 +58,7 @@ public class InfusionRitual {
 		public void apply() {
 
 			RitualRegistry.instance().registerRitual(ritual);
+			MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(ritual);
 		}
 
 		@Override
@@ -88,6 +89,7 @@ public class InfusionRitual {
 		public void undo() {
 
 			RitualRegistry.instance().getRituals().remove(ritual);
+			MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(ritual);
 		}
 	}
 
@@ -121,6 +123,7 @@ public class InfusionRitual {
 				if(RitualRegistry.instance().areStacksEqual(item, ritual.getItem())){
 					removedRituals.add(ritual);
 					RitualRegistry.instance().getRituals().remove(ritual);
+					MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(ritual);
 				}
 		}
 
@@ -153,8 +156,10 @@ public class InfusionRitual {
 
 			if(removedRituals != null)
 				for(NecronomiconInfusionRitual ritual : removedRituals)
-					if(ritual != null)
+					if(ritual != null){
 						RitualRegistry.instance().registerRitual(ritual);
+						MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(ritual);
+					}
 		}
 	}
 }

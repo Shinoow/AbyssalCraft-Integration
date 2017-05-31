@@ -29,16 +29,18 @@ public class Crystallizer {
 		private ItemStack input, output1, output2;
 		private float exp;
 		private boolean isSingle;
+		private Object recipe;
 
 		public Add(ItemStack input, ItemStack output1, ItemStack output2, float exp){
 			this.input = input;
 			this.output1 = output1;
 			this.output2 = output2;
 			this.exp = exp;
+			recipe = ACMTJEIUtil.getCrystRecipe(input, output1, output2, exp);
 		}
 
 		public Add(ItemStack input, ItemStack output, float exp){
-			this(input, output, output, exp);
+			this(input, output, null, exp);
 			isSingle = true;
 		}
 
@@ -48,6 +50,8 @@ public class Crystallizer {
 			if(!isSingle)
 				AbyssalCraftAPI.addCrystallization(input, output1, output2, exp);
 			else AbyssalCraftAPI.addSingleCrystallization(input, output1, exp);
+			if(recipe != null)
+				MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe);
 		}
 
 		@Override
@@ -78,6 +82,8 @@ public class Crystallizer {
 		public void undo() {
 
 			CrystallizerRecipes.instance().getCrystallizationList().remove(input);
+			if(recipe != null)
+				MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(recipe);
 		}
 	}
 
@@ -89,6 +95,7 @@ public class Crystallizer {
 	private static class Remove implements IUndoableAction {
 
 		private ItemStack input, output1, output2;
+		private Object recipe;
 
 		public Remove(ItemStack input){
 			this.input = input;
@@ -96,11 +103,14 @@ public class Crystallizer {
 
 			output1 = outputs[0];
 			output2 = outputs[1];
+			recipe = ACMTJEIUtil.getCrystRecipe(input, output1, output2, CrystallizerRecipes.instance().getExperience(output1));
 		}
 
 		@Override
 		public void apply() {
 			CrystallizerRecipes.instance().getCrystallizationList().remove(input);
+			if(recipe != null)
+				MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(recipe);
 		}
 
 		@Override
@@ -129,8 +139,11 @@ public class Crystallizer {
 
 		@Override
 		public void undo() {
-			if(input != null && output1 != null)
+			if(input != null && output1 != null){
 				AbyssalCraftAPI.addCrystallization(input, output1, output2, CrystallizerRecipes.instance().getExperience(output1));
+				if(recipe != null)
+					MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe);
+			}
 		}
 	}
 }

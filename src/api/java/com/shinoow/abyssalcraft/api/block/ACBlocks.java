@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -170,6 +170,7 @@ public class ACBlocks {
 	public static Block decorative_yog_sothoth_statue;
 	public static Block decorative_shub_niggurath_statue;
 	public static Block crystal_cluster;
+	public static Block crystal_cluster2;
 	public static Block energy_collector;
 	public static Block energy_relay;
 	public static Block energy_container;
@@ -203,4 +204,7 @@ public class ACBlocks {
 	public static Block coralium_cobblestone_wall;
 	public static Block luminous_thistle;
 	public static Block wastelands_thorn;
+	public static Block rending_pedestal;
+	public static Block state_transformer;
+	public static Block energy_depositioner;
 }

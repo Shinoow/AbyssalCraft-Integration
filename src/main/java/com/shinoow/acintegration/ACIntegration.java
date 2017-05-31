@@ -13,7 +13,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -34,17 +33,14 @@ import org.apache.logging.log4j.Level;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
-import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.3.9,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
-acceptedMinecraftVersions = "[1.9.4]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:Forge@[forgeversion,);required-after:abyssalcraft@[1.9.4,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
+acceptedMinecraftVersions = "[1.10.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
 public class ACIntegration {
 
-	public static final String version = "1.4.7";
+	public static final String version = "1.5.0";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 
@@ -82,14 +78,14 @@ public class ACIntegration {
 
 		dust = new ItemMetadata("dust", "abyssalnite", "coralium", "dreadium").setCreativeTab(tabItems);
 
-		GameRegistry.register(dust, new ResourceLocation("acintegration", "dust"));
+		GameRegistry.register(dust.setRegistryName(new ResourceLocation("acintegration", "dust")));
 
 		OreDictionary.registerOre("dustAbyssalnite", new ItemStack(dust, 1, 0));
 		OreDictionary.registerOre("dustLiquifiedCoralium", new ItemStack(dust, 1, 1));
 		OreDictionary.registerOre("dustDreadium", new ItemStack(dust, 1, 2));
 
 		registerIntegrations();
-		registerNecroData();
+		//		registerNecroData();
 
 		if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
 			String[] names = {"abyssalnite", "coralium", "dreadium"};
@@ -132,32 +128,32 @@ public class ACIntegration {
 			ACTiCon.instance.preInit();
 	}
 
-	private void registerNecroData(){
-		String[] tctxt = new String[]{I18n.translateToLocal("necro.text.integration.tc.1"),
-				I18n.translateToLocal("necro.text.integration.tc.2"),
-				I18n.translateToLocal("necro.text.integration.tc.3"),
-				I18n.translateToLocal("necro.text.integration.tc.4"),
-				I18n.translateToLocal("necro.text.integration.tc.5"),
-				I18n.translateToLocal("necro.text.integration.tc.6"),
-				I18n.translateToLocal("necro.text.integration.tc.7"),
-				I18n.translateToLocal("necro.text.integration.tc.8")};
-		ResourceLocation[] tcres = new ResourceLocation[]{new ResourceLocation("acintegration", "textures/necronomicon/tc1.png"),
-				new ResourceLocation("acintegration", "textures/necronomicon/tc2.png"),
-				new ResourceLocation("acintegration", "textures/necronomicon/tc3.png"), null};
-
-		Chapter tc = new Chapter("thaumcraft", "Thaumcraft", new Page[]{
-				new Page(1, tcres[0], tctxt[0]), new Page(2, tctxt[1]), new Page(3, tcres[1], tctxt[2]),
-				new Page(4, tctxt[3]), new Page(5, tcres[2], tctxt[4]), new Page(5, tctxt[5]),
-				new Page(7, tctxt[6]), new Page(8, tctxt[7])
-		});
-		//		Chapter morph = new Chapter("morph", "Morph", new Page[]{
-		//				new Page(1, I18n.translateToLocal("necro.text.integration.morph"))
-		//		});
-
-		new NecroData(modid, name, I18n.translateToLocal("necro.text.integration"), tc);
-
-		//		AbyssalCraftAPI.registerNecronomiconData(data, 0);
-	}
+	//	private void registerNecroData(){
+	//		String[] tctxt = new String[]{I18n.translateToLocal("necro.text.integration.tc.1"),
+	//				I18n.translateToLocal("necro.text.integration.tc.2"),
+	//				I18n.translateToLocal("necro.text.integration.tc.3"),
+	//				I18n.translateToLocal("necro.text.integration.tc.4"),
+	//				I18n.translateToLocal("necro.text.integration.tc.5"),
+	//				I18n.translateToLocal("necro.text.integration.tc.6"),
+	//				I18n.translateToLocal("necro.text.integration.tc.7"),
+	//				I18n.translateToLocal("necro.text.integration.tc.8")};
+	//		ResourceLocation[] tcres = new ResourceLocation[]{new ResourceLocation("acintegration", "textures/necronomicon/tc1.png"),
+	//				new ResourceLocation("acintegration", "textures/necronomicon/tc2.png"),
+	//				new ResourceLocation("acintegration", "textures/necronomicon/tc3.png"), null};
+	//
+	//		Chapter tc = new Chapter("thaumcraft", "Thaumcraft", new Page[]{
+	//				new Page(1, tcres[0], tctxt[0]), new Page(2, tctxt[1]), new Page(3, tcres[1], tctxt[2]),
+	//				new Page(4, tctxt[3]), new Page(5, tcres[2], tctxt[4]), new Page(5, tctxt[5]),
+	//				new Page(7, tctxt[6]), new Page(8, tctxt[7])
+	//		});
+	//				Chapter morph = new Chapter("morph", "Morph", new Page[]{
+	//						new Page(1, I18n.translateToLocal("necro.text.integration.morph"))
+	//				});
+	//
+	//		NecroData data = new NecroData(modid, name, I18n.translateToLocal("necro.text.integration"), tc);
+	//
+	//				AbyssalCraftAPI.registerNecronomiconData(data, 0);
+	//	}
 
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {

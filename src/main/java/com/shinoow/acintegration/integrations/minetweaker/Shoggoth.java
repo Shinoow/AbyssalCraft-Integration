@@ -2,15 +2,10 @@ package com.shinoow.acintegration.integrations.minetweaker;
 
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
-import minetweaker.api.item.IItemStack;
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 
@@ -24,14 +19,6 @@ public class Shoggoth {
 		} catch (ClassNotFoundException e) {
 			ACLogger.warning("Could not find Entity class %s", clazz);
 		}
-	}
-
-	@ZenMethod
-	public static void addShoggothBlacklist(IItemStack istack){
-		ItemStack stack = ACMT.toStack(istack);
-		if(Block.getBlockFromItem(stack.getItem()) != null)
-			MineTweakerAPI.apply(new AddBlacklist(Block.getBlockFromItem(stack.getItem())));
-		else ACLogger.warning("This is not a Block: %s", stack.getDisplayName());
 	}
 
 	private static class AddFood implements IUndoableAction {
@@ -76,51 +63,6 @@ public class Shoggoth {
 		public void undo() {
 
 			EntityUtil.getShoggothFood().remove(clazz);
-		}
-	}
-
-	private static class AddBlacklist implements IUndoableAction {
-
-		private Block block;
-
-		public AddBlacklist(Block block){
-			this.block = block;
-		}
-
-		@Override
-		public void apply() {
-
-			AbyssalCraftAPI.addShoggothBlacklist(block);
-		}
-
-		@Override
-		public boolean canUndo() {
-
-			return true;
-		}
-
-		@Override
-		public String describe() {
-
-			return "Added Block " + I18n.translateToLocal(block.getUnlocalizedName() + ".name") + " to the Lesser Shoggoth Block Blacklist";
-		}
-
-		@Override
-		public String describeUndo() {
-
-			return "Removed Block " + I18n.translateToLocal(block.getUnlocalizedName() + ".name") + " from the Lesser Shoggoth Block Blacklist";
-		}
-
-		@Override
-		public Object getOverrideKey() {
-
-			return null;
-		}
-
-		@Override
-		public void undo() {
-
-			AbyssalCraftAPI.getShoggothBlockBlacklist().remove(block);
 		}
 	}
 }

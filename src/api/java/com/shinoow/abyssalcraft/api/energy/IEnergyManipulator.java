@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -77,15 +77,22 @@ public interface IEnergyManipulator {
 	public void setActiveAmplifier(AmplifierType amplifier);
 
 	/**
-	 * Increases the tolerance value (tolerance determines a disruption is fired)
+	 * Increases the tolerance value (tolerance determines when a disruption is fired)
 	 * @param num Amount to increase with
 	 */
 	public void addTolerance(int num);
 
 	/**
-	 * Returns the manipulator's current tolerance value (tolerance determines a disruption is fired)
+	 * Returns the manipulator's current tolerance value (tolerance determines when a disruption is fired)
 	 */
 	public int getTolerance();
+
+	/**
+	 * Verifies if the manipulator can transfer PE to nearby Players and/or Collectors.<br>
+	 * This is called in PEUtils before any energy transfer, so use this for something like checking the
+	 * capacity of a PE buffer (provided the manipulator has one, otherwise just return true and call it a day).
+	 */
+	public boolean canTransferPE();
 
 	/**
 	 * Fires off a Disruption, which can lead to bad things happening

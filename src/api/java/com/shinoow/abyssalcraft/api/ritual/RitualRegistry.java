@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -232,14 +232,14 @@ public class RitualRegistry {
 
 	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2, boolean nbt){
 		if(stack1 == null || stack2 == null) return false;
-		return nbt ? areStacksEqual(stack1, stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2) :
+		return nbt ? areStacksEqual(stack1, stack2) && ItemStack.areItemStackTagsEqual(stack2, stack1) :
 			areStacksEqual(stack1, stack2);
 	}
 
 	public boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
 	{
 		if (stack1 == null || stack2 == null) return false;
-		return stack1.getItem() == stack2.getItem() && (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE
+		return stack1.getItem() == stack2.getItem() && (stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE
 				|| stack1.getItemDamage() == stack2.getItemDamage());
 	}
 }

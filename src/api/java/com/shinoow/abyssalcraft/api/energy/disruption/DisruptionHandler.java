@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -97,6 +97,7 @@ public class DisruptionHandler {
 		List<DisruptionEntry> dis = Lists.newArrayList();
 
 		if(deity == null){
+			deity = DeityType.values()[world.rand.nextInt(DeityType.values().length)];
 			for(DisruptionEntry entry : disruptions)
 				if(entry.getDeity() == null)
 					dis.add(entry);

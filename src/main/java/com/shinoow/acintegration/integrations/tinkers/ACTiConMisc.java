@@ -11,6 +11,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
+import slimeknights.tconstruct.library.materials.BowMaterialStats;
 import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
 import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
@@ -85,15 +86,18 @@ public class ACTiConMisc {
 		TinkerRegistry.addMaterialStats(abyssalnite,
 				new HeadMaterialStats(630, 10.00f, 6.00f, 4),
 				new HandleMaterialStats(0.90f, 60),
-				new ExtraMaterialStats(100));
+				new ExtraMaterialStats(100),
+				new BowMaterialStats(0.85f, 1.1f, 1.5f));
 		TinkerRegistry.addMaterialStats(coralium,
 				new HeadMaterialStats(900, 12.00f, 7.00f, 5),
 				new HandleMaterialStats(0.90f, 60),
-				new ExtraMaterialStats(100));
+				new ExtraMaterialStats(100),
+				new BowMaterialStats(0.75f, 1.2f, 2.5f));
 		TinkerRegistry.addMaterialStats(dreadium,
 				new HeadMaterialStats(1150, 14.00f, 8.00f, 6),
 				new HandleMaterialStats(0.90f, 60),
-				new ExtraMaterialStats(100));
+				new ExtraMaterialStats(100),
+				new BowMaterialStats(0.65f, 1.3f, 3.5f));
 
 		TinkerSmeltery.registerToolpartMeltingCasting(abyssalnite);
 		TinkerSmeltery.registerToolpartMeltingCasting(coralium);

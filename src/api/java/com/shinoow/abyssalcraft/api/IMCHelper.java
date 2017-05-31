@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -124,17 +124,6 @@ public class IMCHelper {
 	 *
 	 * The message is sent this way:
 	 * FMLInterModComms.sendMessage("abyssalcraft", "addMaterialization", <a NBTTagCompound with the aforementioned tags>);
-	 */
-
-	//SHOGGOTH BLOCK BLACKLIST /////////////////////////////////////////////////////////////////
-
-	/**
-	 * This is a IMC version of AbyssalCraftAPI#addShoggothBlacklist
-	 * You can use the IMC message "shoggothBlacklist" to add a Block to the Shoggoth Block Blacklist
-	 * The format for the message should be a ItemStack containing a Block
-	 *
-	 * Example of how it would look like if I added Darkstone Bricks to the food list:
-	 * FMLInterModComms.sendMessage("abyssalcraft", "shoggothBlacklist", new ItemStack(ACBlocks.darkstone_brick));
 	 */
 
 	//GHOUL ARMOR REGISTRATION /////////////////////////////////////////////////////////////////

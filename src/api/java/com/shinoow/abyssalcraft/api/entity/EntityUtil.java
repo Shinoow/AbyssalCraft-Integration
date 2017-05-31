@@ -1,6 +1,6 @@
 /*******************************************************************************
  * AbyssalCraft
- * Copyright (c) 2012 - 2016 Shinoow.
+ * Copyright (c) 2012 - 2017 Shinoow.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Lesser Public License v3
  * which accompanies this distribution, and is available at
@@ -125,8 +125,10 @@ public final class EntityUtil {
 	 * @return true if the Entity is food, otherwise false
 	 */
 	public static boolean isShoggothFood(EntityLivingBase entity){
-		return shoggothFood.contains(entity.getClass()) ? true : shoggothFood.contains(entity.getClass().getSuperclass()) ? true :
-			shoggothFood.contains(entity.getClass().getSuperclass().getSuperclass()) ? true : false;
+		for(Class<? extends EntityLivingBase> c : shoggothFood)
+			if(c.isAssignableFrom(entity.getClass()))
+				return true;
+		return false;
 	}
 
 	static class Vars{
