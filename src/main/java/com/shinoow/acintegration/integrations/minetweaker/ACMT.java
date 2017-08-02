@@ -1,11 +1,6 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import static minetweaker.api.minecraft.MineTweakerMC.getItemStack;
-import minetweaker.MineTweakerAPI;
-import minetweaker.api.item.IIngredient;
-import minetweaker.api.item.IItemStack;
-import minetweaker.api.item.IngredientStack;
-import minetweaker.api.oredict.IOreDictEntry;
+import static crafttweaker.api.minecraft.CraftTweakerMC.getItemStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
@@ -13,6 +8,12 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.acintegration.ACIntegration;
+
+import crafttweaker.CraftTweakerAPI;
+import crafttweaker.api.item.IIngredient;
+import crafttweaker.api.item.IItemStack;
+import crafttweaker.api.item.IngredientStack;
+import crafttweaker.api.oredict.IOreDictEntry;
 
 @ACPlugin
 public class ACMT implements IACPlugin {
@@ -23,6 +24,8 @@ public class ACMT implements IACPlugin {
 		return "CraftTweaker";
 	}
 
+	public static ACMT instance = new ACMT();
+
 	@Override
 	public boolean canLoad() {
 
@@ -31,26 +34,27 @@ public class ACMT implements IACPlugin {
 
 	@Override
 	public void preInit() {
-
+		CraftTweakerAPI.registerClass(Crystallizer.class);
+		CraftTweakerAPI.registerClass(Transmutator.class);
+		CraftTweakerAPI.registerClass(CreationRitual.class);
+		CraftTweakerAPI.registerClass(InfusionRitual.class);
+		CraftTweakerAPI.registerClass(InternalNecroData.class);
+		CraftTweakerAPI.registerClass(Shoggoth.class);
+		CraftTweakerAPI.registerClass(EnchantmentRitual.class);
+		CraftTweakerAPI.registerClass(PotionRitual.class);
+		CraftTweakerAPI.registerClass(PotionAoERitual.class);
+		CraftTweakerAPI.registerClass(UpgradeKit.class);
 	}
 
 	@Override
 	public void init() {
-
+		ACMTMisc.ADDITIONS.forEach(CraftTweakerAPI::apply);
+		ACMTMisc.REMOVALS.forEach(CraftTweakerAPI::apply);
 	}
 
 	@Override
 	public void postInit() {
-		MineTweakerAPI.registerClass(Crystallizer.class);
-		MineTweakerAPI.registerClass(Transmutator.class);
-		MineTweakerAPI.registerClass(CreationRitual.class);
-		MineTweakerAPI.registerClass(InfusionRitual.class);
-		MineTweakerAPI.registerClass(InternalNecroData.class);
-		MineTweakerAPI.registerClass(Shoggoth.class);
-		MineTweakerAPI.registerClass(EnchantmentRitual.class);
-		MineTweakerAPI.registerClass(PotionRitual.class);
-		MineTweakerAPI.registerClass(PotionAoERitual.class);
-		MineTweakerAPI.registerClass(UpgradeKit.class);
+
 	}
 
 	// Start of borrowed code from Immersive Engineering

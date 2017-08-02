@@ -35,17 +35,16 @@ public class ACPE implements IACPlugin {
 	@Override
 	public void init() {
 
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.darkstone), 1);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.darkstone_cobblestone), 1);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.abyssal_stone), 1);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.coralium_stone), 16);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.dreadstone), 1);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.abyssalnite_stone), 1);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.omothol_stone), 1);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.ethaxium), 16);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.darklands_grass), 1);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.stone, 1, 0), 1);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.cobblestone, 1, OreDictionary.WILDCARD_VALUE), 1);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.stone, 1, 1), 1);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.stone, 1, 4), 16);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.stone, 1, 2), 1);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.stone, 1, 3), 1);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.stone, 1, 6), 1);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.stone, 1, 5), 16);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.dreadlands_grass), 1);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.monolith_stone), 16);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.stone, 1, 7), 16);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.shoggoth_ooze), 8);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.shoggoth_biomass), 16);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.abyssalnite_ore), 3072);
@@ -127,13 +126,7 @@ public class ACPE implements IACPlugin {
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.nyarlathotep_charm, 1, OreDictionary.WILDCARD_VALUE), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.yog_sothoth_charm, 1, OreDictionary.WILDCARD_VALUE), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.shub_niggurath_charm, 1, OreDictionary.WILDCARD_VALUE), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.cthulhu_statue), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.hastur_statue), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.jzahar_statue), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.azathoth_statue), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.nyarlathotep_statue), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.yog_sothoth_statue), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.shub_niggurath_statue), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.statue, 1, OreDictionary.WILDCARD_VALUE), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.gateway_key), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.dreaded_gateway_key), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACItems.dread_plagued_gateway_key), 0);
@@ -145,10 +138,7 @@ public class ACPE implements IACPlugin {
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.tiered_energy_pedestal, 1, OreDictionary.WILDCARD_VALUE), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.tiered_sacrificial_altar, 1, OreDictionary.WILDCARD_VALUE), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.tiered_energy_collector, 1, OreDictionary.WILDCARD_VALUE), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.overworld_energy_relay), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.abyssal_wasteland_energy_relay), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.dreadlands_energy_relay), 0);
-		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.omothol_energy_relay), 0);
+		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.energy_relay, 1, OreDictionary.WILDCARD_VALUE), 0);
 		ProjectEAPI.getEMCProxy().registerCustomEMC(new ItemStack(ACBlocks.tiered_energy_container, 1, OreDictionary.WILDCARD_VALUE), 0);
 
 		for(String name :OreDictionary.getOreNames())

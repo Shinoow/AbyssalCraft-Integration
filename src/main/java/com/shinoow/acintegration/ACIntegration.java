@@ -5,28 +5,29 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.Mod.Metadata;
-import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.logging.log4j.Level;
@@ -34,10 +35,11 @@ import org.apache.logging.log4j.Level;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
+import com.shinoow.acintegration.integrations.minetweaker.ACMT;
 import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 
 @Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:forge@[forgeversion,);required-after:abyssalcraft@[1.9.4,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
-acceptedMinecraftVersions = "[1.11.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
+acceptedMinecraftVersions = "[1.12]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json")
 public class ACIntegration {
 
 	public static final String version = "1.5.0";
@@ -71,39 +73,18 @@ public class ACIntegration {
 		metadata = event.getModMetadata();
 		metadata.description = metadata.description +"\n\n\u00a76Supporters: "+getSupporterList()+"\u00a7r";
 
-		instance = this;
+		MinecraftForge.EVENT_BUS.register(this);
 
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
 
 		dust = new ItemMetadata("dust", "abyssalnite", "coralium", "dreadium").setCreativeTab(tabItems);
 
-		GameRegistry.register(dust.setRegistryName(new ResourceLocation("acintegration", "dust")));
-
-		OreDictionary.registerOre("dustAbyssalnite", new ItemStack(dust, 1, 0));
-		OreDictionary.registerOre("dustLiquifiedCoralium", new ItemStack(dust, 1, 1));
-		OreDictionary.registerOre("dustDreadium", new ItemStack(dust, 1, 2));
-
 		registerIntegrations();
-		//		registerNecroData();
-
-		if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
-			String[] names = {"abyssalnite", "coralium", "dreadium"};
-			ResourceLocation[] res = new ResourceLocation[names.length];
-			for(int i = 0; i < names.length; i++)
-				res[i] = new ResourceLocation("acintegration", "dust_" + names[i]);
-			ModelBakery.registerItemVariants(dust, res);
-		}
 	}
 
 	@EventHandler
 	public void Init(FMLInitializationEvent event) {
-		if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
-			String[] names = {"abyssalnite", "coralium", "dreadium"};
-			RenderItem render = Minecraft.getMinecraft().getRenderItem();
-			for(int i = 0; i < names.length; i++)
-				render.getItemModelMesher().register(dust, i, new ModelResourceLocation("acintegration:dust_" + names[i], "inventory"));
-		}
 
 		GameRegistry.addSmelting(new ItemStack(dust, 1, 0), new ItemStack(ACItems.abyssalnite_ingot), 3F);
 		GameRegistry.addSmelting(new ItemStack(dust, 1, 1), new ItemStack(ACItems.refined_coralium_ingot), 3F);
@@ -120,45 +101,37 @@ public class ACIntegration {
 	}
 
 	private void registerIntegrations(){
-		//		if(Loader.isModLoaded("Thaumcraft") && loadTC)
-		//						ACTC.instance.preInit();
-		//		if(Loader.isModLoaded("EE3") && loadEE3)
-		//			ACEE3.instance.preInit();
 		if(ACTiCon.instance.canLoad())
 			ACTiCon.instance.preInit();
+		if(ACMT.instance.canLoad())
+			ACMT.instance.preInit();
 	}
-
-	//	private void registerNecroData(){
-	//		String[] tctxt = new String[]{I18n.translateToLocal("necro.text.integration.tc.1"),
-	//				I18n.translateToLocal("necro.text.integration.tc.2"),
-	//				I18n.translateToLocal("necro.text.integration.tc.3"),
-	//				I18n.translateToLocal("necro.text.integration.tc.4"),
-	//				I18n.translateToLocal("necro.text.integration.tc.5"),
-	//				I18n.translateToLocal("necro.text.integration.tc.6"),
-	//				I18n.translateToLocal("necro.text.integration.tc.7"),
-	//				I18n.translateToLocal("necro.text.integration.tc.8")};
-	//		ResourceLocation[] tcres = new ResourceLocation[]{new ResourceLocation("acintegration", "textures/necronomicon/tc1.png"),
-	//				new ResourceLocation("acintegration", "textures/necronomicon/tc2.png"),
-	//				new ResourceLocation("acintegration", "textures/necronomicon/tc3.png"), null};
-	//
-	//		Chapter tc = new Chapter("thaumcraft", "Thaumcraft", new Page[]{
-	//				new Page(1, tcres[0], tctxt[0]), new Page(2, tctxt[1]), new Page(3, tcres[1], tctxt[2]),
-	//				new Page(4, tctxt[3]), new Page(5, tcres[2], tctxt[4]), new Page(5, tctxt[5]),
-	//				new Page(7, tctxt[6]), new Page(8, tctxt[7])
-	//		});
-	//				Chapter morph = new Chapter("morph", "Morph", new Page[]{
-	//						new Page(1, I18n.translateToLocal("necro.text.integration.morph"))
-	//				});
-	//
-	//		NecroData data = new NecroData(modid, name, I18n.translateToLocal("necro.text.integration"), tc);
-	//
-	//				AbyssalCraftAPI.registerNecronomiconData(data, 0);
-	//	}
 
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
 		if(eventArgs.getModID().equals("acintegration"))
 			syncConfig();
+	}
+
+	@SubscribeEvent
+	public void registerItems(RegistryEvent.Register<Item> event){
+		event.getRegistry().register(dust.setRegistryName(new ResourceLocation("acintegration", "dust")));
+
+		OreDictionary.registerOre("dustAbyssalnite", new ItemStack(dust, 1, 0));
+		OreDictionary.registerOre("dustLiquifiedCoralium", new ItemStack(dust, 1, 1));
+		OreDictionary.registerOre("dustDreadium", new ItemStack(dust, 1, 2));
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void registerModels(ModelRegistryEvent event){
+		String[] names = {"abyssalnite", "coralium", "dreadium"};
+		ResourceLocation[] res = new ResourceLocation[names.length];
+		for(int i = 0; i < names.length; i++)
+			res[i] = new ResourceLocation("acintegration", "dust_" + names[i]);
+		ModelBakery.registerItemVariants(dust, res);
+		for(int i = 0; i < names.length; i++)
+			ModelLoader.setCustomModelResourceLocation(dust, i, new ModelResourceLocation("acintegration:dust_" + names[i], "inventory"));
 	}
 
 	private static void syncConfig(){
@@ -170,7 +143,7 @@ public class ACIntegration {
 		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
 		//		tcWarp = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs and being inside AbyssalCraft dimensions").getBoolean();
 		loadTiCon = cfg.get(Configuration.CATEGORY_GENERAL, "Tinkers' Construct", true, "Whether or not to load the Tinkers' Construct integration.").getBoolean();
-//		loadBQ = cfg.get(Configuration.CATEGORY_GENERAL, "Better Questing", true, "Whether or not to load the Better Questing integration.").getBoolean();
+		//		loadBQ = cfg.get(Configuration.CATEGORY_GENERAL, "Better Questing", true, "Whether or not to load the Better Questing integration.").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();

@@ -3,17 +3,17 @@ package com.shinoow.acintegration.integrations.minetweaker;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
+
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 
-import minetweaker.IUndoableAction;
-import minetweaker.MineTweakerAPI;
-import minetweaker.api.item.IIngredient;
-import minetweaker.api.item.IItemStack;
-import net.minecraft.item.ItemStack;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
+import crafttweaker.IAction;
+import crafttweaker.api.item.IIngredient;
+import crafttweaker.api.item.IItemStack;
 
 @ZenClass("mods.abyssalcraft.InfusionRitual")
 public class InfusionRitual {
@@ -41,10 +41,10 @@ public class InfusionRitual {
 
 		if(tags != null && tags.length > 0) ritual.setTags(tags);
 
-		MineTweakerAPI.apply(new Add(ritual));
+		ACMTMisc.ADDITIONS.add(new Add(ritual));
 	}
 
-	private static class Add implements IUndoableAction
+	private static class Add implements IAction
 	{
 
 		private final NecronomiconInfusionRitual ritual;
@@ -58,13 +58,6 @@ public class InfusionRitual {
 		public void apply() {
 
 			RitualRegistry.instance().registerRitual(ritual);
-			MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(ritual);
-		}
-
-		@Override
-		public boolean canUndo() {
-
-			return true;
 		}
 
 		@Override
@@ -72,37 +65,17 @@ public class InfusionRitual {
 
 			return "Adding Necronomicon Infusion Ritual for " + ritual.getItem().getDisplayName();
 		}
-
-		@Override
-		public String describeUndo() {
-
-			return "Removing Necronomicon Infusion Ritual for " + ritual.getItem().getDisplayName();
-		}
-
-		@Override
-		public Object getOverrideKey() {
-
-			return null;
-		}
-
-		@Override
-		public void undo() {
-
-			RitualRegistry.instance().getRituals().remove(ritual);
-			MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(ritual);
-		}
 	}
 
 	@ZenMethod
 	public static void removeRitual(IItemStack item){
 
-		MineTweakerAPI.apply(new Remove(ACMT.toStack(item)));
+		ACMTMisc.REMOVALS.add(new Remove(ACMT.toStack(item)));
 	}
 
-	private static class Remove implements IUndoableAction
+	private static class Remove implements IAction
 	{
 		private final ItemStack item;
-		List<NecronomiconInfusionRitual> removedRituals;
 
 		public Remove(ItemStack item){
 			this.item = item;
@@ -111,8 +84,6 @@ public class InfusionRitual {
 		@Override
 		public void apply() {
 
-			removedRituals = new ArrayList<NecronomiconInfusionRitual>();
-
 			List<NecronomiconInfusionRitual> temp = new ArrayList<NecronomiconInfusionRitual>();
 			for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
 				if(ritual instanceof NecronomiconInfusionRitual &&
@@ -120,46 +91,14 @@ public class InfusionRitual {
 						ritual.getClass().getSuperclass().getSuperclass() != NecronomiconInfusionRitual.class)
 					temp.add((NecronomiconInfusionRitual) ritual);
 			for(NecronomiconInfusionRitual ritual : temp)
-				if(RitualRegistry.instance().areStacksEqual(item, ritual.getItem())){
-					removedRituals.add(ritual);
+				if(RitualRegistry.instance().areStacksEqual(item, ritual.getItem()))
 					RitualRegistry.instance().getRituals().remove(ritual);
-					MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(ritual);
-				}
-		}
-
-		@Override
-		public boolean canUndo() {
-
-			return true;
 		}
 
 		@Override
 		public String describe() {
 
 			return "Removing Necronomicon Infusion Ritual for "+ item.getDisplayName();
-		}
-
-		@Override
-		public String describeUndo() {
-
-			return "Re-Adding Necronomicon Infusion Ritual for "+ item.getDisplayName();
-		}
-
-		@Override
-		public Object getOverrideKey() {
-
-			return null;
-		}
-
-		@Override
-		public void undo() {
-
-			if(removedRituals != null)
-				for(NecronomiconInfusionRitual ritual : removedRituals)
-					if(ritual != null){
-						RitualRegistry.instance().registerRitual(ritual);
-						MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(ritual);
-					}
 		}
 	}
 }

@@ -3,17 +3,17 @@ package com.shinoow.acintegration.integrations.minetweaker;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconEnchantmentRitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
-
-import minetweaker.IUndoableAction;
-import minetweaker.MineTweakerAPI;
-import minetweaker.api.item.IIngredient;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconEnchantmentRitual;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
+
+import crafttweaker.IAction;
+import crafttweaker.api.item.IIngredient;
 
 @ZenClass("mods.abyssalcraft.EnchantmentRitual")
 public class EnchantmentRitual {
@@ -36,7 +36,7 @@ public class EnchantmentRitual {
 
 		if(nbt) ritual.setNBTSensitive();
 
-		MineTweakerAPI.apply(new Add(ritual));
+		ACMTMisc.ADDITIONS.add(new Add(ritual));
 	}
 
 	private static EnchantmentData getEnch(String string){
@@ -56,7 +56,7 @@ public class EnchantmentRitual {
 		return null;
 	}
 
-	private static class Add implements IUndoableAction
+	private static class Add implements IAction
 	{
 
 		private final NecronomiconEnchantmentRitual ritual;
@@ -73,33 +73,9 @@ public class EnchantmentRitual {
 		}
 
 		@Override
-		public boolean canUndo() {
-
-			return true;
-		}
-
-		@Override
 		public String describe() {
 
-			return "Adding Necronomicon Enchantment Ritual for " + ritual.getEnchantment().enchantmentobj.getTranslatedName(ritual.getEnchantment().enchantmentLevel);
-		}
-
-		@Override
-		public String describeUndo() {
-
-			return "Removing Necronomicon Enchantment Ritual for " + ritual.getEnchantment().enchantmentobj.getTranslatedName(ritual.getEnchantment().enchantmentLevel);
-		}
-
-		@Override
-		public Object getOverrideKey() {
-
-			return null;
-		}
-
-		@Override
-		public void undo() {
-
-			RitualRegistry.instance().getRituals().remove(ritual);
+			return "Adding Necronomicon Enchantment Ritual for " + ritual.getEnchantment().enchantment.getTranslatedName(ritual.getEnchantment().enchantmentLevel);
 		}
 	}
 
@@ -110,13 +86,12 @@ public class EnchantmentRitual {
 
 		if(ench == null) return;
 
-		MineTweakerAPI.apply(new Remove(ench));
+		ACMTMisc.REMOVALS.add(new Remove(ench));
 	}
 
-	private static class Remove implements IUndoableAction
+	private static class Remove implements IAction
 	{
 		private final EnchantmentData ench;
-		List<NecronomiconEnchantmentRitual> removedRituals;
 
 		public Remove(EnchantmentData ench){
 			this.ench = ench;
@@ -125,51 +100,20 @@ public class EnchantmentRitual {
 		@Override
 		public void apply() {
 
-			removedRituals = new ArrayList<NecronomiconEnchantmentRitual>();
-
 			List<NecronomiconEnchantmentRitual> temp = new ArrayList<NecronomiconEnchantmentRitual>();
 			for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
 				if(ritual instanceof NecronomiconEnchantmentRitual)
 					temp.add((NecronomiconEnchantmentRitual) ritual);
 			for(NecronomiconEnchantmentRitual ritual : temp)
-				if(ritual.getEnchantment().enchantmentobj == ench.enchantmentobj &&
-				ritual.getEnchantment().enchantmentLevel == ench.enchantmentLevel){
-					removedRituals.add(ritual);
+				if(ritual.getEnchantment().enchantment == ench.enchantment &&
+				ritual.getEnchantment().enchantmentLevel == ench.enchantmentLevel)
 					RitualRegistry.instance().getRituals().remove(ritual);
-				}
-		}
-
-		@Override
-		public boolean canUndo() {
-
-			return true;
 		}
 
 		@Override
 		public String describe() {
 
-			return "Removing Necronomicon Enchantment Ritual for "+ ench.enchantmentobj.getTranslatedName(ench.enchantmentLevel);
-		}
-
-		@Override
-		public String describeUndo() {
-
-			return "Re-Adding Necronomicon Enchantment Ritual for "+ ench.enchantmentobj.getTranslatedName(ench.enchantmentLevel);
-		}
-
-		@Override
-		public Object getOverrideKey() {
-
-			return null;
-		}
-
-		@Override
-		public void undo() {
-
-			if(removedRituals != null)
-				for(NecronomiconEnchantmentRitual ritual : removedRituals)
-					if(ritual != null)
-						RitualRegistry.instance().registerRitual(ritual);
+			return "Removing Necronomicon Enchantment Ritual for "+ ench.enchantment.getTranslatedName(ench.enchantmentLevel);
 		}
 	}
 }

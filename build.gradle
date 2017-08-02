@@ -13,8 +13,8 @@ buildscript {
 		
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
-		classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.0.5"
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+		classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.0.9"
     }
 }
 
@@ -64,7 +64,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.11.2-13.20.0.2282"
+    version = "1.12-14.21.1.2413"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -72,7 +72,7 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20161220"
+    mappings = "snapshot_20170624"
     makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 	
 	useDepAts = true
@@ -84,12 +84,12 @@ minecraft {
 dependencies {
 	//compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.507:dev"
 
-	deobfCompile "mezz.jei:jei_1.11.2:4.3.6.280"
+	deobfCompile "mezz.jei:jei_1.12:4.7.1.69"
 	//deobfCompile name: 'Thaumcraft', version: "5.2.4", ext: 'jar'
-	deobfCompile "slimeknights.mantle:Mantle:1.11.2-1.2.0.25"
-    deobfCompile "slimeknights:TConstruct:1.11.2-2.7.0.26"
-	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.11.2-1.9.4-pre-3:dev"
-    deobfCompile "MineTweaker3:MineTweaker3-MC1112-Main:1.11.2-3.0.25.102"
+	deobfCompile "slimeknights.mantle:Mantle:1.12-1.3.1.19"
+    deobfCompile "slimeknights:TConstruct:1.12-2.7.2.15"
+	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.12-1.9.4-pre-4"
+    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.0.1.238"
 	//deobfCompile "better-questing:BetterQuesting:1.3.180"
 }
 
@@ -125,24 +125,15 @@ processResources
     }
 }
 
-	task srcJar(type: Jar) {
-    from sourceSets.main.allSource
+task srcJar(type: Jar) {
+    from sourceSets.main.allJava
 	
 	extension = 'jar'
-	classifier = 'src'
+	classifier = 'sources'
 }
 
-	task devJar(type: Jar, dependsOn: 'classes') {
-    from(sourceSets.main.output) {
-        include '**'
-    }
-
-    extension = 'jar'
-    classifier = 'dev'
-}
-
-	artifacts {
-    archives srcJar, devJar
+artifacts {
+    archives srcJar
 }
 
 curseforge {
@@ -152,7 +143,6 @@ curseforge {
 		releaseType = project.props.release_type //alpha beta release
 		changelogType = 'html'
 		changelog   = new File('changelog.html') //must have at least an empty string
-		addArtifact devJar
 		addArtifact srcJar
 		
 		relations{

@@ -1,7 +1,5 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import minetweaker.IUndoableAction;
-import minetweaker.MineTweakerAPI;
 import net.minecraft.entity.EntityLivingBase;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -9,19 +7,21 @@ import stanhebben.zenscript.annotations.ZenMethod;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 
+import crafttweaker.IAction;
+
 @ZenClass("mods.abyssalcraft.shoggoth")
 public class Shoggoth {
 
 	@ZenMethod
 	public static void addShoggothFood(String clazz){
 		try {
-			MineTweakerAPI.apply(new AddFood((Class<? extends EntityLivingBase>) Class.forName(clazz)));
+			ACMTMisc.ADDITIONS.add(new AddFood((Class<? extends EntityLivingBase>) Class.forName(clazz)));
 		} catch (ClassNotFoundException e) {
 			ACLogger.warning("Could not find Entity class %s", clazz);
 		}
 	}
 
-	private static class AddFood implements IUndoableAction {
+	private static class AddFood implements IAction {
 
 		private Class<? extends EntityLivingBase> clazz;
 
@@ -36,33 +36,9 @@ public class Shoggoth {
 		}
 
 		@Override
-		public boolean canUndo() {
-
-			return true;
-		}
-
-		@Override
 		public String describe() {
 
 			return "Adding Entity Class " + clazz.getCanonicalName() + " to the Lesser Shoggoth food list";
-		}
-
-		@Override
-		public String describeUndo() {
-
-			return "Removing Entity Class " + clazz.getCanonicalName() + " from the Lesser Shoggoth food list";
-		}
-
-		@Override
-		public Object getOverrideKey() {
-
-			return null;
-		}
-
-		@Override
-		public void undo() {
-
-			EntityUtil.getShoggothFood().remove(clazz);
 		}
 	}
 }

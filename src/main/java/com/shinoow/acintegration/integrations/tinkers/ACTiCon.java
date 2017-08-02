@@ -6,12 +6,17 @@ import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -67,11 +72,7 @@ public class ACTiCon implements IACPlugin {
 
 		FMLInterModComms.sendMessage("tconstruct", "integrateSmeltery", tag);
 
-		if(FMLCommonHandler.instance().getEffectiveSide().isClient()){
-			registerFluidModel(moltenAbyssalnite, "aby");
-			registerFluidModel(moltenCoralium, "cor");
-			registerFluidModel(moltenDreadium, "dre");
-		}
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
@@ -82,6 +83,28 @@ public class ACTiCon implements IACPlugin {
 	@Override
 	public void postInit() {
 
+	}
+
+	@SubscribeEvent
+	public void registerBlocks(RegistryEvent.Register<Block> event){
+		event.getRegistry().register(moltenAbyssalnite.setRegistryName(new ResourceLocation("acintegration", "moltenabyssalnite")));
+		event.getRegistry().register(moltenCoralium.setRegistryName(new ResourceLocation("acintegration", "moltencoralium")));
+		event.getRegistry().register(moltenDreadium.setRegistryName(new ResourceLocation("acintegration", "moltendreadium")));
+	}
+
+	@SubscribeEvent
+	public void registerItems(RegistryEvent.Register<Item> event){
+		event.getRegistry().register(new ItemBlock(moltenAbyssalnite).setRegistryName(new ResourceLocation("acintegration", "moltenabyssalnite")));
+		event.getRegistry().register(new ItemBlock(moltenCoralium).setRegistryName(new ResourceLocation("acintegration", "moltencoralium")));
+		event.getRegistry().register(new ItemBlock(moltenDreadium).setRegistryName(new ResourceLocation("acintegration", "moltendreadium")));
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void registerModels(ModelRegistryEvent event){
+		registerFluidModel(moltenAbyssalnite, "aby");
+		registerFluidModel(moltenCoralium, "cor");
+		registerFluidModel(moltenDreadium, "dre");
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -3,16 +3,16 @@ package com.shinoow.acintegration.integrations.minetweaker;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.potion.Potion;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
+
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 
-import minetweaker.IUndoableAction;
-import minetweaker.MineTweakerAPI;
-import minetweaker.api.item.IIngredient;
-import net.minecraft.potion.Potion;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
+import crafttweaker.IAction;
+import crafttweaker.api.item.IIngredient;
 
 @ZenClass("mods.abyssalcraft.PotionRitual")
 public class PotionRitual {
@@ -35,10 +35,10 @@ public class PotionRitual {
 
 		if(nbt) ritual.setNBTSensitive();
 
-		MineTweakerAPI.apply(new Add(ritual));
+		ACMTMisc.ADDITIONS.add(new Add(ritual));
 	}
 
-	private static class Add implements IUndoableAction
+	private static class Add implements IAction
 	{
 
 		private final NecronomiconPotionRitual ritual;
@@ -55,33 +55,9 @@ public class PotionRitual {
 		}
 
 		@Override
-		public boolean canUndo() {
-
-			return true;
-		}
-
-		@Override
 		public String describe() {
 
 			return "Adding Necronomicon Potion Ritual for " + ritual.getPotionEffect().getName();
-		}
-
-		@Override
-		public String describeUndo() {
-
-			return "Removing Necronomicon Potion Ritual for " + ritual.getPotionEffect().getName();
-		}
-
-		@Override
-		public Object getOverrideKey() {
-
-			return null;
-		}
-
-		@Override
-		public void undo() {
-
-			RitualRegistry.instance().getRituals().remove(ritual);
 		}
 	}
 
@@ -92,13 +68,12 @@ public class PotionRitual {
 
 		if(pot == null) return;
 
-		MineTweakerAPI.apply(new Remove(pot));
+		ACMTMisc.REMOVALS.add(new Remove(pot));
 	}
 
-	private static class Remove implements IUndoableAction
+	private static class Remove implements IAction
 	{
 		private final Potion potion;
-		List<NecronomiconPotionRitual> removedRituals;
 
 		public Remove(Potion potion){
 			this.potion = potion;
@@ -107,51 +82,20 @@ public class PotionRitual {
 		@Override
 		public void apply() {
 
-			removedRituals = new ArrayList<NecronomiconPotionRitual>();
-
 			List<NecronomiconPotionRitual> temp = new ArrayList<NecronomiconPotionRitual>();
 			for(NecronomiconRitual ritual : RitualRegistry.instance().getRituals())
 				if(ritual instanceof NecronomiconPotionRitual)
 					temp.add((NecronomiconPotionRitual) ritual);
 			for(NecronomiconPotionRitual ritual : temp)
 				if(potion.getName().equals(ritual.getPotionEffect().getName()) &&
-						Potion.getIdFromPotion(potion) == Potion.getIdFromPotion(ritual.getPotionEffect())){
-					removedRituals.add(ritual);
+						Potion.getIdFromPotion(potion) == Potion.getIdFromPotion(ritual.getPotionEffect()))
 					RitualRegistry.instance().getRituals().remove(ritual);
-				}
-		}
-
-		@Override
-		public boolean canUndo() {
-
-			return true;
 		}
 
 		@Override
 		public String describe() {
 
 			return "Removing Necronomicon Potion Ritual for "+ potion.getName();
-		}
-
-		@Override
-		public String describeUndo() {
-
-			return "Re-Adding Necronomicon Potion Ritual for "+ potion.getName();
-		}
-
-		@Override
-		public Object getOverrideKey() {
-
-			return null;
-		}
-
-		@Override
-		public void undo() {
-
-			if(removedRituals != null)
-				for(NecronomiconPotionRitual ritual : removedRituals)
-					if(ritual != null)
-						RitualRegistry.instance().registerRitual(ritual);
 		}
 	}
 }
