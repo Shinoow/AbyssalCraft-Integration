@@ -51,6 +51,9 @@ public class ACMT implements IACPlugin {
 		MineTweakerAPI.registerClass(PotionRitual.class);
 		MineTweakerAPI.registerClass(PotionAoERitual.class);
 		MineTweakerAPI.registerClass(UpgradeKit.class);
+		MineTweakerAPI.registerClass(SummonRitual.class);
+		MineTweakerAPI.registerClass(GatewayKey.class);
+		MineTweakerAPI.registerClass(Rituals.class);
 	}
 
 	// Start of borrowed code from Immersive Engineering
