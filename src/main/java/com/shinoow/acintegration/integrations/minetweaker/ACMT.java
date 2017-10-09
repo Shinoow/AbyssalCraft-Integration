@@ -44,6 +44,11 @@ public class ACMT implements IACPlugin {
 		CraftTweakerAPI.registerClass(PotionRitual.class);
 		CraftTweakerAPI.registerClass(PotionAoERitual.class);
 		CraftTweakerAPI.registerClass(UpgradeKit.class);
+		CraftTweakerAPI.registerClass(SummonRitual.class);
+		CraftTweakerAPI.registerClass(GatewayKey.class);
+		CraftTweakerAPI.registerClass(Rituals.class);
+		if(Loader.isModLoaded("gamestages") && ACIntegration.loadGS)
+			CraftTweakerAPI.registerClass(RitualStages.class);
 	}
 
 	@Override
