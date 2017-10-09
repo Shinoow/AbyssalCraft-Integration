@@ -43,6 +43,10 @@ repositories {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
 	}*/
+	maven {
+		name 'Darkhax'
+		url "http://maven.epoxide.org"
+	}
 }
 
 ext.propFile = file "build.properties"
@@ -79,6 +83,7 @@ minecraft {
 	
 		replaceIn "ACIntegration.java"
             replace "forgeversion", props.forge_version
+			replace "cert_fingerprint", project.findProperty('signSHA1')
 }
 
 dependencies {
@@ -91,6 +96,8 @@ dependencies {
 	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.11.2-1.9.4-pre-3:dev"
     deobfCompile "MineTweaker3:MineTweaker3-MC1112-Main:1.11.2-3.0.25.102"
 	//deobfCompile "better-questing:BetterQuesting:1.3.180"
+	deobfCompile "net.darkhax.bookshelf:Bookshelf:1.11.2-2.0.0.387"
+	deobfCompile "net.darkhax.gamestages:GameStages-1.11.2:1.0.11"
 }
 
 version = "${props.mc_version}-${props.aci_version}"
@@ -125,24 +132,16 @@ processResources
     }
 }
 
-	task srcJar(type: Jar) {
-    from sourceSets.main.allSource
+task srcJar(type: Jar) {
+    from sourceSets.main.allJava
 	
 	extension = 'jar'
-	classifier = 'src'
+	classifier = 'sources'
 }
 
-	task devJar(type: Jar, dependsOn: 'classes') {
-    from(sourceSets.main.output) {
-        include '**'
-    }
 
-    extension = 'jar'
-    classifier = 'dev'
-}
-
-	artifacts {
-    archives srcJar, devJar
+artifacts {
+    archives srcJar
 }
 
 curseforge {
@@ -152,7 +151,6 @@ curseforge {
 		releaseType = project.props.release_type //alpha beta release
 		changelogType = 'html'
 		changelog   = new File('changelog.html') //must have at least an empty string
-		addArtifact devJar
 		addArtifact srcJar
 		
 		relations{
@@ -162,6 +160,27 @@ curseforge {
 			//optionalLibrary 'thaumcraft'
 			optionalLibrary 'tinkers-construct'
 			//optionalLibrary 'better-questing'
+			optionalLibrary 'game-stages'
 		}
 	}
 }
+
+task signJar(type: SignJar, dependsOn: reobfJar) {
+
+    // Skips if the keyStore property is missing.
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+
+    // findProperty allows us to reference the property without it existing. 
+    // Using project.propName would cause the script to fail validation if 
+    // the property did not exist. 
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
+}
+
+// Runs this task automatic

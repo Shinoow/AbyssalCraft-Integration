@@ -1,14 +1,14 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
-
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IItemStack;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 
 @ZenClass("mods.abyssalcraft.Crystallizer")
 public class Crystallizer {

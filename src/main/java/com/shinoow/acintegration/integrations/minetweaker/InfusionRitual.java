@@ -3,10 +3,6 @@ package com.shinoow.acintegration.integrations.minetweaker;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
-import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
-import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
-
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
@@ -14,6 +10,10 @@ import minetweaker.api.item.IItemStack;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
+import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
+import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 
 @ZenClass("mods.abyssalcraft.InfusionRitual")
 public class InfusionRitual {

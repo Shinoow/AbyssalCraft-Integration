@@ -4,13 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
-import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
-
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IItemStack;
@@ -18,6 +11,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
+import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 @ZenClass("mods.abyssalcraft.UpgradeKit")
 public class UpgradeKit {
