@@ -4,11 +4,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 import com.google.common.collect.Maps;
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ItemUpgradeKit;
 import com.shinoow.abyssalcraft.api.recipe.UpgradeKitRecipes;
@@ -74,19 +74,14 @@ public class UpgradeKit {
 
 			for(Entry<ItemUpgradeKit, Map<ItemStack, ItemStack>> e : UpgradeKitRecipes.instance().getAllUpgrades().entrySet())
 				for(Entry<ItemStack, ItemStack> e1 : e.getValue().entrySet())
-					if(areStacksEqual(input, e1.getKey())){
-						if(!recipes.containsKey(e1.getKey()))
+					if(APIUtils.areStacksEqual(input, e1.getKey())){
+						if(!recipes.containsKey(e.getKey()))
 							recipes.put(e.getKey(), Maps.newHashMap());
 						recipes.get(e.getKey()).put(e1.getKey(), e1.getValue());
 					}
 			for(Entry<ItemUpgradeKit, Map<ItemStack, ItemStack>> e : recipes.entrySet())
 				for(Entry<ItemStack, ItemStack> e1 : e.getValue().entrySet())
 					UpgradeKitRecipes.instance().getUpgrades(e.getKey()).remove(e1.getKey(), e1.getValue());
-		}
-
-		private boolean areStacksEqual(ItemStack input, ItemStack compare)
-		{
-			return compare.getItem() == input.getItem() && (compare.getItemDamage() == OreDictionary.WILDCARD_VALUE || compare.getItemDamage() == input.getItemDamage());
 		}
 
 		@Override

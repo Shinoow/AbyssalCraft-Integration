@@ -1,9 +1,13 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
+import java.util.Iterator;
+import java.util.Map.Entry;
+
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 
@@ -47,7 +51,7 @@ public class Transmutator {
 
 	@ZenMethod
 	public static void removeTransmutation(IItemStack input){
-		CraftTweakerAPI.apply(new Remove(ACMT.toStack(input)));
+		ACMTMisc.REMOVALS.add(new Remove(ACMT.toStack(input)));
 	}
 
 	private static class Remove implements IAction {
@@ -56,12 +60,18 @@ public class Transmutator {
 
 		public Remove(ItemStack input){
 			this.input = input;
-			output = TransmutatorRecipes.instance().getTransmutationResult(input);
+			output = ItemStack.EMPTY;
 		}
 
 		@Override
 		public void apply() {
-			TransmutatorRecipes.instance().getTransmutationList().remove(input);
+			for(Iterator<Entry<ItemStack, ItemStack>> i = TransmutatorRecipes.instance().getTransmutationList().entrySet().iterator(); i.hasNext();){
+				Entry<ItemStack, ItemStack> e = i.next();
+				if(APIUtils.areStacksEqual(input, e.getKey())){
+					i.remove();
+					break;
+				}
+			}
 		}
 
 		@Override

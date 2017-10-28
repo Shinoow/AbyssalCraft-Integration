@@ -1,20 +1,25 @@
 {
   "homepage": "http://minecraft.curseforge.com/mc-mods/234851",
   "promos": {
+	"1.12.2-latest": "1.6.1",
+	"1.12.2-recommended": "1.6.1",
 	"1.12.1-latest": "1.6.0",
 	"1.12.1-recommended": "1.6.0",
 	"1.12-latest": "1.5.0",
 	"1.12-recommended": "1.5.0",
-	"1.11.2-latest": "1.6.0",
-	"1.11.2-recommended": "1.6.0",
-	"1.10.2-latest": "1.6.0",
-	"1.10.2-recommended": "1.6.0",
+	"1.11.2-latest": "1.6.1",
+	"1.11.2-recommended": "1.6.1",
+	"1.10.2-latest": "1.6.1",
+	"1.10.2-recommended": "1.6.1",
 	"1.9.4-latest": "1.4.7",
 	"1.9.4-recommended": "1.4.7",
 	"1.9-latest": "1.4.7",
 	"1.9-recommended": "1.4.7",
     "1.8.9-latest": "1.4.7",
     "1.8.9-recommended": "1.4.7"
+  },
+  "1.12.2": {
+	"1.6.1": "- Transmutator recipes can now be removed again (apparently broke at some point)\n- Adding Crystallizer recipes works again now (things turned null because scripts run before recipes are added in the mod)\n- Crystallizer recipes can now be removed again (TL;DR read thing about Transmutator recipes)\n- Upgrade Kit recipes can now be removed again (roughly the same problem as the other cases, but a bit different)\n- Bump to AbyssalCraft 1.9.4 (the now working recipe removal stuff is incompatible with the pre-releases)\n- Compiled against 1.12.2\n- Now runs on Forge 14.23.0.2500"
   },
   "1.12.1": {
 	"1.6.0": "- Compiled against 1.12.1\n- Now runs on Forge 14.22.0.2453\n- Added Game Stages integration (allowing you to lock rituals behind stages)\n- Added a CraftTweaker method for adding Ritual Stages (addRitualStage, first parameter stage, second ritual unlocalized name)\n- Added a command to write out ritual unlocalized names in chat, or write more detailed information to a text file\n- Added CraftTweaker support for Summoning Rituals\n- Added CraftTweaker support for Gateway Key overrides (allowing you to specify additional dimensions where you can use Gateway Keys)\n- Added CraftTweaker support for Ritual dimension mapping (allowing you to specify additional dimensions where you can perform rituals)"
@@ -23,10 +28,12 @@
 	"1.5.0": "- Ported to 1.12\n- Bump to AbyssalCraft 1.9.4-pre-4\n- Now runs on Forge 14.21.1.2413"
   },
   "1.11.2": {
+	"1.6.1": "- Transmutator recipes can now be removed again (apparently broke at some point)\n- Crystallizer recipes can now be removed again (TL;DR read thing about Transmutator recipes)\n- Upgrade Kit recipes can now be removed again (roughly the same problem as the other cases, but a bit different)\n- Bump to AbyssalCraft 1.9.4 (the now working recipe removal stuff is incompatible with the pre-releases)",
 	"1.6.0": "- Added Game Stages integration (allowing you to lock rituals behind stages)\n- Added a CraftTweaker method for adding Ritual Stages (addRitualStage, first parameter stage, second ritual unlocalized name)\n- Added a command to write out ritual unlocalized names in chat, or write more detailed information to a text file\n- Added CraftTweaker support for Summoning Rituals\n- Added CraftTweaker support for Gateway Key overrides (allowing you to specify additional dimensions where you can use Gateway Keys)\n- Added CraftTweaker support for Ritual dimension mapping (allowing you to specify additional dimensions where you can perform rituals)",
 	"1.5.0": "- Ported to 1.11.2\n- Bump to AbyssalCraft 1.9.4-pre-3\n- Removed the method for adding blocks to the Shoggoth Block Blacklist (deprecated since AC 1.9.4-pre-1, has no function)\n- You can now add Upgrade Kit upgrades through the MineTweaker integration\n- Fixed bugs where recipes added through MineTweaker(through this integration) wouldn't display in JEI\n- You can now cast bow and crossbow parts with AbyssalCraft materials\n- The Better Questing integration is disabled until it's been rewritten to support BQ 2.x.x\n- Now runs on Forge 13.20.0.2282"
   },
   "1.10.2": {
+	"1.6.1": "- Transmutator recipes can now be removed again (apparently broke at some point)\n- Adding single Crystallizer recipes works again now (null check that was ignored)\n- Crystallizer recipes can now be removed again (TL;DR read thing about Transmutator recipes)\n- Upgrade Kit recipes can now be removed again (roughly the same problem as the other cases, but a bit different)\n- Bump to AbyssalCraft 1.9.4 (the now working recipe removal stuff is incompatible with the pre-releases)",
 	"1.6.0": "- Added a command to write out ritual unlocalized names in chat, or write more detailed information to a text file\n- Added CraftTweaker support for Summoning Rituals\n- Added CraftTweaker support for Gateway Key overrides (allowing you to specify additional dimensions where you can use Gateway Keys)\n- Added CraftTweaker support for Ritual dimension mapping (allowing you to specify additional dimensions where you can perform rituals)",
 	"1.5.0": "- Ported to 1.10.2\n- Bump to AbyssalCraft 1.9.4-pre-3\n- Removed the method for adding blocks to the Shoggoth Block Blacklist (deprecated since AC 1.9.4-pre-1, has no function)\n- You can now add Upgrade Kit upgrades through the MineTweaker integration\n- Fixed bugs where recipes added through MineTweaker(through this integration) wouldn't display in JEI\n- You can now cast bow and crossbow parts with AbyssalCraft materials\n- Now runs on Forge 12.18.3.2254"
   },

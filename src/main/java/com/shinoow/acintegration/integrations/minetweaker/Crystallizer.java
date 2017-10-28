@@ -1,11 +1,16 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
+import java.util.Iterator;
+import java.util.Map.Entry;
+
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
+import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 
 import crafttweaker.IAction;
 import crafttweaker.api.item.IItemStack;
@@ -68,7 +73,7 @@ public class Crystallizer {
 
 		public Remove(ItemStack input){
 			this.input = input;
-			ItemStack[] outputs = CrystallizerRecipes.instance().getCrystallizationResult(input);
+			ItemStack[] outputs = {ItemStack.EMPTY, ItemStack.EMPTY};
 
 			output1 = outputs[0];
 			output2 = outputs[1];
@@ -76,7 +81,13 @@ public class Crystallizer {
 
 		@Override
 		public void apply() {
-			CrystallizerRecipes.instance().getCrystallizationList().remove(input);
+			for(Iterator<Entry<ItemStack, ItemStack[]>> i = CrystallizerRecipes.instance().getCrystallizationList().entrySet().iterator(); i.hasNext();){
+				Entry<ItemStack, ItemStack[]> e = i.next();
+				if(APIUtils.areStacksEqual(input, e.getKey())){
+					i.remove();
+					break;
+				}
+			}
 		}
 
 		@Override
