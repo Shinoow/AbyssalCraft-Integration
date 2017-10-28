@@ -37,7 +37,7 @@ import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 acceptedMinecraftVersions = "[1.10.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json", certificateFingerprint = "cert_fingerprint")
 public class ACIntegration {
 
-	public static final String version = "1.6.0";
+	public static final String version = "1.6.1";
 	public static final String modid = "acintegration";
 	public static final String name = "AbyssalCraft Integration";
 

@@ -1,7 +1,6 @@
 package com.shinoow.acintegration.integrations.tinkers;
 
-import com.shinoow.abyssalcraft.api.item.ACItems;
-
+import static com.shinoow.acintegration.integrations.tinkers.ACTiCon.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -11,15 +10,12 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
-import slimeknights.tconstruct.library.materials.BowMaterialStats;
-import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
-import slimeknights.tconstruct.library.materials.HandleMaterialStats;
-import slimeknights.tconstruct.library.materials.HeadMaterialStats;
-import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.materials.*;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.block.BlockTinkerFluid;
-import static com.shinoow.acintegration.integrations.tinkers.ACTiCon.*;
+
+import com.shinoow.abyssalcraft.api.item.ACItems;
 
 /**
  * This class exists to move fields from the main plugin class that can trigger a NoClassDefFoundError when the<br>

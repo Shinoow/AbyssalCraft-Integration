@@ -1,7 +1,7 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
@@ -9,6 +9,10 @@ import minetweaker.api.item.IItemStack;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 
 @ZenClass("mods.abyssalcraft.Transmutator")
 public class Transmutator {
@@ -83,16 +87,26 @@ public class Transmutator {
 
 		private ItemStack input, output;
 		private Object recipe;
+		private float exp;
 
 		public Remove(ItemStack input){
 			this.input = input;
 			output = TransmutatorRecipes.instance().getTransmutationResult(input);
-			recipe = ACMTJEIUtil.getTransRecipe(input, output, TransmutatorRecipes.instance().getExperience(output));
+			exp = TransmutatorRecipes.instance().getExperience(output);
+			recipe = ACMTJEIUtil.getTransRecipe(input);
 		}
 
 		@Override
 		public void apply() {
-			TransmutatorRecipes.instance().getTransmutationList().remove(input);
+
+			for(Iterator<Entry<ItemStack, ItemStack>> i = TransmutatorRecipes.instance().getTransmutationList().entrySet().iterator(); i.hasNext();){
+				Entry<ItemStack, ItemStack> e = i.next();
+				if(APIUtils.areStacksEqual(input, e.getKey())){
+					i.remove();
+					break;
+				}
+			}
+
 			if(recipe != null)
 				MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(recipe);
 		}
@@ -124,7 +138,7 @@ public class Transmutator {
 		@Override
 		public void undo() {
 			if(input != null && output != null){
-				AbyssalCraftAPI.addTransmutation(input, output, TransmutatorRecipes.instance().getExperience(output));
+				AbyssalCraftAPI.addTransmutation(input, output, exp);
 				if(recipe != null)
 					MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe);
 			}

@@ -9,7 +9,9 @@ import betterquesting.quests.QuestDatabase;
 import betterquesting.quests.QuestInstance;
 import betterquesting.quests.tasks.TaskBase;
 
-import com.shinoow.abyssalcraft.api.event.ACEvents.*;
+import com.shinoow.abyssalcraft.api.event.ACEvents.ItemCrystallizedEvent;
+import com.shinoow.abyssalcraft.api.event.ACEvents.ItemTransmutedEvent;
+import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconCreationRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
 import com.shinoow.acintegration.integrations.betterquesting.tasks.*;

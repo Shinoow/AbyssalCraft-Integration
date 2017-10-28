@@ -1,12 +1,11 @@
 package com.shinoow.acintegration.integrations.betterquesting.gui;
 
 import net.minecraft.util.text.translation.I18n;
-
-import com.shinoow.acintegration.integrations.betterquesting.tasks.TaskRitual;
-
 import betterquesting.client.gui.GuiQuesting;
 import betterquesting.client.gui.misc.GuiEmbedded;
 import betterquesting.client.themes.ThemeRegistry;
+
+import com.shinoow.acintegration.integrations.betterquesting.tasks.TaskRitual;
 
 public class GuiTaskRitual extends GuiEmbedded {
 

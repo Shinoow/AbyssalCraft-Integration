@@ -8,11 +8,7 @@ import betterquesting.quests.tasks.TaskRegistry;
 import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.acintegration.ACIntegration;
-import com.shinoow.acintegration.integrations.betterquesting.tasks.TaskCreationRitual;
-import com.shinoow.acintegration.integrations.betterquesting.tasks.TaskCrystallize;
-import com.shinoow.acintegration.integrations.betterquesting.tasks.TaskInfusionRitual;
-import com.shinoow.acintegration.integrations.betterquesting.tasks.TaskRitual;
-import com.shinoow.acintegration.integrations.betterquesting.tasks.TaskTransmute;
+import com.shinoow.acintegration.integrations.betterquesting.tasks.*;
 
 @ACPlugin
 public class ACBQ implements IACPlugin {

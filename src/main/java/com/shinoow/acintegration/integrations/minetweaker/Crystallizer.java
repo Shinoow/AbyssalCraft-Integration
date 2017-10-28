@@ -1,7 +1,7 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
@@ -9,6 +9,10 @@ import minetweaker.api.item.IItemStack;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import com.shinoow.abyssalcraft.api.APIUtils;
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 
 @ZenClass("mods.abyssalcraft.Crystallizer")
 public class Crystallizer {
@@ -63,13 +67,13 @@ public class Crystallizer {
 		@Override
 		public String describe() {
 
-			return "Adding Crystallization recipe for " + output1.getDisplayName() + output2 != null ? " (and "+ output2.getDisplayName() + ")" : "";
+			return "Adding Crystallization recipe for " + output1.getDisplayName() + (!isSingle ? " (and "+ output2.getDisplayName() + ")" : "");
 		}
 
 		@Override
 		public String describeUndo() {
 
-			return "Removing Crystallization recipe for " + output1.getDisplayName() + output2 != null ? " (and "+ output2.getDisplayName() + ")" : "";
+			return "Removing Crystallization recipe for " + output1.getDisplayName() + (!isSingle ? " (and "+ output2.getDisplayName() + ")" : "");
 		}
 
 		@Override
@@ -96,6 +100,7 @@ public class Crystallizer {
 
 		private ItemStack input, output1, output2;
 		private Object recipe;
+		private float exp;
 
 		public Remove(ItemStack input){
 			this.input = input;
@@ -103,12 +108,22 @@ public class Crystallizer {
 
 			output1 = outputs[0];
 			output2 = outputs[1];
-			recipe = ACMTJEIUtil.getCrystRecipe(input, output1, output2, CrystallizerRecipes.instance().getExperience(output1));
+			exp = CrystallizerRecipes.instance().getExperience(output1);
+
+			recipe = ACMTJEIUtil.getCrystRecipe(input);
 		}
 
 		@Override
 		public void apply() {
-			CrystallizerRecipes.instance().getCrystallizationList().remove(input);
+
+			for(Iterator<Entry<ItemStack, ItemStack[]>> i = CrystallizerRecipes.instance().getCrystallizationList().entrySet().iterator(); i.hasNext();){
+				Entry<ItemStack, ItemStack[]> e = i.next();
+				if(APIUtils.areStacksEqual(input, e.getKey())){
+					i.remove();
+					break;
+				}
+			}
+
 			if(recipe != null)
 				MineTweakerAPI.getIjeiRecipeRegistry().removeRecipe(recipe);
 		}
@@ -140,7 +155,7 @@ public class Crystallizer {
 		@Override
 		public void undo() {
 			if(input != null && output1 != null){
-				AbyssalCraftAPI.addCrystallization(input, output1, output2, CrystallizerRecipes.instance().getExperience(output1));
+				AbyssalCraftAPI.addCrystallization(input, output1, output2, exp);
 				if(recipe != null)
 					MineTweakerAPI.getIjeiRecipeRegistry().addRecipe(recipe);
 			}

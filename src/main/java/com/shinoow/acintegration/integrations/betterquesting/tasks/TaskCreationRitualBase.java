@@ -1,21 +1,17 @@
 package com.shinoow.acintegration.integrations.betterquesting.tasks;
 
 import java.util.HashMap;
-import java.util.UUID;
 import java.util.Map.Entry;
-
-import org.apache.logging.log4j.Level;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.shinoow.abyssalcraft.common.util.ACLogger;
+import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+
+import org.apache.logging.log4j.Level;
+
 import betterquesting.party.PartyInstance;
-import betterquesting.party.PartyManager;
 import betterquesting.party.PartyInstance.PartyMember;
+import betterquesting.party.PartyManager;
 import betterquesting.quests.QuestDatabase;
 import betterquesting.quests.QuestInstance;
 import betterquesting.quests.tasks.TaskBase;
@@ -23,6 +19,11 @@ import betterquesting.quests.tasks.advanced.IProgressionTask;
 import betterquesting.utils.BigItemStack;
 import betterquesting.utils.JsonHelper;
 import betterquesting.utils.NBTConverter;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 public abstract class TaskCreationRitualBase extends TaskBase implements IProgressionTask<Integer> {
 

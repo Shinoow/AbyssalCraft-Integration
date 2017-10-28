@@ -89,11 +89,10 @@ dependencies {
 	//deobfCompile name: 'Thaumcraft', version: "5.2.4", ext: 'jar'
 	deobfCompile "slimeknights.mantle:Mantle:1.10.2-1.1.3.202"
     deobfCompile "slimeknights:TConstruct:1.10.2-2.6.1.464"
-	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.10.2-1.9.4-pre-3:dev"
+	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.10.2-1.9.4"
     deobfCompile "MineTweaker3:MineTweaker3-MC1102-Main:1.10.2-3.0.25.102"
 	deobfCompile "better-questing:BetterQuesting:1.3.180"
 	
-	//runtime "com.shinoow.abyssalcraft:AbyssalCraft:1.10.2-1.9.4-pre-3:dev"
 }
 
 version = "${props.mc_version}-${props.aci_version}"
