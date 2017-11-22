@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconInfusionRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
@@ -91,7 +92,7 @@ public class InfusionRitual {
 						ritual.getClass().getSuperclass().getSuperclass() != NecronomiconInfusionRitual.class)
 					temp.add((NecronomiconInfusionRitual) ritual);
 			for(NecronomiconInfusionRitual ritual : temp)
-				if(RitualRegistry.instance().areStacksEqual(item, ritual.getItem()))
+				if(APIUtils.areStacksEqual(item, ritual.getItem()))
 					RitualRegistry.instance().getRituals().remove(ritual);
 		}
 

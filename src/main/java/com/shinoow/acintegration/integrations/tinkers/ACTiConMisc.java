@@ -42,29 +42,10 @@ public class ACTiConMisc {
 		moltenAbyssalnite = new BlockTinkerFluid(fluid_molten_abyssalnite, net.minecraft.block.material.Material.LAVA);
 		moltenCoralium = new BlockTinkerFluid(fluid_molten_coralium, net.minecraft.block.material.Material.LAVA);
 		moltenDreadium = new BlockTinkerFluid(fluid_molten_dreadium, net.minecraft.block.material.Material.LAVA);
-	}
 
-	public static void initMaterials(){
 		abyssalnite = new Material("abyssalnite", 0x4a1c89);
-		abyssalnite.setFluid(fluid_molten_abyssalnite);
-		abyssalnite.addItem("ingotAbyssalnite", 1, Material.VALUE_Ingot);
-		abyssalnite.setCraftable(true);
-		abyssalnite.setRepresentativeItem(new ItemStack(ACItems.abyssalnite_ingot));
-		abyssalnite.addTrait(dread_purity);
-
 		coralium = new Material("refined_coralium", 0x169265);
-		coralium.setFluid(fluid_molten_coralium);
-		coralium.addItem("ingotLiquifiedCoralium", 1, Material.VALUE_Ingot);
-		coralium.setCraftable(true);
-		coralium.setRepresentativeItem(new ItemStack(ACItems.refined_coralium_ingot));
-		coralium.addTrait(coralium_plague);
-
 		dreadium = new Material("dreadium", 0x880101);
-		dreadium.setFluid(fluid_molten_dreadium);
-		dreadium.addItem("ingotDreadium", 1, Material.VALUE_Ingot);
-		dreadium.setCraftable(true);
-		dreadium.setRepresentativeItem(new ItemStack(ACItems.dreadium_ingot));
-		dreadium.addTrait(dread_plague);
 
 		TinkerRegistry.addMaterial(abyssalnite);
 		TinkerRegistry.addMaterial(coralium);
@@ -85,6 +66,26 @@ public class ACTiConMisc {
 				new HandleMaterialStats(0.90f, 60),
 				new ExtraMaterialStats(100),
 				new BowMaterialStats(0.65f, 1.3f, 3.5f));
+	}
+
+	public static void initMaterials(){
+		abyssalnite.setFluid(fluid_molten_abyssalnite);
+		abyssalnite.addItem("ingotAbyssalnite", 1, Material.VALUE_Ingot);
+		abyssalnite.setCraftable(true);
+		abyssalnite.setRepresentativeItem(new ItemStack(ACItems.abyssalnite_ingot));
+		abyssalnite.addTrait(dread_purity);
+
+		coralium.setFluid(fluid_molten_coralium);
+		coralium.addItem("ingotLiquifiedCoralium", 1, Material.VALUE_Ingot);
+		coralium.setCraftable(true);
+		coralium.setRepresentativeItem(new ItemStack(ACItems.refined_coralium_ingot));
+		coralium.addTrait(coralium_plague);
+
+		dreadium.setFluid(fluid_molten_dreadium);
+		dreadium.addItem("ingotDreadium", 1, Material.VALUE_Ingot);
+		dreadium.setCraftable(true);
+		dreadium.setRepresentativeItem(new ItemStack(ACItems.dreadium_ingot));
+		dreadium.addTrait(dread_plague);
 
 		TinkerSmeltery.registerToolpartMeltingCasting(abyssalnite);
 		TinkerSmeltery.registerToolpartMeltingCasting(coralium);

@@ -47,6 +47,7 @@ public class ACMT implements IACPlugin {
 		CraftTweakerAPI.registerClass(SummonRitual.class);
 		CraftTweakerAPI.registerClass(GatewayKey.class);
 		CraftTweakerAPI.registerClass(Rituals.class);
+		CraftTweakerAPI.registerClass(Materializer.class);
 		if(Loader.isModLoaded("gamestages") && ACIntegration.loadGS)
 			CraftTweakerAPI.registerClass(RitualStages.class);
 	}
