@@ -13,7 +13,7 @@ public class GatewayKey {
 	@ZenMethod
 	public static void addOverride(int dimId, int type){
 		if(type > -1 && type < 3)
-			ACMTMisc.ADDITIONS.add(new Add(dimId, type));
+			ACMTMisc.TASKS.add(new Add(dimId, type));
 	}
 
 	private static class Add implements IAction {

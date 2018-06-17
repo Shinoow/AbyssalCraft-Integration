@@ -20,12 +20,12 @@ public class Crystallizer {
 	@ZenMethod
 	public static void addCrystallization(IItemStack input, IItemStack output1, IItemStack output2, float exp){
 
-		ACMTMisc.ADDITIONS.add(new Add(ACMT.toStack(input), ACMT.toStack(output1), ACMT.toStack(output2), exp));
+		ACMTMisc.TASKS.add(new Add(ACMT.toStack(input), ACMT.toStack(output1), ACMT.toStack(output2), exp));
 	}
 
 	@ZenMethod
 	public static void addSingleCrystallization(IItemStack input, IItemStack output, float exp){
-		ACMTMisc.ADDITIONS.add(new Add(ACMT.toStack(input), ACMT.toStack(output), exp));
+		ACMTMisc.TASKS.add(new Add(ACMT.toStack(input), ACMT.toStack(output), exp));
 	}
 
 	private static class Add implements IAction
@@ -63,7 +63,7 @@ public class Crystallizer {
 
 	@ZenMethod
 	public static void removeCrystallization(IItemStack input){
-		ACMTMisc.REMOVALS.add(new Remove(ACMT.toStack(input)));
+		ACMTMisc.TASKS.add(new Remove(ACMT.toStack(input)));
 	}
 
 	private static class Remove implements IAction {

@@ -25,7 +25,7 @@ public class Materializer {
 		ItemStack[] stacks = new ItemStack[input.length];
 		for(int i = 0; i < stacks.length; i++)
 			stacks[i] = ACMT.toStack(input[i]);
-		ACMTMisc.ADDITIONS.add(new Add(stack, stacks));
+		ACMTMisc.TASKS.add(new Add(stack, stacks));
 	}
 
 	private static class Add implements IAction {
@@ -61,7 +61,7 @@ public class Materializer {
 	@ZenMethod
 	public static void removeMaterialization(IItemStack output){
 
-		ACMTMisc.REMOVALS.add(new Remove(ACMT.toStack(output)));
+		ACMTMisc.TASKS.add(new Remove(ACMT.toStack(output)));
 	}
 
 	private static class Remove implements IAction {
@@ -91,7 +91,7 @@ public class Materializer {
 
 	@ZenMethod
 	public static void addCrystal(IItemStack stack){
-		ACMTMisc.ADDITIONS.add(new AddCrystal(ACMT.toStack(stack)));
+		ACMTMisc.TASKS.add(new AddCrystal(ACMT.toStack(stack)));
 	}
 
 	private static class AddCrystal implements IAction {

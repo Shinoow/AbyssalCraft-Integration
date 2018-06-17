@@ -16,13 +16,13 @@ public class Rituals {
 	public static void mapDimensionToBookType(int dim, int bookType){
 		if(bookType <= 4 && bookType >= 0)
 			if(dim != -1 && dim != 1)
-				ACMTMisc.ADDITIONS.add(new AddBookType(dim, bookType));
+				ACMTMisc.TASKS.add(new AddBookType(dim, bookType));
 	}
 
 	@ZenMethod
 	public static void mapDimensionToName(int dim, String name){
 		if(dim != -1 && dim != 1)
-			ACMTMisc.ADDITIONS.add(new AddName(dim, name));
+			ACMTMisc.TASKS.add(new AddName(dim, name));
 	}
 
 	@ZenMethod
@@ -78,47 +78,47 @@ public class Rituals {
 
 	@ZenMethod
 	public static void modifyRitualBookType(String name, int bookType){
-		ACMTMisc.ADDITIONS.add(new ModifyRitual(name, 0, bookType));
+		ACMTMisc.TASKS.add(new ModifyRitual(name, 0, bookType));
 	}
 
 	@ZenMethod
 	public static void modifyRitualDimension(String name, int dimension){
-		ACMTMisc.ADDITIONS.add(new ModifyRitual(name, 1, dimension));
+		ACMTMisc.TASKS.add(new ModifyRitual(name, 1, dimension));
 	}
 
 	@ZenMethod
 	public static void modifyRitualSacrificeRequirement(String name, boolean requiresSacrifice){
-		ACMTMisc.ADDITIONS.add(new ModifyRitual(name, 2, requiresSacrifice));
+		ACMTMisc.TASKS.add(new ModifyRitual(name, 2, requiresSacrifice));
 	}
 
 	@ZenMethod
 	public static void modifyRitualEnergyRequirement(String name, float requiredEnergy){
-		ACMTMisc.ADDITIONS.add(new ModifyRitual(name, 3, requiredEnergy));
+		ACMTMisc.TASKS.add(new ModifyRitual(name, 3, requiredEnergy));
 	}
 
 	@ZenMethod
 	public static void modifyRitualSacrifice(String name, IIngredient sacrifice){
-		ACMTMisc.ADDITIONS.add(new ModifyRitual(name, 4, ACMT.toObject(sacrifice)));
+		ACMTMisc.TASKS.add(new ModifyRitual(name, 4, ACMT.toObject(sacrifice)));
 	}
 
 	@ZenMethod
 	public static void modifyRitualNbtSensitivity(String name, boolean nbtSensitive){
-		ACMTMisc.ADDITIONS.add(new ModifyRitual(name, 5, nbtSensitive));
+		ACMTMisc.TASKS.add(new ModifyRitual(name, 5, nbtSensitive));
 	}
 
 	@ZenMethod
 	public static void modifyRitualNbtSensitivitySacrifice(String name, boolean nbtSensitiveSacrifice){
-		ACMTMisc.ADDITIONS.add(new ModifyRitual(name, 6, nbtSensitiveSacrifice));
+		ACMTMisc.TASKS.add(new ModifyRitual(name, 6, nbtSensitiveSacrifice));
 	}
 
 	@ZenMethod
 	public static void modifyRitualOfferings(String name, IIngredient[] offerings){
-		ACMTMisc.ADDITIONS.add(new ModifyRitual(name, 7, ACMT.toObjects(offerings)));
+		ACMTMisc.TASKS.add(new ModifyRitual(name, 7, ACMT.toObjects(offerings)));
 	}
 
 	@ZenMethod
 	public static void modifyRitualReplaceOffering(String name, IIngredient original, IIngredient replace, boolean nbt){
-		ACMTMisc.ADDITIONS.add(new ModifyRitual(name, 8, new Object[]{ACMT.toObject(original), ACMT.toObject(replace), nbt}));
+		ACMTMisc.TASKS.add(new ModifyRitual(name, 8, new Object[]{ACMT.toObject(original), ACMT.toObject(replace), nbt}));
 	}
 
 	private static class ModifyRitual implements IAction {

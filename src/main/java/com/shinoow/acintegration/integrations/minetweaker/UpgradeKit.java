@@ -24,7 +24,7 @@ public class UpgradeKit {
 	public static void addUpgrade(IItemStack kit, IItemStack input, IItemStack output){
 
 		if(ACMT.toStack(kit).getItem() instanceof ItemUpgradeKit)
-			ACMTMisc.ADDITIONS.add(new Add(ACMT.toStack(kit), ACMT.toStack(input), ACMT.toStack(output)));
+			ACMTMisc.TASKS.add(new Add(ACMT.toStack(kit), ACMT.toStack(input), ACMT.toStack(output)));
 		else ACLogger.warning("%s is not a Upgrade Kit!", ACMT.toStack(kit).getDisplayName());
 	}
 
@@ -54,7 +54,7 @@ public class UpgradeKit {
 
 	@ZenMethod
 	public static void removeUpgrade(IItemStack input){
-		ACMTMisc.REMOVALS.add(new Remove(ACMT.toStack(input)));
+		ACMTMisc.TASKS.add(new Remove(ACMT.toStack(input)));
 	}
 
 	private static class Remove implements IAction {

@@ -19,7 +19,7 @@ public class InternalNecroData {
 	@ZenMethod
 	public static void addChapter(String chapteridentifier, String chaptertitle, String necrodataidentifier){
 		Chapter chapter = new Chapter(chapteridentifier, chaptertitle, 0);
-		ACMTMisc.ADDITIONS.add(new AddChapter(chapter, necrodataidentifier));
+		ACMTMisc.TASKS.add(new AddChapter(chapter, necrodataidentifier));
 	}
 
 	private static class AddChapter implements IAction
@@ -49,7 +49,7 @@ public class InternalNecroData {
 
 	@ZenMethod
 	public static void removeChapter(String chapteridentifier, String necrodataidentifier){
-		ACMTMisc.REMOVALS.add(new RemoveChapter(chapteridentifier, necrodataidentifier));
+		ACMTMisc.TASKS.add(new RemoveChapter(chapteridentifier, necrodataidentifier));
 	}
 
 	private static class RemoveChapter implements IAction
@@ -78,37 +78,37 @@ public class InternalNecroData {
 	@ZenMethod
 	public static void addNormalPage(int pageNum, String pagetext, String chapteridentifier, String necrodataidentifier){
 		Page page = new Page(pageNum, "title", 0, pagetext);
-		ACMTMisc.ADDITIONS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
+		ACMTMisc.TASKS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
 	@ZenMethod
 	public static void addItemPage(int pageNum, IItemStack stack, String pagetext, String chapteridentifier, String necrodataidentifier){
 		Page page = new Page(pageNum, "title", 0, ACMT.toStack(stack), pagetext);
-		ACMTMisc.ADDITIONS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
+		ACMTMisc.TASKS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
 	@ZenMethod
 	public static void addImagePage(int pageNum, String resourcepath, String pagetext, String chapteridentifier, String necrodataidentifier){
 		Page page = new Page(pageNum, "title", 0, new ResourceLocation(resourcepath), pagetext);
-		ACMTMisc.ADDITIONS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
+		ACMTMisc.TASKS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
 	@ZenMethod
 	public static void addCraftingPage(int pageNum, IIngredient thing, String pagetext, String chapteridentifier, String necrodataidentifier){
 		Page page = new Page(pageNum, "title", 0, new CraftingStack(ACMT.toObject(thing)), pagetext);
-		ACMTMisc.ADDITIONS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
+		ACMTMisc.TASKS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
 	@ZenMethod
 	public static void addCraftingPage(int pageNum, IIngredient thing, IIngredient[] stuff, String pagetext, String chapteridentifier, String necrodataidentifier){
 		Page page = new Page(pageNum, "title", 0, new CraftingStack(ACMT.toObject(thing), ACMT.toObjects(stuff)), pagetext);
-		ACMTMisc.ADDITIONS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
+		ACMTMisc.TASKS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
 	@ZenMethod
 	public static void addURLPage(int pageNum, String url, String pagetext, String chapteridentifier, String necrodataidentifier){
 		Page page = new Page(pageNum, "title", 0, url, pagetext);
-		ACMTMisc.ADDITIONS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
+		ACMTMisc.TASKS.add(new AddPage(page, chapteridentifier, necrodataidentifier));
 	}
 
 	private static class AddPage implements IAction{
@@ -138,7 +138,7 @@ public class InternalNecroData {
 
 	@ZenMethod
 	public static void removePage(int pageNum, String chapteridentifier, String necrodataidentifier){
-		ACMTMisc.REMOVALS.add(new RemovePage(pageNum, chapteridentifier, necrodataidentifier));
+		ACMTMisc.TASKS.add(new RemovePage(pageNum, chapteridentifier, necrodataidentifier));
 	}
 
 	private static class RemovePage implements IAction{

@@ -20,7 +20,7 @@ public class Transmutator {
 	@ZenMethod
 	public static void addTransmutation(IItemStack input, IItemStack output, float exp){
 
-		ACMTMisc.ADDITIONS.add(new Add(ACMT.toStack(input), ACMT.toStack(output), exp));
+		ACMTMisc.TASKS.add(new Add(ACMT.toStack(input), ACMT.toStack(output), exp));
 	}
 
 	private static class Add implements IAction
@@ -50,7 +50,7 @@ public class Transmutator {
 
 	@ZenMethod
 	public static void removeTransmutation(IItemStack input){
-		ACMTMisc.REMOVALS.add(new Remove(ACMT.toStack(input)));
+		ACMTMisc.TASKS.add(new Remove(ACMT.toStack(input)));
 	}
 
 	private static class Remove implements IAction {

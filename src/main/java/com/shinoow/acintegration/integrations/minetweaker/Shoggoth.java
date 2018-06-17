@@ -15,7 +15,7 @@ public class Shoggoth {
 	@ZenMethod
 	public static void addShoggothFood(String clazz){
 		try {
-			ACMTMisc.ADDITIONS.add(new AddFood((Class<? extends EntityLivingBase>) Class.forName(clazz)));
+			ACMTMisc.TASKS.add(new AddFood((Class<? extends EntityLivingBase>) Class.forName(clazz)));
 		} catch (ClassNotFoundException e) {
 			ACLogger.warning("Could not find Entity class %s", clazz);
 		}

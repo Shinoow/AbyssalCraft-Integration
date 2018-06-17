@@ -53,14 +53,11 @@ public class ACMT implements IACPlugin {
 	}
 
 	@Override
-	public void init() {
-		ACMTMisc.ADDITIONS.forEach(CraftTweakerAPI::apply);
-		ACMTMisc.REMOVALS.forEach(CraftTweakerAPI::apply);
-	}
+	public void init() {}
 
 	@Override
 	public void postInit() {
-
+		ACMTMisc.TASKS.forEach(CraftTweakerAPI::apply);
 	}
 
 	// Start of borrowed code from Immersive Engineering

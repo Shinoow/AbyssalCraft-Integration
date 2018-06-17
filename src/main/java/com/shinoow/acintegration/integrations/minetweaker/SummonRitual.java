@@ -49,7 +49,7 @@ public class SummonRitual {
 
 		if(nbt) ritual.setNBTSensitive();
 
-		ACMTMisc.ADDITIONS.add(new Add(ritual));
+		ACMTMisc.TASKS.add(new Add(ritual));
 	}
 
 	private static class Add implements IAction
@@ -92,7 +92,7 @@ public class SummonRitual {
 
 		if(e == null) return;
 
-		ACMTMisc.REMOVALS.add(new Remove(e));
+		ACMTMisc.TASKS.add(new Remove(e));
 	}
 
 	private static class Remove implements IAction

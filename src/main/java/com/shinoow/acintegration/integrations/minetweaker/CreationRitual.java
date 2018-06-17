@@ -34,7 +34,7 @@ public class CreationRitual {
 
 		if(nbt) ritual.setNBTSensitive();
 
-		ACMTMisc.ADDITIONS.add(new Add(ritual));
+		ACMTMisc.TASKS.add(new Add(ritual));
 	}
 
 	private static class Add implements IAction
@@ -63,7 +63,7 @@ public class CreationRitual {
 	@ZenMethod
 	public static void removeRitual(IItemStack item){
 
-		ACMTMisc.REMOVALS.add(new Remove(ACMT.toStack(item)));
+		ACMTMisc.TASKS.add(new Remove(ACMT.toStack(item)));
 	}
 
 	private static class Remove implements IAction

@@ -7,7 +7,6 @@ import crafttweaker.IAction;
 
 public class ACMTMisc {
 
-	public static List<IAction> ADDITIONS = new LinkedList();
-	public static List<IAction> REMOVALS = new LinkedList();
+	public static List<IAction> TASKS = new LinkedList();
 
 }

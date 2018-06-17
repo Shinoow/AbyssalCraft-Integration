@@ -36,7 +36,7 @@ public class EnchantmentRitual {
 
 		if(nbt) ritual.setNBTSensitive();
 
-		ACMTMisc.ADDITIONS.add(new Add(ritual));
+		ACMTMisc.TASKS.add(new Add(ritual));
 	}
 
 	private static EnchantmentData getEnch(String string){
@@ -86,7 +86,7 @@ public class EnchantmentRitual {
 
 		if(ench == null) return;
 
-		ACMTMisc.REMOVALS.add(new Remove(ench));
+		ACMTMisc.TASKS.add(new Remove(ench));
 	}
 
 	private static class Remove implements IAction

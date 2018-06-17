@@ -12,7 +12,7 @@ public class RitualStages {
 
 	@ZenMethod
 	public static void addRitualStage(String stage, String ritual){
-		ACMTMisc.ADDITIONS.add(new Add(stage, ritual));
+		ACMTMisc.TASKS.add(new Add(stage, ritual));
 	}
 
 	private static class Add implements IAction {

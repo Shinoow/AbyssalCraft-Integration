@@ -35,7 +35,7 @@ public class PotionAoERitual {
 
 		if(nbt) ritual.setNBTSensitive();
 
-		ACMTMisc.ADDITIONS.add(new Add(ritual));
+		ACMTMisc.TASKS.add(new Add(ritual));
 	}
 
 	private static class Add implements IAction
@@ -68,7 +68,7 @@ public class PotionAoERitual {
 
 		if(pot == null) return;
 
-		ACMTMisc.REMOVALS.add(new Remove(pot));
+		ACMTMisc.TASKS.add(new Remove(pot));
 	}
 
 	private static class Remove implements IAction
