@@ -32,7 +32,7 @@ public class ACTC implements IACPlugin {
 	@Override
 	public boolean canLoad() {
 
-		return Loader.isModLoaded("Thaumcraft") && ACIntegration.loadTC;
+		return Loader.isModLoaded("thaumcraft") && ACIntegration.loadTC;
 	}
 
 	@Override

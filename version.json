@@ -1,8 +1,8 @@
 {
   "homepage": "http://minecraft.curseforge.com/mc-mods/234851",
   "promos": {
-	"1.12.2-latest": "1.6.3",
-	"1.12.2-recommended": "1.6.3",
+	"1.12.2-latest": "1.6.4",
+	"1.12.2-recommended": "1.6.4",
 	"1.12.1-latest": "1.6.0",
 	"1.12.1-recommended": "1.6.0",
 	"1.12-latest": "1.5.0",
@@ -19,6 +19,7 @@
     "1.8.9-recommended": "1.4.7"
   },
   "1.12.2": {
+	"1.6.4": "- Thaumcraft integration actually loads now",
 	"1.6.3": "- Bump to AbyssalCraft 1.9.4.10\n- Re-added Thaumcraft aspects to Items, Blocks and Mobs\n- Reimplemented the Thaumcraft warp integration\n- Fixed a small typo in one of the Tinkers' modifier tooltips\n- CraftTweaker task processing is now done in post-init instead of init",
 	"1.6.2": "- Added CraftTweaker support for modifying rituals\n- Added CraftTweaker support for adding/removing Materializations\n- Added CraftTweaker support for adding stuff to the Crystal List (so they can be placed in the Crystal Bag, therefore usable in Materialization recipes)\n- The materials added in the Tinkers integration now properly display their colors\n- Bump to AbyssalCraft 1.9.4.2",
 	"1.6.1": "- Transmutator recipes can now be removed again (apparently broke at some point)\n- Adding Crystallizer recipes works again now (things turned null because scripts run before recipes are added in the mod)\n- Crystallizer recipes can now be removed again (TL;DR read thing about Transmutator recipes)\n- Upgrade Kit recipes can now be removed again (roughly the same problem as the other cases, but a bit different)\n- Bump to AbyssalCraft 1.9.4 (the now working recipe removal stuff is incompatible with the pre-releases)\n- Compiled against 1.12.2\n- Now runs on Forge 14.23.0.2500"
