@@ -31,7 +31,7 @@ public class GuiTaskInfusionRitual extends GuiEmbedded {
 	public void drawGui(int mx, int my, float partialTick) {
 		BigItemStack dispStack = task.output.copy();
 		BigItemStack offerStack = task.offering.copy();
-		int progress = quest == null || !quest.globalQuest? task.GetUserProgress(screen.mc.thePlayer.getUniqueID()) : task.GetGlobalProgress();
+		int progress = quest == null || !quest.globalQuest? task.GetUserProgress(screen.mc.player.getUniqueID()) : task.GetGlobalProgress();
 
 		if(dispStack.getBaseStack() != null && offerStack.getBaseStack() != null){
 			screen.mc.renderEngine.bindTexture(ThemeRegistry.curTheme().guiTexture());
@@ -67,10 +67,10 @@ public class GuiTaskInfusionRitual extends GuiEmbedded {
 			screen.mc.fontRendererObj.drawString("To create the following:", posX + sizeX/2 - screen.mc.fontRendererObj.getStringWidth("To create the following:")/2 + 20, posY + sizeY/2 - 30, ThemeRegistry.curTheme().textColor().getRGB());
 
 			if(mx >= posX + sizeX/2 - 8 + 20 && mx < posX + sizeX/2 + 8 + 20 && my >= posY + sizeY/2 - 17 && my < posY + sizeY/2 - 1)
-				screen.DrawTooltip(dispStack.getBaseStack().getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
+				screen.DrawTooltip(dispStack.getBaseStack().getTooltip(screen.mc.player, screen.mc.gameSettings.advancedItemTooltips), mx, my);
 
 			if(mx >= posX + sizeX/2 - 8 + 20 && mx < posX + sizeX/2 + 8 + 20 && my >= posY + sizeY/2 - 17 - 35 && my < posY + sizeY/2 - 1 - 35)
-				screen.DrawTooltip(offerStack.getBaseStack().getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
+				screen.DrawTooltip(offerStack.getBaseStack().getTooltip(screen.mc.player, screen.mc.gameSettings.advancedItemTooltips), mx, my);
 		}
 	}
 }

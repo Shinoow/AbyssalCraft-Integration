@@ -17,13 +17,13 @@ import com.shinoow.abyssalcraft.lib.util.IHiddenRitual;
 public class RitualCommand extends CommandBase {
 
 	@Override
-	public String getCommandName() {
+	public String getName() {
 
 		return "acritual";
 	}
 
 	@Override
-	public String getCommandUsage(ICommandSender sender) {
+	public String getUsage(ICommandSender sender) {
 
 		return "/acritual chat | file";
 	}
@@ -45,7 +45,7 @@ public class RitualCommand extends CommandBase {
 							sb.append(" | ");
 					}
 
-				sender.addChatMessage(new TextComponentString(sb.toString()));
+				sender.sendMessage(new TextComponentString(sb.toString()));
 				return;
 			} else if(args[0].equals("file")){
 
@@ -75,17 +75,17 @@ public class RitualCommand extends CommandBase {
 					BufferedWriter bw = new BufferedWriter(fw);
 					bw.write(sb.toString());
 					bw.close();
-					sender.addChatMessage(new TextComponentString("Done!"));
+					sender.sendMessage(new TextComponentString("Done!"));
 					return;
 				} catch(IOException e){
 					e.printStackTrace();
 				}
 			} else {
-				sender.addChatMessage(new TextComponentString(getCommandUsage(sender)));
+				sender.sendMessage(new TextComponentString(getUsage(sender)));
 				return;
 			}
 		} else {
-			sender.addChatMessage(new TextComponentString(getCommandUsage(sender)));
+			sender.sendMessage(new TextComponentString(getUsage(sender)));
 			return;
 		}
 	}

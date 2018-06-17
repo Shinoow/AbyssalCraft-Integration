@@ -31,7 +31,7 @@ public class GuiTaskACMachine extends GuiEmbedded {
 	public void drawGui(int mx, int my, float partialTick) {
 
 		BigItemStack dispStack = task.output.copy();
-		int progress = quest == null || !quest.globalQuest? task.GetUserProgress(screen.mc.thePlayer.getUniqueID()) : task.GetGlobalProgress();
+		int progress = quest == null || !quest.globalQuest? task.GetUserProgress(screen.mc.player.getUniqueID()) : task.GetGlobalProgress();
 
 		if(dispStack.getBaseStack() != null){
 
@@ -73,7 +73,7 @@ public class GuiTaskACMachine extends GuiEmbedded {
 					screen.mc.fontRendererObj.drawString("->", posX + sizeX/2 - screen.mc.fontRendererObj.getStringWidth("->")/2 - 10, posY + sizeY/2 - 17 + 2, ThemeRegistry.curTheme().textColor().getRGB());
 
 					if(mx >= posX + sizeX/2 - 8 - 40 && mx < posX + sizeX/2 + 8 - 40 && my >= posY + sizeY/2 - 17 && my < posY + sizeY/2 - 1)
-						screen.DrawTooltip(temp.getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
+						screen.DrawTooltip(temp.getTooltip(screen.mc.player, screen.mc.gameSettings.advancedItemTooltips), mx, my);
 				} else {
 					int max = task.inputs.size();
 					if(max > 5)
@@ -110,7 +110,7 @@ public class GuiTaskACMachine extends GuiEmbedded {
 						}
 
 						if(mx >= posX + sizeX/2 - 8 - 40 && mx < posX + sizeX/2 + 8 - 40 && my >= posY + sizeY/2 - 17 + i*19 - max * 8 && my < posY + sizeY/2 - 1 + i*19 - max * 8)
-							screen.DrawTooltip(temp.getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
+							screen.DrawTooltip(temp.getTooltip(screen.mc.player, screen.mc.gameSettings.advancedItemTooltips), mx, my);
 					}
 				}
 			} else {
@@ -119,7 +119,7 @@ public class GuiTaskACMachine extends GuiEmbedded {
 			}
 
 			if(mx >= posX + sizeX/2 - 8 + 20 && mx < posX + sizeX/2 + 8 + 20 && my >= posY + sizeY/2 - 17 && my < posY + sizeY/2 - 1)
-				screen.DrawTooltip(dispStack.getBaseStack().getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
+				screen.DrawTooltip(dispStack.getBaseStack().getTooltip(screen.mc.player, screen.mc.gameSettings.advancedItemTooltips), mx, my);
 		}
 	}
 }

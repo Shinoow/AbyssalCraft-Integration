@@ -25,7 +25,7 @@ public class GuiTaskCreationRitual extends GuiEmbedded {
 	@Override
 	public void drawGui(int mx, int my, float partialTick) {
 		BigItemStack dispStack = task.output.copy();
-		int progress = quest == null || !quest.globalQuest? task.GetUserProgress(screen.mc.thePlayer.getUniqueID()) : task.GetGlobalProgress();
+		int progress = quest == null || !quest.globalQuest? task.GetUserProgress(screen.mc.player.getUniqueID()) : task.GetGlobalProgress();
 
 		if(dispStack.getBaseStack() != null){
 			screen.mc.renderEngine.bindTexture(ThemeRegistry.curTheme().guiTexture());
@@ -39,7 +39,7 @@ public class GuiTaskCreationRitual extends GuiEmbedded {
 			screen.mc.fontRendererObj.drawString("Create the following through a Creation Ritual:", posX + sizeX/2 - screen.mc.fontRendererObj.getStringWidth("Creation the following through a Creation Ritual:")/2 + 20, posY + sizeY/2 - 30, ThemeRegistry.curTheme().textColor().getRGB());
 
 			if(mx >= posX + sizeX/2 - 8 + 20 && mx < posX + sizeX/2 + 8 + 20 && my >= posY + sizeY/2 - 17 && my < posY + sizeY/2 - 1)
-				screen.DrawTooltip(dispStack.getBaseStack().getTooltip(screen.mc.thePlayer, screen.mc.gameSettings.advancedItemTooltips), mx, my);
+				screen.DrawTooltip(dispStack.getBaseStack().getTooltip(screen.mc.player, screen.mc.gameSettings.advancedItemTooltips), mx, my);
 		}
 	}
 }

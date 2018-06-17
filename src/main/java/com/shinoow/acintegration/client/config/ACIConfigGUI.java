@@ -18,7 +18,6 @@ public class ACIConfigGUI extends GuiConfig {
 		super(parent, getConfigElements(), "acintegration", true, true, "AbyssalCraft Integration");
 	}
 
-	@SuppressWarnings("rawtypes")
 	private static List<IConfigElement> getConfigElements(){
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
 		list.add(new DummyCategoryElement(I18n.translateToLocal("aci_general"), "aci_general", GeneralEntry.class));

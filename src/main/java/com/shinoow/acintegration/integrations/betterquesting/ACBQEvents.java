@@ -21,7 +21,7 @@ public class ACBQEvents {
 	@SubscribeEvent
 	public void onTransmuted(ItemTransmutedEvent event){
 
-		if(event.getEntityPlayer().worldObj.isRemote)
+		if(event.getEntityPlayer().world.isRemote)
 			return;
 
 		for(Entry<TaskACMachine,QuestInstance> set : getMachineTasks(event.getEntityPlayer().getUniqueID()).entrySet()){
@@ -34,7 +34,7 @@ public class ACBQEvents {
 	@SubscribeEvent
 	public void onCrystallized(ItemCrystallizedEvent event){
 
-		if(event.getEntityPlayer().worldObj.isRemote)
+		if(event.getEntityPlayer().world.isRemote)
 			return;
 
 		for(Entry<TaskACMachine,QuestInstance> set : getMachineTasks(event.getEntityPlayer().getUniqueID()).entrySet()){
@@ -47,7 +47,7 @@ public class ACBQEvents {
 	@SubscribeEvent
 	public void onRitualComplete(RitualEvent.Post event){
 
-		if(event.getEntityPlayer().worldObj.isRemote)
+		if(event.getEntityPlayer().world.isRemote)
 			return;
 
 		for(TaskBase task : QuestDatabase.getActiveTasks(event.getEntityPlayer().getUniqueID())){
