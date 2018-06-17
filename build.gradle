@@ -81,9 +81,10 @@ minecraft {
 	
 	useDepAts = true
 	
-		replaceIn "ACIntegration.java"
-            replace "forgeversion", props.forge_version
-			replace "cert_fingerprint", project.findProperty('signSHA1')
+	replaceIn "ACIntegration.java"
+        replace "forgeversion", props.forge_version
+		replace "aci_version", props.aci_version
+		replace "cert_fingerprint", project.findProperty('signSHA1')
 }
 
 dependencies {
@@ -93,7 +94,7 @@ dependencies {
 	//deobfCompile name: 'Thaumcraft', version: "5.2.4", ext: 'jar'
 	deobfCompile "slimeknights.mantle:Mantle:1.11.2-1.2.0.25"
     deobfCompile "slimeknights:TConstruct:1.11.2-2.7.0.26"
-	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.11.2-1.9.4.2"
+	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.11.2-1.9.4.10"
     deobfCompile "MineTweaker3:MineTweaker3-MC1112-Main:1.11.2-3.0.25.102"
 	//deobfCompile "better-questing:BetterQuesting:1.3.180"
 	deobfCompile "net.darkhax.bookshelf:Bookshelf:1.11.2-2.0.0.387"
@@ -156,7 +157,7 @@ curseforge {
 		relations{
 			requiredLibrary 'abyssalcraft'
 			optionalLibrary 'crafttweaker'
-			//optionalLibrary 'projecte'
+			optionalLibrary 'projecte'
 			//optionalLibrary 'thaumcraft'
 			optionalLibrary 'tinkers-construct'
 			//optionalLibrary 'better-questing'
