@@ -38,6 +38,7 @@ public class ACTC implements IACPlugin {
 	@Override
 	public void preInit() {
 
+		ACTCMisc.initAspects();
 //
 //		if(ACIntegration.tcItems){
 //
@@ -134,7 +135,6 @@ public class ACTC implements IACPlugin {
 
 		if(ACIntegration.tcWarp)
 			MinecraftForge.EVENT_BUS.register(new ACTCEvents());
-		ACTCMisc.initAspects();
 
 //		if(ACIntegration.tcItems){
 

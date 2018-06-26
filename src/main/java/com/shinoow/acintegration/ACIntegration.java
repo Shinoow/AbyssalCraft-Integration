@@ -36,6 +36,7 @@ import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
 import com.shinoow.acintegration.command.RitualCommand;
 import com.shinoow.acintegration.integrations.minetweaker.ACMT;
+import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
 import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 
 @Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:forge@[forgeversion,);required-after:abyssalcraft@[1.9.4.10,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
@@ -113,6 +114,8 @@ public class ACIntegration {
 			ACTiCon.instance.preInit();
 		if(ACMT.instance.canLoad())
 			ACMT.instance.preInit();
+		if(ACTC.instance.canLoad())
+			ACTC.instance.preInit();
 	}
 
 	@SubscribeEvent
