@@ -101,6 +101,7 @@ public class BlocksTC {
 	public static Block redstoneRelay;
 	public static Block matrixSpeed;
 	public static Block matrixCost;
+	public static Block visBattery;
 	
 	public static HashMap<EnumDyeColor,Block> candles = new HashMap<>();
 	public static HashMap<EnumDyeColor,Block> banners = new HashMap<>();
@@ -157,11 +158,18 @@ public class BlocksTC {
 	public static Block patternCrafter;
 	public static Block activatorRail;
 	public static Block potionSprayer;
+	public static Block stabilizer;
+	public static Block visGenerator;
+	public static Block condenser;
+	public static Block condenserlattice;
+	public static Block condenserlatticeDirty;
+	public static Block voidSiphon;
 	
 	// Fluids
 	public static Block fluxGoo;	
 	public static Block purifyingFluid;
 	public static Block liquidDeath;
+	public static Block taintDust;
 		
 	// Misc
 	public static Block hole;
@@ -175,6 +183,10 @@ public class BlocksTC {
 	public static Block placeholderAnvil;
 	public static Block placeholderCauldron;
 	public static Block placeholderTable;
+	
+	
+	
+	
 	
 	
 	

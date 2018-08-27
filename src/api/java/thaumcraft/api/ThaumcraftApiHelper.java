@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -18,10 +23,16 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.VanillaInventoryCodeHooks;
+import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IEssentiaTransport;
+import thaumcraft.api.crafting.IngredientNBTTC;
 import thaumcraft.api.items.ItemGenericEssentiaContainer;
 import thaumcraft.api.items.ItemsTC;
 
@@ -377,6 +388,69 @@ public class ThaumcraftApiHelper {
 	}
 
 	
+	public static Ingredient getIngredient(Object obj)
+    {
+		if (obj instanceof Ingredient) return (Ingredient) obj;
+        if (obj!=null && obj instanceof ItemStack && ((ItemStack)obj).hasTagCompound())
+            return new IngredientNBTTC((ItemStack)obj);
+        else 
+        	return CraftingHelper.getIngredient(obj);
+    }
 
+	public static IItemHandler getItemHandlerAt(World world, BlockPos pos, EnumFacing side) {
+		Pair<IItemHandler, Object> dest = VanillaInventoryCodeHooks.getItemHandler(world, pos.getX(), pos.getY(), pos.getZ(), side);
+		if (dest!=null && dest.getLeft()!=null) {
+			return dest.getLeft();
+		} else {
+			TileEntity tileentity = world.getTileEntity(pos);
+	        if (tileentity != null && tileentity instanceof IInventory) {            	
+	        	return wrapInventory ((IInventory) tileentity, side);
+	        }
+		}
+		return null;
+	}
+
+	public static IItemHandler wrapInventory(IInventory inventory, EnumFacing side) {
+		return inventory instanceof ISidedInventory? new SidedInvWrapper((ISidedInventory) inventory, side) : new InvWrapper((IInventory) inventory);
+	}
+
+	/**
+	 * Unlike the normal nbt comparison used by itemstacks, this method only checks if all the tags in stackA is present and equal in stackB. Any extra tags in stackB is ignored. 
+	 * Some mods love adding their own nbt data to itemstacks which ends up breaking a lot of crafting recipes or similar checks
+	 * This version of the check ignores capabilities as this method is primarily used on my side by things that do not have capabilities in any case.
+	 * @param prime
+	 * @param other
+	 * @return
+	 */	
+	public static boolean areItemStackTagsEqualRelaxed(ItemStack prime, ItemStack other) {
+		if (prime.isEmpty() && other.isEmpty())
+	    {
+	        return true;
+	    }
+	    else if (!prime.isEmpty() && !other.isEmpty())
+	    {
+//	        if (prime.getTagCompound() == null && other.getTagCompound() != null)
+//	        {
+//	            return false;
+//	        }
+//	        else
+//	        {
+	            return (prime.getTagCompound() == null || compareTagsRelaxed(prime.getTagCompound(),other.getTagCompound()));
+//	        }
+	    }
+	    else
+	    {
+	        return false;
+	    }
+	}
 	
+	public static boolean compareTagsRelaxed(NBTTagCompound prime, NBTTagCompound other) {
+		for (String key : prime.getKeySet()) {			
+			if (!other.hasKey(key) || !prime.getTag(key).equals(other.getTag(key))) {
+				return false;
+			}
+		}		
+		return true;
+	}
+		
 }

@@ -2,17 +2,17 @@ package com.shinoow.acintegration.integrations.gamestages;
 
 import java.util.Map;
 
-import net.darkhax.gamestages.capabilities.PlayerDataHandler;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.acintegration.ACIntegration;
+
+import net.darkhax.gamestages.GameStageHelper;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @ACPlugin
 public class ACGS implements IACPlugin {
@@ -52,7 +52,7 @@ public class ACGS implements IACPlugin {
 		String requiredStage = RITUAL_MAP.get(event.getRitual().getUnlocalizedName().substring(10));
 
 		if(requiredStage != null && !requiredStage.isEmpty())
-			if(!PlayerDataHandler.getStageData(event.getEntityPlayer()).hasUnlockedStage(requiredStage)){
+			if(!GameStageHelper.getPlayerData(event.getEntityPlayer()).hasStage(requiredStage)){
 				event.setCanceled(true);
 				if(event.getWorld().isRemote)
 					event.getEntityPlayer().sendMessage(new TextComponentString("You cannot perform this ritual yet."));
