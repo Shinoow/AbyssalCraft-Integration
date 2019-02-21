@@ -1,17 +1,17 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import net.minecraft.util.ResourceLocation;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.necronomicon.*;
+import com.shinoow.abyssalcraft.api.necronomicon.CraftingStack;
+import com.shinoow.abyssalcraft.api.necronomicon.INecroData;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Chapter;
 import com.shinoow.abyssalcraft.api.necronomicon.NecroData.Page;
 
 import crafttweaker.IAction;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
+import net.minecraft.util.ResourceLocation;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.abyssalcraft.necronomicon.internal")
 public class InternalNecroData {

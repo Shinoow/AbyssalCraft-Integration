@@ -53,7 +53,7 @@ public class ACTCEvents {
 
 	@SubscribeEvent
 	public void onEntityAttack(LivingAttackEvent event){
-		if(ACIntegration.tcWarp)
+		if(ACIntegration.tcWarpMobs)
 			if(event.getEntity() instanceof EntityLiving){
 				EntityLiving mob = (EntityLiving)event.getEntity();
 
@@ -77,7 +77,7 @@ public class ACTCEvents {
 
 	@SubscribeEvent
 	public void onEntityHurt(LivingHurtEvent event){
-		if(ACIntegration.tcWarp)
+		if(ACIntegration.tcWarpMobs)
 			if(event.getEntity() instanceof EntityPlayer){
 				EntityPlayer player = (EntityPlayer)event.getEntity();
 
@@ -107,7 +107,7 @@ public class ACTCEvents {
 
 	@SubscribeEvent
 	public void onEntityLiving(LivingUpdateEvent event){
-		if(ACIntegration.tcWarp)
+		if(ACIntegration.tcWarpDims)
 			if(event.getEntity() instanceof EntityPlayer){
 				EntityPlayer player = (EntityPlayer)event.getEntity();
 

@@ -3,17 +3,16 @@ package com.shinoow.acintegration.integrations.minetweaker;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentData;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconEnchantmentRitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 
 import crafttweaker.IAction;
 import crafttweaker.api.item.IIngredient;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.abyssalcraft.EnchantmentRitual")
 public class EnchantmentRitual {

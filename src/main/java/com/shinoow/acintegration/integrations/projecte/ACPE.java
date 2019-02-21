@@ -3,16 +3,16 @@ package com.shinoow.acintegration.integrations.projecte;
 import java.util.Iterator;
 import java.util.List;
 
-import moze_intel.projecte.api.ProjectEAPI;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.oredict.OreDictionary;
-
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.acintegration.ACIntegration;
+
+import moze_intel.projecte.api.ProjectEAPI;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.oredict.OreDictionary;
 
 @ACPlugin
 public class ACPE implements IACPlugin {

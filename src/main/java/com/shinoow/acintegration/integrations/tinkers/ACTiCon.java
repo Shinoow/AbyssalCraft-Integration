@@ -1,5 +1,9 @@
 package com.shinoow.acintegration.integrations.tinkers;
 
+import com.shinoow.abyssalcraft.api.integration.ACPlugin;
+import com.shinoow.abyssalcraft.api.integration.IACPlugin;
+import com.shinoow.acintegration.ACIntegration;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -19,10 +23,6 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.shinoow.abyssalcraft.api.integration.ACPlugin;
-import com.shinoow.abyssalcraft.api.integration.IACPlugin;
-import com.shinoow.acintegration.ACIntegration;
 
 @ACPlugin
 public class ACTiCon implements IACPlugin {

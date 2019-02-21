@@ -1,9 +1,6 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
 import static crafttweaker.api.minecraft.CraftTweakerMC.getItemStack;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
@@ -14,6 +11,9 @@ import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.item.IngredientStack;
 import crafttweaker.api.oredict.IOreDictEntry;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 @ACPlugin
 public class ACMT implements IACPlugin {

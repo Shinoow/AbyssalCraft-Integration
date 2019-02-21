@@ -1,11 +1,11 @@
 package com.shinoow.acintegration.integrations.tinkers;
 
+import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
-
-import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 
 public class TraitDreadPurity extends AbstractTrait {
 

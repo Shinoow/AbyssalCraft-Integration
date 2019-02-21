@@ -3,16 +3,15 @@ package com.shinoow.acintegration.integrations.minetweaker;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.potion.Potion;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconPotionAoERitual;
 import com.shinoow.abyssalcraft.api.ritual.NecronomiconRitual;
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 
 import crafttweaker.IAction;
 import crafttweaker.api.item.IIngredient;
+import net.minecraft.potion.Potion;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.abyssalcraft.PotionAoERitual")
 public class PotionAoERitual {

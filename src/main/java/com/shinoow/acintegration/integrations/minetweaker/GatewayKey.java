@@ -1,11 +1,10 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 
 import crafttweaker.IAction;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.abyssalcraft.GatewayKey")
 public class GatewayKey {

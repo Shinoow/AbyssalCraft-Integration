@@ -1,8 +1,8 @@
 {
   "homepage": "http://minecraft.curseforge.com/mc-mods/234851",
   "promos": {
-	"1.12.2-latest": "1.6.6",
-	"1.12.2-recommended": "1.6.6",
+	"1.12.2-latest": "1.7.0",
+	"1.12.2-recommended": "1.7.0",
 	"1.12.1-latest": "1.6.0",
 	"1.12.1-recommended": "1.6.0",
 	"1.12-latest": "1.5.0",
@@ -19,6 +19,7 @@
     "1.8.9-recommended": "1.4.7"
   },
   "1.12.2": {
+	"1.7.0": "- Added Bewitchment integration (Statues, Dreadlands Infused Powerstones, Ghoul Heads, Crystal Clusters and Necronomicons can be used as altar boosters)\n- Split the Thaumcraft warp config option into two separate options (one for dimension travel, and one for fighting mobs)\n- Bump to AbyssalCraft 1.9.5.2\n- Now runs on Forge 14.23.5.2815",
 	"1.6.6": "- Updated GameStages integration to support version 2.0.98\n- Thaumcraft aspects are now assigned through its registration event\n- Bump to AbyssalCraft 1.9.4.11\n- Now runs on Forge 14.23.4.2705",
 	"1.6.5": "- Thaumcraft Aspects are now registered in preinit",
 	"1.6.4": "- Thaumcraft integration actually loads now",

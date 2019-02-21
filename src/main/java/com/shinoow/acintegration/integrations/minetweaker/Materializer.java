@@ -2,10 +2,6 @@ package com.shinoow.acintegration.integrations.minetweaker;
 
 import java.util.List;
 
-import net.minecraft.item.ItemStack;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-
 import com.google.common.collect.Lists;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -14,6 +10,9 @@ import com.shinoow.abyssalcraft.api.recipe.MaterializerRecipes;
 
 import crafttweaker.IAction;
 import crafttweaker.api.item.IItemStack;
+import net.minecraft.item.ItemStack;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.abyssalcraft.Materializer")
 public class Materializer {

@@ -5,6 +5,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import org.apache.logging.log4j.Level;
+
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
+import com.shinoow.abyssalcraft.api.item.ACItems;
+import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
+import com.shinoow.acintegration.command.RitualCommand;
+import com.shinoow.acintegration.integrations.minetweaker.ACMT;
+import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
+import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
+
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -29,17 +39,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-import org.apache.logging.log4j.Level;
-
-import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
-import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
-import com.shinoow.acintegration.command.RitualCommand;
-import com.shinoow.acintegration.integrations.minetweaker.ACMT;
-import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
-import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
-
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:forge@[forgeversion,);required-after:abyssalcraft@[1.9.4.10,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:forge@[forgeversion,);required-after:abyssalcraft@[1.9.5.2,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
 acceptedMinecraftVersions = "[1.12.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json", certificateFingerprint = "cert_fingerprint")
 public class ACIntegration {
 
@@ -55,7 +55,7 @@ public class ACIntegration {
 
 	public static Configuration cfg;
 
-	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarp, loadTiCon, loadBQ, loadGS;
+	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarpDims, tcWarpMobs, loadTiCon, loadBQ, loadGS, loadBW;
 
 	public static Item dust;
 
@@ -152,10 +152,12 @@ public class ACIntegration {
 		//		tcItems = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Items", true, "Wheter or not to add items through the Thaumcraft integration.").getBoolean();
 		loadMT = cfg.get(Configuration.CATEGORY_GENERAL, "MineTweaker Integration", true, "Whether or not to load the MineTweaker integration.").getBoolean();
 		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
-		tcWarp = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs and being inside AbyssalCraft dimensions").getBoolean();
+		tcWarpDims = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp: Dimensions", true, "Toggles wheter or not to gain additional warp from being inside AbyssalCraft dimensions").getBoolean();
+		tcWarpMobs = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp: Mobs", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs").getBoolean();
 		loadTiCon = cfg.get(Configuration.CATEGORY_GENERAL, "Tinkers' Construct", true, "Whether or not to load the Tinkers' Construct integration.").getBoolean();
 		//		loadBQ = cfg.get(Configuration.CATEGORY_GENERAL, "Better Questing", true, "Whether or not to load the Better Questing integration.").getBoolean();
 		loadGS = cfg.get(Configuration.CATEGORY_GENERAL, "Game Stages", true, "Whether or not to load the Game Stages integration.").getBoolean();
+		loadBW = cfg.get(Configuration.CATEGORY_GENERAL, "Bewitchment", true, "Whether or not to load the Bewitchment integration.").getBoolean();
 
 		if(cfg.hasChanged())
 			cfg.save();

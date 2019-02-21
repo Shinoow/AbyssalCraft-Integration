@@ -3,16 +3,15 @@ package com.shinoow.acintegration.integrations.minetweaker;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import net.minecraft.item.ItemStack;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 
 import crafttweaker.IAction;
 import crafttweaker.api.item.IItemStack;
+import net.minecraft.item.ItemStack;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.abyssalcraft.Crystallizer")
 public class Crystallizer {

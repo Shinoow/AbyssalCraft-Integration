@@ -3,10 +3,6 @@ package com.shinoow.acintegration.integrations.minetweaker;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.minecraft.item.ItemStack;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-
 import com.google.common.collect.Maps;
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
@@ -16,6 +12,9 @@ import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import crafttweaker.IAction;
 import crafttweaker.api.item.IItemStack;
+import net.minecraft.item.ItemStack;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.abyssalcraft.UpgradeKit")
 public class UpgradeKit {

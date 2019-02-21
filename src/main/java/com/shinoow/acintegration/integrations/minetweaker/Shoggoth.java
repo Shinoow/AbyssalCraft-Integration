@@ -1,13 +1,12 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import net.minecraft.entity.EntityLivingBase;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
 
 import crafttweaker.IAction;
+import net.minecraft.entity.EntityLivingBase;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.abyssalcraft.shoggoth")
 public class Shoggoth {

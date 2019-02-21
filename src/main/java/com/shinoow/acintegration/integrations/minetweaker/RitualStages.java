@@ -1,11 +1,10 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-
 import com.shinoow.acintegration.integrations.gamestages.ACGS;
 
 import crafttweaker.IAction;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.abyssalcraft.RitualStages")
 public class RitualStages {
