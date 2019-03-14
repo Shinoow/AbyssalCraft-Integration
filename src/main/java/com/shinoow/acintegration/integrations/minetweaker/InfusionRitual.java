@@ -37,7 +37,7 @@ public class InfusionRitual {
 
 		NecronomiconInfusionRitual ritual = new NecronomiconInfusionRitual(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, ACMT.toStack(item), ACMT.toObject(sacrifice), offers);
 
-		if(nbt) ritual.setNBTSensitive();
+		if(nbt) ritual.setNBTSensitive().setNBTSensitiveSacrifice();
 
 		if(tags != null && tags.length > 0) ritual.setTags(tags);
 
