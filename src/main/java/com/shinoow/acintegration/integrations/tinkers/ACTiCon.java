@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -19,7 +18,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -48,36 +46,14 @@ public class ACTiCon implements IACPlugin {
 	@Override
 	public void preInit() {
 
-		ACTiConMisc.initFluids();
-
-		//IMC registration
-		NBTTagCompound tag = new NBTTagCompound();
-		tag.setString("fluid", fluid_molten_abyssalnite.getName());
-		tag.setString("ore", "Abyssalnite");
-		tag.setBoolean("toolforge", true);
-
-		FMLInterModComms.sendMessage("tconstruct", "integrateSmeltery", tag);
-
-		tag = new NBTTagCompound();
-		tag.setString("fluid", fluid_molten_coralium.getName());
-		tag.setString("ore", "LiquifiedCoralium");
-		tag.setBoolean("toolforge", true);
-
-		FMLInterModComms.sendMessage("tconstruct", "integrateSmeltery", tag);
-
-		tag = new NBTTagCompound();
-		tag.setString("fluid", fluid_molten_dreadium.getName());
-		tag.setString("ore", "Dreadium");
-		tag.setBoolean("toolforge", true);
-
-		FMLInterModComms.sendMessage("tconstruct", "integrateSmeltery", tag);
+		ACTiConMisc.preInit();
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
 	public void init() {
-		ACTiConMisc.initMaterials();
+		ACTiConMisc.init();
 	}
 
 	@Override
