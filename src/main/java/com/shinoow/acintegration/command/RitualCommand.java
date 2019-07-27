@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
 
@@ -113,7 +114,7 @@ public class RitualCommand extends CommandBase {
 		sb.append(" | ");
 		sb.append(ritual.isNBTSensitive());
 		sb.append(" | ");
-		sb.append(ritual.getSacrifice() != null ? APIUtils.convertToStack(ritual.getSacrifice()).toString() : "None");
+		sb.append(ritual.getSacrifice() != null ? getStackName(APIUtils.convertToStack(ritual.getSacrifice())) : "None");
 		sb.append(" | ");
 		sb.append(getOutput(ritual));
 		sb.append("\n");
@@ -122,7 +123,7 @@ public class RitualCommand extends CommandBase {
 
 	private String getOutput(NecronomiconRitual ritual){
 		if(ritual instanceof NecronomiconCreationRitual)
-			return ((NecronomiconCreationRitual) ritual).getItem().toString();
+			return getStackName(((NecronomiconCreationRitual) ritual).getItem());
 		if(ritual instanceof NecronomiconEnchantmentRitual)
 			return ((NecronomiconEnchantmentRitual) ritual).getEnchantment().enchantment.getName();
 		if(ritual instanceof NecronomiconPotionAoERitual)
@@ -134,4 +135,7 @@ public class RitualCommand extends CommandBase {
 		return "Unknown";
 	}
 
+	private String getStackName(ItemStack stack) {
+		return stack.getCount() + "x" + stack.getItem().getRegistryName().toString() + "@" + stack.getItemDamage();
+	}
 }

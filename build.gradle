@@ -94,12 +94,12 @@ dependencies {
 	//deobfCompile name: 'Thaumcraft', version: "6.1.BETA11", ext: 'jar'
 	deobfCompile "slimeknights.mantle:Mantle:1.12-1.3.1.21"
     deobfCompile "slimeknights:TConstruct:1.12-2.7.4.34"
-	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.12.2-1.9.5.4"
+	deobfCompile "com.shinoow.abyssalcraft:AbyssalCraft:1.12.2-1.9.10"
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.0.0.8"
 	//deobfCompile "better-questing:BetterQuesting:1.3.180"
 	deobfCompile "net.darkhax.bookshelf:Bookshelf-1.12.2:2.3.556"
     deobfCompile "net.darkhax.gamestages:GameStages-1.12.2:2.0.98"
-    deobfCompile "bewitchment:Bewitchment-1.12.2:0.0.19.15:indev";
+    deobfCompile "bewitchment:bewitchment:1.12.2:0.0.20.3";
 }
 
 version = "${props.mc_version}-${props.aci_version}"

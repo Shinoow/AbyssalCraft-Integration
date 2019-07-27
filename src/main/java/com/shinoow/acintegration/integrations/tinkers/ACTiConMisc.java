@@ -2,6 +2,7 @@ package com.shinoow.acintegration.integrations.tinkers;
 
 import static com.shinoow.acintegration.integrations.tinkers.ACTiCon.*;
 
+import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 
 import net.minecraft.item.ItemStack;
@@ -9,8 +10,10 @@ import net.minecraftforge.fluids.FluidRegistry;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
 import slimeknights.tconstruct.library.materials.*;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.smeltery.block.BlockTinkerFluid;
+import slimeknights.tconstruct.tools.modifiers.ModAntiMonsterType;
 
 /**
  * This class exists to move fields from the main plugin class that can trigger a NoClassDefFoundError when the<br>
@@ -24,6 +27,8 @@ public class ACTiConMisc {
 	public static final AbstractTrait dread_plague = new TraitDreadPlague();
 	public static final AbstractTrait coralium_plague = new TraitCoraliumPlague();
 	public static final AbstractTrait dread_purity = new TraitDreadPurity();
+
+	public static Modifier light_pierce;
 
 	public static void preInit(){
 		fluid_molten_abyssalnite = new FluidMolten("moltenAbyssalnite", 0x4a1c89);
@@ -67,6 +72,9 @@ public class ACTiConMisc {
 				new ExtraMaterialStats(100),
 				new BowMaterialStats(0.65f, 1.3f, 3.5f));
 		TinkerRegistry.integrate(dreadium, fluid_molten_dreadium, "Dreadium").toolforge().preInit();
+
+		light_pierce = new ModAntiMonsterType("light_pierce", 0xf2f2f2, 5, 24, AbyssalCraftAPI.SHADOW);
+		light_pierce.addItem(ACItems.shadow_gem);
 	}
 
 	public static void init(){

@@ -16,7 +16,7 @@ public class TraitDreadPurity extends AbstractTrait {
 	@Override
 	public float damage(ItemStack tool,  EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical) {
 
-		if(EntityUtil.isEntityDread(target) && !EntityUtil.isEntityAnti(target) && !EntityUtil.isEntityCoralium(target))
+		if(EntityUtil.isDreadPlagueCarrier(target))
 			return super.damage(tool, player, target, damage, newDamage * 1.25F, isCritical);
 		return super.damage(tool, player, target, damage, newDamage, isCritical);
 	}
