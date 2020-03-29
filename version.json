@@ -1,8 +1,8 @@
 {
   "homepage": "http://minecraft.curseforge.com/mc-mods/234851",
   "promos": {
-	"1.12.2-latest": "1.9.0",
-	"1.12.2-recommended": "1.9.0",
+	"1.12.2-latest": "1.10.0",
+	"1.12.2-recommended": "1.10.0",
 	"1.12.1-latest": "1.6.0",
 	"1.12.1-recommended": "1.6.0",
 	"1.12-latest": "1.5.0",
@@ -19,6 +19,7 @@
     "1.8.9-recommended": "1.4.7"
   },
   "1.12.2": {
+	"1.10.0": "- Bump to AbyssalCraft 1.9.18\n- Added CraftTweaker support for adding fuel for the Crystallizer and Transmutator\n- Added a variant of the Materializer addCrystal method in the CraftTweaker integration that allows you to set a fuel value for it",
 	"1.9.0": "- Bewitchment integration updated to support 0.0.20.3\n- The \"/acritual\" command now prints the registry name of Item Sacrifices and Item Outputs (instead of unlocalized)\n- Added a Light Pierce modifier to the Tinkers' integration (uses Shadow Gems, has no page)\n- Added Russian translation (courtesy of Hesperusrus)\n- Bump to AbyssalCraft 1.9.10",
 	"1.8.1": "- Crafting crossbow bolts using Abyssalnite, Refined Coralium and Dreadium in Tinkers Construct now works",
 	"1.8.0": "- Summoning rituals added through the CraftTweaker integration now supports adding custom NBT data to the summoned mob\n- Infusion Rituals now also make the sacrifice (Item placed on altar) NBT sensitive if the NBT flag is enabled (for now you can disable this by calling the related ritual property modifying method after registering the ritual)\n- Bump to AbyssalCraft 1.9.5.4",
