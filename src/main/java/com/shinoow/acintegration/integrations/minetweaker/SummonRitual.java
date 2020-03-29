@@ -61,9 +61,8 @@ public class SummonRitual {
 
 		if(nbt) ritual.setNBTSensitive();
 
-		if(customNBT != null) {
+		if(customNBT != null)
 			ritual.setCustomNBT((NBTTagCompound) NBTConverter.from(customNBT));
-		}
 
 		ACMTMisc.TASKS.add(new Add(ritual));
 	}

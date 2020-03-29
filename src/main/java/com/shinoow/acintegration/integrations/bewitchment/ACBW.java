@@ -34,7 +34,7 @@ public class ACBW implements IACPlugin {
 
 	@Override
 	public void init() {
-		
+
 		BewitchmentAPI.ALTAR_UPGRADES.put(s -> s.getBlockState().getBlock() == ACBlocks.statue || s.getBlockState().getBlock() == ACBlocks.decorative_statue, new AltarUpgrade(AltarUpgrade.Type.PENTACLE, 4, 0));
 		BewitchmentAPI.ALTAR_UPGRADES.put(s -> s.getBlockState().getBlock() == ACBlocks.dreadlands_infused_powerstone, new AltarUpgrade(AltarUpgrade.Type.PENTACLE, 1, 0));
 		BewitchmentAPI.ALTAR_UPGRADES.put(s -> s.getBlockState().getBlock() == ACBlocks.depths_ghoul_head, new AltarUpgrade(AltarUpgrade.Type.PENTACLE, 1, 0));
