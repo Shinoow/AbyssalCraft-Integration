@@ -45,13 +45,13 @@ public class Materializer {
 		@Override
 		public String describe() {
 
-			return String.format("Adding Materialization recipe for %s (input: %s)", output, getArrayContent(input));
+			return String.format("Adding Materialization recipe for %s (input: %s)", output.getDisplayName(), getArrayContent(input));
 		}
 
 		private String getArrayContent(ItemStack[] array){
 			String stuff = "[";
 			for(ItemStack stack : array)
-				stuff+=stack+", ";
+				stuff+=stack.getDisplayName()+", ";
 			stuff = stuff.substring(0, stuff.length()-2);
 			return stuff+="]";
 		}
@@ -84,7 +84,7 @@ public class Materializer {
 		@Override
 		public String describe() {
 
-			return String.format("Removing Materialization recipes for %s", output);
+			return String.format("Removing Materialization recipes for %s", output.getDisplayName());
 		}
 	}
 
@@ -109,7 +109,36 @@ public class Materializer {
 		@Override
 		public String describe() {
 
-			return String.format("Added %s to the Crystal List", stack);
+			return String.format("Added %s to the Crystal List", stack.getDisplayName());
+		}
+	}
+
+	@ZenMethod
+	public static void addCrystal(IItemStack stack, int burnTime) {
+		ACMTMisc.TASKS.add(new AddCrystalFuel(ACMT.toStack(stack), burnTime));
+	}
+
+	private static class AddCrystalFuel implements IAction {
+
+		private ItemStack stack;
+		private int burnTime;
+
+		public AddCrystalFuel(ItemStack stack, int burnTime) {
+			this.stack = stack;
+			this.burnTime = burnTime;
+		}
+
+		@Override
+		public void apply() {
+			AbyssalCraftAPI.addCrystal(stack);
+			ACMT.CRYSTALLIZER_FUELS.put(stack, burnTime);
+			ACMT.TRANSMUTATOR_FUELS.put(stack, burnTime);
+		}
+
+		@Override
+		public String describe() {
+
+			return String.format("Added %s to the Crystal List, and added it as Crystallizer and Transmutator fuel (burntime: %d)", stack.getDisplayName(), burnTime);
 		}
 	}
 }

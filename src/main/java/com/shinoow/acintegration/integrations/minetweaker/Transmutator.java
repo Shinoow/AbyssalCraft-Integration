@@ -78,4 +78,31 @@ public class Transmutator {
 			return "Removing Transmutation recipe for " + output.getDisplayName() + " (input: " + input.getDisplayName() + ")";
 		}
 	}
+
+	@ZenMethod
+	public static void addFuel(IItemStack stack, int burnTime) {
+		ACMTMisc.TASKS.add(new AddFuel(ACMT.toStack(stack), burnTime));
+	}
+
+	private static class AddFuel implements IAction {
+
+		private ItemStack stack;
+		private int burnTime;
+
+		public AddFuel(ItemStack stack, int burnTime) {
+			this.stack = stack;
+			this.burnTime = burnTime;
+		}
+
+		@Override
+		public void apply() {
+			ACMT.TRANSMUTATOR_FUELS.put(stack, burnTime);
+		}
+
+		@Override
+		public String describe() {
+
+			return String.format("Added %s as Transmutator fuel with a burntime of %d ", stack.getDisplayName(), burnTime);
+		}
+	}
 }

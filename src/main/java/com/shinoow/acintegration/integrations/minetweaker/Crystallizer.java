@@ -94,4 +94,31 @@ public class Crystallizer {
 			return "Removing Crystallization recipe for " + output1.getDisplayName() + (!output2.isEmpty() ? " (and "+ output2.getDisplayName() + ")" : "") + " (input: " + input.getDisplayName() + ")";
 		}
 	}
+
+	@ZenMethod
+	public static void addFuel(IItemStack stack, int burnTime) {
+		ACMTMisc.TASKS.add(new AddFuel(ACMT.toStack(stack), burnTime));
+	}
+
+	private static class AddFuel implements IAction {
+
+		private ItemStack stack;
+		private int burnTime;
+
+		public AddFuel(ItemStack stack, int burnTime) {
+			this.stack = stack;
+			this.burnTime = burnTime;
+		}
+
+		@Override
+		public void apply() {
+			ACMT.CRYSTALLIZER_FUELS.put(stack, burnTime);
+		}
+
+		@Override
+		public String describe() {
+
+			return String.format("Added %s as Crystallizer fuel with a burntime of %d ", stack.getDisplayName(), burnTime);
+		}
+	}
 }
