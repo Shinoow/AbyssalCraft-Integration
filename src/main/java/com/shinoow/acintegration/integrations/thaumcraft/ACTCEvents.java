@@ -330,6 +330,7 @@ public class ACTCEvents {
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.evil_sheep), new AspectList().add(Aspect.BEAST, 2).add(Aspect.EARTH, 2).add(Aspect.LIFE, 2));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.demon_sheep), new AspectList().add(Aspect.LIFE, 3).add(Aspect.FIRE, 3).add(Aspect.BEAST, 2));
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.coralium_squid), new AspectList().add(Aspect.LIFE, 3).add(Aspect.WATER, 3).add(ACTCMisc.CORALIUM, 3));
+		ThaumcraftApi.registerEntityTag(getMobName("shuboffspring"), new AspectList().add(Aspect.PLANT, 3).add(Aspect.DARKNESS, 3).add(Aspect.BEAST, 2));
 	}
 
 	@SubscribeEvent
