@@ -3,10 +3,14 @@ package com.shinoow.acintegration.integrations.thaumcraft;
 import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.acintegration.ACIntegration;
+import com.shinoow.acintegration.integrations.thaumcraft.cap.ITaintTimerCapability;
+import com.shinoow.acintegration.integrations.thaumcraft.cap.TaintTimerCapability;
+import com.shinoow.acintegration.integrations.thaumcraft.cap.TaintTimerCapabilityStorage;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Loader;
 
 @ACPlugin
@@ -121,6 +125,7 @@ public class ACTC implements IACPlugin {
 		//				ModelBakery.registerItemVariants(wandCore, coreres);
 		//			}
 		//		}
+		CapabilityManager.INSTANCE.register(ITaintTimerCapability.class, TaintTimerCapabilityStorage.instance, TaintTimerCapability::new);
 	}
 
 	@Override

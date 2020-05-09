@@ -9,16 +9,23 @@ import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.*;
-import com.shinoow.abyssalcraft.lib.ACLib;
+import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilAnimal;
 import com.shinoow.acintegration.ACIntegration;
+import com.shinoow.acintegration.integrations.thaumcraft.cap.ITaintTimerCapability;
+import com.shinoow.acintegration.integrations.thaumcraft.cap.TaintTimerCapability;
+import com.shinoow.acintegration.integrations.thaumcraft.cap.TaintTimerCapabilityProvider;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.ThaumcraftApi;
@@ -30,9 +37,6 @@ import thaumcraft.api.capabilities.IPlayerWarp.EnumWarpType;
 public class ACTCEvents {
 
 	List<Class<? extends EntityMob>> elites = Lists.newArrayList();
-	List<Class<? extends EntityMob>> bosses = Lists.newArrayList();
-
-	int warpTimer;
 
 	public ACTCEvents(){
 
@@ -44,11 +48,7 @@ public class ACTCEvents {
 		elites.add(EntitySkeletonGoliath.class);
 		elites.add(EntityOmotholWarden.class);
 		elites.add(EntityShadowTitan.class);
-
-		bosses.add(EntityChagaroth.class);
-		bosses.add(EntityDragonBoss.class);
-		bosses.add(EntityJzahar.class);
-		bosses.add(EntitySacthoth.class);
+		elites.add(EntityShubOffspring.class);
 	}
 
 	@SubscribeEvent
@@ -62,15 +62,16 @@ public class ACTCEvents {
 
 					if(EntityUtil.isEntityCoralium(mob) || EntityUtil.isEntityDread(mob) ||
 							mob.getCreatureAttribute() == AbyssalCraftAPI.SHADOW ||
-							mob instanceof EntitySkeletonGoliath )
+							mob instanceof EntitySkeletonGoliath || mob instanceof EntityShubOffspring ||
+							mob instanceof EntityEvilAnimal)
 						if(isElite(mob)){
 							if(player.world.rand.nextInt(20) == 0)
-								ThaumcraftApi.internalMethods.addWarpToPlayer(player, 5, EnumWarpType.NORMAL);
-						} else if(isBoss(mob)){
+								ThaumcraftApi.internalMethods.addWarpToPlayer(player, 3, EnumWarpType.TEMPORARY);
+						} else if(!mob.isNonBoss()){
 							if(player.world.rand.nextInt(25) == 0)
-								ThaumcraftApi.internalMethods.addWarpToPlayer(player, 7, EnumWarpType.PERMANENT);
+								ThaumcraftApi.internalMethods.addWarpToPlayer(player, 5, EnumWarpType.NORMAL);
 						} else if(player.world.rand.nextInt(15) == 0)
-							ThaumcraftApi.internalMethods.addWarpToPlayer(player, 3, EnumWarpType.TEMPORARY);
+							ThaumcraftApi.internalMethods.addWarpToPlayer(player, 1, EnumWarpType.TEMPORARY);
 				}
 			}
 	}
@@ -86,17 +87,18 @@ public class ACTCEvents {
 
 					if(EntityUtil.isEntityCoralium(mob) || EntityUtil.isEntityDread(mob) ||
 							mob.getCreatureAttribute() == AbyssalCraftAPI.SHADOW ||
-							mob instanceof EntitySkeletonGoliath)
+							mob instanceof EntitySkeletonGoliath || mob instanceof EntityShubOffspring ||
+							mob instanceof EntityEvilAnimal)
 						if(isElite(mob)){
 							if(player.world.rand.nextInt(8) == 0)
 								if(player.world.rand.nextBoolean())
-									ThaumcraftApi.internalMethods.addWarpToPlayer(player, 7, EnumWarpType.NORMAL);
-								else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 2, EnumWarpType.PERMANENT);
-						} else if(isBoss(mob)){
+									ThaumcraftApi.internalMethods.addWarpToPlayer(player, 7, EnumWarpType.TEMPORARY);
+								else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 2, EnumWarpType.NORMAL);
+						} else if(!mob.isNonBoss()){
 							if(player.world.rand.nextInt(12) == 0)
 								if(player.world.rand.nextBoolean())
-									ThaumcraftApi.internalMethods.addWarpToPlayer(player, 10, EnumWarpType.PERMANENT);
-								else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 3, EnumWarpType.PERMANENT);
+									ThaumcraftApi.internalMethods.addWarpToPlayer(player, 10, EnumWarpType.TEMPORARY);
+								else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 3, EnumWarpType.NORMAL);
 						} else if(player.world.rand.nextInt(4) == 0)
 							if(player.world.rand.nextBoolean())
 								ThaumcraftApi.internalMethods.addWarpToPlayer(player, 5, EnumWarpType.TEMPORARY);
@@ -110,25 +112,10 @@ public class ACTCEvents {
 		if(ACIntegration.tcWarpDims)
 			if(event.getEntity() instanceof EntityPlayer){
 				EntityPlayer player = (EntityPlayer)event.getEntity();
+				ITaintTimerCapability cap = TaintTimerCapability.getCap(player);
 
-				if(player.dimension == ACLib.abyssal_wasteland_id ||
-						player.dimension == ACLib.dreadlands_id ||
-						player.dimension == ACLib.omothol_id ||
-						player.dimension == ACLib.dark_realm_id)
-					warpTimer++;
-				if(warpTimer >= 2400){
-					warpTimer = player.world.rand.nextInt(300);
-					if(player.dimension == ACLib.abyssal_wasteland_id ||
-							player.dimension == ACLib.dreadlands_id)
-						if(player.world.rand.nextBoolean())
-							ThaumcraftApi.internalMethods.addWarpToPlayer(player, 10, EnumWarpType.NORMAL);
-						else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 10, EnumWarpType.PERMANENT);
-					if(player.dimension == ACLib.omothol_id ||
-							player.dimension == ACLib.dark_realm_id)
-						if(player.world.rand.nextBoolean())
-							ThaumcraftApi.internalMethods.addWarpToPlayer(player, 15, EnumWarpType.NORMAL);
-						else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 15, EnumWarpType.PERMANENT);
-				}
+				cap.incrementTimerIfApplicable(player);
+				cap.executeIfApplicable(player);
 			}
 	}
 
@@ -345,6 +332,18 @@ public class ACTCEvents {
 		ThaumcraftApi.registerEntityTag(getMobName(ACEntities.coralium_squid), new AspectList().add(Aspect.LIFE, 3).add(Aspect.WATER, 3).add(ACTCMisc.CORALIUM, 3));
 	}
 
+	@SubscribeEvent
+	public void attachCapability(AttachCapabilitiesEvent<Entity> event){
+		if(event.getObject() instanceof EntityPlayer)
+			event.addCapability(new ResourceLocation("acintegration", "tainttimer"), new TaintTimerCapabilityProvider());
+	}
+
+	@SubscribeEvent
+	public void onClonePlayer(PlayerEvent.Clone event) {
+		if(event.isWasDeath())
+			TaintTimerCapability.getCap(event.getEntityPlayer()).copy(TaintTimerCapability.getCap(event.getOriginal()));
+	}
+
 	public static String getMobName(String name){
 		return "abyssalcraft." + name;
 	}
@@ -357,14 +356,6 @@ public class ACTCEvents {
 	//	}
 
 	private boolean isElite(EntityLiving entity){
-		for(Class<? extends EntityMob> clazz : elites)
-			return entity.getClass().getName().equals(clazz.getName());
-		return false;
-	}
-
-	private boolean isBoss(EntityLiving entity){
-		for(Class<? extends EntityMob> clazz : bosses)
-			return entity.getClass().getName().equals(clazz.getName());
-		return false;
+		return elites.stream().anyMatch(c -> entity.getClass().getName().equals(c.getName()));
 	}
 }
