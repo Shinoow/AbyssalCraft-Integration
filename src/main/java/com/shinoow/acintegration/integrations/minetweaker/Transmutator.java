@@ -105,4 +105,29 @@ public class Transmutator {
 			return String.format("Added %s as Transmutator fuel with a burntime of %d ", stack.getDisplayName(), burnTime);
 		}
 	}
+
+	@ZenMethod
+	public static void removeFuel(IItemStack stack) {
+		ACMTMisc.TASKS.add(new RemoveFuel(ACMT.toStack(stack)));
+	}
+
+	private static class RemoveFuel implements IAction {
+
+		private ItemStack stack;
+
+		public RemoveFuel(ItemStack stack) {
+			this.stack = stack;
+		}
+
+		@Override
+		public void apply() {
+			ACMT.TRANSMUTATOR_FUELS.put(stack, 0);
+		}
+
+		@Override
+		public String describe() {
+
+			return String.format("Removed %s as Transmutator fuel", stack.getDisplayName());
+		}
+	}
 }

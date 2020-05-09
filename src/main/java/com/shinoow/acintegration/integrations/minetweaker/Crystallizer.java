@@ -121,4 +121,29 @@ public class Crystallizer {
 			return String.format("Added %s as Crystallizer fuel with a burntime of %d ", stack.getDisplayName(), burnTime);
 		}
 	}
+
+	@ZenMethod
+	public static void removeFuel(IItemStack stack) {
+		ACMTMisc.TASKS.add(new RemoveFuel(ACMT.toStack(stack)));
+	}
+
+	private static class RemoveFuel implements IAction {
+
+		private ItemStack stack;
+
+		public RemoveFuel(ItemStack stack) {
+			this.stack = stack;
+		}
+
+		@Override
+		public void apply() {
+			ACMT.CRYSTALLIZER_FUELS.put(stack, 0);
+		}
+
+		@Override
+		public String describe() {
+
+			return String.format("Removed %s as Crystallizer fuel", stack.getDisplayName());
+		}
+	}
 }
