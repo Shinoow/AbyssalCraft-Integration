@@ -114,8 +114,8 @@ public class ACMT implements IACPlugin {
 					.filter(e -> APIUtils.areStacksEqual(event.getItemStack(), e.getKey()))
 					.map(e -> e.getValue().intValue())
 					.findFirst()
-					.orElse(0);
-			if(val > 0)
+					.orElse(-1);
+			if(val > -1)
 				event.setBurnTime(val);
 		}
 		if(event.getFuelType() == FuelType.TRANSMUTATOR) {
@@ -123,8 +123,8 @@ public class ACMT implements IACPlugin {
 					.filter(e -> APIUtils.areStacksEqual(event.getItemStack(), e.getKey()))
 					.map(e -> e.getValue().intValue())
 					.findFirst()
-					.orElse(0);
-			if(val > 0)
+					.orElse(-1);
+			if(val > -1)
 				event.setBurnTime(val);
 		}
 	}
