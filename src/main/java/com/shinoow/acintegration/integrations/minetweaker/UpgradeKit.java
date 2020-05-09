@@ -89,4 +89,23 @@ public class UpgradeKit {
 			return "Removing " + (recipes != null ? recipes.size() : 0) + " Upgrade Kit recipe(s) for " + input.getDisplayName();
 		}
 	}
+
+	@ZenMethod
+	public static void removeAll() {
+		ACMTMisc.TASKS.add(new RemoveAll());
+	}
+
+	private static class RemoveAll implements IAction {
+
+		@Override
+		public void apply() {
+			UpgradeKitRecipes.instance().getAllUpgrades().entrySet().forEach(e -> e.getValue().clear());
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing all Upgrade Kit recipes";
+		}
+	}
 }

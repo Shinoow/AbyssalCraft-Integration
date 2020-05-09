@@ -197,4 +197,23 @@ public class Rituals {
 			else return String.format("Modifying property %s of ritual %s with value %s", getProperty(type), name, param);
 		}
 	}
+
+	@ZenMethod
+	public static void removeAll() {
+		ACMTMisc.TASKS.add(new RemoveAll());
+	}
+
+	private static class RemoveAll implements IAction {
+
+		@Override
+		public void apply() {
+			RitualRegistry.instance().getRituals().clear();
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing all Ritual recipes";
+		}
+	}
 }

@@ -97,4 +97,23 @@ public class PotionAoERitual {
 			return "Removing Necronomicon Potion AoE Ritual for "+ potion.getName();
 		}
 	}
+
+	@ZenMethod
+	public static void removeAll() {
+		ACMTMisc.TASKS.add(new RemoveAll());
+	}
+
+	private static class RemoveAll implements IAction {
+
+		@Override
+		public void apply() {
+			RitualRegistry.instance().getRituals().removeIf(r -> r instanceof NecronomiconPotionAoERitual);
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing all Potion AoE Ritual recipes";
+		}
+	}
 }

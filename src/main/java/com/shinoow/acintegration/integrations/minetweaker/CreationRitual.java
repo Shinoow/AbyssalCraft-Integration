@@ -93,4 +93,25 @@ public class CreationRitual {
 			return "Removing Necronomicon Creation Ritual for "+ item.getDisplayName();
 		}
 	}
+
+	@ZenMethod
+	public static void removeAll() {
+		ACMTMisc.TASKS.add(new RemoveAll());
+	}
+
+	private static class RemoveAll implements IAction {
+
+		@Override
+		public void apply() {
+			RitualRegistry.instance().getRituals().removeIf(r -> r instanceof NecronomiconCreationRitual &&
+					r.getClass().getSuperclass() != NecronomiconCreationRitual.class &&
+					r.getClass().getSuperclass().getSuperclass() != NecronomiconCreationRitual.class);
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing all Creation Ritual recipes";
+		}
+	}
 }

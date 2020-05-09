@@ -122,7 +122,7 @@ public class Transmutator {
 		@Override
 		public String describe() {
 
-			return String.format("Added %s as Transmutator fuel with a burntime of %d ", stack.getDisplayName(), burnTime);
+			return String.format("Adding %s as Transmutator fuel with a burntime of %d ", stack.getDisplayName(), burnTime);
 		}
 	}
 
@@ -147,7 +147,26 @@ public class Transmutator {
 		@Override
 		public String describe() {
 
-			return String.format("Removed %s as Transmutator fuel", stack.getDisplayName());
+			return String.format("Removing %s as Transmutator fuel", stack.getDisplayName());
+		}
+	}
+
+	@ZenMethod
+	public static void removeAll() {
+		ACMTMisc.TASKS.add(new RemoveAll());
+	}
+
+	private static class RemoveAll implements IAction {
+
+		@Override
+		public void apply() {
+			TransmutatorRecipes.instance().getTransmutationList().clear();
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing all Transmutator recipes";
 		}
 	}
 }

@@ -138,7 +138,7 @@ public class Materializer {
 		@Override
 		public String describe() {
 
-			return String.format("Added %s to the Crystal List", stack.getDisplayName());
+			return String.format("Adding %s to the Crystal List", stack.getDisplayName());
 		}
 	}
 
@@ -167,7 +167,26 @@ public class Materializer {
 		@Override
 		public String describe() {
 
-			return String.format("Added %s to the Crystal List, and added it as Crystallizer and Transmutator fuel (burntime: %d)", stack.getDisplayName(), burnTime);
+			return String.format("Adding %s to the Crystal List, and added it as Crystallizer and Transmutator fuel (burntime: %d)", stack.getDisplayName(), burnTime);
+		}
+	}
+
+	@ZenMethod
+	public static void removeAll() {
+		ACMTMisc.TASKS.add(new RemoveAll());
+	}
+
+	private static class RemoveAll implements IAction {
+
+		@Override
+		public void apply() {
+			MaterializerRecipes.instance().getMaterializationList().clear();
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing all Materializer recipes";
 		}
 	}
 }

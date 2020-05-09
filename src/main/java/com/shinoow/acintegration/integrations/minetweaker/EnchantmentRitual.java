@@ -115,4 +115,23 @@ public class EnchantmentRitual {
 			return "Removing Necronomicon Enchantment Ritual for "+ ench.enchantment.getTranslatedName(ench.enchantmentLevel);
 		}
 	}
+
+	@ZenMethod
+	public static void removeAll() {
+		ACMTMisc.TASKS.add(new RemoveAll());
+	}
+
+	private static class RemoveAll implements IAction {
+
+		@Override
+		public void apply() {
+			RitualRegistry.instance().getRituals().removeIf(r -> r instanceof NecronomiconEnchantmentRitual);
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing all Enchantment Ritual recipes";
+		}
+	}
 }

@@ -101,4 +101,25 @@ public class InfusionRitual {
 			return "Removing Necronomicon Infusion Ritual for "+ item.getDisplayName();
 		}
 	}
+
+	@ZenMethod
+	public static void removeAll() {
+		ACMTMisc.TASKS.add(new RemoveAll());
+	}
+
+	private static class RemoveAll implements IAction {
+
+		@Override
+		public void apply() {
+			RitualRegistry.instance().getRituals().removeIf(r -> r instanceof NecronomiconInfusionRitual &&
+					r.getClass().getSuperclass() != NecronomiconInfusionRitual.class &&
+					r.getClass().getSuperclass().getSuperclass() != NecronomiconInfusionRitual.class);
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing all Infusion Ritual recipes";
+		}
+	}
 }

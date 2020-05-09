@@ -137,4 +137,23 @@ public class SummonRitual {
 			return "Removing Necronomicon Summoning Ritual for "+ (EntityList.getKey(entity) != null ? EntityList.getKey(entity).toString() : "");
 		}
 	}
+
+	@ZenMethod
+	public static void removeAll() {
+		ACMTMisc.TASKS.add(new RemoveAll());
+	}
+
+	private static class RemoveAll implements IAction {
+
+		@Override
+		public void apply() {
+			RitualRegistry.instance().getRituals().removeIf(r -> r instanceof NecronomiconSummonRitual);
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing all Summoning Ritual recipes";
+		}
+	}
 }
