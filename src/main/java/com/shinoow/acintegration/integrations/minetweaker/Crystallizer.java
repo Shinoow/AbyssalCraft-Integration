@@ -1,8 +1,5 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import java.util.Iterator;
-import java.util.Map.Entry;
-
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
@@ -62,36 +59,58 @@ public class Crystallizer {
 
 	@ZenMethod
 	public static void removeCrystallization(IItemStack input){
-		ACMTMisc.TASKS.add(new Remove(ACMT.toStack(input)));
+		removeCrystallizationInput(input);
 	}
 
-	private static class Remove implements IAction {
+	@ZenMethod
+	public static void removeCrystallizationInput(IItemStack input){
+		ACMTMisc.TASKS.add(new RemoveInput(ACMT.toStack(input)));
+	}
 
-		private ItemStack input, output1, output2;
+	private static class RemoveInput implements IAction {
 
-		public Remove(ItemStack input){
+		private ItemStack input;
+
+		public RemoveInput(ItemStack input){
 			this.input = input;
-			ItemStack[] outputs = {ItemStack.EMPTY, ItemStack.EMPTY};
-
-			output1 = outputs[0];
-			output2 = outputs[1];
 		}
 
 		@Override
 		public void apply() {
-			for(Iterator<Entry<ItemStack, ItemStack[]>> i = CrystallizerRecipes.instance().getCrystallizationList().entrySet().iterator(); i.hasNext();){
-				Entry<ItemStack, ItemStack[]> e = i.next();
-				if(APIUtils.areStacksEqual(input, e.getKey())){
-					i.remove();
-					break;
-				}
-			}
+			CrystallizerRecipes.instance().getCrystallizationList().entrySet().removeIf(e -> APIUtils.areStacksEqual(input, e.getKey()));
 		}
 
 		@Override
 		public String describe() {
 
-			return "Removing Crystallization recipe for " + output1.getDisplayName() + (!output2.isEmpty() ? " (and "+ output2.getDisplayName() + ")" : "") + " (input: " + input.getDisplayName() + ")";
+			return "Removing Crystallization recipe with input: " + input.getDisplayName();
+		}
+	}
+
+	@ZenMethod
+	public static void removeCrystallizationOutput(IItemStack output){
+		ACMTMisc.TASKS.add(new RemoveOutput(ACMT.toStack(output)));
+	}
+
+	private static class RemoveOutput implements IAction {
+
+		private ItemStack output;
+
+		public RemoveOutput(ItemStack output){
+
+			this.output = output;
+		}
+
+		@Override
+		public void apply() {
+			CrystallizerRecipes.instance().getCrystallizationList().entrySet()
+			.removeIf(e -> APIUtils.areStacksEqual(output, e.getValue()[0]) || APIUtils.areStacksEqual(output, e.getValue()[1]));
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing Crystallization recipe(s) for " + output.getDisplayName();
 		}
 	}
 

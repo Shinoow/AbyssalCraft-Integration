@@ -1,8 +1,5 @@
 package com.shinoow.acintegration.integrations.minetweaker;
 
-import java.util.Iterator;
-import java.util.Map.Entry;
-
 import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
@@ -49,33 +46,56 @@ public class Transmutator {
 
 	@ZenMethod
 	public static void removeTransmutation(IItemStack input){
-		ACMTMisc.TASKS.add(new Remove(ACMT.toStack(input)));
+		removeTransmutationInput(input);
 	}
 
-	private static class Remove implements IAction {
+	@ZenMethod
+	public static void removeTransmutationInput(IItemStack input){
+		ACMTMisc.TASKS.add(new RemoveInput(ACMT.toStack(input)));
+	}
 
-		private ItemStack input, output;
+	private static class RemoveInput implements IAction {
 
-		public Remove(ItemStack input){
+		private ItemStack input;
+
+		public RemoveInput(ItemStack input){
 			this.input = input;
-			output = ItemStack.EMPTY;
 		}
 
 		@Override
 		public void apply() {
-			for(Iterator<Entry<ItemStack, ItemStack>> i = TransmutatorRecipes.instance().getTransmutationList().entrySet().iterator(); i.hasNext();){
-				Entry<ItemStack, ItemStack> e = i.next();
-				if(APIUtils.areStacksEqual(input, e.getKey())){
-					i.remove();
-					break;
-				}
-			}
+			TransmutatorRecipes.instance().getTransmutationList().entrySet().removeIf(e -> APIUtils.areStacksEqual(input, e.getKey()));
 		}
 
 		@Override
 		public String describe() {
 
-			return "Removing Transmutation recipe for " + output.getDisplayName() + " (input: " + input.getDisplayName() + ")";
+			return "Removing Transmutation recipe with input: " + input.getDisplayName();
+		}
+	}
+
+	@ZenMethod
+	public static void removeTransmutationOutput(IItemStack output){
+		ACMTMisc.TASKS.add(new RemoveOutput(ACMT.toStack(output)));
+	}
+
+	private static class RemoveOutput implements IAction {
+
+		private ItemStack output;
+
+		public RemoveOutput(ItemStack output){
+			this.output = output;
+		}
+
+		@Override
+		public void apply() {
+			TransmutatorRecipes.instance().getTransmutationList().entrySet().removeIf(e -> APIUtils.areStacksEqual(output, e.getValue()));
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing Transmutation recipe(s) for " + output.getDisplayName();
 		}
 	}
 
