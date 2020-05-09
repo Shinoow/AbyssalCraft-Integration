@@ -7,6 +7,8 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI.ACEntities;
 import com.shinoow.abyssalcraft.api.block.ACBlocks;
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
+import com.shinoow.abyssalcraft.api.event.ACEvents.DisruptionEvent;
+import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.common.entity.*;
 import com.shinoow.abyssalcraft.common.entity.demon.EntityEvilAnimal;
@@ -343,6 +345,21 @@ public class ACTCEvents {
 	public void onClonePlayer(PlayerEvent.Clone event) {
 		if(event.isWasDeath())
 			TaintTimerCapability.getCap(event.getEntityPlayer()).copy(TaintTimerCapability.getCap(event.getOriginal()));
+	}
+
+	@SubscribeEvent
+	public void onRitualFailed(RitualEvent.Failed event) {
+		if(ACIntegration.tcWarpPE)
+			ThaumcraftApi.internalMethods.addWarpToPlayer(event.getEntityPlayer(), 10, EnumWarpType.NORMAL);
+	}
+
+	@SubscribeEvent
+	public void onDisruption(DisruptionEvent event) {
+		if(ACIntegration.tcWarpPE)
+			for(EntityPlayer player : event.getPlayers())
+				if(player.getRNG().nextBoolean())
+					ThaumcraftApi.internalMethods.addWarpToPlayer(player, 5, EnumWarpType.TEMPORARY);
+				else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 1, EnumWarpType.TEMPORARY);
 	}
 
 	public static String getMobName(String name){

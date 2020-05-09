@@ -55,7 +55,7 @@ public class ACIntegration {
 
 	public static Configuration cfg;
 
-	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarpDims, tcWarpMobs, loadTiCon, loadBQ, loadGS, loadBW;
+	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarpDims, tcWarpMobs, tcWarpPE, loadTiCon, loadBQ, loadGS, loadBW;
 
 	public static Item dust;
 
@@ -154,6 +154,7 @@ public class ACIntegration {
 		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
 		tcWarpDims = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp: Dimensions", true, "Toggles wheter or not to gain additional warp from being inside AbyssalCraft dimensions").getBoolean();
 		tcWarpMobs = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp: Mobs", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs").getBoolean();
+		tcWarpPE = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp: PE", true, "Toggles whether or not you gain additional warp through failing rituals and Disruptions").getBoolean();
 		loadTiCon = cfg.get(Configuration.CATEGORY_GENERAL, "Tinkers' Construct", true, "Whether or not to load the Tinkers' Construct integration.").getBoolean();
 		//		loadBQ = cfg.get(Configuration.CATEGORY_GENERAL, "Better Questing", true, "Whether or not to load the Better Questing integration.").getBoolean();
 		loadGS = cfg.get(Configuration.CATEGORY_GENERAL, "Game Stages", true, "Whether or not to load the Game Stages integration.").getBoolean();
