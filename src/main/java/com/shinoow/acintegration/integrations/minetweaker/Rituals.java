@@ -199,6 +199,31 @@ public class Rituals {
 	}
 
 	@ZenMethod
+	public static void removeRitual(String name) {
+		ACMTMisc.TASKS.add(new Remove(name));
+	}
+
+	private static class Remove implements IAction {
+
+		private String name;
+
+		public Remove(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public void apply() {
+			RitualRegistry.instance().getRituals().removeIf(r -> r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name));
+		}
+
+		@Override
+		public String describe() {
+
+			return "Removing ritual with the following name: " + name;
+		}
+	}
+
+	@ZenMethod
 	public static void removeAll() {
 		ACMTMisc.TASKS.add(new RemoveAll());
 	}
