@@ -46,6 +46,7 @@ public class Materializer {
 		public void apply() {
 			if(output instanceof String) {
 				outputName = (String)output;
+				AbyssalCraftAPI.addMaterialization(outputName, input);
 			} else if(output instanceof ItemStack) {
 				ItemStack stack = (ItemStack)output;
 				outputName = stack.getDisplayName();
