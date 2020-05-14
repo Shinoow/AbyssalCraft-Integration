@@ -2,6 +2,7 @@ package com.shinoow.acintegration.integrations.thaumcraft;
 
 import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
+import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.acintegration.ACIntegration;
 import com.shinoow.acintegration.integrations.thaumcraft.cap.ITaintTimerCapability;
 import com.shinoow.acintegration.integrations.thaumcraft.cap.TaintTimerCapability;
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Loader;
+import thaumcraft.api.ThaumcraftApi;
 
 @ACPlugin
 public class ACTC implements IACPlugin {
@@ -187,6 +189,11 @@ public class ACTC implements IACPlugin {
 	@Override
 	public void postInit() {
 
+		ThaumcraftApi.addWarpToItem(new ItemStack(ACItems.necronomicon), 5);
+		ThaumcraftApi.addWarpToItem(new ItemStack(ACItems.abyssal_wasteland_necronomicon), 5);
+		ThaumcraftApi.addWarpToItem(new ItemStack(ACItems.dreadlands_necronomicon), 5);
+		ThaumcraftApi.addWarpToItem(new ItemStack(ACItems.omothol_necronomicon), 5);
+		ThaumcraftApi.addWarpToItem(new ItemStack(ACItems.abyssalnomicon), 10);
 	}
 
 	//	private void addArmorUpgrade(ItemStack helmet, ItemStack chestplate, ItemStack pants, ItemStack boots,

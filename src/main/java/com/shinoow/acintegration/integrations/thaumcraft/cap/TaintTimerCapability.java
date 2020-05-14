@@ -41,12 +41,12 @@ public class TaintTimerCapability implements ITaintTimerCapability {
 					player.dimension == ACLib.dreadlands_id)
 				if(player.world.rand.nextBoolean())
 					ThaumcraftApi.internalMethods.addWarpToPlayer(player, 10, EnumWarpType.TEMPORARY);
-				else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 10, EnumWarpType.NORMAL);
+				else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 3, EnumWarpType.NORMAL);
 			if(player.dimension == ACLib.omothol_id ||
 					player.dimension == ACLib.dark_realm_id)
 				if(player.world.rand.nextBoolean())
 					ThaumcraftApi.internalMethods.addWarpToPlayer(player, 15, EnumWarpType.TEMPORARY);
-				else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 15, EnumWarpType.NORMAL);
+				else ThaumcraftApi.internalMethods.addWarpToPlayer(player, 5, EnumWarpType.NORMAL);
 		}
 	}
 
