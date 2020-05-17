@@ -63,7 +63,7 @@ public class InfusionRitual {
 		@Override
 		public String describe() {
 
-			return "Adding Necronomicon Infusion Ritual for " + ritual.getItem().getDisplayName();
+			return "Adding Necronomicon Infusion Ritual for " + ACMT.getItemNameSafely(ritual.getItem());
 		}
 	}
 
@@ -98,7 +98,7 @@ public class InfusionRitual {
 		@Override
 		public String describe() {
 
-			return "Removing Necronomicon Infusion Ritual for "+ item.getDisplayName();
+			return "Removing Necronomicon Infusion Ritual for "+ ACMT.getItemNameSafely(item);
 		}
 	}
 

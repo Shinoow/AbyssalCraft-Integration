@@ -22,6 +22,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.oredict.OreDictionary;
 
 @ACPlugin
 public class ACMT implements IACPlugin {
@@ -106,6 +107,15 @@ public class ACMT implements IACPlugin {
 	}
 
 	// End of borrowed code
+
+	/**
+	 * "Safely" returns the name of an ItemStack, displaying it differently if the OreDict wildcard is present
+	 */
+	public static String getItemNameSafely(ItemStack stack) {
+		if(stack.getMetadata() == OreDictionary.WILDCARD_VALUE && stack.getHasSubtypes())
+			return "all subtypes of "+stack.getItem().getRegistryName().toString();
+		return stack.getDisplayName();
+	}
 
 	@SubscribeEvent
 	public void fuels(FuelBurnTimeEvent event) {

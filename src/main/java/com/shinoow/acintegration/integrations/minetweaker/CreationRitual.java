@@ -55,7 +55,7 @@ public class CreationRitual {
 		@Override
 		public String describe() {
 
-			return "Adding Necronomicon Creation Ritual for " + ritual.getItem().getDisplayName();
+			return "Adding Necronomicon Creation Ritual for " + ACMT.getItemNameSafely(ritual.getItem());
 		}
 	}
 
@@ -90,7 +90,7 @@ public class CreationRitual {
 		@Override
 		public String describe() {
 
-			return "Removing Necronomicon Creation Ritual for "+ item.getDisplayName();
+			return "Removing Necronomicon Creation Ritual for "+ ACMT.getItemNameSafely(item);
 		}
 	}
 

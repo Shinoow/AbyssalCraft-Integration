@@ -53,7 +53,7 @@ public class Crystallizer {
 		@Override
 		public String describe() {
 
-			return "Adding Crystallization recipe for " + output1.getDisplayName() + (!output2.isEmpty() ? " (and "+ output2.getDisplayName() + ")" : "");
+			return "Adding Crystallization recipe for " + ACMT.getItemNameSafely(output1) + (!output2.isEmpty() ? " (and "+ ACMT.getItemNameSafely(output2) + ")" : "");
 		}
 	}
 
@@ -83,7 +83,7 @@ public class Crystallizer {
 		@Override
 		public String describe() {
 
-			return "Removing Crystallization recipe with input: " + input.getDisplayName();
+			return "Removing Crystallization recipe with input: " + ACMT.getItemNameSafely(input);
 		}
 	}
 
@@ -110,7 +110,7 @@ public class Crystallizer {
 		@Override
 		public String describe() {
 
-			return "Removing Crystallization recipe(s) for " + output.getDisplayName();
+			return "Removing Crystallization recipe(s) for " + ACMT.getItemNameSafely(output);
 		}
 	}
 
@@ -137,7 +137,7 @@ public class Crystallizer {
 		@Override
 		public String describe() {
 
-			return String.format("Adding %s as Crystallizer fuel with a burntime of %d ", stack.getDisplayName(), burnTime);
+			return String.format("Adding %s as Crystallizer fuel with a burntime of %d ", ACMT.getItemNameSafely(stack), burnTime);
 		}
 	}
 
@@ -162,7 +162,7 @@ public class Crystallizer {
 		@Override
 		public String describe() {
 
-			return String.format("Removing %s as Crystallizer fuel", stack.getDisplayName());
+			return String.format("Removing %s as Crystallizer fuel", ACMT.getItemNameSafely(stack));
 		}
 	}
 

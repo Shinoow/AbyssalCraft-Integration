@@ -24,7 +24,7 @@ public class UpgradeKit {
 
 		if(ACMT.toStack(kit).getItem() instanceof ItemUpgradeKit)
 			ACMTMisc.TASKS.add(new Add(ACMT.toStack(kit), ACMT.toStack(input), ACMT.toStack(output)));
-		else ACLogger.warning("%s is not a Upgrade Kit!", ACMT.toStack(kit).getDisplayName());
+		else ACLogger.warning("%s is not a Upgrade Kit!", ACMT.getItemNameSafely(ACMT.toStack(kit)));
 	}
 
 	private static class Add implements IAction
@@ -47,7 +47,7 @@ public class UpgradeKit {
 		@Override
 		public String describe() {
 
-			return "Adding Upgrade Kit recipe for " + output.getDisplayName();
+			return "Adding Upgrade Kit recipe for " + ACMT.getItemNameSafely(output);
 		}
 	}
 
@@ -86,7 +86,7 @@ public class UpgradeKit {
 		@Override
 		public String describe() {
 
-			return "Removing " + (recipes != null ? recipes.size() : 0) + " Upgrade Kit recipe(s) for " + input.getDisplayName();
+			return "Removing " + (recipes != null ? recipes.size() : 0) + " Upgrade Kit recipe(s) for " + ACMT.getItemNameSafely(input);
 		}
 	}
 

@@ -40,7 +40,7 @@ public class Transmutator {
 		@Override
 		public String describe() {
 
-			return "Adding Transmutation recipe for " + output.getDisplayName();
+			return "Adding Transmutation recipe for " + ACMT.getItemNameSafely(output);
 		}
 	}
 
@@ -70,7 +70,7 @@ public class Transmutator {
 		@Override
 		public String describe() {
 
-			return "Removing Transmutation recipe with input: " + input.getDisplayName();
+			return "Removing Transmutation recipe with input: " + ACMT.getItemNameSafely(input);
 		}
 	}
 
@@ -95,7 +95,7 @@ public class Transmutator {
 		@Override
 		public String describe() {
 
-			return "Removing Transmutation recipe(s) for " + output.getDisplayName();
+			return "Removing Transmutation recipe(s) for " + ACMT.getItemNameSafely(output);
 		}
 	}
 
@@ -122,7 +122,7 @@ public class Transmutator {
 		@Override
 		public String describe() {
 
-			return String.format("Adding %s as Transmutator fuel with a burntime of %d ", stack.getDisplayName(), burnTime);
+			return String.format("Adding %s as Transmutator fuel with a burntime of %d ", ACMT.getItemNameSafely(stack), burnTime);
 		}
 	}
 
@@ -147,7 +147,7 @@ public class Transmutator {
 		@Override
 		public String describe() {
 
-			return String.format("Removing %s as Transmutator fuel", stack.getDisplayName());
+			return String.format("Removing %s as Transmutator fuel", ACMT.getItemNameSafely(stack));
 		}
 	}
 

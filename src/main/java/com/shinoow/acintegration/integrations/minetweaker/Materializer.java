@@ -49,7 +49,7 @@ public class Materializer {
 				AbyssalCraftAPI.addMaterialization(outputName, input);
 			} else if(output instanceof ItemStack) {
 				ItemStack stack = (ItemStack)output;
-				outputName = stack.getDisplayName();
+				outputName = ACMT.getItemNameSafely(stack);
 				if(stack.getHasSubtypes() && stack.getMetadata() == OreDictionary.WILDCARD_VALUE) {
 					NonNullList<ItemStack> list = NonNullList.create();
 					stack.getItem().getSubItems(stack.getItem().getCreativeTab(), list);
@@ -70,7 +70,7 @@ public class Materializer {
 		private String getArrayContent(ItemStack[] array){
 			String stuff = "[";
 			for(ItemStack stack : array)
-				stuff+=stack.getDisplayName()+", ";
+				stuff+=ACMT.getItemNameSafely(stack)+", ";
 			stuff = stuff.substring(0, stuff.length()-2);
 			return stuff+="]";
 		}
@@ -114,7 +114,7 @@ public class Materializer {
 		@Override
 		public String describe() {
 
-			return String.format("Removing Materialization recipes for %s", output.getDisplayName());
+			return String.format("Removing Materialization recipes for %s", ACMT.getItemNameSafely(output));
 		}
 	}
 
@@ -139,7 +139,7 @@ public class Materializer {
 		@Override
 		public String describe() {
 
-			return String.format("Adding %s to the Crystal List", stack.getDisplayName());
+			return String.format("Adding %s to the Crystal List", ACMT.getItemNameSafely(stack));
 		}
 	}
 
@@ -168,7 +168,7 @@ public class Materializer {
 		@Override
 		public String describe() {
 
-			return String.format("Adding %s to the Crystal List, and added it as Crystallizer and Transmutator fuel (burntime: %d)", stack.getDisplayName(), burnTime);
+			return String.format("Adding %s to the Crystal List, and added it as Crystallizer and Transmutator fuel (burntime: %d)", ACMT.getItemNameSafely(stack), burnTime);
 		}
 	}
 
