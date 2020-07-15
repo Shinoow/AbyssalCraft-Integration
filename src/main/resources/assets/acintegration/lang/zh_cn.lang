@@ -56,11 +56,11 @@ material.dreadium.name=惧质
 modifier.dreadplague.name=恐惧疫染
 modifier.dreadplague.desc=§o向查伽洛斯臣服！§r\nzz在暴击时附加恐惧瘟疫效果。
 modifier.coraliumplague.name=珊瑚疫染
-modifier.coraliumplague.desc=§o感染一切！§r\n暴击时附加珊瑚瘟疫效果。
+modifier.coraliumplague.desc=§o感染一切！§r\n在暴击时附加珊瑚瘟疫效果。
 modifier.dreadpurity.name=净化
 modifier.dreadpurity.desc=§o消灭腐朽！§r\n对任何被珊瑚瘟疫感染的实体造成25%的额外伤害。
 modifier.light_pierce.name=光之穿刺
-modifier.light_pierce.desc=§o阴影克星§r\n对阴影生物造成
+modifier.light_pierce.desc=§o阴影克星§r\n对阴影生物造成大量伤害。
 modifier.light_pierce.extra=对阴影生物：+%s
 
 #Better Questing
