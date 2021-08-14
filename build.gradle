@@ -31,10 +31,14 @@ repositories {
 		name "Thaumcraft"
 		artifactPattern "https://dl.dropboxusercontent.com/u/47135879/[module]-1.12.2-[revision]-deobf.[ext]"
 	}*/
-	maven {
-		name 'shinoow'
-		url 'https://dl.bintray.com/shinoow/maven/'
-	}
+	// maven {
+	// 	name 'shinoow'
+	// 	url 'https://dl.bintray.com/shinoow/maven/'
+	// }
+    maven {
+        name 'ModMaven'
+        url 'https://modmaven.dev'
+    }
 	maven {
         name 'jared'
         url "http://maven.blamejared.com/"

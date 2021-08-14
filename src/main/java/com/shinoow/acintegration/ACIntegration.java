@@ -72,7 +72,7 @@ public class ACIntegration {
 	public void preInit(FMLPreInitializationEvent event) {
 
 		metadata = event.getModMetadata();
-		metadata.description = metadata.description +"\n\n\u00a76Supporters: "+getSupporterList()+"\u00a7r";
+		getSupporterList();
 
 		MinecraftForge.EVENT_BUS.register(this);
 
@@ -164,20 +164,24 @@ public class ACIntegration {
 			cfg.save();
 	}
 
-	private String getSupporterList(){
-		BufferedReader nameFile;
-		String names = "";
-		try {
-			nameFile = new BufferedReader(new InputStreamReader(new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/supporters.txt").openStream()));
+	private void getSupporterList(){
+		new Thread("AbyssalCraft Integration Get Supporters") {
+			public void run() {
+				BufferedReader nameFile;
+				String names = "";
+				try {
+					nameFile = new BufferedReader(new InputStreamReader(new URL("https://raw.githubusercontent.com/Shinoow/AbyssalCraft/master/supporters.txt").openStream()));
 
-			names = nameFile.readLine();
-			nameFile.close();
+					names = nameFile.readLine();
+					nameFile.close();
 
-		} catch (IOException e) {
-			FMLLog.log("AbyssalCraft Integration", Level.ERROR, "Failed to fetch supporter list, using local version!");
-			names = "Gentlemangamer2015";
-		}
-
-		return names;
+				} catch (IOException e) {
+					FMLLog.log("AbyssalCraft Integration", Level.ERROR, "Failed to fetch supporter list, using local version!");
+					names = "Jenni Mort, Simon.R.K";
+				}
+				
+				metadata.description += String.format("\n\n\u00a76Supporters: %s\u00a7r", names);
+			}
+		}.start();
 	}
 }

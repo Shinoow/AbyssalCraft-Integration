@@ -1,8 +1,8 @@
 {
   "homepage": "http://minecraft.curseforge.com/mc-mods/234851",
   "promos": {
-	"1.12.2-latest": "1.11.2",
-	"1.12.2-recommended": "1.11.2",
+	"1.12.2-latest": "1.11.3",
+	"1.12.2-recommended": "1.11.3",
 	"1.12.1-latest": "1.6.0",
 	"1.12.1-recommended": "1.6.0",
 	"1.12-latest": "1.5.0",
@@ -19,6 +19,7 @@
     "1.8.9-recommended": "1.4.7"
   },
   "1.12.2": {
+	"1.11.3": "- Supporters list is now fetched on a separate thread",
 	"1.11.2": "- Changed how Item/Block names are displayed in the CraftTweaker integration to account for the OreDictionary wildcard",
 	"1.11.1": "- Reduced the sticky warp you can get from being inside the dimensions by two thirds\n- Crafting any of the Necronomicon now gives you warp",
 	"1.11.0": "- Bump to AbyssalCraft 1.9.19\n- Reworked the Thaumcraft warp integration (no more permanent warp, proper timer, Dark Offspring and Evil Animals give warp now)\n- Assigned Aspects to the Dark Offspring\n- Warp is now given when failing rituals or when experiencing Disruptions\n- Added a config option to toggle getting warp from failing rituals or experiencing Disruptions\n- Materializer recipe removal in the CraftTweaker integration now takes the wildcard value into account\n- Materializer recipe adding in the CraftTweaker integration now supports both the Ore Dictionary and the wildcard value\n- Added CraftTweaker support for removing fuels from the Crystallizer and Transmutator\n- Added CraftTweaker support for removing Crystallizer and Transmutator recipes on a output basis\n- Renamed \"removeCrystallization\" and \"removeTransmutation\" to \"removeCrystallizationInput\" and \"removeTransmutationInput\" (old ones are kept for backwards compatibility)\n- Added \"removeAll\" methods to all recipe types in the CraftTweaker integration\n- Added CraftTweaker support for removing any ritual by name",
