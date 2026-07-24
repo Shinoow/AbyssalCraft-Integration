@@ -39,7 +39,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:forge@[forgeversion,);required-after:abyssalcraft@[1.9.19,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:forge@[forgeversion,);required-after:abyssalcraft@[1.11.3,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
 acceptedMinecraftVersions = "[1.12.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json", certificateFingerprint = "cert_fingerprint")
 public class ACIntegration {
 
@@ -62,7 +62,7 @@ public class ACIntegration {
 	public static final CreativeTabs tabItems = new CreativeTabs("acintegration"){
 
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 
 			return new ItemStack(dust);
 		}
@@ -179,7 +179,7 @@ public class ACIntegration {
 					FMLLog.log("AbyssalCraft Integration", Level.ERROR, "Failed to fetch supporter list, using local version!");
 					names = "Jenni Mort, Simon.R.K";
 				}
-				
+
 				metadata.description += String.format("\n\n\u00a76Supporters: %s\u00a7r", names);
 			}
 		}.start();

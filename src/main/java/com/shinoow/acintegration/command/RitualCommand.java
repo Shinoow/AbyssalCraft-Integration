@@ -67,7 +67,7 @@ public class RitualCommand extends CommandBase {
 					sb.append(getRitualData(r));
 
 				try{
-					File f = new File(Minecraft.getMinecraft().mcDataDir, "acritual.txt");
+					File f = new File(Minecraft.getMinecraft().gameDir, "acritual.txt");
 
 					if(!f.exists())
 						f.createNewFile();
