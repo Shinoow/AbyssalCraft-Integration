@@ -1,4 +1,4 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
 import com.shinoow.acintegration.integrations.gamestages.ACGS;
 
@@ -11,7 +11,7 @@ public class RitualStages {
 
 	@ZenMethod
 	public static void addRitualStage(String stage, String ritual){
-		ACMTMisc.TASKS.add(new Add(stage, ritual));
+		ACCTMisc.TASKS.add(new Add(stage, ritual));
 	}
 
 	private static class Add implements IAction {

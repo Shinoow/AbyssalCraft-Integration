@@ -1,4 +1,4 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +27,13 @@ public class CreationRitual {
 	@ZenMethod
 	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean requiresSacrifice, IItemStack item, IIngredient[] offerings, boolean nbt){
 
-		Object[] offers = ACMT.toObjects(offerings);
+		Object[] offers = ACCT.toObjects(offerings);
 
-		NecronomiconCreationRitual ritual = new NecronomiconCreationRitual(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, ACMT.toStack(item), offers);
+		NecronomiconCreationRitual ritual = new NecronomiconCreationRitual(unlocalizedName, bookType, dimension, requiredEnergy, requiresSacrifice, ACCT.toStack(item), offers);
 
 		if(nbt) ritual.setNBTSensitive();
 
-		ACMTMisc.TASKS.add(new Add(ritual));
+		ACCTMisc.TASKS.add(new Add(ritual));
 	}
 
 	private static class Add implements IAction
@@ -55,14 +55,14 @@ public class CreationRitual {
 		@Override
 		public String describe() {
 
-			return "Adding Necronomicon Creation Ritual for " + ACMT.getItemNameSafely(ritual.getItem());
+			return "Adding Necronomicon Creation Ritual for " + ACCT.getItemNameSafely(ritual.getItem());
 		}
 	}
 
 	@ZenMethod
 	public static void removeRitual(IItemStack item){
 
-		ACMTMisc.TASKS.add(new Remove(ACMT.toStack(item)));
+		ACCTMisc.TASKS.add(new Remove(ACCT.toStack(item)));
 	}
 
 	private static class Remove implements IAction
@@ -90,13 +90,13 @@ public class CreationRitual {
 		@Override
 		public String describe() {
 
-			return "Removing Necronomicon Creation Ritual for "+ ACMT.getItemNameSafely(item);
+			return "Removing Necronomicon Creation Ritual for "+ ACCT.getItemNameSafely(item);
 		}
 	}
 
 	@ZenMethod
 	public static void removeAll() {
-		ACMTMisc.TASKS.add(new RemoveAll());
+		ACCTMisc.TASKS.add(new RemoveAll());
 	}
 
 	private static class RemoveAll implements IAction {

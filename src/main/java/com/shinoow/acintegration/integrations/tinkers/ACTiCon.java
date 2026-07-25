@@ -43,7 +43,6 @@ public class ACTiCon implements IACPlugin {
 		return Loader.isModLoaded("tconstruct") && ACIntegration.loadTiCon;
 	}
 
-	@Override
 	public void preInit() {
 
 		ACTiConMisc.preInit();

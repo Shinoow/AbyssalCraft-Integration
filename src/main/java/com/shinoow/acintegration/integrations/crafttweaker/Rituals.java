@@ -1,10 +1,11 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
 import com.shinoow.abyssalcraft.api.ritual.RitualRegistry;
 import com.shinoow.abyssalcraft.lib.util.RitualUtil;
 
 import crafttweaker.IAction;
 import crafttweaker.api.item.IIngredient;
+import net.minecraftforge.oredict.OreDictionary;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -12,112 +13,78 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class Rituals {
 
 	@ZenMethod
-	public static void mapDimensionToBookType(int dim, int bookType){
-		if(bookType <= 4 && bookType >= 0)
-			if(dim != -1 && dim != 1)
-				ACMTMisc.TASKS.add(new AddBookType(dim, bookType));
-	}
-
-	@ZenMethod
-	public static void mapDimensionToName(int dim, String name){
-		if(dim != -1 && dim != 1)
-			ACMTMisc.TASKS.add(new AddName(dim, name));
-	}
-
-	@ZenMethod
 	public static void mapDimensionToBookTypeAndName(int dim, int bookType, String name){
-		mapDimensionToBookType(dim, bookType);
-		mapDimensionToName(dim, name);
+		if(dim != OreDictionary.WILDCARD_VALUE)
+			ACCTMisc.TASKS.add(new AddBookTypeAndName(dim, bookType, name));
 	}
 
-	private static class AddBookType implements IAction {
+	private static class AddBookTypeAndName implements IAction {
 
 		private int dim, bookType;
-
-		public AddBookType(int dim, int bookType){
-			this.dim = dim;
-			this.bookType = bookType;
-		}
-
-		@Override
-		public void apply() {
-			RitualRegistry.instance().addDimensionToBookType(dim, bookType);
-		}
-
-		@Override
-		public String describe() {
-
-			return String.format("Mapped dimension ID %d to Book Type %d", dim, bookType);
-		}
-
-	}
-
-	private static class AddName implements IAction {
-
-		private int dim;
 		private String name;
 
-		public AddName(int dim, String name){
+		public AddBookTypeAndName(int dim, int bookType, String name){
 			this.dim = dim;
+			this.bookType = bookType;
 			this.name = name;
 		}
 
 		@Override
 		public void apply() {
-			RitualRegistry.instance().addDimensionToName(dim, name);
+			RitualRegistry.instance().addDimensionToBookTypeAndName(dim, bookType, name);
 		}
 
 		@Override
 		public String describe() {
 
-			return String.format("Mapped dimension ID %d to the name %s", dim, name);
+			return String.format("Mapped dimension ID %d to Book Type %d and name %s", dim, bookType, name);
 		}
 
 	}
 
 	@ZenMethod
 	public static void modifyRitualBookType(String name, int bookType){
-		ACMTMisc.TASKS.add(new ModifyRitual(name, 0, bookType));
+		ACCTMisc.TASKS.add(new ModifyRitual(name, 0, bookType));
 	}
 
 	@ZenMethod
 	public static void modifyRitualDimension(String name, int dimension){
-		ACMTMisc.TASKS.add(new ModifyRitual(name, 1, dimension));
+		ACCTMisc.TASKS.add(new ModifyRitual(name, 1, dimension));
 	}
 
 	@ZenMethod
 	public static void modifyRitualSacrificeRequirement(String name, boolean requiresSacrifice){
-		ACMTMisc.TASKS.add(new ModifyRitual(name, 2, requiresSacrifice));
+		ACCTMisc.TASKS.add(new ModifyRitual(name, 2, requiresSacrifice));
 	}
 
 	@ZenMethod
 	public static void modifyRitualEnergyRequirement(String name, float requiredEnergy){
-		ACMTMisc.TASKS.add(new ModifyRitual(name, 3, requiredEnergy));
+		ACCTMisc.TASKS.add(new ModifyRitual(name, 3, requiredEnergy));
 	}
 
 	@ZenMethod
 	public static void modifyRitualSacrifice(String name, IIngredient sacrifice){
-		ACMTMisc.TASKS.add(new ModifyRitual(name, 4, ACMT.toObject(sacrifice)));
+		ACCTMisc.TASKS.add(new ModifyRitual(name, 4, ACCT.toObject(sacrifice)));
 	}
 
 	@ZenMethod
 	public static void modifyRitualNbtSensitivity(String name, boolean nbtSensitive){
-		ACMTMisc.TASKS.add(new ModifyRitual(name, 5, nbtSensitive));
+		ACCTMisc.TASKS.add(new ModifyRitual(name, 5, nbtSensitive));
 	}
 
 	@ZenMethod
 	public static void modifyRitualNbtSensitivitySacrifice(String name, boolean nbtSensitiveSacrifice){
-		ACMTMisc.TASKS.add(new ModifyRitual(name, 6, nbtSensitiveSacrifice));
+		ACCTMisc.TASKS.add(new ModifyRitual(name, 6, nbtSensitiveSacrifice));
 	}
 
 	@ZenMethod
 	public static void modifyRitualOfferings(String name, IIngredient[] offerings){
-		ACMTMisc.TASKS.add(new ModifyRitual(name, 7, ACMT.toObjects(offerings)));
+		ACCTMisc.TASKS.add(new ModifyRitual(name, 7, ACCT.toObjects(offerings)));
 	}
 
 	@ZenMethod
 	public static void modifyRitualReplaceOffering(String name, IIngredient original, IIngredient replace, boolean nbt){
-		ACMTMisc.TASKS.add(new ModifyRitual(name, 8, new Object[]{ACMT.toObject(original), ACMT.toObject(replace), nbt}));
+		ACCTMisc.TASKS.add(new ModifyRitual(name, 8, new Object[]{ACCT.toObject(original), ACCT.toObject(replace), nbt}));
 	}
 
 	private static class ModifyRitual implements IAction {
@@ -200,7 +167,7 @@ public class Rituals {
 
 	@ZenMethod
 	public static void removeRitual(String name) {
-		ACMTMisc.TASKS.add(new Remove(name));
+		ACCTMisc.TASKS.add(new Remove(name));
 	}
 
 	private static class Remove implements IAction {
@@ -213,7 +180,7 @@ public class Rituals {
 
 		@Override
 		public void apply() {
-			RitualRegistry.instance().getRituals().removeIf(r -> r.getUnlocalizedName().substring("ac.ritual.".length()).equals(name));
+			RitualRegistry.instance().getRituals().removeIf(r -> r.getID().equals(name));
 		}
 
 		@Override
@@ -225,7 +192,7 @@ public class Rituals {
 
 	@ZenMethod
 	public static void removeAll() {
-		ACMTMisc.TASKS.add(new RemoveAll());
+		ACCTMisc.TASKS.add(new RemoveAll());
 	}
 
 	private static class RemoveAll implements IAction {

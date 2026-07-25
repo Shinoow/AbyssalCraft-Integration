@@ -1,4 +1,4 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
 import static crafttweaker.api.minecraft.CraftTweakerMC.getItemStack;
 
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
 @ACPlugin
-public class ACMT implements IACPlugin {
+public class ACCT implements IACPlugin {
 
 	public static Map<ItemStack, Integer> CRYSTALLIZER_FUELS = new HashMap<>();
 	public static Map<ItemStack, Integer> TRANSMUTATOR_FUELS = new HashMap<>();
@@ -36,15 +36,14 @@ public class ACMT implements IACPlugin {
 		return "CraftTweaker";
 	}
 
-	public static ACMT instance = new ACMT();
+	public static ACCT instance = new ACCT();
 
 	@Override
 	public boolean canLoad() {
 
-		return Loader.isModLoaded("crafttweaker") && ACIntegration.loadMT;
+		return Loader.isModLoaded("crafttweaker") && ACIntegration.loadCT;
 	}
 
-	@Override
 	public void preInit() {
 		CraftTweakerAPI.registerClass(Crystallizer.class);
 		CraftTweakerAPI.registerClass(Transmutator.class);
@@ -55,9 +54,7 @@ public class ACMT implements IACPlugin {
 		CraftTweakerAPI.registerClass(EnchantmentRitual.class);
 		CraftTweakerAPI.registerClass(PotionRitual.class);
 		CraftTweakerAPI.registerClass(PotionAoERitual.class);
-		CraftTweakerAPI.registerClass(UpgradeKit.class);
 		CraftTweakerAPI.registerClass(SummonRitual.class);
-		CraftTweakerAPI.registerClass(GatewayKey.class);
 		CraftTweakerAPI.registerClass(Rituals.class);
 		CraftTweakerAPI.registerClass(Materializer.class);
 		if(Loader.isModLoaded("gamestages") && ACIntegration.loadGS)
@@ -71,7 +68,7 @@ public class ACMT implements IACPlugin {
 
 	@Override
 	public void postInit() {
-		ACMTMisc.TASKS.forEach(CraftTweakerAPI::apply);
+		ACCTMisc.TASKS.forEach(CraftTweakerAPI::apply);
 	}
 
 	// Start of borrowed code from Immersive Engineering

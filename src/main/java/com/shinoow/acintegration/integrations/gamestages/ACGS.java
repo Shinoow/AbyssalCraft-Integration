@@ -3,7 +3,7 @@ package com.shinoow.acintegration.integrations.gamestages;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
-import com.shinoow.abyssalcraft.api.event.ACEvents.RitualEvent;
+import com.shinoow.abyssalcraft.api.event.RitualEvent;
 import com.shinoow.abyssalcraft.api.integration.ACPlugin;
 import com.shinoow.abyssalcraft.api.integration.IACPlugin;
 import com.shinoow.acintegration.ACIntegration;
@@ -29,11 +29,6 @@ public class ACGS implements IACPlugin {
 	public boolean canLoad() {
 
 		return Loader.isModLoaded("gamestages") && ACIntegration.loadGS;
-	}
-
-	@Override
-	public void preInit() {
-
 	}
 
 	@Override

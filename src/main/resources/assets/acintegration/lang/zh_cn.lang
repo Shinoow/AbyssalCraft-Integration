@@ -11,9 +11,9 @@ necro.text.integration.tc.8=伊塞斯蕴能奥穆索之石法杖可通过注魔�
 
 necro.text.integration.morph=安装Morph后，你可以在变形成深渊国度的实体时拥有变形技能。额外的能力也可能会被添加，如免疫瘟疫。当变成拥有特殊模型的实体时，你的手也会在第一人称下变形成模型所采用的手。
 
-item.dust.abyssalnite.name=渊素粉
-item.dust.coralium.name=精炼珊瑚粉
-item.dust.dreadium.name=惧质粉
+item.dust_abyssalnite.name=渊素粉
+item.dust_coralium.name=精炼珊瑚粉
+item.dust_dreadium.name=惧质粉
 
 itemGroup.acintegration=深渊国度联动
 

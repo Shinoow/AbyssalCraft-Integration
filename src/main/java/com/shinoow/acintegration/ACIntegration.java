@@ -9,13 +9,12 @@ import org.apache.logging.log4j.Level;
 
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
-import com.shinoow.abyssalcraft.lib.item.ItemMetadata;
+import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 import com.shinoow.acintegration.command.RitualCommand;
 import com.shinoow.acintegration.integrations.minetweaker.ACMT;
 import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
 import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 
-import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -39,7 +38,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:forge@[forgeversion,);required-after:abyssalcraft@[1.11.3,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
+@Mod(modid = ACIntegration.modid, name = ACIntegration.name, version = ACIntegration.version, dependencies = "required-after:forge@[forgeversion,);required-after:abyssalcraft@[2.0.0,];after:tconstruct", useMetadata = false, guiFactory = "com.shinoow.acintegration.client.config.ACIGuiFactory",
 acceptedMinecraftVersions = "[1.12.2]", updateJSON = "https://raw.githubusercontent.com/Shinoow/AbyssalCraft-Integration/master/version.json", certificateFingerprint = "cert_fingerprint")
 public class ACIntegration {
 
@@ -57,14 +56,14 @@ public class ACIntegration {
 
 	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarpDims, tcWarpMobs, tcWarpPE, loadTiCon, loadBQ, loadGS, loadBW;
 
-	public static Item dust;
+	public static Item dust_abyssalnite, dust_coralium, dust_dreadium;
 
 	public static final CreativeTabs tabItems = new CreativeTabs("acintegration"){
 
 		@Override
 		public ItemStack createIcon() {
 
-			return new ItemStack(dust);
+			return new ItemStack(dust_abyssalnite);
 		}
 	};
 
@@ -79,7 +78,9 @@ public class ACIntegration {
 		cfg = new Configuration(event.getSuggestedConfigurationFile());
 		syncConfig();
 
-		dust = new ItemMetadata("dust", "abyssalnite", "coralium", "dreadium").setCreativeTab(tabItems);
+		dust_abyssalnite = new ItemACBasic("dust_abyssalnite").setCreativeTab(tabItems);
+		dust_coralium = new ItemACBasic("dust_coralium").setCreativeTab(tabItems);
+		dust_dreadium = new ItemACBasic("dust_dreadium").setCreativeTab(tabItems);
 
 		registerIntegrations();
 	}
@@ -87,13 +88,13 @@ public class ACIntegration {
 	@EventHandler
 	public void Init(FMLInitializationEvent event) {
 
-		GameRegistry.addSmelting(new ItemStack(dust, 1, 0), new ItemStack(ACItems.abyssalnite_ingot), 3F);
-		GameRegistry.addSmelting(new ItemStack(dust, 1, 1), new ItemStack(ACItems.refined_coralium_ingot), 3F);
-		GameRegistry.addSmelting(new ItemStack(dust, 1, 2), new ItemStack(ACItems.dreadium_ingot), 3F);
+		GameRegistry.addSmelting(new ItemStack(dust_abyssalnite), new ItemStack(ACItems.abyssalnite_ingot), 3F);
+		GameRegistry.addSmelting(new ItemStack(dust_coralium), new ItemStack(ACItems.refined_coralium_ingot), 3F);
+		GameRegistry.addSmelting(new ItemStack(dust_dreadium), new ItemStack(ACItems.dreadium_ingot), 3F);
 
-		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(dust, 1, 0), new ItemStack(ACItems.crystal_shard, 4, 12), 0.1F);
-		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(dust, 1, 1), new ItemStack(ACItems.crystal_shard, 4, 13), 0.1F);
-		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(dust, 1, 2), new ItemStack(ACItems.crystal_shard, 4, 14), 0.1F);
+		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(dust_abyssalnite), new ItemStack(ACItems.crystal_shard_abyssalnite, 4), 0.1F);
+		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(dust_coralium), new ItemStack(ACItems.crystal_shard_coralium, 4), 0.1F);
+		AbyssalCraftAPI.addSingleCrystallization(new ItemStack(dust_dreadium), new ItemStack(ACItems.crystal_shard_dreadium, 4), 0.1F);
 
 		if(FMLCommonHandler.instance().getEffectiveSide().isClient())
 			ClientCommandHandler.instance.registerCommand(new RitualCommand());
@@ -126,23 +127,26 @@ public class ACIntegration {
 
 	@SubscribeEvent
 	public void registerItems(RegistryEvent.Register<Item> event){
-		event.getRegistry().register(dust.setRegistryName(new ResourceLocation("acintegration", "dust")));
+		event.getRegistry().register(dust_abyssalnite.setRegistryName(new ResourceLocation("acintegration", "dust_abyssalnite")));
+		event.getRegistry().register(dust_coralium.setRegistryName(new ResourceLocation("acintegration", "dust_coralium")));
+		event.getRegistry().register(dust_dreadium.setRegistryName(new ResourceLocation("acintegration", "dust_dreadium")));
 
-		OreDictionary.registerOre("dustAbyssalnite", new ItemStack(dust, 1, 0));
-		OreDictionary.registerOre("dustLiquifiedCoralium", new ItemStack(dust, 1, 1));
-		OreDictionary.registerOre("dustDreadium", new ItemStack(dust, 1, 2));
+		OreDictionary.registerOre("dustAbyssalnite", new ItemStack(dust_abyssalnite));
+		OreDictionary.registerOre("dustLiquifiedCoralium", new ItemStack(dust_coralium));
+		OreDictionary.registerOre("dustDreadium", new ItemStack(dust_dreadium));
 	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event){
-		String[] names = {"abyssalnite", "coralium", "dreadium"};
-		ResourceLocation[] res = new ResourceLocation[names.length];
-		for(int i = 0; i < names.length; i++)
-			res[i] = new ResourceLocation("acintegration", "dust_" + names[i]);
-		ModelBakery.registerItemVariants(dust, res);
-		for(int i = 0; i < names.length; i++)
-			ModelLoader.setCustomModelResourceLocation(dust, i, new ModelResourceLocation("acintegration:dust_" + names[i], "inventory"));
+		registerItemRender(dust_abyssalnite);
+		registerItemRender(dust_coralium);
+		registerItemRender(dust_dreadium);
+	}
+
+	@SideOnly(Side.CLIENT)
+	private void registerItemRender(Item item) {
+		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}
 
 	private static void syncConfig(){

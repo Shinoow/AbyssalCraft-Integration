@@ -1,6 +1,5 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
-import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.recipe.TransmutatorRecipes;
 
@@ -16,7 +15,7 @@ public class Transmutator {
 	@ZenMethod
 	public static void addTransmutation(IItemStack input, IItemStack output, float exp){
 
-		ACMTMisc.TASKS.add(new Add(ACMT.toStack(input), ACMT.toStack(output), exp));
+		ACCTMisc.TASKS.add(new Add(ACCT.toStack(input), ACCT.toStack(output), exp));
 	}
 
 	private static class Add implements IAction
@@ -40,7 +39,7 @@ public class Transmutator {
 		@Override
 		public String describe() {
 
-			return "Adding Transmutation recipe for " + ACMT.getItemNameSafely(output);
+			return "Adding Transmutation recipe for " + ACCT.getItemNameSafely(output);
 		}
 	}
 
@@ -51,7 +50,7 @@ public class Transmutator {
 
 	@ZenMethod
 	public static void removeTransmutationInput(IItemStack input){
-		ACMTMisc.TASKS.add(new RemoveInput(ACMT.toStack(input)));
+		ACCTMisc.TASKS.add(new RemoveInput(ACCT.toStack(input)));
 	}
 
 	private static class RemoveInput implements IAction {
@@ -64,19 +63,19 @@ public class Transmutator {
 
 		@Override
 		public void apply() {
-			TransmutatorRecipes.instance().getTransmutationList().entrySet().removeIf(e -> APIUtils.areStacksEqual(input, e.getKey()));
+			TransmutatorRecipes.instance().removeTransmutationInput(input);
 		}
 
 		@Override
 		public String describe() {
 
-			return "Removing Transmutation recipe with input: " + ACMT.getItemNameSafely(input);
+			return "Removing Transmutation recipe with input: " + ACCT.getItemNameSafely(input);
 		}
 	}
 
 	@ZenMethod
 	public static void removeTransmutationOutput(IItemStack output){
-		ACMTMisc.TASKS.add(new RemoveOutput(ACMT.toStack(output)));
+		ACCTMisc.TASKS.add(new RemoveOutput(ACCT.toStack(output)));
 	}
 
 	private static class RemoveOutput implements IAction {
@@ -89,19 +88,19 @@ public class Transmutator {
 
 		@Override
 		public void apply() {
-			TransmutatorRecipes.instance().getTransmutationList().entrySet().removeIf(e -> APIUtils.areStacksEqual(output, e.getValue()));
+			TransmutatorRecipes.instance().removeTransmutation(output);
 		}
 
 		@Override
 		public String describe() {
 
-			return "Removing Transmutation recipe(s) for " + ACMT.getItemNameSafely(output);
+			return "Removing Transmutation recipe(s) for " + ACCT.getItemNameSafely(output);
 		}
 	}
 
 	@ZenMethod
 	public static void addFuel(IItemStack stack, int burnTime) {
-		ACMTMisc.TASKS.add(new AddFuel(ACMT.toStack(stack), burnTime));
+		ACCTMisc.TASKS.add(new AddFuel(ACCT.toStack(stack), burnTime));
 	}
 
 	private static class AddFuel implements IAction {
@@ -116,19 +115,19 @@ public class Transmutator {
 
 		@Override
 		public void apply() {
-			ACMT.TRANSMUTATOR_FUELS.put(stack, burnTime);
+			ACCT.TRANSMUTATOR_FUELS.put(stack, burnTime);
 		}
 
 		@Override
 		public String describe() {
 
-			return String.format("Adding %s as Transmutator fuel with a burntime of %d ", ACMT.getItemNameSafely(stack), burnTime);
+			return String.format("Adding %s as Transmutator fuel with a burntime of %d ", ACCT.getItemNameSafely(stack), burnTime);
 		}
 	}
 
 	@ZenMethod
 	public static void removeFuel(IItemStack stack) {
-		ACMTMisc.TASKS.add(new RemoveFuel(ACMT.toStack(stack)));
+		ACCTMisc.TASKS.add(new RemoveFuel(ACCT.toStack(stack)));
 	}
 
 	private static class RemoveFuel implements IAction {
@@ -141,19 +140,19 @@ public class Transmutator {
 
 		@Override
 		public void apply() {
-			ACMT.TRANSMUTATOR_FUELS.put(stack, 0);
+			ACCT.TRANSMUTATOR_FUELS.put(stack, 0);
 		}
 
 		@Override
 		public String describe() {
 
-			return String.format("Removing %s as Transmutator fuel", ACMT.getItemNameSafely(stack));
+			return String.format("Removing %s as Transmutator fuel", ACCT.getItemNameSafely(stack));
 		}
 	}
 
 	@ZenMethod
 	public static void removeAll() {
-		ACMTMisc.TASKS.add(new RemoveAll());
+		ACCTMisc.TASKS.add(new RemoveAll());
 	}
 
 	private static class RemoveAll implements IAction {

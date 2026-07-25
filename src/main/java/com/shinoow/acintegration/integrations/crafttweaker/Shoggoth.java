@@ -1,4 +1,4 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
 import com.shinoow.abyssalcraft.api.entity.EntityUtil;
 import com.shinoow.abyssalcraft.common.util.ACLogger;
@@ -14,7 +14,7 @@ public class Shoggoth {
 	@ZenMethod
 	public static void addShoggothFood(String clazz){
 		try {
-			ACMTMisc.TASKS.add(new AddFood((Class<? extends EntityLivingBase>) Class.forName(clazz)));
+			ACCTMisc.TASKS.add(new AddFood((Class<? extends EntityLivingBase>) Class.forName(clazz)));
 		} catch (ClassNotFoundException e) {
 			ACLogger.warning("Could not find Entity class %s", clazz);
 		}

@@ -11,9 +11,9 @@ necro.text.integration.tc.8=Жезл из Омотула с усиленными
 
 necro.text.integration.morph=С установленным Morph, ты можешь получить способности morph при трансформации в существа AbyssalCraft. Могут быть добавлены дополнительные способности, такие как иммунитет от чумы. При трансформации в существа, которые имеют специальные модели, твоя рука будет трансформированна в руку, используемой этой моделью от вида 1-го лица.
 
-item.dust.abyssalnite.name=Абиссальнитовая пыль
-item.dust.coralium.name=Обработанная коралловая пыль
-item.dust.dreadium.name=Страхолитовая пыль
+item.dust_abyssalnite.name=Абиссальнитовая пыль
+item.dust_coralium.name=Обработанная коралловая пыль
+item.dust_dreadium.name=Страхолитовая пыль
 
 itemGroup.acintegration=AbyssalCraft Integration
 

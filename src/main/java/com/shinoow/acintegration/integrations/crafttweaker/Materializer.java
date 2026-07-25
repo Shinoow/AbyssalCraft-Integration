@@ -1,4 +1,4 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
 import java.util.List;
 
@@ -24,11 +24,11 @@ public class Materializer {
 	@ZenMethod
 	public static void addMaterialization(IIngredient output, IItemStack[] input){
 
-		Object obj = ACMT.toObject(output);
+		Object obj = ACCT.toObject(output);
 		ItemStack[] stacks = new ItemStack[input.length];
 		for(int i = 0; i < stacks.length; i++)
-			stacks[i] = ACMT.toStack(input[i]);
-		ACMTMisc.TASKS.add(new Add(obj, stacks));
+			stacks[i] = ACCT.toStack(input[i]);
+		ACCTMisc.TASKS.add(new Add(obj, stacks));
 	}
 
 	private static class Add implements IAction {
@@ -49,7 +49,7 @@ public class Materializer {
 				AbyssalCraftAPI.addMaterialization(outputName, input);
 			} else if(output instanceof ItemStack) {
 				ItemStack stack = (ItemStack)output;
-				outputName = ACMT.getItemNameSafely(stack);
+				outputName = ACCT.getItemNameSafely(stack);
 				if(stack.getHasSubtypes() && stack.getMetadata() == OreDictionary.WILDCARD_VALUE) {
 					NonNullList<ItemStack> list = NonNullList.create();
 					stack.getItem().getSubItems(stack.getItem().getCreativeTab(), list);
@@ -70,7 +70,7 @@ public class Materializer {
 		private String getArrayContent(ItemStack[] array){
 			String stuff = "[";
 			for(ItemStack stack : array)
-				stuff+=ACMT.getItemNameSafely(stack)+", ";
+				stuff+=ACCT.getItemNameSafely(stack)+", ";
 			stuff = stuff.substring(0, stuff.length()-2);
 			return stuff+="]";
 		}
@@ -79,7 +79,7 @@ public class Materializer {
 	@ZenMethod
 	public static void removeMaterialization(IItemStack output){
 
-		ACMTMisc.TASKS.add(new Remove(ACMT.toStack(output)));
+		ACCTMisc.TASKS.add(new Remove(ACCT.toStack(output)));
 	}
 
 	private static class Remove implements IAction {
@@ -114,13 +114,13 @@ public class Materializer {
 		@Override
 		public String describe() {
 
-			return String.format("Removing Materialization recipes for %s", ACMT.getItemNameSafely(output));
+			return String.format("Removing Materialization recipes for %s", ACCT.getItemNameSafely(output));
 		}
 	}
 
 	@ZenMethod
 	public static void addCrystal(IItemStack stack){
-		ACMTMisc.TASKS.add(new AddCrystal(ACMT.toStack(stack)));
+		ACCTMisc.TASKS.add(new AddCrystal(ACCT.toStack(stack)));
 	}
 
 	private static class AddCrystal implements IAction {
@@ -139,13 +139,13 @@ public class Materializer {
 		@Override
 		public String describe() {
 
-			return String.format("Adding %s to the Crystal List", ACMT.getItemNameSafely(stack));
+			return String.format("Adding %s to the Crystal List", ACCT.getItemNameSafely(stack));
 		}
 	}
 
 	@ZenMethod
 	public static void addCrystal(IItemStack stack, int burnTime) {
-		ACMTMisc.TASKS.add(new AddCrystalFuel(ACMT.toStack(stack), burnTime));
+		ACCTMisc.TASKS.add(new AddCrystalFuel(ACCT.toStack(stack), burnTime));
 	}
 
 	private static class AddCrystalFuel implements IAction {
@@ -161,20 +161,20 @@ public class Materializer {
 		@Override
 		public void apply() {
 			AbyssalCraftAPI.addCrystal(stack);
-			ACMT.CRYSTALLIZER_FUELS.put(stack, burnTime);
-			ACMT.TRANSMUTATOR_FUELS.put(stack, burnTime);
+			ACCT.CRYSTALLIZER_FUELS.put(stack, burnTime);
+			ACCT.TRANSMUTATOR_FUELS.put(stack, burnTime);
 		}
 
 		@Override
 		public String describe() {
 
-			return String.format("Adding %s to the Crystal List, and added it as Crystallizer and Transmutator fuel (burntime: %d)", ACMT.getItemNameSafely(stack), burnTime);
+			return String.format("Adding %s to the Crystal List, and added it as Crystallizer and Transmutator fuel (burntime: %d)", ACCT.getItemNameSafely(stack), burnTime);
 		}
 	}
 
 	@ZenMethod
 	public static void removeAll() {
-		ACMTMisc.TASKS.add(new RemoveAll());
+		ACCTMisc.TASKS.add(new RemoveAll());
 	}
 
 	private static class RemoveAll implements IAction {

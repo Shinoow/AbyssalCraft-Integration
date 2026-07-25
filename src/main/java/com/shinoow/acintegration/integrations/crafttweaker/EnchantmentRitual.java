@@ -1,4 +1,4 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class EnchantmentRitual {
 	@ZenMethod
 	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean requiresSacrifice, String enchantment, IIngredient[] offerings, boolean nbt){
 
-		Object[] offers = ACMT.toObjects(offerings);
+		Object[] offers = ACCT.toObjects(offerings);
 
 		EnchantmentData ench = getEnch(enchantment);
 
@@ -35,7 +35,7 @@ public class EnchantmentRitual {
 
 		if(nbt) ritual.setNBTSensitive();
 
-		ACMTMisc.TASKS.add(new Add(ritual));
+		ACCTMisc.TASKS.add(new Add(ritual));
 	}
 
 	private static EnchantmentData getEnch(String string){
@@ -85,7 +85,7 @@ public class EnchantmentRitual {
 
 		if(ench == null) return;
 
-		ACMTMisc.TASKS.add(new Remove(ench));
+		ACCTMisc.TASKS.add(new Remove(ench));
 	}
 
 	private static class Remove implements IAction
@@ -118,7 +118,7 @@ public class EnchantmentRitual {
 
 	@ZenMethod
 	public static void removeAll() {
-		ACMTMisc.TASKS.add(new RemoveAll());
+		ACCTMisc.TASKS.add(new RemoveAll());
 	}
 
 	private static class RemoveAll implements IAction {

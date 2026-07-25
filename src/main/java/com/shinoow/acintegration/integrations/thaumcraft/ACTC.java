@@ -34,7 +34,6 @@ public class ACTC implements IACPlugin {
 		return Loader.isModLoaded("thaumcraft") && ACIntegration.loadTC;
 	}
 
-	@Override
 	public void preInit() {
 
 		ACTCMisc.initAspects();

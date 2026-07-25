@@ -1,4 +1,4 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class SummonRitual {
 	@ZenMethod
 	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean requiresSacrifice, String entity, IIngredient[] offerings, boolean nbt, IData customNBT){
 
-		Object[] offers = ACMT.toObjects(offerings);
+		Object[] offers = ACCT.toObjects(offerings);
 
 		Class<? extends Entity> e;
 
@@ -64,7 +64,7 @@ public class SummonRitual {
 		if(customNBT != null)
 			ritual.setCustomNBT((NBTTagCompound) NBTConverter.from(customNBT));
 
-		ACMTMisc.TASKS.add(new Add(ritual));
+		ACCTMisc.TASKS.add(new Add(ritual));
 	}
 
 	private static class Add implements IAction
@@ -107,7 +107,7 @@ public class SummonRitual {
 
 		if(e == null) return;
 
-		ACMTMisc.TASKS.add(new Remove(e));
+		ACCTMisc.TASKS.add(new Remove(e));
 	}
 
 	private static class Remove implements IAction
@@ -140,7 +140,7 @@ public class SummonRitual {
 
 	@ZenMethod
 	public static void removeAll() {
-		ACMTMisc.TASKS.add(new RemoveAll());
+		ACCTMisc.TASKS.add(new RemoveAll());
 	}
 
 	private static class RemoveAll implements IAction {

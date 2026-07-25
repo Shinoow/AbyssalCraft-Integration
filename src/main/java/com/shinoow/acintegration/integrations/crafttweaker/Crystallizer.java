@@ -1,6 +1,5 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
-import com.shinoow.abyssalcraft.api.APIUtils;
 import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.recipe.CrystallizerRecipes;
 
@@ -16,12 +15,12 @@ public class Crystallizer {
 	@ZenMethod
 	public static void addCrystallization(IItemStack input, IItemStack output1, IItemStack output2, float exp){
 
-		ACMTMisc.TASKS.add(new Add(ACMT.toStack(input), ACMT.toStack(output1), ACMT.toStack(output2), exp));
+		ACCTMisc.TASKS.add(new Add(ACCT.toStack(input), ACCT.toStack(output1), ACCT.toStack(output2), exp));
 	}
 
 	@ZenMethod
 	public static void addSingleCrystallization(IItemStack input, IItemStack output, float exp){
-		ACMTMisc.TASKS.add(new Add(ACMT.toStack(input), ACMT.toStack(output), exp));
+		ACCTMisc.TASKS.add(new Add(ACCT.toStack(input), ACCT.toStack(output), exp));
 	}
 
 	private static class Add implements IAction
@@ -53,7 +52,7 @@ public class Crystallizer {
 		@Override
 		public String describe() {
 
-			return "Adding Crystallization recipe for " + ACMT.getItemNameSafely(output1) + (!output2.isEmpty() ? " (and "+ ACMT.getItemNameSafely(output2) + ")" : "");
+			return "Adding Crystallization recipe for " + ACCT.getItemNameSafely(output1) + (!output2.isEmpty() ? " (and "+ ACCT.getItemNameSafely(output2) + ")" : "");
 		}
 	}
 
@@ -64,7 +63,7 @@ public class Crystallizer {
 
 	@ZenMethod
 	public static void removeCrystallizationInput(IItemStack input){
-		ACMTMisc.TASKS.add(new RemoveInput(ACMT.toStack(input)));
+		ACCTMisc.TASKS.add(new RemoveInput(ACCT.toStack(input)));
 	}
 
 	private static class RemoveInput implements IAction {
@@ -77,19 +76,19 @@ public class Crystallizer {
 
 		@Override
 		public void apply() {
-			CrystallizerRecipes.instance().getCrystallizationList().entrySet().removeIf(e -> APIUtils.areStacksEqual(input, e.getKey()));
+			CrystallizerRecipes.instance().removeCrystallizationInput(input);
 		}
 
 		@Override
 		public String describe() {
 
-			return "Removing Crystallization recipe with input: " + ACMT.getItemNameSafely(input);
+			return "Removing Crystallization recipe with input: " + ACCT.getItemNameSafely(input);
 		}
 	}
 
 	@ZenMethod
 	public static void removeCrystallizationOutput(IItemStack output){
-		ACMTMisc.TASKS.add(new RemoveOutput(ACMT.toStack(output)));
+		ACCTMisc.TASKS.add(new RemoveOutput(ACCT.toStack(output)));
 	}
 
 	private static class RemoveOutput implements IAction {
@@ -103,20 +102,19 @@ public class Crystallizer {
 
 		@Override
 		public void apply() {
-			CrystallizerRecipes.instance().getCrystallizationList().entrySet()
-			.removeIf(e -> APIUtils.areStacksEqual(output, e.getValue()[0]) || APIUtils.areStacksEqual(output, e.getValue()[1]));
+			CrystallizerRecipes.instance().removeCrystallization(output);
 		}
 
 		@Override
 		public String describe() {
 
-			return "Removing Crystallization recipe(s) for " + ACMT.getItemNameSafely(output);
+			return "Removing Crystallization recipe(s) for " + ACCT.getItemNameSafely(output);
 		}
 	}
 
 	@ZenMethod
 	public static void addFuel(IItemStack stack, int burnTime) {
-		ACMTMisc.TASKS.add(new AddFuel(ACMT.toStack(stack), burnTime));
+		ACCTMisc.TASKS.add(new AddFuel(ACCT.toStack(stack), burnTime));
 	}
 
 	private static class AddFuel implements IAction {
@@ -131,19 +129,19 @@ public class Crystallizer {
 
 		@Override
 		public void apply() {
-			ACMT.CRYSTALLIZER_FUELS.put(stack, burnTime);
+			ACCT.CRYSTALLIZER_FUELS.put(stack, burnTime);
 		}
 
 		@Override
 		public String describe() {
 
-			return String.format("Adding %s as Crystallizer fuel with a burntime of %d ", ACMT.getItemNameSafely(stack), burnTime);
+			return String.format("Adding %s as Crystallizer fuel with a burntime of %d ", ACCT.getItemNameSafely(stack), burnTime);
 		}
 	}
 
 	@ZenMethod
 	public static void removeFuel(IItemStack stack) {
-		ACMTMisc.TASKS.add(new RemoveFuel(ACMT.toStack(stack)));
+		ACCTMisc.TASKS.add(new RemoveFuel(ACCT.toStack(stack)));
 	}
 
 	private static class RemoveFuel implements IAction {
@@ -156,19 +154,19 @@ public class Crystallizer {
 
 		@Override
 		public void apply() {
-			ACMT.CRYSTALLIZER_FUELS.put(stack, 0);
+			ACCT.CRYSTALLIZER_FUELS.put(stack, 0);
 		}
 
 		@Override
 		public String describe() {
 
-			return String.format("Removing %s as Crystallizer fuel", ACMT.getItemNameSafely(stack));
+			return String.format("Removing %s as Crystallizer fuel", ACCT.getItemNameSafely(stack));
 		}
 	}
 
 	@ZenMethod
 	public static void removeAll() {
-		ACMTMisc.TASKS.add(new RemoveAll());
+		ACCTMisc.TASKS.add(new RemoveAll());
 	}
 
 	private static class RemoveAll implements IAction {

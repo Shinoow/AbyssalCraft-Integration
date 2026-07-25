@@ -1,4 +1,4 @@
-package com.shinoow.acintegration.integrations.minetweaker;
+package com.shinoow.acintegration.integrations.crafttweaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +33,15 @@ public class InfusionRitual {
 	@ZenMethod
 	public static void addRitual(String unlocalizedName, int bookType, int dimension, float requiredEnergy, boolean remnantHelp, IItemStack item, IIngredient sacrifice, IIngredient[] offerings, boolean nbt, String...tags){
 
-		Object[] offers = ACMT.toObjects(offerings);
+		Object[] offers = ACCT.toObjects(offerings);
 
-		NecronomiconInfusionRitual ritual = new NecronomiconInfusionRitual(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, ACMT.toStack(item), ACMT.toObject(sacrifice), offers);
+		NecronomiconInfusionRitual ritual = new NecronomiconInfusionRitual(unlocalizedName, bookType, dimension, requiredEnergy, remnantHelp, ACCT.toStack(item), ACCT.toObject(sacrifice), offers);
 
 		if(nbt) ritual.setNBTSensitive().setNBTSensitiveSacrifice();
 
 		if(tags != null && tags.length > 0) ritual.setTags(tags);
 
-		ACMTMisc.TASKS.add(new Add(ritual));
+		ACCTMisc.TASKS.add(new Add(ritual));
 	}
 
 	private static class Add implements IAction
@@ -63,14 +63,14 @@ public class InfusionRitual {
 		@Override
 		public String describe() {
 
-			return "Adding Necronomicon Infusion Ritual for " + ACMT.getItemNameSafely(ritual.getItem());
+			return "Adding Necronomicon Infusion Ritual for " + ACCT.getItemNameSafely(ritual.getItem());
 		}
 	}
 
 	@ZenMethod
 	public static void removeRitual(IItemStack item){
 
-		ACMTMisc.TASKS.add(new Remove(ACMT.toStack(item)));
+		ACCTMisc.TASKS.add(new Remove(ACCT.toStack(item)));
 	}
 
 	private static class Remove implements IAction
@@ -98,13 +98,13 @@ public class InfusionRitual {
 		@Override
 		public String describe() {
 
-			return "Removing Necronomicon Infusion Ritual for "+ ACMT.getItemNameSafely(item);
+			return "Removing Necronomicon Infusion Ritual for "+ ACCT.getItemNameSafely(item);
 		}
 	}
 
 	@ZenMethod
 	public static void removeAll() {
-		ACMTMisc.TASKS.add(new RemoveAll());
+		ACCTMisc.TASKS.add(new RemoveAll());
 	}
 
 	private static class RemoveAll implements IAction {
