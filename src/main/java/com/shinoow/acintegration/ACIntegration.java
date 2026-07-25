@@ -11,7 +11,7 @@ import com.shinoow.abyssalcraft.api.AbyssalCraftAPI;
 import com.shinoow.abyssalcraft.api.item.ACItems;
 import com.shinoow.abyssalcraft.lib.item.ItemACBasic;
 import com.shinoow.acintegration.command.RitualCommand;
-import com.shinoow.acintegration.integrations.minetweaker.ACMT;
+import com.shinoow.acintegration.integrations.crafttweaker.ACCT;
 import com.shinoow.acintegration.integrations.thaumcraft.ACTC;
 import com.shinoow.acintegration.integrations.tinkers.ACTiCon;
 
@@ -54,7 +54,7 @@ public class ACIntegration {
 
 	public static Configuration cfg;
 
-	public static boolean loadTC, loadEE3, tcItems, loadMT, loadPE, tcWarpDims, tcWarpMobs, tcWarpPE, loadTiCon, loadBQ, loadGS, loadBW;
+	public static boolean loadTC, loadEE3, tcItems, loadCT, loadPE, tcWarpDims, tcWarpMobs, tcWarpPE, loadTiCon, loadBQ, loadGS, loadBW;
 
 	public static Item dust_abyssalnite, dust_coralium, dust_dreadium;
 
@@ -113,8 +113,8 @@ public class ACIntegration {
 	private void registerIntegrations(){
 		if(ACTiCon.instance.canLoad())
 			ACTiCon.instance.preInit();
-		if(ACMT.instance.canLoad())
-			ACMT.instance.preInit();
+		if(ACCT.instance.canLoad())
+			ACCT.instance.preInit();
 		if(ACTC.instance.canLoad())
 			ACTC.instance.preInit();
 	}
@@ -154,7 +154,7 @@ public class ACIntegration {
 		loadTC = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Integration", true, "Whether or not to load the Thaumcraft integration. Disabling this will override any other part of said integration.").getBoolean();
 		//		loadEE3 = cfg.get(Configuration.CATEGORY_GENERAL, "Equivalent Exchange 3 Integration", true, "Whether or not to load the Equivalent Exchange 3 integration.").getBoolean();
 		//		tcItems = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Items", true, "Wheter or not to add items through the Thaumcraft integration.").getBoolean();
-		loadMT = cfg.get(Configuration.CATEGORY_GENERAL, "MineTweaker Integration", true, "Whether or not to load the MineTweaker integration.").getBoolean();
+		loadCT = cfg.get(Configuration.CATEGORY_GENERAL, "CraftTweaker Integration", true, "Whether or not to load the CraftTweaker integration.").getBoolean();
 		loadPE = cfg.get(Configuration.CATEGORY_GENERAL, "ProjectE Integration", true, "Whether or not to load the ProjectE integration").getBoolean();
 		tcWarpDims = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp: Dimensions", true, "Toggles wheter or not to gain additional warp from being inside AbyssalCraft dimensions").getBoolean();
 		tcWarpMobs = cfg.get(Configuration.CATEGORY_GENERAL, "Thaumcraft Warp: Mobs", true, "Toggles wheter or not to gain additional warp from attacking/being attacked by AbyssalCraft mobs").getBoolean();
