@@ -60,7 +60,7 @@ public class RitualCommand extends CommandBase {
 				sb.append("\n");
 				sb.append("\n");
 				sb.append("\n");
-				sb.append("\nClass | Unlocalized Name | Name | Book Type | Dimension | PE | Sacrifice | Item Sacrifice | NBT Sensitive | Input | Output");
+				sb.append("\nClass | ID | Name | Book Type | Dimension | PE | Sacrifice | Item Sacrifice | NBT Sensitive | Input | Output");
 				sb.append("\n--------------------------------------------------------------------------------------------------------------------------");
 				sb.append("\n");
 				for(NecronomiconRitual r : RitualRegistry.instance().getRituals())
@@ -98,7 +98,7 @@ public class RitualCommand extends CommandBase {
 		sb.append("\n");
 		sb.append(ritual.getClass().getSimpleName());
 		sb.append(" | ");
-		sb.append(ritual.getUnlocalizedName().substring(10));
+		sb.append(ritual.getID());
 		sb.append(" | ");
 		sb.append(ritual.getLocalizedName());
 		sb.append(" | ");
